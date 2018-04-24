@@ -1,4 +1,10 @@
-# STM32 MCU evaluation
+# STMicroelectronics STM32 MCU evaluation
+
+## Motivation
+
+I have been using Microchip PIC MCUs for IoT prototyping over two years. But I have had chances to work with LoRa modules in the past year, and I realized that most of them use STM32 MCUs as a core. It seems to me that STM32 MCUs are becoming a standard platform for IoT devices supporting LPWA or BLE.
+
+It is time to evaluate STM32, comparing with PIC MCUs.
 
 ## IDE
 
