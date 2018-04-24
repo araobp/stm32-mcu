@@ -27,6 +27,9 @@ I have got these STM32 boards.
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html)
 
+- [Schematics](http://www.st.com/resource/en/schematic_pack/stm32f4discovery_sch.zip)
+- [Datasheet](http://www.st.com/resource/en/datasheet/dm00037051.pdf)
+
 => [Eclipse projects](./STM32F4-Discovery)
 
 ## References
