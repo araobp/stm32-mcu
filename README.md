@@ -8,7 +8,11 @@ It is time to evaluate STM32, comparing with PIC MCUs.
 
 ## IDE
 
-I use Eclipse-based [TrueSTUDIO](https://atollic.com/truestudio/) with [STM32 CubeMX Eclipse plugin](http://www.st.com/en/development-tools/stsw-stm32095.html) as IDE for this evaluation.
+I have tried out [Keil uVison](http://www2.keil.com/mdk5/uvision/), [SW4STM32](http://www.openstm32.org/HomePage) and [TrueSTUDIO]((https://atollic.com/truestudio/)). The news that STMicro aquired Atollic motivated me to choose TrueSTUDIO.
+
+[STM32 CubeMX Eclipse plugin](http://www.st.com/en/development-tools/stsw-stm32095.html) is also nice: it is like Microchip [MPLAB X MCC plugin](http://www.microchip.com/mplab/mplab-code-configurator).
+
+So I use TrueSTUDIO with Cube MX as IDE for this evaluation.
 
 ## Evaluation
 
