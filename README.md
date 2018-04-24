@@ -8,7 +8,7 @@ It is time to evaluate STM32, comparing with PIC MCUs.
 
 ## IDE
 
-I have tried out [Keil uVison](http://www2.keil.com/mdk5/uvision/), [SW4STM32](http://www.openstm32.org/HomePage) and [TrueSTUDIO]((https://atollic.com/truestudio/)). The news that STMicro aquired Atollic motivated me to choose TrueSTUDIO.
+I have tried out [Keil uVison](http://www2.keil.com/mdk5/uvision/), [SW4STM32](http://www.openstm32.org/HomePage) and [TrueSTUDIO]((https://atollic.com/truestudio/)). SW4STM32 and TrueSTUDIO are based on Eclipse with GNU GCC toolchain. The news that STMicro aquired Atollic motivated me to choose TrueSTUDIO.
 
 [STM32 CubeMX Eclipse plugin](http://www.st.com/en/development-tools/stsw-stm32095.html) is also nice: it is like Microchip [MPLAB X MCC plugin](http://www.microchip.com/mplab/mplab-code-configurator).
 
