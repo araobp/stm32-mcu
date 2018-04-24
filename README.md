@@ -2,7 +2,7 @@
 
 ## IDE
 
-I use [TrueSTUDIO](https://atollic.com/truestudio/) as IDE for this evaluation.
+I use Eclipse-based [TrueSTUDIO](https://atollic.com/truestudio/) with [STM32 CubeMX Eclipse plugin](http://www.st.com/en/development-tools/stsw-stm32095.html) as IDE for this evaluation.
 
 ## Evaluation
 
