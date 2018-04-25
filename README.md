@@ -32,6 +32,32 @@ I have got these STM32 boards.
 
 => [Eclipse projects](./STM32F4-Discovery)
 
+#### UART and printf
+
+I managed to support printf on USART2.
+
+Physical configuration:
+
+```
+STM32F407
+               +------------+
+            X 5V            |
+GND     ----- GND  FTDI     |
+PA3(RX) ----- TX  USB-UART  ===== USB ======> PC
+PA2(TX) ----- RX  converter |
+               +------------+
+```
+
+Include the following snippet in main.c to support printf:
+
+```
+int _write(int file, char *pbuf, int len)
+{
+  HAL_UART_Transmit(&huart2, (uint8_t *)pbuf, len, 1000);
+  return len;
+}
+```
+
 ## References
 
 - http://stm32f4-discovery.net/
