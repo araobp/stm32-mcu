@@ -36,6 +36,8 @@ I have got these STM32 boards.
 
 I managed to support printf on USART2.
 
+![UART](./doc/STM32F4_Discovery_UART.jpg)
+
 Physical configuration:
 
 ```
