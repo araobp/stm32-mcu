@@ -62,6 +62,8 @@ int _write(int file, char *pbuf, int len)
 
 #### PWM
 
+PWM output (100Hz, 50% duty) to PA8:
+
 ![waveform](./doc/PWM_waveform.jpg)
 
 ## References
