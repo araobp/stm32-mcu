@@ -25,6 +25,11 @@ I have got these STM32 boards.
 
 => [Eclipse projects](./STM32L476-Nucleo-64)
 
+#### Digital MEMS microphones (MP34DT01-M) expansion board
+
+- [X-NUCLEO-CCA02M1](http://www.st.com/en/ecosystems/x-nucleo-cca02m1.html)
+- [X-CUBE-MEMSMIC1](https://my.st.com/content/my_st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32cube-expansion-packages/x-cube-memsmic1.license%3d1524860703776.html)
+
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html)
 
 - [Schematics](http://www.st.com/resource/en/schematic_pack/stm32f4discovery_sch.zip)
