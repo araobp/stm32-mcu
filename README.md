@@ -60,6 +60,10 @@ int _write(int file, char *pbuf, int len)
 }
 ```
 
+#### PWM
+
+![waveform](./doc/PWM_waveform.jpg)
+
 ## References
 
 - http://stm32f4-discovery.net/
