@@ -70,7 +70,8 @@ PWM output (100Hz, 50% duty) to PA8:
 
 - http://stm32f4-discovery.net/
 
-## Interests
+## Other interests
 
+- [STM32L0 Discovery Kit LPWA](http://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html)
 - [AWS FreeRTOS](https://aws.amazon.com/freertos/getting-started/)
-
+- [ESP-IDF](https://esp-idf.readthedocs.io/en/v2.0/index.html)
