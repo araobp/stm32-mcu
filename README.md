@@ -69,3 +69,8 @@ PWM output (100Hz, 50% duty) to PA8:
 ## References
 
 - http://stm32f4-discovery.net/
+
+## Interests
+
+- [AWS FreeRTOS](https://aws.amazon.com/freertos/getting-started/)
+
