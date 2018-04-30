@@ -60,6 +60,22 @@ int _write(int file, char *pbuf, int len)
 }
 ```
 
+#### PWM
+
+PWM output (100Hz, 50% duty) to PA8:
+
+![waveform](./doc/PWM_waveform.jpg)
+
+## STM32Cube packages
+
+- [STM32CubeL4](https://my.st.com/content/my_st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32cube-mcu-packages/stm32cubel4.license%3d1524847579867.html)
+
 ## References
 
 - http://stm32f4-discovery.net/
+
+## Other interests
+
+- [STM32L0 Discovery Kit LPWA](http://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html)
+- [AWS FreeRTOS](https://aws.amazon.com/freertos/getting-started/)
+- [ESP-IDF](https://esp-idf.readthedocs.io/en/v2.0/index.html)
