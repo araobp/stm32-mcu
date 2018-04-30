@@ -2,7 +2,7 @@
 
 ## Motivation
 
-Compare STM32 with PIC16F1 MCUs.
+Compare STMicro STM32 with Microchip PIC16F1 MCUs.
 
 ## IDE
 
