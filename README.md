@@ -2,17 +2,14 @@
 
 ## Motivation
 
-I have been using Microchip PIC MCUs for IoT prototyping over two years. But I have had chances to work with LoRa modules in the past year, and I realized that most of them use [STMicroelectronics](http://www.st.com/content/st_com/en.html)'s STM32 MCUs as a core. It seems to me that STM32 MCUs are becoming a standard platform for IoT devices supporting LPWA or BLE.
-
-It is time to evaluate STM32, comparing with PIC MCUs.
+Compare STM32 with PIC16F1 MCUs.
 
 ## IDE
 
-I have tried out [Keil uVison](http://www2.keil.com/mdk5/uvision/), [SW4STM32](http://www.openstm32.org/HomePage) and [TrueSTUDIO](https://atollic.com/truestudio/). SW4STM32 and TrueSTUDIO are based on Eclipse with GNU GCC toolchain. The news that STMicro aquired Atollic motivated me to choose TrueSTUDIO.
+I use TrueSTUDIO with Cube MX.
 
-[STM32 CubeMX Eclipse plugin](http://www.st.com/en/development-tools/stsw-stm32095.html) is also nice: it is like Microchip [MPLAB X MCC plugin](http://www.microchip.com/mplab/mplab-code-configurator).
-
-So I use TrueSTUDIO with Cube MX as IDE for this evaluation.
+- [TrueSTUDIO](https://atollic.com/truestudio/)
+- [STM32 CubeMX Eclipse plugin](http://www.st.com/en/development-tools/stsw-stm32095.html)
 
 ## Evaluation
 
