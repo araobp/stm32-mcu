@@ -24,6 +24,7 @@ I have got these STM32 boards.
 - [Datasheet](http://www.st.com/resource/en/datasheet/stm32l476je.pdf)
 
 => [Eclipse projects](./STM32L476-Nucleo-64)
+- [Clock](./STM32L476-Nucleo-64/Clock/Clock.md)
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html)
 
