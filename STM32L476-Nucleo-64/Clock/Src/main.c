@@ -467,21 +467,17 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
-  const uint8_t buf[8] = "pressed\n";
-
   char c_time[9];
   char c_date[11];
 
   RTC_DateTypeDef sDate;
   RTC_TimeTypeDef sTime;
 
-  HAL_RTC_GetTime(&hrtc, &sTime, FORMAT_BIN);  // RTC Time
-  HAL_RTC_GetDate(&hrtc, &sDate, FORMAT_BIN);  // RTC Date
-
   if (GPIO_Pin == GPIO_PIN_13) {  // User button (blue tactile switch)
-      HAL_UART_Transmit(&huart2, (uint8_t *)buf, sizeof(buf), 100);
-
       HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);  // LD2
+
+      HAL_RTC_GetTime(&hrtc, &sTime, FORMAT_BIN);  // RTC Time
+      HAL_RTC_GetDate(&hrtc, &sDate, FORMAT_BIN);  // RTC Date
 
       sprintf(c_date, "20%02d/%02d/%02d\n", sDate.Year, sDate.Month, sDate.Date);
       sprintf(c_time, "%02d:%02d:%02d\n", sTime.Hours, sTime.Minutes, sTime.Seconds);
