@@ -47,6 +47,8 @@
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
 
+RTC_HandleTypeDef hrtc;
+
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
@@ -78,6 +80,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_RTC_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -90,7 +93,8 @@ static void MX_I2C1_Init(void);
  * AQM1602XA-RN-GBW
  * LCD write command
  */
-void write_command(uint8_t command) {
+void write_command(uint8_t command)
+{
   uint8_t buf[2] = {0x00, 0x00};
   buf[1] = command;
   HAL_I2C_Master_Transmit(&hi2c1, LCD_I2C_ADDRESS, buf, 2, 100);
@@ -101,14 +105,16 @@ void write_command(uint8_t command) {
  * AQM1602XA-RN-GBW
  * LCD write data
  */
-void write_data(uint8_t data) {
+void write_data(uint8_t data)
+{
   uint8_t buf[2] = {0x40, 0x00};
   buf[1] = data;
   HAL_I2C_Master_Transmit(&hi2c1, LCD_I2C_ADDRESS, buf, 2, 100);
   HAL_Delay(1);
 }
 
-void lcd_init(void) {
+void lcd_init(void)
+{
     HAL_Delay(50);
     write_command(0x38);
     write_command(0x39);
@@ -123,11 +129,13 @@ void lcd_init(void) {
     HAL_Delay(50);
 }
 
-void lcd_clear(void) {
+void lcd_clear(void)
+{
     write_command(0x01);
 }
 
-void lcd_string(void) {
+void lcd_string(void)
+{
     uint8_t i = 4;
     while (pbuf[i] != '\0') {
         write_data(pbuf[i++]);
@@ -139,7 +147,8 @@ void lcd_string(void) {
  * 1st line: 16 characters
  * 2nd line: 16 characters
  */
-void lcd_string_2lines(void) {
+void lcd_string_2lines(void)
+{
     uint8_t i = 4;
     while (pbuf[i] != '\0') {
         write_data(pbuf[i++]);
@@ -153,21 +162,24 @@ void lcd_string_2lines(void) {
  * MSB                  LSB
  * 0 ~ 63 levels
  */
-void lcd_contrast(uint8_t contrast) {
+void lcd_contrast(uint8_t contrast)
+{
     write_command(0x39);
     write_command(0x70 | (contrast & 0b00001111));  // C3 C2 C1 C0
     write_command(0x50 | ((contrast >> 4) & 0b00000111));  // BON C5 C4
     write_command(0x38);
 }
 
-void lcd_arao(void) {
+void lcd_arao(void)
+{
     // Print my name in Japanese Katakana
     write_data(0xb1);
     write_data(0xd7);
     write_data(0xb5);
 }
 
-void lcd_test(void) {
+void lcd_test(void)
+{
     write_data(0x33);  // 3
     write_data(0x37);  // 7
     write_data(0x2e);  // .
@@ -181,6 +193,7 @@ void lcd_test(void) {
     write_data(0x5e);  // ~
     write_data(0x29);  // )
 }
+
 /* USER CODE END 0 */
 
 /**
@@ -214,6 +227,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_I2C1_Init();
+  MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   HAL_UART_Receive_IT(&huart2, rxbuf, 1);
 
@@ -247,9 +261,10 @@ void SystemClock_Config(void)
 
     /**Initializes the CPU, AHB and APB busses clocks 
     */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = 16;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLN = 10;
@@ -275,9 +290,11 @@ void SystemClock_Config(void)
     _Error_Handler(__FILE__, __LINE__);
   }
 
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2|RCC_PERIPHCLK_I2C1;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_USART2
+                              |RCC_PERIPHCLK_I2C1;
   PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
   PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
+  PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -332,6 +349,56 @@ static void MX_I2C1_Init(void)
   if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
+  }
+
+}
+
+/* RTC init function */
+static void MX_RTC_Init(void)
+{
+
+  RTC_TimeTypeDef sTime;
+  RTC_DateTypeDef sDate;
+
+    /**Initialize RTC Only 
+    */
+  hrtc.Instance = RTC;
+if(HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) != 0x32F2){
+  hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+  hrtc.Init.AsynchPrediv = 127;
+  hrtc.Init.SynchPrediv = 255;
+  hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+  hrtc.Init.OutPutRemap = RTC_OUTPUT_REMAP_NONE;
+  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+  if (HAL_RTC_Init(&hrtc) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+    /**Initialize RTC and set the Time and Date 
+    */
+  sTime.Hours = 0x0;
+  sTime.Minutes = 0x0;
+  sTime.Seconds = 0x0;
+  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+  sTime.StoreOperation = RTC_STOREOPERATION_RESET;
+  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  sDate.WeekDay = RTC_WEEKDAY_TUESDAY;
+  sDate.Month = RTC_MONTH_MAY;
+  sDate.Date = 0x1;
+  sDate.Year = 0x18;
+
+  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+    HAL_RTCEx_BKUPWrite(&hrtc,RTC_BKP_DR0,0x32F2);
   }
 
 }
@@ -399,11 +466,30 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+
+  const uint8_t buf[8] = "pressed\n";
+
+  char c_time[9];
+  char c_date[11];
+
+  RTC_DateTypeDef sDate;
+  RTC_TimeTypeDef sTime;
+
+  HAL_RTC_GetTime(&hrtc, &sTime, FORMAT_BIN);  // RTC Time
+  HAL_RTC_GetDate(&hrtc, &sDate, FORMAT_BIN);  // RTC Date
+
   if (GPIO_Pin == GPIO_PIN_13) {  // User button (blue tactile switch)
-      uint8_t buf[8] = "pressed\n";
-      HAL_UART_Transmit(&huart2, (uint8_t *)buf, sizeof(buf), 1000);
-      HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+      HAL_UART_Transmit(&huart2, (uint8_t *)buf, sizeof(buf), 100);
+
+      HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);  // LD2
+
+      sprintf(c_date, "20%02d/%02d/%02d\n", sDate.Year, sDate.Month, sDate.Date);
+      sprintf(c_time, "%02d:%02d:%02d\n", sTime.Hours, sTime.Minutes, sTime.Seconds);
+
+      HAL_UART_Transmit(&huart2, (uint8_t *)c_date, sizeof(c_date), 100);  // RTC date
+      HAL_UART_Transmit(&huart2, (uint8_t *)c_time, sizeof(c_time), 100);  // RTC time
   }
+
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
