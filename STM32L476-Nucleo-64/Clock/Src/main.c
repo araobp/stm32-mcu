@@ -51,7 +51,26 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+#define LCD_I2C_ADDRESS 0x3e // AQM1602XA-RN-GBW
+#define INI "INI"
+#define CMD "CMD"
+#define DAT "DAT"
+#define CLR "CLR"
+#define STR "STR"
+#define HST "HST"
+#define DSP "DSP"
+#define CUL "CUL"
+#define CUR "CUR"
+#define NWL "NWL"
+#define HOM "HOM"
+#define CNT "CNT"
+#define LED "LED"
+#define ON "ON"
+#define OFF "OFF"
 
+uint8_t rxbuf[1];
+
+uint8_t *pbuf;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -67,6 +86,101 @@ static void MX_I2C1_Init(void);
 
 /* USER CODE BEGIN 0 */
 
+/*
+ * AQM1602XA-RN-GBW
+ * LCD write command
+ */
+void write_command(uint8_t command) {
+  uint8_t buf[2] = {0x00, 0x00};
+  buf[1] = command;
+  HAL_I2C_Master_Transmit(&hi2c1, LCD_I2C_ADDRESS, buf, 2, 100);
+  HAL_Delay(1);
+}
+
+/*
+ * AQM1602XA-RN-GBW
+ * LCD write data
+ */
+void write_data(uint8_t data) {
+  uint8_t buf[2] = {0x40, 0x00};
+  buf[1] = data;
+  HAL_I2C_Master_Transmit(&hi2c1, LCD_I2C_ADDRESS, buf, 2, 100);
+  HAL_Delay(1);
+}
+
+void lcd_init(void) {
+    HAL_Delay(50);
+    write_command(0x38);
+    write_command(0x39);
+    write_command(0x14);
+    write_command(0x73);  // Contrast: C3=0 C2=0 C1=1 C0=1
+    write_command(0x52);  // Contrast: BON=0 C5=1 C4=0
+    write_command(0x6c);
+    HAL_Delay(250);
+    write_command(0x38);
+    write_command(0x01);
+    write_command(0x0c);
+    HAL_Delay(50);
+}
+
+void lcd_clear(void) {
+    write_command(0x01);
+}
+
+void lcd_string(void) {
+    uint8_t i = 4;
+    while (pbuf[i] != '\0') {
+        write_data(pbuf[i++]);
+    }
+}
+
+/*
+ * String format
+ * 1st line: 16 characters
+ * 2nd line: 16 characters
+ */
+void lcd_string_2lines(void) {
+    uint8_t i = 4;
+    while (pbuf[i] != '\0') {
+        write_data(pbuf[i++]);
+        if (i == 20) write_command(0xc0); // new line
+    }
+}
+
+/*
+ * contrast data
+ * XX XX C5 C4 C3 C2 C1 C0
+ * MSB                  LSB
+ * 0 ~ 63 levels
+ */
+void lcd_contrast(uint8_t contrast) {
+    write_command(0x39);
+    write_command(0x70 | (contrast & 0b00001111));  // C3 C2 C1 C0
+    write_command(0x50 | ((contrast >> 4) & 0b00000111));  // BON C5 C4
+    write_command(0x38);
+}
+
+void lcd_arao(void) {
+    // Print my name in Japanese Katakana
+    write_data(0xb1);
+    write_data(0xd7);
+    write_data(0xb5);
+}
+
+void lcd_test(void) {
+    write_data(0x33);  // 3
+    write_data(0x37);  // 7
+    write_data(0x2e);  // .
+    write_data(0x30);  // 0
+    write_data(0xf2);  // o
+    write_data(0x43);  // C
+    write_command(0xc0);  // new line
+    write_data(0x28);  // (
+    write_data(0x5e);  // ~
+    write_data(0x2d);  // -
+    write_data(0x5e);  // ~
+    write_data(0x29);  // )
+}
 /* USER CODE END 0 */
 
 /**
@@ -101,7 +215,9 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+  HAL_UART_Receive_IT(&huart2, rxbuf, 1);
 
+  lcd_test();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -225,8 +341,8 @@ static void MX_USART2_UART_Init(void)
 {
 
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
-  huart2.Init.WordLength = UART_WORDLENGTH_7B;
+  huart2.Init.BaudRate = 9600;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
   huart2.Init.Mode = UART_MODE_TX_RX;
@@ -275,10 +391,32 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
 
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+  if (GPIO_Pin == GPIO_PIN_13) {  // User button (blue tactile switch)
+      uint8_t buf[8] = "pressed\n";
+      HAL_UART_Transmit(&huart2, (uint8_t *)buf, sizeof(buf), 1000);
+      HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+  }
+}
 
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+  static uint8_t cmd_buf[32];
+  static uint8_t cnt = 0;
+  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+  cmd_buf[cnt++] = rxbuf[0];
+  if (rxbuf[0] == '\n') {
+      HAL_UART_Transmit(&huart2, (uint8_t *)cmd_buf, cnt, 1000);
+      cnt = 0;
+  }
+  HAL_UART_Receive_IT(&huart2, rxbuf, 1);
+}
 /* USER CODE END 4 */
 
 /**
