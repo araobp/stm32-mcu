@@ -41,6 +41,7 @@
 #include "stm32l4xx_hal.h"
 
 /* USER CODE BEGIN Includes */
+#include "string.h"
 
 /* USER CODE END Includes */
 
@@ -469,6 +470,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
   char c_time[9];
   char c_date[11];
+  char c_weekday[4];
 
   RTC_DateTypeDef sDate;
   RTC_TimeTypeDef sTime;
@@ -481,21 +483,75 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
       sprintf(c_date, "20%02d/%02d/%02d\n", sDate.Year, sDate.Month, sDate.Date);
       sprintf(c_time, "%02d:%02d:%02d\n", sTime.Hours, sTime.Minutes, sTime.Seconds);
+      switch (sDate.WeekDay) {
+	case RTC_WEEKDAY_MONDAY:
+	  strcpy(c_weekday, "MON\n");
+	  break;
+	case RTC_WEEKDAY_TUESDAY:
+	  strcpy(c_weekday, "TUE\n");
+	  break;
+	case RTC_WEEKDAY_WEDNESDAY:
+	  strcpy(c_weekday, "WED\n");
+	  break;
+	case RTC_WEEKDAY_THURSDAY:
+	  strcpy(c_weekday, "THU\n");
+	  break;
+	case RTC_WEEKDAY_FRIDAY:
+	  strcpy(c_weekday, "FRI\n");
+	  break;
+	case RTC_WEEKDAY_SATURDAY:
+	  strcpy(c_weekday, "SAT\n");
+	  break;
+	case RTC_WEEKDAY_SUNDAY:
+	  strcpy(c_weekday, "SUN\n");
+	  break;
+      }
 
       HAL_UART_Transmit(&huart2, (uint8_t *)c_date, sizeof(c_date), 100);  // RTC date
       HAL_UART_Transmit(&huart2, (uint8_t *)c_time, sizeof(c_time), 100);  // RTC time
+      HAL_UART_Transmit(&huart2, (uint8_t *)c_weekday, sizeof(c_weekday), 100);  // RTC weekday
   }
 
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-  static uint8_t cmd_buf[32];
+  static char cmd_buf[32];
   static uint8_t cnt = 0;
+  int year, month, date, hours, minutes, seconds, weekday;
+  RTC_TimeTypeDef sTime;
+  RTC_DateTypeDef sDate;
+
   HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
   cmd_buf[cnt++] = rxbuf[0];
   if (rxbuf[0] == '\n') {
-      HAL_UART_Transmit(&huart2, (uint8_t *)cmd_buf, cnt, 1000);
+      //HAL_UART_Transmit(&huart2, (uint8_t *)cmd_buf, cnt, 1000);
+      cmd_buf[cnt] = '\0';
+      sscanf((char *)cmd_buf, "%d %d %d %d %d %d %d", &year, &month, &date, &hours, &minutes, &seconds, &weekday);
       cnt = 0;
+
+      /* Initialize RTC and set the Time and Date */
+      sTime.Hours = hours;
+      sTime.Minutes = minutes;
+      sTime.Seconds = seconds;
+      sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+      sTime.StoreOperation = RTC_STOREOPERATION_RESET;
+      if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN) != HAL_OK)
+	{
+	  Error_Handler();
+	}
+
+      sDate.WeekDay = RTC_WEEKDAY_TUESDAY;
+      sDate.Month = RTC_MONTH_MAY;
+      sDate.Date = date;
+      sDate.Year = year;
+
+      if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN) != HAL_OK)
+	{
+	  Error_Handler();
+	}
+
+      HAL_RTCEx_BKUPWrite(&hrtc,RTC_BKP_DR0,0x32F2);
+
   }
   HAL_UART_Receive_IT(&huart2, rxbuf, 1);
 }
