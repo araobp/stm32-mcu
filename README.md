@@ -15,6 +15,8 @@ I use TrueSTUDIO with Cube MX.
 - [TrueSTUDIO](https://atollic.com/truestudio/)
 - [STM32 CubeMX Eclipse plugin](http://www.st.com/en/development-tools/stsw-stm32095.html)
 
+TrueSTUDIO is a great IDE. CubeMX is also nice.
+
 ## Evaluation
 
 I have got these STM32 boards.
@@ -26,9 +28,8 @@ I have got these STM32 boards.
 
 #### Sample applications
 
-=> [Eclipse projects](./STM32L476-Nucleo-64)
-
 - [Clock](./STM32L476-Nucleo-64/Clock/README.md)
+- [CAN](./STM32L476-Nucleo-64/CAN/README.md)
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html)
 
@@ -37,7 +38,10 @@ I have got these STM32 boards.
 
 #### Sample applications
 
-=> [Eclipse projects](./STM32F4-Discovery)
+- [BlueSwitch](./stm32-mcu/STM32F4-Discovery/BlueSwitch/)
+- [HelloWorld](./stm32-mcu/STM32F4-Discovery/HelloWorld/)
+- [LED_blinking](./stm32-mcu/STM32F4-Discovery/LED_blinking/)
+- [PWM-output](./stm32-mcu/STM32F4-Discovery/PWM-output/)
 
 #### UART and printf
 
