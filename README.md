@@ -15,6 +15,8 @@ I use TrueSTUDIO with Cube MX.
 - [TrueSTUDIO](https://atollic.com/truestudio/)
 - [STM32 CubeMX Eclipse plugin](http://www.st.com/en/development-tools/stsw-stm32095.html)
 
+TrueSTUDIO is a great IDE. CubeMX is also nice.
+
 ## Evaluation
 
 I have got these STM32 boards.
