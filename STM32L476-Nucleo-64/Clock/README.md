@@ -6,6 +6,10 @@ This is a sample clock application using STM32 RTC capability and an external I2
 
 - [I2C character LCD](http://akizukidenshi.com/catalog/g/gK-08896/)
 
+## Wirling
+
+![wirling](./doc/NUCLEO-L476RG-Clock-Wirling.jpg)
+
 ## Schematic
 
 Note: PB8 and PB9 pins are 5V-tolerant as per [the datasheet](http://www.st.com/resource/en/datasheet/stm32l476je.pdf).
