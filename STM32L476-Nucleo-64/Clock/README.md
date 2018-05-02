@@ -8,7 +8,7 @@ This is a sample clock application using STM32 RTC capability and an external I2
 
 ## Wirling
 
-![wiring](./doc/NUCLEO-L476RG-Clock-Wiring.jpg)
+![wiring](./NUCLEO-L476RG-Clock-Wiring.jpg)
 
 ## Schematic
 
