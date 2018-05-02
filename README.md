@@ -29,7 +29,6 @@ I have got these STM32 boards.
 #### Sample applications
 
 - [Clock](./STM32L476-Nucleo-64/Clock/README.md)
-- [CAN](./STM32L476-Nucleo-64/CAN/README.md)
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html)
 
