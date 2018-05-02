@@ -22,7 +22,7 @@ I have got these STM32 boards.
 
 => [Eclipse projects](./STM32L476-Nucleo-64)
 
-![Clock](./doc/NUCLEO-L476RG-Clock.jpeg)
+![Clock](./doc/NUCLEO-L476RG-Clock.jpg)
 
 - [Clock](./STM32L476-Nucleo-64/Clock/README.md)
 
