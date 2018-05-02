@@ -6,7 +6,7 @@ This is a sample clock application using STM32 RTC capability and an external I2
 
 - [I2C character LCD](http://akizukidenshi.com/catalog/g/gK-08896/)
 
-## Wirling
+## Wiring
 
 ![wiring](./NUCLEO-L476RG-Clock-Wiring.jpg)
 
