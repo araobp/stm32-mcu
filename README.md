@@ -1,5 +1,9 @@
 # STMicroelectronics STM32 MCU evaluation
 
+![Clock](./doc/NUCLEO-L476RG-Clock.jpg)
+
+Clock application with STM32L476RG
+
 ## Motivation
 
 Compare STMicro STM32 with Microchip PIC16F1 MCUs.
@@ -21,8 +25,6 @@ I have got these STM32 boards.
 - [Datasheet](http://www.st.com/resource/en/datasheet/stm32l476je.pdf)
 
 => [Eclipse projects](./STM32L476-Nucleo-64)
-
-![Clock](./doc/NUCLEO-L476RG-Clock.jpg)
 
 - [Clock](./STM32L476-Nucleo-64/Clock/README.md)
 
