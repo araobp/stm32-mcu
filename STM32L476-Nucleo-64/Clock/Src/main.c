@@ -71,9 +71,16 @@ UART_HandleTypeDef huart2;
 #define ON "ON"
 #define OFF "OFF"
 
+const uint16_t lcd_i2c_addr = LCD_I2C_ADDRESS << 1;
+
 uint8_t rxbuf[1];
 
-uint8_t *pbuf;
+typedef struct {
+  char date[10];
+  char time[8];
+  char weekday[3];
+} current_datetime;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -98,7 +105,7 @@ void write_command(uint8_t command)
 {
   uint8_t buf[2] = {0x00, 0x00};
   buf[1] = command;
-  HAL_I2C_Master_Transmit(&hi2c1, LCD_I2C_ADDRESS, buf, 2, 100);
+  HAL_I2C_Master_Transmit(&hi2c1, lcd_i2c_addr, buf, 2, 100);
   HAL_Delay(1);
 }
 
@@ -110,7 +117,7 @@ void write_data(uint8_t data)
 {
   uint8_t buf[2] = {0x40, 0x00};
   buf[1] = data;
-  HAL_I2C_Master_Transmit(&hi2c1, LCD_I2C_ADDRESS, buf, 2, 100);
+  HAL_I2C_Master_Transmit(&hi2c1, lcd_i2c_addr, buf, 2, 100);
   HAL_Delay(1);
 }
 
@@ -135,48 +142,17 @@ void lcd_clear(void)
     write_command(0x01);
 }
 
-void lcd_string(void)
+void lcd_newline(void)
+{
+  write_command(0xc0);
+}
+
+void lcd_string(uint8_t *pbuf)
 {
     uint8_t i = 4;
     while (pbuf[i] != '\0') {
         write_data(pbuf[i++]);
     }
-}
-
-/*
- * String format
- * 1st line: 16 characters
- * 2nd line: 16 characters
- */
-void lcd_string_2lines(void)
-{
-    uint8_t i = 4;
-    while (pbuf[i] != '\0') {
-        write_data(pbuf[i++]);
-        if (i == 20) write_command(0xc0); // new line
-    }
-}
-
-/*
- * contrast data
- * XX XX C5 C4 C3 C2 C1 C0
- * MSB                  LSB
- * 0 ~ 63 levels
- */
-void lcd_contrast(uint8_t contrast)
-{
-    write_command(0x39);
-    write_command(0x70 | (contrast & 0b00001111));  // C3 C2 C1 C0
-    write_command(0x50 | ((contrast >> 4) & 0b00000111));  // BON C5 C4
-    write_command(0x38);
-}
-
-void lcd_arao(void)
-{
-    // Print my name in Japanese Katakana
-    write_data(0xb1);
-    write_data(0xd7);
-    write_data(0xb5);
 }
 
 void lcd_test(void)
@@ -193,6 +169,42 @@ void lcd_test(void)
     write_data(0x2d);  // -
     write_data(0x5e);  // ~
     write_data(0x29);  // )
+}
+
+void get_current_datetime(current_datetime *dt)
+{
+  RTC_DateTypeDef sDate;
+  RTC_TimeTypeDef sTime;
+
+  HAL_RTC_GetTime(&hrtc, &sTime, FORMAT_BIN);  // RTC Time
+  HAL_RTC_GetDate(&hrtc, &sDate, FORMAT_BIN);  // RTC Date
+
+  sprintf(dt->date, "20%02d/%02d/%02d", sDate.Year, sDate.Month, sDate.Date);
+  sprintf(dt->time, "%02d:%02d:%02d", sTime.Hours, sTime.Minutes, sTime.Seconds);
+
+  switch (sDate.WeekDay) {
+	case RTC_WEEKDAY_MONDAY:
+	  strcpy(dt->weekday, "MON");
+	  break;
+	case RTC_WEEKDAY_TUESDAY:
+	  strcpy(dt->weekday, "TUE");
+	  break;
+	case RTC_WEEKDAY_WEDNESDAY:
+	  strcpy(dt->weekday, "WED");
+	  break;
+	case RTC_WEEKDAY_THURSDAY:
+	  strcpy(dt->weekday, "THU");
+	  break;
+	case RTC_WEEKDAY_FRIDAY:
+	  strcpy(dt->weekday, "FRI");
+	  break;
+	case RTC_WEEKDAY_SATURDAY:
+	  strcpy(dt->weekday, "SAT");
+	  break;
+	case RTC_WEEKDAY_SUNDAY:
+	  strcpy(dt->weekday, "SUN");
+	  break;
+    }
 }
 
 /* USER CODE END 0 */
@@ -232,6 +244,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_UART_Receive_IT(&huart2, rxbuf, 1);
 
+  lcd_init();
   lcd_test();
   /* USER CODE END 2 */
 
@@ -468,48 +481,21 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
-  char c_time[9];
-  char c_date[11];
-  char c_weekday[4];
+  current_datetime cd;
 
-  RTC_DateTypeDef sDate;
-  RTC_TimeTypeDef sTime;
+  char newline[] = {'\n'};
 
   if (GPIO_Pin == GPIO_PIN_13) {  // User button (blue tactile switch)
       HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);  // LD2
 
-      HAL_RTC_GetTime(&hrtc, &sTime, FORMAT_BIN);  // RTC Time
-      HAL_RTC_GetDate(&hrtc, &sDate, FORMAT_BIN);  // RTC Date
+      get_current_datetime(&cd);
 
-      sprintf(c_date, "20%02d/%02d/%02d\n", sDate.Year, sDate.Month, sDate.Date);
-      sprintf(c_time, "%02d:%02d:%02d\n", sTime.Hours, sTime.Minutes, sTime.Seconds);
-      switch (sDate.WeekDay) {
-	case RTC_WEEKDAY_MONDAY:
-	  strcpy(c_weekday, "MON\n");
-	  break;
-	case RTC_WEEKDAY_TUESDAY:
-	  strcpy(c_weekday, "TUE\n");
-	  break;
-	case RTC_WEEKDAY_WEDNESDAY:
-	  strcpy(c_weekday, "WED\n");
-	  break;
-	case RTC_WEEKDAY_THURSDAY:
-	  strcpy(c_weekday, "THU\n");
-	  break;
-	case RTC_WEEKDAY_FRIDAY:
-	  strcpy(c_weekday, "FRI\n");
-	  break;
-	case RTC_WEEKDAY_SATURDAY:
-	  strcpy(c_weekday, "SAT\n");
-	  break;
-	case RTC_WEEKDAY_SUNDAY:
-	  strcpy(c_weekday, "SUN\n");
-	  break;
-      }
-
-      HAL_UART_Transmit(&huart2, (uint8_t *)c_date, sizeof(c_date), 100);  // RTC date
-      HAL_UART_Transmit(&huart2, (uint8_t *)c_time, sizeof(c_time), 100);  // RTC time
-      HAL_UART_Transmit(&huart2, (uint8_t *)c_weekday, sizeof(c_weekday), 100);  // RTC weekday
+      HAL_UART_Transmit(&huart2, (uint8_t *)cd.date, sizeof(cd.date), 100);  // RTC date
+      HAL_UART_Transmit(&huart2, (uint8_t *)newline, 1, 100);  // new line
+      HAL_UART_Transmit(&huart2, (uint8_t *)cd.time, sizeof(cd.time), 100);  // RTC time
+      HAL_UART_Transmit(&huart2, (uint8_t *)newline, 1, 100);  // new line
+      HAL_UART_Transmit(&huart2, (uint8_t *)cd.weekday, sizeof(cd.weekday), 100);  // RTC weekday
+      HAL_UART_Transmit(&huart2, (uint8_t *)newline, 1, 100);  // new line
   }
 
 }
