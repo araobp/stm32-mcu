@@ -26,8 +26,6 @@ I have got these STM32 boards.
 
 #### Sample applications
 
-=> [Eclipse projects](./STM32L476-Nucleo-64)
-
 - [Clock](./STM32L476-Nucleo-64/Clock/README.md)
 - [CAN](./STM32L476-Nucleo-64/CAN/README.md)
 
@@ -37,8 +35,6 @@ I have got these STM32 boards.
 - [Datasheet](http://www.st.com/resource/en/datasheet/dm00037051.pdf)
 
 #### Sample applications
-
-=> [Eclipse projects](./STM32F4-Discovery)
 
 - [BlueSwitch](./stm32-mcu/STM32F4-Discovery/BlueSwitch/)
 - [HelloWorld](./stm32-mcu/STM32F4-Discovery/HelloWorld/)
