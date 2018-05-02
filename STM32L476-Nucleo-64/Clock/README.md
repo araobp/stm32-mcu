@@ -6,4 +6,6 @@
 
 ## Schematic
 
+Note: PB8 and PB9 pins are 5V-tolerant as per the datasheet.
+
 ![schematic](./Clock.jpg)
