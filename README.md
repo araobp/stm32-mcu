@@ -24,6 +24,8 @@ I have got these STM32 boards.
 - [Schematics](http://www.st.com/resource/en/schematic_pack/nucleo_64pins_sch.zip)
 - [Datasheet](http://www.st.com/resource/en/datasheet/stm32l476je.pdf)
 
+#### Sample applications
+
 => [Eclipse projects](./STM32L476-Nucleo-64)
 
 - [Clock](./STM32L476-Nucleo-64/Clock/README.md)
@@ -32,6 +34,8 @@ I have got these STM32 boards.
 
 - [Schematics](http://www.st.com/resource/en/schematic_pack/stm32f4discovery_sch.zip)
 - [Datasheet](http://www.st.com/resource/en/datasheet/dm00037051.pdf)
+
+#### Sample applications
 
 => [Eclipse projects](./STM32F4-Discovery)
 
