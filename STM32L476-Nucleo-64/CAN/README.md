@@ -13,5 +13,5 @@ CAN controller                       CAN controller MCP2515
       |                                    |
 CAN tranceiver                       CAN tranceiver MCp2561
       |                                    |
-    --+------- C A N b u s ----------------+--
+    --+------- CAN bus (125kHz) -----------+--
 ```
