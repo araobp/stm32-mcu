@@ -1,4 +1,6 @@
-# Clock
+# Clock application
+
+This is a sample clock application using STM32 RTC capability and an external I2C LCD.
 
 ## Parts
 
