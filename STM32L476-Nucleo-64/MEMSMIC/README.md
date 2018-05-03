@@ -44,7 +44,7 @@ Solder bridges to be closed
 
 https://github.com/araobp/NUCLEO-L476RG_DFSDM_PDM-Mic
 
-Note: The project above has been converted from SW4STM32 into TrueSTUDIO project.
+Note: The project above has been converted from SW4STM32 into TrueSTUDIO project, and I have also modified the pinout on CubeMX for the expansion board.
 
 ## References
 
