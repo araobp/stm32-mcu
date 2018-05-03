@@ -17,6 +17,8 @@ Use [X-NUCLEO-CCA02M1](http://www.st.com/en/ecosystems/x-nucleo-cca02m1.html) ex
 
 ## Bridge/jumper setting for one microphone (M1) acquisition
 
+![SB](./SB.jpg)
+
 Solder bridges to be closed
 
 |Bridge|Connector|Pin number|STM32L476RG pin|
