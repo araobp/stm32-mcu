@@ -1,5 +1,16 @@
 # MEMS Microphones
 
+## DFSDM microphone acquisition
+
+```
+                        +-------+
+     +----- Clock ------|       |          +-----+   +-----+   +------+
+     |                  | DFSDM |-- PCM -->| DMA |-->| RAM |-->| Core |
+     v                  |       |          +-----+   +-----+   +------+
+[MEMS mic]--- PDM ----->|       |
+                        +-------+
+```
+
 ## Expansion board
 
 Use [X-NUCLEO-CCA02M1](http://www.st.com/en/ecosystems/x-nucleo-cca02m1.html) expansion board to test MEMS microphones with DFSDM.
