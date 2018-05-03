@@ -53,7 +53,7 @@ Note: The project above has been converted from SW4STM32 into TrueSTUDIO project
 
 ## Test
 
-=> [./FFT_test.ipynb]
+=> [Jupyter notebook](./FFT_test.ipynb)
 
 ## References
 
