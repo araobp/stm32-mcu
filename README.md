@@ -4,46 +4,30 @@
 
 Clock application with STM32L476RG
 
-## Motivation
-
-Compare STMicro STM32 with Microchip PIC16F1 MCUs.
-
 ## IDE
-
-I use TrueSTUDIO with Cube MX.
 
 - [TrueSTUDIO](https://atollic.com/truestudio/)
 - [STM32 CubeMX Eclipse plugin](http://www.st.com/en/development-tools/stsw-stm32095.html)
 
-TrueSTUDIO is a great IDE. CubeMX is also nice.
-
 ## Evaluation
 
-I have got these STM32 boards.
+### [STM32L476 Nucleo-64](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board
 
-### [STM32L476 Nucleo-64](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html)
-
-- [Schematics](http://www.st.com/resource/en/schematic_pack/nucleo_64pins_sch.zip)
-- [Datasheet](http://www.st.com/resource/en/datasheet/stm32l476je.pdf)
-
-#### Sample applications
+#### Applications
 
 - [Clock](./STM32L476-Nucleo-64/Clock/README.md)
 - [MEMSMIC(MEMS mic expansion board)](./STM32L476-Nucleo-64/MEMSMIC/README.md)
 
-### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html)
+### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html) board
 
-- [Schematics](http://www.st.com/resource/en/schematic_pack/stm32f4discovery_sch.zip)
-- [Datasheet](http://www.st.com/resource/en/datasheet/dm00037051.pdf)
-
-#### Sample applications
+#### Applications
 
 - [BlueSwitch](./stm32-mcu/STM32F4-Discovery/BlueSwitch/)
 - [HelloWorld](./stm32-mcu/STM32F4-Discovery/HelloWorld/)
 - [LED_blinking](./stm32-mcu/STM32F4-Discovery/LED_blinking/)
 - [PWM-output](./stm32-mcu/STM32F4-Discovery/PWM-output/)
 
-#### UART and printf
+#### printf issue
 
 I managed to support printf on USART2.
 
@@ -71,19 +55,24 @@ int _write(int file, char *pbuf, int len)
 }
 ```
 
-#### PWM
+#### PWM test
 
 PWM output (100Hz, 50% duty) to PA8:
 
 ![waveform](./doc/PWM_waveform.jpg)
 
-## STM32Cube packages
-
-- [STM32CubeL4](https://my.st.com/content/my_st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32cube-mcu-packages/stm32cubel4.license%3d1524847579867.html)
-
 ## References
 
-- http://stm32f4-discovery.net/
+### STM32L476 Nucleo-64
+
+- [Schematics](http://www.st.com/resource/en/schematic_pack/nucleo_64pins_sch.zip)
+- [Datasheet](http://www.st.com/resource/en/datasheet/stm32l476je.pdf)
+- [STM32CubeL4](https://my.st.com/content/my_st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32cube-mcu-packages/stm32cubel4.license%3d1524847579867.html)
+
+### STM32F4 Discovery board
+
+- [Schematics](http://www.st.com/resource/en/schematic_pack/stm32f4discovery_sch.zip)
+- [Datasheet](http://www.st.com/resource/en/datasheet/dm00037051.pdf)
 
 ## Other interests
 
