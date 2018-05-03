@@ -26,7 +26,7 @@ Solder bridges to be closed
 
 |Jumper|Position|Description           |
 |------|--------|----------------------|
-|J1    |Closed  |Enable USB            |
+|J1    |Open    |5V generated on Nucleo|
 |J2    |1-2     |Use on-board MIC 1(M1)|
 
 ## Pinout
