@@ -1,12 +1,18 @@
 # MEMS Microphones
 
-## Jumper setting for two microphone acquisition
+## Bridge/jumper setting for one microphone (M1) acquisition
 
-Jumpers to be closed
-SB9 - 
-SB12
-SB16
+Solder bridges to be closed
 
+|Bridge|Connector|Pin number|STM32L476RG pin|
+|------|---------|----------|---------------|
+|SB12  |CN7      |35        |PC2            |
+|SB16  |CN10     |28        |PA6, PB14      |
+
+|Jumper|Position|Description           |
+|------|--------|----------------------|
+|J1    |Closed  |Enable USB            |
+|J2    |1-2     |Use on-board MIC 1(M1)|
 
 ## Schematics
 
