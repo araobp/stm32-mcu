@@ -1,5 +1,9 @@
 # MEMS Microphones
 
+## Expansion board
+
+Use [X-NUCLEO-CCA02M1](http://www.st.com/en/ecosystems/x-nucleo-cca02m1.html) expansion board to test MEMS microphones with DFSDM.
+
 ## Bridge/jumper setting for one microphone (M1) acquisition
 
 Solder bridges to be closed
