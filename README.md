@@ -15,6 +15,8 @@ Clock application with STM32L476RG
 
 #### Applications
 
+- [HelloWorld](./STM32L476-Nucleo-64/HelloWorld)
+- [GPIO_Interrupt](./STM32L476-Nucleo-64/GPIO_Interrupt)
 - [Clock](./STM32L476-Nucleo-64/Clock/README.md)
 - [MEMSMIC(MEMS mic expansion board)](./STM32L476-Nucleo-64/MEMSMIC/README.md)
 
