@@ -56,6 +56,7 @@ Note: The project above has been converted from SW4STM32 into TrueSTUDIO project
 
 #### Arm Cortex-M DSP extension
 
+- [White Paper - DSP capabilities of Cortex-M4 and Cortex-M7](https://community.arm.com/cfs-file/__key/telligent-evolution-components-attachments/01-2142-00-00-00-00-73-48/ARM-white-paper-_2D00_-DSP-capabilities-of-Cortex_2D00_M4-and-Cortex_2D00_M7.pdf)
 - [CMSIS](http://www2.keil.com/mdk5/cmsis/)
 - [DSP for Cortex-M](https://developer.arm.com/technologies/dsp/dsp-for-cortex-m)
 - [CMSIS Real FFT API documentation](https://www.keil.com/pack/doc/CMSIS/DSP/html/group__RealFFT.html)
