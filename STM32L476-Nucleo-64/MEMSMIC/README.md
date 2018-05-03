@@ -44,7 +44,7 @@ Solder bridges to be closed
 
 https://github.com/araobp/NUCLEO-L476RG_DFSDM_PDM-Mic
 
-Note: The project above has been converted from SW4STM32 into TrueSTUDIO project, and all '\t' in printf format has been replaced with ',' to feed the output to Jupyter Notebook and Pandas.
+Note: The project above has been converted from SW4STM32 into TrueSTUDIO project.
 
 ## References
 
