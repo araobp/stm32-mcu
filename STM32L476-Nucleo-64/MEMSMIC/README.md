@@ -1,5 +1,13 @@
 # MEMS Microphones
 
+## Jumper setting for two microphone acquisition
+
+Jumpers to be closed
+SB9 - 
+SB12
+SB16
+
+
 ## Schematics
 
 - [NUCLEO-L476RG schematic](http://www.st.com/resource/en/schematic_pack/nucleo_64pins_sch.zip)
