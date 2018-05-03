@@ -18,6 +18,10 @@ Solder bridges to be closed
 |J1    |Closed  |Enable USB            |
 |J2    |1-2     |Use on-board MIC 1(M1)|
 
+## Pinout
+
+![Pinout](./Pinout.jpg)
+
 ## Schematics
 
 - [NUCLEO-L476RG schematic](http://www.st.com/resource/en/schematic_pack/nucleo_64pins_sch.zip)
