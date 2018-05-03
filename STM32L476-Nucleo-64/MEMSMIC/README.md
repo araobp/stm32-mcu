@@ -1,5 +1,7 @@
 # MEMS Microphones
 
+![expansion](./MEMSMIC_expansion_board.jpg)
+
 ## DFSDM microphone acquisition
 
 ```
