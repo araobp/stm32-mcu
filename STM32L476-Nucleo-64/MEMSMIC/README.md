@@ -29,12 +29,14 @@ Solder bridges to be closed
 |SB12  |CN7      |35        |PC2            |
 |SB16  |CN10     |28        |PA6, PB14      |
 
+Jumper pin setting
+
 |Jumper|Position|Description           |
 |------|--------|----------------------|
 |J1    |Open    |5V generated on Nucleo|
 |J2    |1-2     |Use on-board MIC 1(M1)|
 
-## Pinout
+## STM32L476RG pinout (CubeMX)
 
 ![Pinout](./Pinout.jpg)
 
