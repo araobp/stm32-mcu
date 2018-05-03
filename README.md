@@ -24,10 +24,10 @@ Clock application with STM32L476RG
 
 #### Applications
 
-- [BlueSwitch](./stm32-mcu/STM32F4-Discovery/BlueSwitch/)
-- [HelloWorld](./stm32-mcu/STM32F4-Discovery/HelloWorld/)
-- [LED_blinking](./stm32-mcu/STM32F4-Discovery/LED_blinking/)
-- [PWM-output](./stm32-mcu/STM32F4-Discovery/PWM-output/)
+- [BlueSwitch](./STM32F4-Discovery/BlueSwitch)
+- [HelloWorld](./STM32F4-Discovery/HelloWorld)
+- [LED_blinking](./STM32F4-Discovery/LED_blinking)
+- [PWM-output](./STM32F4-Discovery/PWM-output)
 
 #### printf issue
 
