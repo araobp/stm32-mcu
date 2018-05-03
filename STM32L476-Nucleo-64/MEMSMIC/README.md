@@ -45,7 +45,7 @@ Jumper pin setting
 - [NUCLEO-L476RG schematic](http://www.st.com/resource/en/schematic_pack/nucleo_64pins_sch.zip)
 - [X-NUCLEO-CCA02M1 schematic](http://www.st.com/content/ccc/resource/technical/layouts_and_diagrams/schematic_pack/ae/8d/91/e9/14/bc/4f/0e/x-nucleo-cca02m1_schematic.pdf/files/x-nucleo-cca02m1_schematic.pdf/jcr:content/translations/en.x-nucleo-cca02m1_schematic.pdf)
 
-## Code
+## Code forked from https://github.com/y2kblog/NUCLEO-L476RG_DFSDM_PDM-Mic
 
 https://github.com/araobp/NUCLEO-L476RG_DFSDM_PDM-Mic
 
