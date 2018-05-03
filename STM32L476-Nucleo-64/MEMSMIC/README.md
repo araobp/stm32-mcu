@@ -1,10 +1,23 @@
 # MEMS Microphones
 
+## DFSDM microphone acquisition
+
+```
+                        +-------+
+     +----- Clock ------|       |          +-----+   +-----+   +------+
+     |                  | DFSDM |-- PCM -->| DMA |-->| RAM |-->| Core |
+     v                  |       |          +-----+   +-----+   +------+
+[MEMS mic]--- PDM ----->|       |
+                        +-------+
+```
+
 ## Expansion board
 
 Use [X-NUCLEO-CCA02M1](http://www.st.com/en/ecosystems/x-nucleo-cca02m1.html) expansion board to test MEMS microphones with DFSDM.
 
 ## Bridge/jumper setting for one microphone (M1) acquisition
+
+![SB](./SB.jpg)
 
 Solder bridges to be closed
 
@@ -15,8 +28,12 @@ Solder bridges to be closed
 
 |Jumper|Position|Description           |
 |------|--------|----------------------|
-|J1    |Closed  |Enable USB            |
+|J1    |Open    |5V generated on Nucleo|
 |J2    |1-2     |Use on-board MIC 1(M1)|
+
+## Pinout
+
+![Pinout](./Pinout.jpg)
 
 ## Schematics
 
@@ -25,6 +42,14 @@ Solder bridges to be closed
 
 ## References
 
+### Guide
+
 - https://github.com/y2kblog/NUCLEO-L476RG_DFSDM_PDM-Mic
 - [Getting started with MEMS microphone expansion board](http://www.st.com/content/ccc/resource/technical/document/user_manual/88/5d/3e/6d/9c/ae/42/de/DM00187403.pdf/files/DM00187403.pdf/jcr:content/translations/en.DM00187403.pdf)
 - [STM32L4 DFSDM](http://www.st.com/content/ccc/resource/training/technical/product_training/96/b6/2b/ea/72/3f/4e/d5/STM32L4_System_DFSDM.pdf/files/STM32L4_System_DFSDM.pdf/jcr:content/translations/en.STM32L4_System_DFSDM.pdf)
+
+### MEMS microphone
+
+- [Top ten MEMS microphone vendors ranked](https://www.edn.com/electronics-blogs/20-20khz/4431541/Top-ten-MEMS-microphone-vendors-ranked)
+- [STMicro MP34DT01-M](http://www.st.com/resource/en/datasheet/mp34dt01-m.pdf)
+- [Knowles SPH0641LU4H-1](http://www.knowles.com/jpn/content/download/5990/105795/version/1/file/SPH0641LU4H-1.pdf)
