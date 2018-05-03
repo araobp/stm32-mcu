@@ -51,6 +51,7 @@ https://github.com/araobp/NUCLEO-L476RG_DFSDM_PDM-Mic
 - https://github.com/y2kblog/NUCLEO-L476RG_DFSDM_PDM-Mic
 - [Getting started with MEMS microphone expansion board](http://www.st.com/content/ccc/resource/technical/document/user_manual/88/5d/3e/6d/9c/ae/42/de/DM00187403.pdf/files/DM00187403.pdf/jcr:content/translations/en.DM00187403.pdf)
 - [STM32L4 DFSDM](http://www.st.com/content/ccc/resource/training/technical/product_training/96/b6/2b/ea/72/3f/4e/d5/STM32L4_System_DFSDM.pdf/files/STM32L4_System_DFSDM.pdf/jcr:content/translations/en.STM32L4_System_DFSDM.pdf)
+- [DSP for Cortex-M](https://developer.arm.com/technologies/dsp/dsp-for-cortex-m)
 
 ### MEMS microphone
 
