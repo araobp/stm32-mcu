@@ -55,7 +55,7 @@ Note: The project above has been converted from SW4STM32 into TrueSTUDIO project
 
 ## Test
 
-=> [Jupyter notebook](./FFT_test.ipynb)
+=> [Jupyter notebook](./Tone_15000Hz.ipynb)
 
 ## References
 
