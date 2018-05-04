@@ -38,7 +38,7 @@ Jumper pin setting
 |J1    |Open    |5V generated on Nucleo|
 |J2    |1-2     |Use on-board MIC 1(M1)|
 
-## STM32L476RG pinout (CubeMX)
+## STM32L476RG pinout configuration (CubeMX)
 
 ![Pinout](./Pinout.jpg)
 
@@ -57,7 +57,7 @@ Note: The project above has been converted from SW4STM32 into TrueSTUDIO project
 
 I used [this on-line tone generator](http://www.szynalski.com/tone-generator/) to generate constant tone at 15000Hz frequency.
 
-Then I confirmed that MEMS mic on the expansion board is working: the pinout and jumper/SB setting is correct.
+Then I confirmed that MEMS mic on the expansion board is working: the pinout configuration and the jumper/SB setting is correct.
 
 ![plot_15000Hz](plot_15000Hz.jpg)
 
