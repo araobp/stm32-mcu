@@ -53,6 +53,16 @@ https://github.com/araobp/NUCLEO-L476RG_DFSDM_PDM-Mic
 
 Note: The project above has been converted from SW4STM32 into TrueSTUDIO project, and I have also modified the pinout on CubeMX for the expansion board.
 
+### UART
+
+|Parameter   |Value    |
+|------------|---------|
+|Baud rate   |115200bps|
+|Data        |8bit     |
+|Parity      |None     |
+|Stop        |1bit     |
+|Flow control|None     |
+
 ## Test
 
 I used [this on-line tone generator](http://www.szynalski.com/tone-generator/) to generate constant tone at 15000Hz frequency.
