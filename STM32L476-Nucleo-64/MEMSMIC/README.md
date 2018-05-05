@@ -51,7 +51,7 @@ Jumper pin setting
 
 https://github.com/araobp/NUCLEO-L476RG_DFSDM_PDM-Mic
 
-Note: The project above has been converted from SW4STM32 into TrueSTUDIO project, and I have also modified the pinout on CubeMX for the expansion board. I have also changed the operation to take a single-shot FFT result by pushing USER button on Nucleo board.
+Note: The project above has been converted from SW4STM32 into TrueSTUDIO project, and I have modified the pinout on CubeMX for the expansion board. I have also changed the operation to take a single-shot FFT result by pushing USER button on Nucleo board.
 
 ### UART
 
