@@ -20,7 +20,7 @@ Use [X-NUCLEO-CCA02M1](http://www.st.com/en/ecosystems/x-nucleo-cca02m1.html) ex
 
 ![expansion](./MEMSMIC_expansion_board.jpg)
 
-Inpur clock frequency Max: 3.25MHz
+As per the MEMC mic datasheet, input clock frequency Max value is 3.25MHz.
 
 Given the system clock rate at 80MHz, the clock divider should be larger than 25.
 
