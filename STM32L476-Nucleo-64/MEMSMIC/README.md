@@ -24,6 +24,8 @@ As per the MEMC mic datasheet, input clock frequency Max value is 3.25MHz.
 
 Given the system clock rate at 80MHz, the clock divider should be larger than 25.
 
+To obtain 100kHz sampling rate, the clock divider is set to 25 and the decimation factor to 32.
+
 ## Bridge/jumper setting for one microphone (M1) acquisition
 
 ![SB](./SB.jpg)
