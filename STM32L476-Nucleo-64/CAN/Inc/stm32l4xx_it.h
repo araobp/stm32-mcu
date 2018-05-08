@@ -48,8 +48,6 @@
 /* Exported functions ------------------------------------------------------- */
 
 void SysTick_Handler(void);
-void CAN1_RX0_IRQHandler(void);
-void CAN1_RX1_IRQHandler(void);
 
 #ifdef __cplusplus
 }
