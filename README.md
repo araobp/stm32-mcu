@@ -63,6 +63,10 @@ PWM output (100Hz, 50% duty) to PA8:
 
 ![waveform](./doc/PWM_waveform.jpg)
 
+## Comparison with MPLAB-X MCC from Microchip
+
+I have used CubeMX over a few weeks, then I think MPLAB-X's MCC is more sohpisticated than CubeMX. MCC even allows us to modify auto-generated code.
+
 ## References
 
 ### STM32L476 Nucleo-64
