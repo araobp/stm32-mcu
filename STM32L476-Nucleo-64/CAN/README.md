@@ -1,6 +1,16 @@
 # CAN
 
-The program runs in Loopback/Silent mode. Connect Teraterm to the board at baudrate 9600bps to show the output messages.
+The program runs in Loopback/Silent mode. Connect Teraterm to the board at baudrate 9600bps to show output messages.
+
+```
+[1] MailBox#: 1
+[2] MailBox#: 1
+[1] StdId: 1
+[1] RX_FIFO0: Hello!
+[2] StdId: 2
+[2] RX_FIFO1: World!
+       :
+```
 
 ## CubeMX bug
 
