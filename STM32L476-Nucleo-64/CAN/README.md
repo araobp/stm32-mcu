@@ -1,6 +1,8 @@
 # CAN
 
-The program runs in Loopback/Silent mode. Connect Teraterm to the board at baudrate 9600bps to show output messages.
+This project does not use CAN tranceivers (such as Microchip MCP2561). The program runs in Loopback/Silent mode instead.
+
+Connect Teraterm to the board at baudrate 9600bps to show output messages.
 
 ```
 [1] MailBox#: 1
