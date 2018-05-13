@@ -29,5 +29,3 @@ It was required to upgrading CubeMX from V4.25 to V4.25.1 to fixed the bug.
 STM32CubeMX Software V4.25.1 / 05 May 2018 Minor release 
 Fixed PLLM code generation for STM32L4 Series.
 ```
-
-It was not a minor issue for me, because I spent so much time for the problem to fix.
