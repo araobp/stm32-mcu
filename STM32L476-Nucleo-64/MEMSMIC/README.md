@@ -1,6 +1,6 @@
 # MEMS Microphones
 
-Use this code http://y2kblog.wp.xdomain.jp/pdm_digitalmic_1_stm32l4_dfsdm/ to test X-NUCLEO-CCA02M1 expansion board.
+Use this code https://github.com/y2kblog/NUCLEO-L476RG_DFSDM_PDM-Mic to test X-NUCLEO-CCA02M1 expansion board.
 
 ## DFSDM microphone acquisition
 
