@@ -4,12 +4,11 @@
  *  Created on: 2018/07/18
  */
 
-#ifndef GYRO_SCOPE_H_
-#define GYRO_SCOPE_H_
+#ifndef L3GD20_H_
+#define L3GD20_H_
 
 #include <stdint.h>
-#include <stm32l4xx_hal.h>
-#include <stm32l4xx_hal_i2c.h>
+#include "i2c.h"
 
 #define L3GD20_I2C_ADDRESS 0b01101011 // STMicro L3GD20 gyro scope
 
@@ -26,13 +25,10 @@
 #define OUT_Z_H 0x2dU
 
 #define ENABLE 0x0fU  // power on
-#define SENSIVITY 0.00875f
-
-void write_data(uint8_t reg_addr, uint8_t data);
-uint8_t read_data(uint8_t reg_addr);
+#define SENSITIVITY 0.00875f
 
 uint8_t init_l3gd20(void);
 int8_t get_temp(void);
-int16_t get_motion(char axis);
+float get_motion(char axis);
 
-#endif /* GYRO_SCOPE_H_ */
+#endif /* L3GD20_H_ */
