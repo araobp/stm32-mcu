@@ -10,8 +10,6 @@
 #include <stdint.h>
 #include "i2c.h"
 
-#define L3GD20_I2C_ADDRESS 0b01101011 // STMicro L3GD20 gyro scope
-
 // Register list
 #define WHO_AM_I 0x0fU
 #define RES_OK 0xd4U

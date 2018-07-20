@@ -20,6 +20,11 @@ void i2c_write(uint8_t i2c_addr, uint8_t reg_addr, uint8_t data) {
   HAL_Delay(1);
 }
 
+void i2c_buf_write(uint8_t i2c_addr, uint8_t *pbuf, uint8_t len) {
+  HAL_I2C_Master_Transmit(phi2c_, i2c_addr, pbuf, len, 100);
+  HAL_Delay(1);
+}
+
 uint8_t i2c_read(uint8_t i2c_addr, uint8_t reg_addr) {
   uint8_t buf[1];
   buf[0] = reg_addr;
@@ -29,3 +34,8 @@ uint8_t i2c_read(uint8_t i2c_addr, uint8_t reg_addr) {
   return buf[0];
 }
 
+void i2c_buf_read(uint8_t i2c_addr, uint8_t *pbuf_w, uint8_t len_w, uint8_t *pbuf_r, uint8_t len_r) {
+  HAL_I2C_Master_Transmit(phi2c_, i2c_addr, pbuf_w, len_w, 100);
+  HAL_I2C_Master_Receive(phi2c_, i2c_addr, pbuf_r, len_r, 100);
+  HAL_Delay(1);
+}

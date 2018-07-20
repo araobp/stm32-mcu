@@ -44,7 +44,8 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <l3gd20.h>
+#include "l3gd20.h"
+#include "hmc5883l.h"
 
 /* USER CODE END Includes */
 
@@ -113,6 +114,8 @@ int main(void)
 
   // L3GD20 initialization
   init_l3gd20();
+  // HMC5883L initialization
+  init_hmc5883l();
 
   /* USER CODE END 2 */
 
@@ -125,7 +128,8 @@ int main(void)
     float x = get_motion('x');
     float y = get_motion('y');
     float z = get_motion('z');
-    printf("%.2f,%.2f,%.2f\n", x, y, z);
+    int16_t deg = get_degree();
+    printf("%.2f,%.2f,%.2f,%d\n", x, y, z, deg);
 
   /* USER CODE END WHILE */
 
