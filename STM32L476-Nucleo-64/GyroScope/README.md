@@ -1,6 +1,6 @@
 # Gyro scope
 
-I just want to measure roll, pitch and yaw of a bus running in Tokyo. I am not sure if this gyro scope is useful for the purpose. I am going to use an accelerometer as well.
+I just want to measure roll, pitch and yaw of a bus running in Tokyo.
 
 ## STMicro L3GD20 gyro scope
 
