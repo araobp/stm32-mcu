@@ -45,7 +45,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "l3gd20.h"
-#include "hmc5883l.h"
 
 /* USER CODE END Includes */
 
@@ -114,8 +113,6 @@ int main(void)
 
   // L3GD20 initialization
   init_l3gd20();
-  // HMC5883L initialization
-  init_hmc5883l();
 
   /* USER CODE END 2 */
 
@@ -123,13 +120,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1) {
 
-    HAL_Delay(900);
+    HAL_Delay(100);
 
     float x = get_motion('x');
     float y = get_motion('y');
     float z = get_motion('z');
-    int16_t deg = get_degree();
-    printf("%.2f,%.2f,%.2f,%d\n", x, y, z, deg);
+    printf("%.2f,%.2f,%.2f\n", x, y, z);
 
   /* USER CODE END WHILE */
 
