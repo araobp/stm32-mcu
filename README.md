@@ -20,6 +20,7 @@ Clock application with STM32L476RG
 - [Clock](./STM32L476-Nucleo-64/Clock/README.md)
 - [CAN](./STM32L476-Nucleo-64/CAN/README.md)
 - [MEMSMIC(MEMS mic expansion board)](./STM32L476-Nucleo-64/MEMSMIC/README.md)
+- [ADC with DMA](./STM32L476-Nucleo-64/ADC/README.md)
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html) board
 
