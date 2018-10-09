@@ -2,10 +2,10 @@
 
 ## Configuration
 
-- Resolution: 12bit
+- Resolution: 12bit (0 ~ 4096)
 - SYSCLK: 80MHz
 - Clock prescaler: 4
-- Oversampling ratio: 64x
+- Oversampling ratio: 64x (0 ~ (4096*64)/2^6=4096)
 - Oversampling right shift: 6bit
 
 ## DMA interrupt cycle
