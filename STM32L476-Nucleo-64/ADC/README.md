@@ -1,10 +1,10 @@
-# ADC test
+# ADC with DMA
 
 ## Configuration
 
 - Resolution: 12bit
 - SYSCLK: 80MHz
-- Clock prescaler:4
+- Clock prescaler: 4
 - Oversampling ratio: 64x
 - Oversampling right shift: 6bit
 
