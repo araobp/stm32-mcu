@@ -46,13 +46,15 @@
 
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
+#include "stdbool.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-volatile uint16_t buf[16] = {0};
+volatile uint16_t buf[1024] = {0};
+volatile bool adc_cplt = false;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -101,7 +103,7 @@ int main(void)
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
-  if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)buf, 16) != HAL_OK) {
+  if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)buf, 1024) != HAL_OK) {
     Error_Handler();
   }
 
@@ -111,17 +113,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_Delay(1000);
-
     /* In case of polling mode
     if (HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK) {
       uint32_t v = HAL_ADC_GetValue(&hadc1);
       printf("%lu\n", v);
     }
     */
-    printf("-\n");
-    for (int i = 0; i < 16; i++) {
-      printf("%u\n", buf[i]);
+    if (adc_cplt) {
+      printf("-\n");
+      printf("%u @ %lu\n", buf[0], HAL_GetTick());
+      adc_cplt = false;
     }
 
   /* USER CODE END WHILE */
@@ -202,6 +203,17 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+/**
+  * @brief  Conversion complete callback in non-blocking mode.
+  * @param hadc ADC handle
+  * @retval None
+  */
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
+  if (hadc == &hadc1) {
+    adc_cplt = true;
+  }
+}
 
 /**
  * @brief  Retargets the C library printf function to the USART.
