@@ -1,6 +1,12 @@
 
 # DAC test
 
+## Dynamic range
+
+- 12bit DAC supported by STM32L4: 20 * log10(2^12) = 72dB
+- Analog disk/tape: 60dB that corresponds to 10bit resolution ( ~ 20 * log10(2^10))
+- CD: 20 * log10(2^16) = 96dB
+
 ## Triangular wave
 
 ![](./trianglular_wave.BMP)
