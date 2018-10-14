@@ -19,7 +19,7 @@
 
 - [Sine wave test on Arm Cortex-M4(STM32L476RG)](./sine_wave)
 
-#### Clipping problem
+## Clipping problem
 
 I observed audio clipping with my oscilloscope when sine wave was being generated on the DAC. The range of sine wave was "int16_t 0 to 128", and part of the waveform under around "int16_t 40" did not appear on my oscilloscope.
 
