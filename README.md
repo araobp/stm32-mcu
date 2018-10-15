@@ -22,6 +22,7 @@ Clock application with STM32L476RG
 - [MEMSMIC(MEMS mic expansion board)](./STM32L476-Nucleo-64/MEMSMIC/README.md)
 - [ADC with DMA](./STM32L476-Nucleo-64/ADC/README.md)
 - [DAC with triangular wave and sine wave](./STM32L476-Nucleo-64/DAC/README.md)
+- [Mic->ADC->DAC pipeline](./STM32L476-Nucleo-64/Mic_ADC_DAC/README.md)
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html) board
 
