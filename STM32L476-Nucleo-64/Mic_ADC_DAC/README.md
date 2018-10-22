@@ -40,3 +40,5 @@ TMR6 counter period: 32 * 60 - 1 = 1919
   ```
   
  ![](./Mic_ADC_DAC.jpg)
+ 
+ Note: it requires an analog fiter for AC coupling etc -- refer to [this page](https://github.com/araobp/audio-signal-processing).
