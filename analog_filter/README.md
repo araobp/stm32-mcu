@@ -2,7 +2,7 @@
 
 Some of the applications in this project require an analog filter for DAC to remove quantization noise and to remove DC (AC coupling).
 
-![](./aanalog_filter.jpg)
+![](./analog_filter.jpg)
 
 - [Circuit simulation (LTspice)](./ltspice)
 - [Frequency response (LTspice)](./ltspice/LPF_HPF_for_DAC_and_earphone.pdf)
