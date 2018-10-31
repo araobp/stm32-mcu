@@ -79,12 +79,6 @@ Unfortunately DAC1 OUT2 is connected to PA5 pin that is also connected to the on
 
 Refer to the schematin on this web site: https://www.st.com/en/evaluation-tools/nucleo-l476rg.html
 
-## UART setting
-
-DMA is used to output data to UART. DMA is MUST: the pipeline processing finishes within the time frame with help from DMA.
-
-Baud rate: 230400bps
-
 ## Analog filter
 
 An analog filter is required to attenuate the DAC output voltage, to remove quantization noise and to remove DC offset from DAC output signal => [Analog Filter](../../analog_filter)
