@@ -87,4 +87,6 @@ Baud rate: 230400bps
 
 ## Analog filter
 
+![](../../analog_filter/analog_filter.jpg)
+
 An analog filter is required to attenuate the DAC output voltage, to remove quantization noise and to remove DC offset from DAC output signal.
