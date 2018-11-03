@@ -1,6 +1,6 @@
 ## Analog filter
 
-Some of the applications in this project require an analog filter for DAC to remove quantization noise and to remove DC (AC coupling).
+Some of the applications in this project require an analog filter for DAC to remove quantization noise and to remove DC (AC coupling). The quality of sound is not so good: this filter is just for some experiments on DSP.
 
 ![](./analog_filter.jpg)
 
