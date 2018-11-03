@@ -7,7 +7,7 @@ Clock application with STM32L476RG
 ## IDE
 
 - [TrueSTUDIO](https://atollic.com/truestudio/)
-- [STM32 CubeMX Eclipse plugin](http://www.st.com/en/development-tools/stsw-stm32095.html)
+- [STM32 CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html)
 
 ## Evaluation
 
