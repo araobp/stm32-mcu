@@ -16,3 +16,32 @@ Output signal after the analog filter:
 
 ![](./sine_wave_output.BMP)
 
+## Wirling the analog filter to Arduino connector
+
+- Connect PA4 to left-channel pin header,
+- Connect PA5 to right-channel pin header,
+- Connect GND to GND pin header,
+on the analog filter board.
+
+```
+                                     [ ]
+                                     [ ]
+                                     [ ]
+                                     [ ]
+  [ ]                                [*] PA5(DAC1 OUT2)
+  [ ]                                [ ]
+  [ ]                                [ ]
+  [ ]                                [ ]
+  [ ]                                [ ]
+  [*] GND                            [ ]
+  [ ]
+  [ ]                                [ ]
+                                     [ ]
+  [ ]                                [ ]
+  [ ]                                [ ]
+  [*] PA4(DAC1 OUT1)                 [ ]
+  [ ]                                [ ]
+  [ ]                                [ ]
+  [ ]                                [ ]
+  ```
+
