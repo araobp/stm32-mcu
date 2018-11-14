@@ -11,19 +11,19 @@ Clock application with STM32L476RG
 
 ## Evaluation
 
-### [STM32L476 Nucleo-64](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board
+### [NUCLEO-L476RG](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board
 
 #### Applications
 
-- [HelloWorld](./STM32L476-Nucleo-64/HelloWorld)
-- [GPIO_Interrupt](./STM32L476-Nucleo-64/GPIO_Interrupt)
-- [Clock](./STM32L476-Nucleo-64/Clock/README.md)
-- [CAN](./STM32L476-Nucleo-64/CAN/README.md)
-- [MEMSMIC(MEMS mic expansion board)](./STM32L476-Nucleo-64/MEMSMIC/README.md)
-- [ADC with DMA](./STM32L476-Nucleo-64/ADC/README.md)
-- [DAC with triangular wave and sine wave](./STM32L476-Nucleo-64/DAC/README.md)
-- [Mic->ADC->DAC pipeline](./STM32L476-Nucleo-64/Mic_ADC_DAC/README.md)
-- [Sound Effector](./STM32L476-Nucleo-64/Sound_Effector)
+- [HelloWorld](./NUCLEO-L476RG/HelloWorld)
+- [GPIO_Interrupt](.//GPIO_Interrupt)
+- [Clock](./NUCLEO-L476RG/Clock/README.md)
+- [CAN](./NUCLEO-L476RG/CAN/README.md)
+- [MEMSMIC(MEMS mic expansion board)](./NUCLEO-L476RG/MEMSMIC/README.md)
+- [ADC with DMA](./NUCLEO-L476RG/ADC/README.md)
+- [DAC with triangular wave and sine wave](./NUCLEO-L476RG/DAC/README.md)
+- [Mic->ADC->DAC pipeline](./NUCLEO-L476RG/Mic_ADC_DAC/README.md)
+- [Sound Effector](./NUCLEO-L476RG/Sound_Effector)
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html) board
 
