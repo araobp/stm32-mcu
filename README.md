@@ -11,7 +11,7 @@ Clock application with STM32L476RG
 
 ## Evaluation
 
-STMicro has given me NUCLEO-L476RG and NUCLEO-F401RE with expansion boards for free. Thanks a lot to STMicro!
+STMicro has given me NUCLEO-L476RG and NUCLEO-F401RE with expansion boards for free at trade shows this year. Thanks a lot to STMicro!
 
 ### [NUCLEO-L476RG](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board
 
