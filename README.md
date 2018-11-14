@@ -7,7 +7,7 @@ Clock application with STM32L476RG
 ## IDE
 
 - [TrueSTUDIO](https://atollic.com/truestudio/)
-- [STM32 CubeMX Eclipse plugin](http://www.st.com/en/development-tools/stsw-stm32095.html)
+- [STM32 CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html)
 
 ## Evaluation
 
@@ -68,9 +68,11 @@ PWM output (100Hz, 50% duty) to PA8:
 
 ![waveform](./doc/PWM_waveform.jpg)
 
-## Comparison with MPLAB-X MCC from Microchip
+## Tips
 
-I have used CubeMX over a few weeks, then I think MPLAB-X's MCC is more sohpisticated than CubeMX. MCC even allows us to modify auto-generated code.
+- [CMSIS DSP RFFT pitfalls](./tips/CMSIS_DSP_RFFT.md)
+- [Enabling DSP on STM32](./tips/ENABLE_DSP_AND_PRINTF.md)
+- [PCM data resolution on STM32L4 DFSDM](./tips/RESOLUTION.md)
 
 ## References
 
