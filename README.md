@@ -32,6 +32,7 @@ STMicro has given me NUCLEO-L476RG and NUCLEO-F401RE with expansion boards for f
 #### Applications
 
 - Bluetooth Low Energy(BLE expansion board)
+- Machine learning: https://developer.arm.com/technologies/machine-learning-on-arm/developer-material/software-for-machine-learning-on-arm
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html) board
 
