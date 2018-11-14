@@ -29,6 +29,8 @@ STMicro has given me NUCLEO-L476RG and NUCLEO-F401RE with expansion boards for f
 
 ### [NUCLEO-F401RE](http://www.st.com/en/evaluation-tools/nucleo-f401re.html) board
 
+#### Applications
+
 - Bluetooth Low Energy(BLE expansion board)
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html) board
