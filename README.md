@@ -25,6 +25,10 @@ Clock application with STM32L476RG
 - [Mic->ADC->DAC pipeline](./NUCLEO-L476RG/Mic_ADC_DAC/README.md)
 - [Sound Effector](./NUCLEO-L476RG/Sound_Effector)
 
+### [NUCLEO-F401RE](http://www.st.com/en/evaluation-tools/nucleo-f401re.html) board
+
+- Bluetooth Low Energy(BLE expansion board)
+
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html) board
 
 #### Applications
