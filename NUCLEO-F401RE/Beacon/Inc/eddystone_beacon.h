@@ -118,7 +118,7 @@ typedef struct
 #define ADVERTISING_INTERVAL_IN_MS  (1000)
 #define CALIBRATED_TX_POWER_AT_0_M  ((uint8_t) (-22))
 #define NAMESPACE_ID                'w', 'w', 'w', '.', 's', 't', '.', 'c', 'o', 'm'
-#define BEACON_ID                   0, 0, 0, 0, 0, 1
+#define BEACON_ID                   1, 2, 3, 4, 5, 6
 #define URL_PREFIX                  HTTP
 #define PHYSICAL_WEB_URL            "goo.gl/viVrdi"
 //#define PHYSICAL_WEB_URL            "www.st.com"
