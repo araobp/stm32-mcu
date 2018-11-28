@@ -42,6 +42,7 @@ STMicro has given me NUCLEO-L476RG and NUCLEO-F401RE with expansion boards for f
 - [HelloWorld](./STM32F4-Discovery/HelloWorld)
 - [LED_blinking](./STM32F4-Discovery/LED_blinking)
 - [PWM-output](./STM32F4-Discovery/PWM-output)
+- [AudioWeaver](./STM32F4-Discovery/AudioWeaver)
 
 #### printf issue
 
