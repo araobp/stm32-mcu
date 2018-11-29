@@ -42,6 +42,7 @@ STMicro has given me NUCLEO-L476RG and NUCLEO-F401RE with expansion boards for f
 - [HelloWorld](./STM32F4-Discovery/HelloWorld)
 - [LED_blinking](./STM32F4-Discovery/LED_blinking)
 - [PWM-output](./STM32F4-Discovery/PWM-output)
+- [AudioWeaver](./STM32F4-Discovery/AudioWeaver)
 
 #### printf issue
 
@@ -95,9 +96,3 @@ PWM output (100Hz, 50% duty) to PA8:
 
 - [Schematics](http://www.st.com/resource/en/schematic_pack/stm32f4discovery_sch.zip)
 - [Datasheet](http://www.st.com/resource/en/datasheet/dm00037051.pdf)
-
-## Other interests
-
-- [STM32L0 Discovery Kit LPWA](http://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html)
-- [AWS FreeRTOS](https://aws.amazon.com/freertos/getting-started/)
-- [ESP-IDF](https://esp-idf.readthedocs.io/en/v2.0/index.html)
