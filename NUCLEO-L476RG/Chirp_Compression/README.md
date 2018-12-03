@@ -2,12 +2,6 @@
 
 ![](./oscilloscope/screenshots/chirp_compression.jpg)
 
-## Background and motivation
-
-- [This project "ultrasonic-communcations"](https://github.com/araobp/ultrasonic-communication) resulted in an unsuccessful output. But I recently experimented chirp compression with a matched filter. It turned out to be succesful with better SNR.
-- I am working on AED (Acoustic Event Detection) in [this "acoustic-event-detection" project](https://github.com/araobp/acoustic-event-detection) right now. I wonder if the devic
-e can employ chirp compression with a little cheap speaker (instead of BLE) to transmit data to the cloud.
-
 ## Chirp compression technique
 
 It is very simple:
@@ -32,11 +26,10 @@ First half of c(n) is added to the second half of previous c(n):
 
 All the noise is not compressed, that is the point.
 
-## System components in development
+## System components
 
 - [Receiver (STM32L476RG with Knowles MEMS microphones](./stm32)
 - [Oscilloscope GUI (Tkinter and matplotlib)](./oscilloscope)
-- Transmitter to be developed (not a python-based one)
 
 ## Experiments (Dec 2, 2018)
 
@@ -62,6 +55,12 @@ Parameters:
 - Clock: 80_000_000/25(Divider)/42(FOSR) = 76.2kHz
 - Frame length: 1024 samples, 13.4msec
 - Sweep range: 15000Hz ~ 18000Hz
+
+## Remaining issues (Nov 3, 2018)
+
+- Its comression is not so good.
+- It requires to increase the sampling frequency.
+- FFT of 1024 samples is too small, but I could not increase the size due to the limitaion of RFFT in CMSIS-DSP somehow...
 
 ## Reference
 
