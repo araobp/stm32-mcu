@@ -58,9 +58,11 @@ Parameters:
 
 ## Remaining issues (Nov 3, 2018)
 
-- Its comression is not so good.
+- It is still bad comression.
 - It requires to increase the sampling frequency.
-- FFT of 1024 samples is too small, but I could not increase the size due to the limitaion of RFFT in CMSIS-DSP somehow...
+- FFT of 1024 samples per frame is too small, but I could not increase the size due to the limitaion of RFFT in CMSIS-DSP somehow...
+
+So I give up this work for the time being...
 
 ## Reference
 
