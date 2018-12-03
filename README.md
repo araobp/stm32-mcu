@@ -26,6 +26,7 @@ STMicro has given me NUCLEO-L476RG and NUCLEO-F401RE with expansion boards for f
 - [DAC with triangular wave and sine wave](./NUCLEO-L476RG/DAC/README.md)
 - [Mic->ADC->DAC pipeline](./NUCLEO-L476RG/Mic_ADC_DAC/README.md)
 - [Sound Effector](./NUCLEO-L476RG/Sound_Effector)
+- [Chirp compression](./NUCLEO-L476RG/Chirp_Compression)
 
 ### [NUCLEO-F401RE](http://www.st.com/en/evaluation-tools/nucleo-f401re.html) board
 
