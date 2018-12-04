@@ -22,7 +22,7 @@ GND    3.3V     GND   3.3V             3.3 GND         |       |
  
 ```
 
-## I2C devices
+## I2C slave devices
 
 ### Infrared array sensor
 
@@ -33,6 +33,10 @@ GND    3.3V     GND   3.3V             3.3 GND         |       |
 
 - [Humidity and temperature sensor (Sensirion SHT32-DIS)](https://www.sensirion.com/en/environmental-sensors/humidity-sensors/digital-humidity-sensors-for-various-applications/)
 - [Data sheet](http://www.mouser.com/ds/2/682/Sensirion_Humidity_Sensors_SHT3x_Datasheet_digital-971521.pdf)
+
+## Schematic
+
+- [Arduino shield](./kicad/arduino_board.pdf)
 
 ## Capabilities in development
 
