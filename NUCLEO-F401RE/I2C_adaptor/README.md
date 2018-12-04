@@ -23,7 +23,7 @@ I am going to develop a simple I2C-to-UART converter for infrared array sensors 
 - Read registors successively.
 - Timer to read registors periodically (e.g., 100msec)
 - 8bit binary data output to UART (to the viewer)
-- BLE support
+- Data output to BLE (to the viewer)
 
 ## Implementation
 
