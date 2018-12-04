@@ -107,3 +107,6 @@ local.properties
 .scala_dependencies
 .worksheet
 
+# Python
+__pycache__
+.ipynb_checkpoints
