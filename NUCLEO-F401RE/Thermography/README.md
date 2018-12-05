@@ -31,16 +31,7 @@ The picture above is me on thermography GUI that I have developed based on matpl
 
 - [Arduino shield](./kicad/arduino_board.pdf)
 
-## Capabilities to be developed
-
-- Read registors successively.
-- Timer to read registors periodically (e.g., 100msec)
-- 8bit binary data output to UART (to the viewer)
-- Data output to CAN and BLE (to the viewer)
-- Viewer based on matplotlib/Tkinter
-- Pre-processing for training RNN model on Keras/TensorFlow
-
 ## Implementation at the moment
 
 - [I2C adaptor on NUCLEO F401RE](./stm32)
-- [Thermography GUI](./viewer)
+- [Thermography GUI](./thermography)
