@@ -2,6 +2,8 @@
 
 ![](./NUCLEO-F401RE/Thermography/thermography/screenshots/this_is_me.png)
 
+This is me.
+
 ## IDE
 
 - [TrueSTUDIO](https://atollic.com/truestudio/)
