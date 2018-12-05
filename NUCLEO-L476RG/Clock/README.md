@@ -1,5 +1,7 @@
 # Clock application
 
+![](./NUCLEO-L476RG-Clock.jpg)
+
 This is a sample clock application using STM32 RTC capability and an external I2C LCD.
 
 ## Parts
