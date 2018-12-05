@@ -1,5 +1,9 @@
 # Thermography
 
+![](./thermography/screenshots/this_is_me.png)
+
+The picture above is me on the thermography GUI that I have developed based on matplotlib with Tk.
+
 I am going to develop a cheap thermography with an infrared array sensor.
 
 ## Architecture
