@@ -2,7 +2,7 @@
 
 ![](./thermography/screenshots/this_is_me.png)
 
-The picture above is me on the thermography GUI that I have developed based on matplotlib with Tk.
+The picture above is me on thermography GUI that I have developed based on matplotlib with Tk.
 
 ## Architecture
 
