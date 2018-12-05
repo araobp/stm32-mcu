@@ -1,6 +1,6 @@
 # I2C adaptor for infrared sensor
 
-I am going to develop a simple I2C-to-UART converter for infrared array sensors etc.
+I am going to develop a simple I2C-to-UART converter for infrared array sensors.
 
 ## Architecture
 
