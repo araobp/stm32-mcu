@@ -41,4 +41,4 @@ I am going to develop a simple I2C-to-UART converter for infrared array sensors.
 ## Implementation at the moment
 
 - [I2C adaptor on NUCLEO F401RE](./stm32)
-- [viewer](./viewer)
+- [Thermography GUI](./viewer)
