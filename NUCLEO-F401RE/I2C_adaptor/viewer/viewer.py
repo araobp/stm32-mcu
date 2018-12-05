@@ -22,9 +22,6 @@ if __name__ == '__main__':
 
     gui = heatmap.GUI(port = args.port)
 
-    ### Default settings to DSP ###
-    ###############################
-
     matplotlib.use('TkAgg')
 
     PADX = 6
@@ -33,9 +30,8 @@ if __name__ == '__main__':
 
     root = Tk.Tk()
     root.wm_title("Viewer")
-
-    fig = Figure(figsize=(4, 4), dpi=100)
-    ax = fig.add_subplot(111)
+    
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 5), gridspec_kw = {'width_ratios':[20, 1]})
     fig.subplots_adjust(bottom=0.15)
 
     frame = Tk.Frame(master=root)
@@ -47,21 +43,25 @@ if __name__ == '__main__':
     canvas = FigureCanvasTkAgg(fig, master=frame_row0)
     canvas.show()
 
-    ### Row 1 ####
+    def pixels():
+        ax1.clear()
+        ax2.clear()
+        mag = gui.plot((ax1, ax2), heatmap.PIXELS, cmap='rainbow')
+        fig.tight_layout()
+        canvas.draw()
+        thermistor()
+        repeat(pixels)
 
-    ### Row 2 ####
+    def thermistor():
+        mag = gui.plot((ax1, ax2), heatmap.THERMISTOR)
+        label_thermistor.configure(text='Room temperature: {:.1f} degrees Celsius'.format(mag[0]))
+
     repeat_action = False
 
     # Repeat an operation
     def repeat(func):
         if repeat_action:
             root.after(10, func)
-
-    def pixels():
-        mag = gui.plot_temp(ax, heatmap.PIXELS, cmap='plasma')
-        fig.tight_layout()
-        canvas.draw()
-        repeat(pixels)
 
     def repeat_toggle():
         global repeat_action
@@ -76,20 +76,16 @@ if __name__ == '__main__':
         fig.savefig('screen_shot.png')
 
     def _quit():
+        gui.close()
         root.quit()
-        root.destroy()
-        
-    ### Row 1 ####
+        root.destroy() 
 
-    button_pixels = Tk.Button(master=frame_row1, text='Pixels', command=pixels, bg='lightblue', activebackground='grey', padx=PADX)
+    label_thermistor = Tk.Label(master=frame_row1, padx=PADX)
 
-    ### Row 2 ####
-
+    button_pixels = Tk.Button(master=frame_row2, text='Pixels', command=pixels, bg='lightblue', activebackground='grey', padx=PADX)
     button_repeat = Tk.Button(master=frame_row2, text='Repeat', command=repeat_toggle, bg='lightblue', activebackground='grey', padx=PADX)
     button_savefig = Tk.Button(master=frame_row2, text='Savefig', command=savefig, bg='lightblue', activebackground='grey', padx=PADX)
     button_quit = Tk.Button(master=frame_row2, text='Quit', command=_quit, bg='yellow', activebackground='grey', padx=PADX)
-
-    ### Row 3 ####
     
 
     ##### Place the parts on Tk #####
@@ -97,30 +93,26 @@ if __name__ == '__main__':
     frame.pack(expand=True, fill=Tk.BOTH)
 
     ### Row 0: main canvas
-    frame_row0.pack(expand=True, fill=Tk.BOTH)
     canvas._tkcanvas.pack(expand=True, fill=Tk.BOTH)
+    frame_row0.pack(expand=True, fill=Tk.BOTH)
 
-    ### Row 1: operation ####
+    ### Row 1: information ####
 
+    label_thermistor.grid(row=0, column=0, padx=PADX_GRID)
     frame_row1.pack(pady=PADY_GRID)
 
-    # Pixels
-    button_pixels.grid(row=0, column=4, padx=PADX_GRID)
+    ### Row 2: operation ####
 
-    ### Row 2 ####
-
+    button_pixels.grid(row=0, column=0, padx=PADX_GRID)
+    button_repeat.grid(row=0, column=2, padx=PADX_GRID)
+    button_savefig.grid(row=0, column=3, padx=PADX_GRID)
+    button_quit.grid(row=0, column=4, padx=PADX_GRID)
     frame_row2.pack(pady=PADY_GRID)
-
-    # Repeat, pre_emphasis, save fig and delete
-    button_repeat.grid(row=0, column=4, padx=PADX_GRID)
-    button_savefig.grid(row=0, column=6, padx=PADX_GRID)
-        
-    # Quit
-    button_quit.grid(row=0, column=9, padx=PADX_GRID)
-
+    
     ### Row 3 ####
 
     # DEBUG
 
     ##### loop forever #####
+    thermistor()
     Tk.mainloop()

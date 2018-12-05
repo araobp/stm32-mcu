@@ -50,12 +50,3 @@ void i2c_read_registors(uint8_t i2c_addr, uint8_t reg_addr, uint8_t *buffer, uin
   }
 }
 
-void i2c_read_registors_16bit(uint8_t i2c_addr, uint8_t reg_addr, uint16_t *buffer, uint8_t length) {
-  uint16_t msb, lsb;
-  for (uint8_t i = 0; i < length; i++) {
-    lsb = (uint16_t)i2c_read(i2c_addr, reg_addr++);
-    msb = (uint16_t)i2c_read(i2c_addr, reg_addr++);
-    buffer[i] = (msb << 16) + lsb;
-  }
-
-}

@@ -75,7 +75,8 @@ uint8_t buffer[AMG8833_PIXEL_DATA_LENGTH] = { 0.0f };
 // UART one-byte input buffer
 uint8_t cmd;
 
-volatile bool output = false;
+volatile bool output_pixels = false;
+volatile bool output_thermistor = false;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -128,18 +129,18 @@ int main(void)
   while (1)
   {
 
-    if (output) {
-      i2c_read_registors(AMG8833_DEV_ADDR, AMG8833_PIXEL_DATA_HEAD, buffer, AMG8833_PIXEL_DATA_LENGTH);
+    if (output_pixels) {
+      i2c_read_registors(AMG8833_DEV_ADDR, AMG8833_T01L_ADDR, buffer, AMG8833_PIXEL_DATA_LENGTH);
       HAL_UART_Transmit(&huart2, buffer, AMG8833_PIXEL_DATA_LENGTH, 3000);
-      output = false;
+      output_pixels = false;
     }
-    /*
-    i2c_read_registors_16bit(AMG8833_DEV_ADDR, AMG8833_PIXEL_DATA_HEAD, buffer, AMG8833_PIXEL_DATA_LENGTH);
-    for (int i=0; i < AMG8833_PIXEL_DATA_LENGTH_16bit; i++) {
-      printf("%u,", buffer[i]);
+
+    if (output_thermistor) {
+      i2c_read_registors(AMG8833_DEV_ADDR, AMG8833_TTHL_ADDR, buffer, 2);
+      HAL_UART_Transmit(&huart2, buffer, 2, 3000);
+      output_thermistor = false;
     }
-    printf("\n");
-    */
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -208,8 +209,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
   switch(cmd) {
 
+  case 'p':
+    output_pixels = true;
+    break;
   case 't':
-    output = true;
+    output_thermistor = true;
     break;
   default:
     break;
