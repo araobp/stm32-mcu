@@ -1,6 +1,6 @@
-# I2C adaptor
+# I2C adaptor for infrared sensor
 
-I am going to develop a simple I2C-to-UART converter for infrared array sensors etc.
+I am going to develop a simple I2C-to-UART converter for infrared array sensors.
 
 ## Architecture
 
@@ -12,7 +12,7 @@ I am going to develop a simple I2C-to-UART converter for infrared array sensors 
                  |      |                |  |
                  |      |                |  |
                 SCL    SDA               3.3V
-               [I2C slave]----I2C--->[NUCLEO F401RE]--+--UART-+--->[heatmap.py/viewer.py/PC]
+           [Infrared sensor]---I2C--->[NUCLEO F401RE]--+--UART-+--->[heatmap.py/viewer.py/PC]
                 GND   3.3V             3.3 GND         |       |
                  |      |                |  |          +--CAN--+
                  +      +----------------+  |          |       |
@@ -20,17 +20,10 @@ I am going to develop a simple I2C-to-UART converter for infrared array sensors 
 
 ```
 
-## I2C slave devices
-
-### Infrared array sensor
+## Infrared array sensor (I2C slave)
 
 - [Infrared array sensor (Panasonic AMG88XX)](https://industrial.panasonic.com/cdbs/www-data/pdf/ADI8000/ADI8000C53.pdf)
 - [Data sheet](https://cdn-learn.adafruit.com/assets/assets/000/043/261/original/Grid-EYE_SPECIFICATIONS%28Reference%29.pdf?1498680225)
-
-### Humidity and temperature sensor
-
-- [Humidity and temperature sensor (Sensirion SHT32-DIS)](https://www.sensirion.com/en/environmental-sensors/humidity-sensors/digital-humidity-sensors-for-various-applications/)
-- [Data sheet](http://www.mouser.com/ds/2/682/Sensirion_Humidity_Sensors_SHT3x_Datasheet_digital-971521.pdf)
 
 ## Schematic of my original Arduino shield
 
@@ -48,4 +41,4 @@ I am going to develop a simple I2C-to-UART converter for infrared array sensors 
 ## Implementation at the moment
 
 - [I2C adaptor on NUCLEO F401RE](./stm32)
-- [viewer](./viewer)
+- [Thermography GUI](./viewer)
