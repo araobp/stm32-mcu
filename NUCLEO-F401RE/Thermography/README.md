@@ -1,6 +1,6 @@
-# I2C adaptor for infrared sensor
+# Thermography
 
-I am going to develop a simple I2C-to-UART converter for infrared array sensors.
+I am going to develop a cheap thermography with an infrared array sensor.
 
 ## Architecture
 
