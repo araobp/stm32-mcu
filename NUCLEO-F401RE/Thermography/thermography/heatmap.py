@@ -1,20 +1,18 @@
-# << Digial signal processing for oscilloscope GUI >>
 #
-# (1) Interface to the edge device (STM32L4 w/ my original
-#     MEMS mic Arduino shield)
-# (2) Plot the data with matplotlib
+# Heatmap
 #
-# Follow the definition in the include files below:
-# https://github.com/araobp/acoustic-event-detection/tree/master/stm32/Inc
+# Reference: https://learn.adafruit.com/adafruit-amg8833-8x8-thermal-camera-sensor/raspberry-pi-thermal-camera
 #
 
 import serial
 import pandas as pd
 import numpy as np
+import math
 import traceback
 import threading
 #import matplotlib.pyplot as plt
 import seaborn as sns; sns.set()
+from scipy.interpolate import griddata
 
 ### Constants #####
 
@@ -27,6 +25,10 @@ THERMISTOR = b't'
 NUM_SAMPLES = {}            # The number of samples to receive from the device
 NUM_SAMPLES[PIXELS] = 64
 NUM_SAMPLES[THERMISTOR] = 1
+
+# Points and grids for interpolation of 2d image
+POINTS = [(math.floor(n / 8), (n % 8)) for n in range(0, 64)]
+GRID_X, GRID_Y = np.mgrid[0:7:32j, 0:7:32j]
 
 ###################
 
@@ -85,15 +87,16 @@ class GUI:
     # Use matplotlib to plot the output from the device
     def plot(self, axes, cmd, cmap=None, ssub=None):
 
-        mag = self.read(cmd)
+        data = self.read(cmd)
         
         if cmd == PIXELS:
-            mag = mag * 0.25  # Resolution: 0.25 per degress Celsius
-            mag = np.flip(np.flip(mag.reshape(8,8), axis=0), axis=1)
+            data = data * 0.25  # Resolution: 0.25 per degress Celsius
+            data = griddata(POINTS, data, (GRID_X, GRID_Y), method='cubic')
+            data = np.flip(np.flip(data.reshape(32,32), axis=0), axis=1)
             axes[0].set_title('Heat map')
-            sns.heatmap(mag, cmap=cmap, ax=axes[0], cbar_ax=axes[1])
+            sns.heatmap(data, cmap=cmap, ax=axes[0], cbar_ax=axes[1])
 
         elif cmd == THERMISTOR:
-            mag = (mag - 20) * 0.0625  # Resolution: 0.0625 per degree Celsius
+            data = (data - 20) * 0.0625  # Resolution: 0.0625 per degree Celsius
             
-        return mag
+        return data

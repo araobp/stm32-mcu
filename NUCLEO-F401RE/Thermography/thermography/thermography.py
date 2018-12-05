@@ -1,3 +1,7 @@
+#
+# Thermography GUI
+#
+
 import matplotlib
 import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -46,15 +50,15 @@ if __name__ == '__main__':
     def pixels():
         ax1.clear()
         ax2.clear()
-        mag = gui.plot((ax1, ax2), heatmap.PIXELS, cmap='rainbow')
+        data = gui.plot((ax1, ax2), heatmap.PIXELS, cmap='rainbow')
         fig.tight_layout()
         canvas.draw()
         thermistor()
         repeat(pixels)
 
     def thermistor():
-        mag = gui.plot((ax1, ax2), heatmap.THERMISTOR)
-        label_thermistor.configure(text='Room temperature: {:.1f} degrees Celsius'.format(mag[0]))
+        data = gui.plot((ax1, ax2), heatmap.THERMISTOR)
+        label_thermistor.configure(text='Room temperature: {:.1f} degrees Celsius'.format(data[0]))
 
     repeat_action = False
 
