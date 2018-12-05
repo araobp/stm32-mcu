@@ -1,8 +1,6 @@
 # STMicroelectronics STM32 MCU evaluation
 
-![Clock](./doc/NUCLEO-L476RG-Clock.jpg)
-
-Clock application with STM32L476RG
+![](./NUCLEO-F401RE/thermography/screenshots/this_is_me.png)
 
 ## IDE
 
