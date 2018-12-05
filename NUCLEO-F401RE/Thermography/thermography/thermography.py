@@ -33,7 +33,7 @@ if __name__ == '__main__':
     PADY_GRID = 2
 
     root = Tk.Tk()
-    root.wm_title("Viewer")
+    root.wm_title("Thermography")
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 5), gridspec_kw = {'width_ratios':[20, 1]})
     fig.subplots_adjust(bottom=0.15)
@@ -54,7 +54,15 @@ if __name__ == '__main__':
         fig.tight_layout()
         canvas.draw()
         thermistor()
-        repeat(pixels)
+
+    def pixels_continuous():
+        ax1.clear()
+        ax2.clear()
+        data = gui.plot((ax1, ax2), heatmap.PIXELS, cmap='rainbow')
+        fig.tight_layout()
+        canvas.draw()
+        thermistor()
+        repeat(pixels_continuous)
 
     def thermistor():
         data = gui.plot((ax1, ax2), heatmap.THERMISTOR)
@@ -71,10 +79,11 @@ if __name__ == '__main__':
         global repeat_action
         if repeat_action == True:
             repeat_action = False
-            button_repeat.configure(bg='lightblue')
+            button_continuous.configure(bg='lightblue')
         else:
             repeat_action = True
-            button_repeat.configure(bg='red')
+            button_continuous.configure(bg='red')
+            pixels_continuous()
 
     def savefig():
         fig.savefig('screen_shot.png')
@@ -86,8 +95,8 @@ if __name__ == '__main__':
 
     label_thermistor = Tk.Label(master=frame_row1, padx=PADX)
 
-    button_pixels = Tk.Button(master=frame_row2, text='Pixels', command=pixels, bg='lightblue', activebackground='grey', padx=PADX)
-    button_repeat = Tk.Button(master=frame_row2, text='Repeat', command=repeat_toggle, bg='lightblue', activebackground='grey', padx=PADX)
+    button_shutter = Tk.Button(master=frame_row2, text='Shutter', command=pixels, bg='lightblue', activebackground='grey', padx=PADX)
+    button_continuous = Tk.Button(master=frame_row2, text='Continous', command=repeat_toggle, bg='lightblue', activebackground='grey', padx=PADX)
     button_savefig = Tk.Button(master=frame_row2, text='Savefig', command=savefig, bg='lightblue', activebackground='grey', padx=PADX)
     button_quit = Tk.Button(master=frame_row2, text='Quit', command=_quit, bg='yellow', activebackground='grey', padx=PADX)
     
@@ -107,8 +116,8 @@ if __name__ == '__main__':
 
     ### Row 2: operation ####
 
-    button_pixels.grid(row=0, column=0, padx=PADX_GRID)
-    button_repeat.grid(row=0, column=2, padx=PADX_GRID)
+    button_shutter.grid(row=0, column=0, padx=PADX_GRID)
+    button_continuous.grid(row=0, column=2, padx=PADX_GRID)
     button_savefig.grid(row=0, column=3, padx=PADX_GRID)
     button_quit.grid(row=0, column=4, padx=PADX_GRID)
     frame_row2.pack(pady=PADY_GRID)
