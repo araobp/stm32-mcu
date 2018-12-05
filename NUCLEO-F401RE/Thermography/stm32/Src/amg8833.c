@@ -1,24 +1,15 @@
 /*
- * i2c_adaptor.c
+ * amg8833.c
  *
  *  Created on: 2018/12/04
  *      Author: shiny
  */
 
-#include "i2c.h"
-#include "i2c_adaptor.h"
-
-/*
- * i2c.c
- *
- *  Created on: 2018/07/19
- */
-
-#include "i2c.h"
+#include <amg8833.h>
 
 I2C_HandleTypeDef *phi2c_;
 
-void i2c_adaptor_init(I2C_HandleTypeDef *phi2c) {
+void adaptor_init(I2C_HandleTypeDef *phi2c) {
   phi2c_ = phi2c;
 }
 
@@ -44,9 +35,27 @@ uint8_t i2c_read(uint8_t i2c_addr, uint8_t reg_addr) {
   return buf[0];
 }
 
-void i2c_read_registors(uint8_t i2c_addr, uint8_t reg_addr, uint8_t *buffer, uint8_t length) {
+void read_registors(uint8_t reg_addr, uint8_t *buffer, uint8_t length) {
   for (uint8_t i = 0; i < length; i++) {
-    buffer[i] = i2c_read(i2c_addr, reg_addr++);
+    buffer[i] = i2c_read(AMG8833_DEV_ADDR, reg_addr++);
+  }
+}
+
+void set_moving_average(bool enable) {
+  uint8_t reg_addr_sequence[5] = {AMG8833_1F_ADDR, AMG8833_1F_ADDR, AMG8833_1F_ADDR,
+      AMG8833_AVE_ADDR, AMG8833_1F_ADDR};
+  uint8_t enable_sequence[5] = {0x50, 0x45, 0x57, 0x20, 0x00};
+  uint8_t disable_sequence[5] = {0x50, 0x45, 0x57, 0x00, 0x00};
+  uint8_t *pSeq;
+
+  if (enable) {
+    pSeq = enable_sequence;
+  } else {
+    pSeq = disable_sequence;
+  }
+
+  for (int i = 0; i < sizeof(reg_addr_sequence); i++) {
+    i2c_write(AMG8833_DEV_ADDR, reg_addr_sequence[i], *(pSeq+i));
   }
 }
 

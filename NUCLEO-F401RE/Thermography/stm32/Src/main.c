@@ -39,6 +39,7 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
+#include <amg8833.h>
 #include "main.h"
 #include "i2c.h"
 #include "usart.h"
@@ -46,7 +47,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "i2c_adaptor.h"
 #include "stdbool.h"
 /* USER CODE END Includes */
 
@@ -120,7 +120,8 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  i2c_adaptor_init(&hi2c1);
+  adaptor_init(&hi2c1);
+  set_moving_average(true);
   HAL_UART_Receive_IT(&huart2, (uint8_t *)&cmd, 1);
   /* USER CODE END 2 */
 
@@ -130,13 +131,13 @@ int main(void)
   {
 
     if (output_pixels) {
-      i2c_read_registors(AMG8833_DEV_ADDR, AMG8833_T01L_ADDR, buffer, AMG8833_PIXEL_DATA_LENGTH);
+      read_registors(AMG8833_T01L_ADDR, buffer, AMG8833_PIXEL_DATA_LENGTH);
       HAL_UART_Transmit(&huart2, buffer, AMG8833_PIXEL_DATA_LENGTH, 3000);
       output_pixels = false;
     }
 
     if (output_thermistor) {
-      i2c_read_registors(AMG8833_DEV_ADDR, AMG8833_TTHL_ADDR, buffer, 2);
+      read_registors(AMG8833_TTHL_ADDR, buffer, 2);
       HAL_UART_Transmit(&huart2, buffer, 2, 3000);
       output_thermistor = false;
     }
