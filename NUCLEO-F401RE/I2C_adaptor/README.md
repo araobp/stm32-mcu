@@ -20,7 +20,7 @@ I am going to develop a simple I2C-to-UART converter for infrared array sensors.
 
 ```
 
-### Infrared array sensor (I2C slave)
+## Infrared array sensor (I2C slave)
 
 - [Infrared array sensor (Panasonic AMG88XX)](https://industrial.panasonic.com/cdbs/www-data/pdf/ADI8000/ADI8000C53.pdf)
 - [Data sheet](https://cdn-learn.adafruit.com/assets/assets/000/043/261/original/Grid-EYE_SPECIFICATIONS%28Reference%29.pdf?1498680225)
