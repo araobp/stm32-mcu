@@ -29,6 +29,8 @@ The picture above is me on thermography GUI that I have developed based on matpl
 
 ## Schematic of my original Arduino shield
 
+![](./device.jpg)
+
 - [Arduino shield](./kicad/arduino_board.pdf)
 
 ## Implementation at the moment
