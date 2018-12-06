@@ -38,14 +38,15 @@ The picture above is me on thermography GUI that I have developed based on matpl
 - [I2C adaptor on NUCLEO F401RE](./stm32)
 - [Thermography GUI](./thermography)
 
-## Deep learning experiment
-
-### Rock-paper-scissors recognition
+## Deep learning on Rock-paper-scissors with Keras/TensorFlow
 
 Class labels:
 - rock
 - paper
 - scissors
 
-Training data: 2D array of 8 x 8 pixels
+Training data: 2D array of 32 x 32 pixels (8 x 8 images interpolated)
 
+Data set: [csv files](./thermography/data)
+
+Training result: [Jupyter Notebook](./tensorflow/CNN_for_rock_paper_scissors.ipynb)
