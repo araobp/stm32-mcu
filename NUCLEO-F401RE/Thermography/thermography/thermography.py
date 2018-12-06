@@ -44,10 +44,16 @@ if __name__ == '__main__':
     frame_row2 = Tk.Frame(master=frame)
     frame_row3 = Tk.Frame(master=frame)
 
+    cnt = 0
+    class_label_ = ''
+    filename = None
+    data = None
+
     canvas = FigureCanvasTkAgg(fig, master=frame_row0)
     canvas.show()
 
     def pixels():
+        global data
         ax1.clear()
         ax2.clear()
         data = gui.plot((ax1, ax2), heatmap.PIXELS, cmap='rainbow')
@@ -56,6 +62,7 @@ if __name__ == '__main__':
         thermistor()
 
     def pixels_continuous():
+        global data
         ax1.clear()
         ax2.clear()
         data = gui.plot((ax1, ax2), heatmap.PIXELS, cmap='rainbow')
@@ -85,22 +92,53 @@ if __name__ == '__main__':
             button_continuous.configure(bg='red')
             pixels_continuous()
 
-    def savefig():
+    def screenshot():
         fig.savefig('screen_shot.png')
+
+    def remove():
+        global filename, cnt
+        if filename:
+            os.remove(filename+'.csv')
+            cnt -= 1
+            counter.configure(text='({})'.format(str(cnt)))
+
+    # Save training data for deep learning
+    def save_training_data():
+        global class_label_, cnt, filename, data
+        class_label = entry.get()
+        dt = datetime.today().strftime('%Y%m%d%H%M%S')
+        if class_label == '':
+            filename = './data/{}'.format(dt)
+        else:
+            filename = './data/{}-{}'.format(entry.get(), dt)
+            with open(filename+'.csv', "w") as f:
+                flattend_data = np.round(data.flatten(), 1)
+                f.write(','.join(flattend_data.astype(str)))
+            if class_label_ != class_label:
+                class_label_ = class_label
+                cnt = 0
+            cnt += 1
+            counter.configure(text='({})'.format(str(cnt)))
 
     def _quit():
         gui.close()
         root.quit()
         root.destroy() 
 
+
     label_thermistor = Tk.Label(master=frame_row1, padx=PADX)
+
+    label_class = Tk.Label(master=frame_row2, text='Class label:')
+    entry = Tk.Entry(master=frame_row2, width=14)
+    counter = Tk.Label(master=frame_row2)
 
     button_shutter = Tk.Button(master=frame_row2, text='Shutter', command=pixels, bg='lightblue', activebackground='grey', padx=PADX)
     button_continuous = Tk.Button(master=frame_row2, text='Continous', command=repeat_toggle, bg='lightblue', activebackground='grey', padx=PADX)
-    button_savefig = Tk.Button(master=frame_row2, text='Savefig', command=savefig, bg='lightblue', activebackground='grey', padx=PADX)
+    button_screenshot = Tk.Button(master=frame_row2, text='Screenshot', command=screenshot, bg='lightblue', activebackground='grey', padx=PADX)
+    button_save = Tk.Button(master=frame_row2, text='Save', command=save_training_data, bg='lightblue', activebackground='grey', padx=PADX)
+    button_remove = Tk.Button(master=frame_row2, text='Remove', command=remove, bg='lightblue', activebackground='grey', padx=PADX)
     button_quit = Tk.Button(master=frame_row2, text='Quit', command=_quit, bg='yellow', activebackground='grey', padx=PADX)
     
-
     ##### Place the parts on Tk #####
 
     frame.pack(expand=True, fill=Tk.BOTH)
@@ -116,10 +154,17 @@ if __name__ == '__main__':
 
     ### Row 2: operation ####
 
-    button_shutter.grid(row=0, column=0, padx=PADX_GRID)
-    button_continuous.grid(row=0, column=2, padx=PADX_GRID)
-    button_savefig.grid(row=0, column=3, padx=PADX_GRID)
-    button_quit.grid(row=0, column=4, padx=PADX_GRID)
+    label_class.grid(row=0, column=0, padx=PADX_GRID)
+    entry.grid(row=0, column=1, padx=PADX_GRID)
+    counter.grid(row=0, column=2, padx=PADX_GRID)
+    counter.configure(text='({})'.format(str(cnt)))
+    
+    button_shutter.grid(row=0, column=3, padx=PADX_GRID)
+    button_continuous.grid(row=0, column=4, padx=PADX_GRID)
+    button_save.grid(row=0, column=5, padx=PADX_GRID)
+    button_remove.grid(row=0, column=6, padx=PADX_GRID)
+    button_screenshot.grid(row=0, column=7, padx=PADX_GRID)
+    button_quit.grid(row=0, column=8, padx=PADX_GRID)
     frame_row2.pack(pady=PADY_GRID)
     
     ### Row 3 ####
