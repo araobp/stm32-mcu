@@ -35,3 +35,15 @@ The picture above is me on thermography GUI that I have developed based on matpl
 
 - [I2C adaptor on NUCLEO F401RE](./stm32)
 - [Thermography GUI](./thermography)
+
+## Deep learning experiment
+
+### Rock-paper-scissors recognition
+
+Class labels:
+- rock
+- paper
+- scissors
+
+Training data: 2D array of 8 x 8 pixels
+
