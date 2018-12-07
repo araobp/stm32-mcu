@@ -40,6 +40,8 @@ The picture above is me on thermography GUI that I have developed based on matpl
 
 ## Deep learning on Rock-paper-scissors with Keras/TensorFlow
 
+### Training CNN model
+
 Class labels:
 - rock
 - paper
@@ -50,3 +52,12 @@ Training data: 2D array of 32 x 32 pixels (8 x 8 images interpolated)
 Data set: [csv files](./thermography/data)
 
 Training result: [Jupyter Notebook](./tensorflow/CNN_for_rock_paper_scissors.ipynb)
+
+### Using the trained CNN model
+
+![](./thermography/screenshots/ml_rock.jpg)
+
+![](./thermography/screenshots/ml_paper.jpg)
+
+![](./thermography/screenshots/ml_scissors.jpg)
+
