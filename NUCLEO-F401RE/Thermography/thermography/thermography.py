@@ -3,37 +3,39 @@
 #
 
 import matplotlib
+matplotlib.use('TkAgg')
+
 import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import sys
 import tkinter as Tk
-import heatmap
 from datetime import datetime
 import time
 import os
 
 import matplotlib.pyplot as plt
-plt.style.use('dark_background')
+
+import heatmap
+import inference
 
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("port", help="serial port identifier")
-parser.add_argument("-d", "--debug", help="serial port identifier", action="store_true")
+parser.add_argument("-m", "--model_file", help="Trained CNN model in hdf5 (.h5) format")
+parser.add_argument("-c", "--class_file", help="Class labels of the trained CNN model in YAML format")
 args = parser.parse_args()
 
 if __name__ == '__main__':
 
     gui = heatmap.GUI(port = args.port)
 
-    matplotlib.use('TkAgg')
-
     PADX = 6
     PADX_GRID = 2
     PADY_GRID = 2
 
     root = Tk.Tk()
-    root.wm_title("Thermography")
+    root.wm_title("Thermography for ML with Keras/TensorFlow")
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 5), gridspec_kw = {'width_ratios':[20, 1]})
     fig.subplots_adjust(bottom=0.15)
@@ -48,10 +50,14 @@ if __name__ == '__main__':
     class_label_ = ''
     filename = None
     data = None
+    cnn_model = None
+
+    if args.model_file and args.class_file:
+        cnn_model = inference.Model(class_file=args.class_file, model_file=args.model_file)
 
     canvas = FigureCanvasTkAgg(fig, master=frame_row0)
-    canvas.show()
-
+    canvas.draw()
+    
     def pixels():
         global data
         ax1.clear()
@@ -69,6 +75,9 @@ if __name__ == '__main__':
         fig.tight_layout()
         canvas.draw()
         thermistor()
+        if cnn_model:
+            class_label, probability = cnn_model.infer(data)
+            label_inference.configure(text='ML inference: this is {} ({} %)'.format(class_label, int(probability)))
         repeat(pixels_continuous)
 
     def thermistor():
@@ -127,17 +136,20 @@ if __name__ == '__main__':
 
 
     label_thermistor = Tk.Label(master=frame_row1, padx=PADX)
+    
+    label_inference = Tk.Label(master=frame_row2, padx=PADX)
+    label_inference.config(font=("Arial", 20))
+    
+    label_class = Tk.Label(master=frame_row3, text='Class label:')
+    entry = Tk.Entry(master=frame_row3, width=14)
+    counter = Tk.Label(master=frame_row3)
 
-    label_class = Tk.Label(master=frame_row2, text='Class label:')
-    entry = Tk.Entry(master=frame_row2, width=14)
-    counter = Tk.Label(master=frame_row2)
-
-    button_shutter = Tk.Button(master=frame_row2, text='Shutter', command=pixels, bg='lightblue', activebackground='grey', padx=PADX)
-    button_continuous = Tk.Button(master=frame_row2, text='Continous', command=repeat_toggle, bg='lightblue', activebackground='grey', padx=PADX)
-    button_screenshot = Tk.Button(master=frame_row2, text='Screenshot', command=screenshot, bg='lightblue', activebackground='grey', padx=PADX)
-    button_save = Tk.Button(master=frame_row2, text='Save', command=save_training_data, bg='lightblue', activebackground='grey', padx=PADX)
-    button_remove = Tk.Button(master=frame_row2, text='Remove', command=remove, bg='lightblue', activebackground='grey', padx=PADX)
-    button_quit = Tk.Button(master=frame_row2, text='Quit', command=_quit, bg='yellow', activebackground='grey', padx=PADX)
+    button_shutter = Tk.Button(master=frame_row3, text='Shutter', command=pixels, bg='lightblue', activebackground='grey', padx=PADX)
+    button_continuous = Tk.Button(master=frame_row3, text='Continous', command=repeat_toggle, bg='lightblue', activebackground='grey', padx=PADX)
+    button_screenshot = Tk.Button(master=frame_row3, text='Screenshot', command=screenshot, bg='lightblue', activebackground='grey', padx=PADX)
+    button_save = Tk.Button(master=frame_row3, text='Save', command=save_training_data, bg='lightblue', activebackground='grey', padx=PADX)
+    button_remove = Tk.Button(master=frame_row3, text='Remove', command=remove, bg='lightblue', activebackground='grey', padx=PADX)
+    button_quit = Tk.Button(master=frame_row3, text='Quit', command=_quit, bg='yellow', activebackground='grey', padx=PADX)
     
     ##### Place the parts on Tk #####
 
@@ -152,7 +164,11 @@ if __name__ == '__main__':
     label_thermistor.grid(row=0, column=0, padx=PADX_GRID)
     frame_row1.pack(pady=PADY_GRID)
 
-    ### Row 2: operation ####
+    ### Row 2: inference
+    label_inference.grid(row=0, column=0, padx=PADX_GRID)
+    frame_row2.pack(pady=PADY_GRID)
+
+    ### Row 3: operation ####
 
     label_class.grid(row=0, column=0, padx=PADX_GRID)
     entry.grid(row=0, column=1, padx=PADX_GRID)
@@ -165,12 +181,10 @@ if __name__ == '__main__':
     button_remove.grid(row=0, column=6, padx=PADX_GRID)
     button_screenshot.grid(row=0, column=7, padx=PADX_GRID)
     button_quit.grid(row=0, column=8, padx=PADX_GRID)
-    frame_row2.pack(pady=PADY_GRID)
-    
-    ### Row 3 ####
+    frame_row3.pack(pady=PADY_GRID)
 
-    # DEBUG
-
-    ##### loop forever #####
+    # Data from thermistor
     thermistor()
+    
+    ##### loop forever #####
     Tk.mainloop()
