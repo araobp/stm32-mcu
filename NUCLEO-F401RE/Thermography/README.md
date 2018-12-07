@@ -38,7 +38,7 @@ The picture above is me on thermography GUI that I have developed based on matpl
 - [I2C adaptor on NUCLEO F401RE](./stm32)
 - [Thermography GUI](./thermography)
 
-## Deep learning on Rock-paper-scissors with Keras/TensorFlow
+## Deep learning on rock-paper-scissors with Keras/TensorFlow
 
 ### Training CNN model
 
