@@ -6,8 +6,9 @@ import sklearn.preprocessing as pp
 # Trained CNN model
 class Model:
 
-    def __init__(self, class_file, model_file):
+    def __init__(self, shape, class_file, model_file):
 
+        self.shape = shape
         self.class_labels = None
         self.activation_model = None
 
@@ -20,7 +21,7 @@ class Model:
     
     def infer(self, data):
         if self.activation_model:
-            activations = self.activation_model.predict([pp.scale(data).reshape(1,32,32,1)])
+            activations = self.activation_model.predict([pp.scale(data).reshape(1,self.shape[0],self.shape[1],1)])
             result = (activations[-1]*100)  # The last layer
             p = result[0]
             max_idx = np.argmax(p*100)

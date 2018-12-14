@@ -24,11 +24,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument("port", help="serial port identifier")
 parser.add_argument("-m", "--model_file", help="Trained CNN model in hdf5 (.h5) format")
 parser.add_argument("-c", "--class_file", help="Class labels of the trained CNN model in YAML format")
+parser.add_argument("-g", "--grid_data", help="Apply griddata filter", action='store_true')
 args = parser.parse_args()
 
 if __name__ == '__main__':
 
-    gui = heatmap.GUI(port = args.port)
+    gui = heatmap.GUI(port = args.port, grid_data=args.grid_data)
 
     PADX = 6
     PADX_GRID = 2
@@ -51,9 +52,13 @@ if __name__ == '__main__':
     filename = None
     data = None
     cnn_model = None
+    if args.grid_data:
+        shape = (32, 32)
+    else:
+        shape = (8, 8)
 
     if args.model_file and args.class_file:
-        cnn_model = inference.Model(class_file=args.class_file, model_file=args.model_file)
+        cnn_model = inference.Model(shape=shape, class_file=args.class_file, model_file=args.model_file)
 
     canvas = FigureCanvasTkAgg(fig, master=frame_row0)
     canvas.draw()

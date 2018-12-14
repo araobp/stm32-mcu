@@ -35,9 +35,10 @@ GRID_X, GRID_Y = np.mgrid[0:7:32j, 0:7:32j]
 # GUI class
 class GUI:
     
-    def __init__(self, port):
+    def __init__(self, port, grid_data):
         # Serial interface
         self.port = port
+        self.grid_data=grid_data
         self.lock = threading.Lock()
         self.ser = None
         try:
@@ -91,8 +92,11 @@ class GUI:
         
         if cmd == PIXELS:
             data = data * 0.25  # Resolution: 0.25 per degress Celsius
-            data = griddata(POINTS, data, (GRID_X, GRID_Y), method='cubic')
-            data = np.flip(np.flip(data.reshape(32,32), axis=0), axis=1)
+            if self.grid_data:
+                data = griddata(POINTS, data, (GRID_X, GRID_Y), method='cubic')
+                data = np.flip(np.flip(data.reshape(32,32), axis=0), axis=1)
+            else:
+                data = np.flip(np.flip(data.reshape(8,8), axis=0), axis=1)
             axes[0].set_title('Heat map')
             sns.heatmap(data, cmap=cmap, ax=axes[0], cbar_ax=axes[1])
 
