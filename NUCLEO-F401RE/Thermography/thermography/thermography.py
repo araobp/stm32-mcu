@@ -16,6 +16,7 @@ import os
 
 import matplotlib.pyplot as plt
 
+import interface
 import heatmap
 import inference
 
@@ -29,7 +30,8 @@ args = parser.parse_args()
 
 if __name__ == '__main__':
 
-    gui = heatmap.GUI(port = args.port, grid_data=args.grid_data)
+    itfc = interface.Interface(port = args.port)
+    gui = heatmap.GUI(interface=itfc, grid_data=args.grid_data)
 
     PADX = 6
     PADX_GRID = 2
@@ -68,7 +70,7 @@ if __name__ == '__main__':
         global data, axes
         for ax in axes:
             ax.clear()
-        data = gui.plot(axes, heatmap.PIXELS, cmap='rainbow')
+        data = gui.plot(axes, interface.PIXELS, cmap='rainbow')
         fig.tight_layout()
         canvas.draw()
         thermistor()
@@ -77,7 +79,7 @@ if __name__ == '__main__':
         global data, axes
         for ax in axes:
             ax.clear()
-        data = gui.plot(axes, heatmap.PIXELS, cmap='rainbow')
+        data = gui.plot(axes, interface.PIXELS, cmap='rainbow')
         fig.tight_layout()
         canvas.draw()
         thermistor()
@@ -87,7 +89,7 @@ if __name__ == '__main__':
         repeat(pixels_continuous)
 
     def thermistor():
-        data = gui.plot(axes, heatmap.THERMISTOR)
+        data = gui.plot(axes, interface.THERMISTOR)
         label_thermistor.configure(text='Room temperature: {:.1f} degrees Celsius'.format(data[0]))
 
     repeat_action = False
@@ -136,7 +138,7 @@ if __name__ == '__main__':
             counter.configure(text='({})'.format(str(cnt)))
 
     def _quit():
-        gui.close()
+        itfc.close()
         root.quit()
         root.destroy() 
 
