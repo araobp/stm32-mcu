@@ -48,11 +48,16 @@ class GUI:
                 data = np.flip(np.flip(data.reshape(8,8), axis=0), axis=1)
                 
             axes[0].set_title('Heat map')
-            sns.heatmap(data, cmap=cmap, ax=axes[0], cbar_ax=axes[1])
-            axes[2].set_title('DCT')
+            if self.grid_data:
+                sns.heatmap(data, cmap=cmap, ax=axes[0], annot=False, cbar_ax=axes[1])
+            else:
+                sns.heatmap(data, cmap=cmap, ax=axes[0], annot=True, cbar=False)              
+                axes[1].set_title('DCT')
             coef = dct_2d(data)
             coef[0,0] = 0  # Remove DC
-            sns.heatmap(np.abs(coef), cmap='gray', vmin=0, vmax=10, ax=axes[2], cbar_ax=axes[3])
+            max = np.abs(coef).max()
+            if not self.grid_data:
+                sns.heatmap(coef, cmap='bwr', vmin=-max, vmax=max, ax=axes[1], annot=True, cbar=False)
 
         elif cmd == interface.THERMISTOR:
             data = (data - 20) * 0.0625  # Resolution: 0.0625 per degree Celsius

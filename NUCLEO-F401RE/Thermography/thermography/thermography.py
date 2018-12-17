@@ -18,7 +18,6 @@ import matplotlib.pyplot as plt
 
 import interface
 import heatmap
-import inference
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -39,8 +38,11 @@ if __name__ == '__main__':
 
     root = Tk.Tk()
     root.wm_title("Thermography for ML with Keras/TensorFlow")
-    
-    fig, axes = plt.subplots(1, 4, figsize=(12, 5), gridspec_kw = {'width_ratios':[20, 1, 20, 1]})
+
+    if args.grid_data:
+        fig, axes = plt.subplots(1, 2, figsize=(6, 5), gridspec_kw = {'width_ratios':[20, 1]})
+    else:
+        fig, axes = plt.subplots(1, 2, figsize=(10, 5))
     
     fig.subplots_adjust(bottom=0.15)
 
@@ -60,7 +62,9 @@ if __name__ == '__main__':
     else:
         shape = (8, 8)
 
+    cnn_model = None
     if args.model_file and args.class_file:
+        import inference
         cnn_model = inference.Model(shape=shape, class_file=args.class_file, model_file=args.model_file)
 
     canvas = FigureCanvasTkAgg(fig, master=frame_row0)
@@ -74,6 +78,9 @@ if __name__ == '__main__':
         fig.tight_layout()
         canvas.draw()
         thermistor()
+        if cnn_model:
+            class_label, probability = cnn_model.infer(data)
+            label_inference.configure(text='ML inference: this is {} ({} %)'.format(class_label, int(probability)))
 
     def pixels_continuous():
         global data, axes
@@ -173,8 +180,9 @@ if __name__ == '__main__':
     frame_row1.pack(pady=PADY_GRID)
 
     ### Row 2: inference
-    label_inference.grid(row=0, column=0, padx=PADX_GRID)
-    frame_row2.pack(pady=PADY_GRID)
+    if cnn_model:
+        label_inference.grid(row=0, column=0, padx=PADX_GRID)
+        frame_row2.pack(pady=PADY_GRID)
 
     ### Row 3: operation ####
 
@@ -182,11 +190,11 @@ if __name__ == '__main__':
     entry.grid(row=0, column=1, padx=PADX_GRID)
     counter.grid(row=0, column=2, padx=PADX_GRID)
     counter.configure(text='({})'.format(str(cnt)))
+    button_save.grid(row=0, column=5, padx=PADX_GRID)
+    button_remove.grid(row=0, column=6, padx=PADX_GRID)
     
     button_shutter.grid(row=0, column=3, padx=PADX_GRID)
     button_continuous.grid(row=0, column=4, padx=PADX_GRID)
-    button_save.grid(row=0, column=5, padx=PADX_GRID)
-    button_remove.grid(row=0, column=6, padx=PADX_GRID)
     button_screenshot.grid(row=0, column=7, padx=PADX_GRID)
     button_quit.grid(row=0, column=8, padx=PADX_GRID)
     frame_row3.pack(pady=PADY_GRID)
