@@ -38,7 +38,8 @@ if __name__ == '__main__':
     root = Tk.Tk()
     root.wm_title("Thermography for ML with Keras/TensorFlow")
     
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 5), gridspec_kw = {'width_ratios':[20, 1]})
+    fig, axes = plt.subplots(1, 4, figsize=(12, 5), gridspec_kw = {'width_ratios':[20, 1, 20, 1]})
+    
     fig.subplots_adjust(bottom=0.15)
 
     frame = Tk.Frame(master=root)
@@ -64,19 +65,19 @@ if __name__ == '__main__':
     canvas.draw()
     
     def pixels():
-        global data
-        ax1.clear()
-        ax2.clear()
-        data = gui.plot((ax1, ax2), heatmap.PIXELS, cmap='rainbow')
+        global data, axes
+        for ax in axes:
+            ax.clear()
+        data = gui.plot(axes, heatmap.PIXELS, cmap='rainbow')
         fig.tight_layout()
         canvas.draw()
         thermistor()
 
     def pixels_continuous():
-        global data
-        ax1.clear()
-        ax2.clear()
-        data = gui.plot((ax1, ax2), heatmap.PIXELS, cmap='rainbow')
+        global data, axes
+        for ax in axes:
+            ax.clear()
+        data = gui.plot(axes, heatmap.PIXELS, cmap='rainbow')
         fig.tight_layout()
         canvas.draw()
         thermistor()
@@ -86,7 +87,7 @@ if __name__ == '__main__':
         repeat(pixels_continuous)
 
     def thermistor():
-        data = gui.plot((ax1, ax2), heatmap.THERMISTOR)
+        data = gui.plot(axes, heatmap.THERMISTOR)
         label_thermistor.configure(text='Room temperature: {:.1f} degrees Celsius'.format(data[0]))
 
     repeat_action = False
