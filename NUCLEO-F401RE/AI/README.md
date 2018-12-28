@@ -10,6 +10,8 @@ I loaded a Keras model in [this folder](../Thermography/tensorflow) into CubeMX.
 
 ## Validation result on CubeMX
 
+It takes around 10msec to infer rock-paper-scissors on 32x32 image from the infrared array sensor.
+
 ```
 ON-DEVICE STM32 execution ("network", auto-detect, 115200)..
 
