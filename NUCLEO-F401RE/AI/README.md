@@ -6,7 +6,7 @@ I just followed the instructions on [this video (YoueTube)](https://www.youtube.
 
 ## Loading Keras model into CubeMX
 
-I loaded a Keras model in (this folder)[../Thermography/tensorflow] to CubeMX.
+I loaded a Keras model in [this folder](../Thermography/tensorflow) into CubeMX.
 
 ## Tips for TrueSTUDIO
 
