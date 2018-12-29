@@ -64,7 +64,7 @@ static const ai_network_entry_t networks[AI_MNETWORK_NUMBER] = {
 };
 ```
 
-## Basic APIs (
+## Basic APIs (app_x-cube-ai.c)
 
 In my case, \*name is "network".
 
