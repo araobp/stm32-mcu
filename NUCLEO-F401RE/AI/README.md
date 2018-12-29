@@ -74,6 +74,16 @@ Python validation ended
 
 => **[APPLICATION_TEMPLATE](APPLICATION_TEMPLATE.md)**
 
+## Experiment next
+
+I will try the following setup:
+
+```
+
+[PC]---32x32 image--->[STM32]---inference result--->[PC]
+
+```
+
 ## Tips for TrueSTUDIO
 
 It seems to require extra steps for building the auto-generated code on TrueSTUDIO.
