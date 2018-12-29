@@ -1,6 +1,32 @@
 # Application template created by X-CUBE-AI
 
-## Weights (network.c)
+This is a note of code-reading on the auto-generated code.
+
+(I have never tried to run it on my target board)
+
+## Shape of input and output buffer (network.h)
+
+```
+#define AI_NETWORK_IN_NUM       (1)
+#define AI_NETWORK_IN_1  \
+  AI_BUFFER_OBJ_INIT(AI_BUFFER_FORMAT_FLOAT, 32, 32, 1, 1, NULL)
+#define AI_NETWORK_IN_1_SIZE \
+  (32 * 32 * 1)
+
+#define AI_NETWORK_OUT_NUM      (1)
+#define AI_NETWORK_OUT_1  \
+  AI_BUFFER_OBJ_INIT(AI_BUFFER_FORMAT_FLOAT, 1, 1, 3, 1, NULL)
+#define AI_NETWORK_OUT_1_SIZE \
+  (1 * 1 * 3)
+```
+
+## Neural network (network.c)
+
+My neural network is defined in the source code.
+
+## Weights (network_data.c)
+
+This is weights of the network.
 
 ```
 ai_handle ai_network_data_weights_get(void)
@@ -15,7 +41,64 @@ ai_handle ai_network_data_weights_get(void)
                          :
 ```
 
+## Networks (app_x-cube-ai.c)
+
+This is network entries definition as a constant.
+
+```
+static const ai_network_entry_t networks[AI_MNETWORK_NUMBER] = {
+    {
+        .name = (const char *)AI_NETWORK_MODEL_NAME,
+        .config = AI_NETWORK_DATA_CONFIG,
+        .ai_get_info = ai_network_get_info,
+        .ai_create = ai_network_create,
+        .ai_destroy = ai_network_destroy,
+        .ai_get_error = ai_network_get_error,
+        .ai_init = ai_network_init,
+        .ai_run = ai_network_run,
+        .ai_forward = ai_network_forward,
+        .ai_data_weights_get_default = ai_network_data_weights_get,
+        .params = { AI_NETWORK_DATA_WEIGHTS(0),
+                AI_NETWORK_DATA_ACTIVATIONS(0)},
+    },
+};
+```
+
+## Basic APIs (
+
+In my case, \*name is "network".
+
+```
+ai_error ai_mnetwork_create(const char *name, ai_handle* network,
+        const ai_buffer* network_config);
+        
+ai_bool ai_mnetwork_init(ai_handle network, const ai_network_params* params);
+
+ai_i32 ai_mnetwork_run(ai_handle network, const ai_buffer* input,
+        ai_buffer* output);
+```
+
 ## Buffer format (ai_platform.h)
+
+This is a type definition of input and output buffers. As for width and size, I just follow the definitions in network.h.
+
+```
+/*!
+ * @struct ai_buffer
+ * @ingroup ai_platform
+ * @brief Memory buffer storing data (optional) with a shape, size and type.
+ * This datastruct is used also for network querying, where the data field may
+ * may be NULL.
+ */
+typedef struct ai_buffer_ {
+  ai_buffer_format        format;     /*!< buffer format */
+  ai_u16                  n_batches;  /*!< number of batches in the buffer */
+  ai_u16                  height;     /*!< buffer height dimension */
+  ai_u16                  width;      /*!< buffer width dimension */
+  ai_u32                  channels;   /*!< buffer number of channels */
+  ai_handle               data;       /*!< pointer to buffer data */
+} ai_buffer;
+```
 
 ```
 /*!
