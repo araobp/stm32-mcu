@@ -87,7 +87,9 @@ I will try the following setup:
 
 ## Tips for TrueSTUDIO
 
-It seems to require extra steps for building the auto-generated code on TrueSTUDIO.
+I guess "Add necessary files as reference in the toolchain project config files" is the right option to select on Code Generator, but it did not work on TrueSTUDIO.
+
+So I left the option to default, and I managed to build the code with extra steps as below:
 
 [Step 1] Rename the auto generated lib file from "network_runtime.a" to "libnetwork_runtime.a" as a shared C library.
 

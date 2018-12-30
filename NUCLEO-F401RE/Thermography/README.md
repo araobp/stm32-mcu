@@ -33,7 +33,7 @@ The picture above is me on thermography GUI that I have developed based on matpl
 
 - [Arduino shield](./kicad/arduino_board.pdf)
 
-## Implementation at the moment
+## Implementation
 
 - [I2C adaptor on NUCLEO F401RE](./stm32)
 - [Thermography GUI](./thermography)
@@ -61,3 +61,8 @@ Training result: [Jupyter Notebook](./tensorflow/CNN_for_rock_paper_scissors.ipy
 
 ![](./thermography/screenshots/ml_scissors.jpg)
 
+## DCT
+
+Descrete Cosine Transform of 2D image shows some features:
+
+![](./thermography/screenshots/dct.jpg)
