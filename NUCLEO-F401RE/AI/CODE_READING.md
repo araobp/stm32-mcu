@@ -100,6 +100,8 @@ typedef struct ai_buffer_ {
 } ai_buffer;
 ```
 
+I used ["sklearn.preprocessing.scale"](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.scale.html) to normalize the dataset for training CNN on Keras. Do I need to scale the data on STM32 as well?
+
 ```
 /*!
  * @enum buffer formats enum list
