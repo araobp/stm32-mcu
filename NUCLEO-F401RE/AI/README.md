@@ -2,7 +2,8 @@
 
 ## X-CUBE-AI
 
-https://www.st.com/en/embedded-software/x-cube-ai.html
+- [STM32 solutions for Artificial Neural Networks](https://www.st.com/content/st_com/en/stm32-ann.html)
+- [X-CUBE-AI](https://www.st.com/en/embedded-software/x-cube-ai.html)
 
 ## X-CUBE-AI guide
 
