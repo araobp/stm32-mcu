@@ -122,6 +122,8 @@ enum {
 
 Refer to "aiValidation.c" that shows how to run the network.
 
+### How to run the network
+
 [Step 1: find a network]
 
 In my network, set "idx" to 0 to find a network name.
