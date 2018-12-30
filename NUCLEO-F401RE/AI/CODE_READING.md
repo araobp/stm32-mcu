@@ -132,7 +132,7 @@ In my network, set "idx" to 0 to find a network name.
 ```
 "nn_name" should be "network" in my case.
 
-[Step 2: creat the network]
+[Step 2: create the network]
  
 ```
 err = ai_mnetwork_create(nn_name, &net_exec_ctx[idx].network, NULL);
