@@ -155,6 +155,15 @@ const ai_network_params params = {
          AI_BUFFER_NULL(activations) };
 ```
 
+But I guess "networks[0].params" defined in "app_x-cube-ai.c" should be used for the parameter:
+```
+static const ai_network_entry_t networks[AI_MNETWORK_NUMBER] = {
+    {
+                           :
+        .params = { AI_NETWORK_DATA_WEIGHTS(0),
+                AI_NETWORK_DATA_ACTIVATIONS(0)},
+```
+
 [Step 4: run the network]
 
 ```
