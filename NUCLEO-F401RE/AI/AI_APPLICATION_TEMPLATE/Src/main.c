@@ -123,10 +123,6 @@ int main(void)
   MX_CRC_Init();
   MX_X_CUBE_AI_Init();
   /* USER CODE BEGIN 2 */
-  ai_network_handle handle = NULL;
-  ai_mnetwork_create("network", &handle, NULL);
-  ai_mnetwork_init(net, networks[0].params);
-
   /* USER CODE END 2 */
 
   /* Infinite loop */

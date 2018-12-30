@@ -62,6 +62,15 @@ void MX_X_CUBE_AI_Init(void)
 {
     MX_UARTx_Init();
     /* USER CODE BEGIN 0 */
+    static ai_u8 activations[AI_MNETWORK_DATA_ACTIVATIONS_SIZE];
+    const ai_network_params params = {
+    		AI_BUFFER_NULL(NULL),
+			AI_BUFFER_NULL(activations)};
+
+    char *nn_name = ai_mnetwork_find(NULL, 0);
+    ai_network_handle handle = NULL;
+    ai_mnetwork_create(nn_name, &handle, NULL);
+    ai_mnetwork_init(handle, &params);
 
     /* USER CODE END 0 */
 }
