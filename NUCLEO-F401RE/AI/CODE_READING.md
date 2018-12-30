@@ -24,7 +24,7 @@
 
 My neural network is defined in the source code.
 
-## Weights (network_data.c)
+### Weights (network_data.c)
 
 This is weights of the network.
 
