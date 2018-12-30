@@ -91,16 +91,12 @@ I guess "Add necessary files as reference in the toolchain project config files"
 
 So I left the option to default, and I managed to build the code with extra steps as below:
 
-[Step 1] Rename the auto generated lib file from "network_runtime.a" to "libnetwork_runtime.a" as a shared C library.
-
-![](./truestudio_rename_lib.jpg)
-
-[Step 2] Add the lib path
+[Step 1] Add the lib path
 
 ![](./truestudio_lib_path.jpg)
 
 ![](./truestudio_lib_path_edit.jpg)
 
-[Step 3] Add the lib name
+[Step 2] Add the lib name
 
 ![](./truestudio_lib_name.jpg)
