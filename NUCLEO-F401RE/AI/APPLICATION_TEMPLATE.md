@@ -115,3 +115,60 @@ enum {
   AI_BUFFER_FORMAT_Q15      = 0x32,
 };
 ```
+
+## Running the neural network
+
+Refer to "aiValidation.c".
+
+[Step 1: find a network]
+
+In my network, set "idx" to 0 to find a network name.
+```
+ nn_name = ai_mnetwork_find(NULL, idx);
+```
+"nn_name" should be "network" in my case.
+
+[Step 2: creat the network]
+ 
+```
+ err = ai_mnetwork_create(nn_name, &net_exec_ctx[idx].network, NULL);
+```
+
+"&net_exec_ctx[idx].network" is a pointer to an empty "ai_handle" variable.
+
+[Step 3: initalize the network]
+
+```
+err = ai_mnetwork_init(net_exec_ctx[idx].network, &params);
+```
+
+"params" as the second argument of the function call above is defined in the source code as follows:
+```
+static ai_u8 activations[AI_MNETWORK_DATA_ACTIVATIONS_SIZE];
+
+const ai_network_params params = {
+            AI_BUFFER_NULL(NULL),
+            AI_BUFFER_NULL(activations) };
+```
+
+[Step 4: run the network]
+
+```
+    static ai_float in_data[AI_MNETWORK_IN_1_SIZE];
+    static ai_float out_data[AI_MNETWORK_OUT_1_SIZE];
+
+    ai_buffer ai_input[1];
+    ai_buffer ai_output[1];
+
+    ai_input[0].n_batches  = 1;
+    ai_input[0].data = AI_HANDLE_PTR(in_data);
+    ai_output[0].n_batches = 1;
+    ai_output[0].data = AI_HANDLE_PTR(out_data);
+```
+    
+```
+    batch = ai_mnetwork_run(ctx->network,
+            &ai_input[0], &ai_output[0]);
+```
+
+### 
