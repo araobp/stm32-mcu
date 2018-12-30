@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=C:/Users/shiny/Documents/GitHub/stm32-mcu/NUCLEO-F401RE/AI/Inc
+HeaderPath=C:/Users/shiny/Documents/GitHub/stm32-mcu/NUCLEO-F401RE/AI/AI_VALIDATION/Inc
 HeaderFiles=app_x-cube-ai.h;constants_ai.h;bsp_ai.h;stm32f4xx_it.h;RTE_Components.h;stm32f4xx_hal_conf.h;main.h;
-SourcePath=C:/Users/shiny/Documents/GitHub/stm32-mcu/NUCLEO-F401RE/AI/Src
+SourcePath=C:/Users/shiny/Documents/GitHub/stm32-mcu/NUCLEO-F401RE/AI/AI_VALIDATION/Src
 SourceFiles=app_x-cube-ai.c;stm32f4xx_it.c;stm32f4xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]

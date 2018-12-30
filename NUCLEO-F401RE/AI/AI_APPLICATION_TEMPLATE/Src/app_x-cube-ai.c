@@ -62,6 +62,7 @@ void MX_X_CUBE_AI_Init(void)
 {
     MX_UARTx_Init();
     /* USER CODE BEGIN 0 */
+
     /* USER CODE END 0 */
 }
 

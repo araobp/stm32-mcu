@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    network.c
   * @author  AST Embedded Analytics Research Platform
-  * @date    Sun Dec 30 05:23:52 2018
+  * @date    Sun Dec 30 17:33:58 2018
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * @attention
@@ -53,7 +53,7 @@
 #endif
 
 #undef AI_TOOLS_DATE_TIME
-#define AI_TOOLS_DATE_TIME   "Sun Dec 30 05:23:52 2018"
+#define AI_TOOLS_DATE_TIME   "Sun Dec 30 17:33:58 2018"
 
 #undef AI_TOOLS_COMPILE_TIME
 #define AI_TOOLS_COMPILE_TIME    __DATE__ " " __TIME__
@@ -287,14 +287,14 @@ AI_LAYER_OBJ_DECLARE(
 
 /* Weight tensor #1 */
 AI_ARRAY_OBJ_DECLARE(
-  dense_1_weights_array, AI_DATA_FORMAT_LUT8_FLOAT, 
+  dense_1_weights_array, AI_DATA_FORMAT_FLOAT, 
   NULL, NULL, 3456,
   AI_STATIC)
 
 AI_TENSOR_OBJ_DECLARE(
   dense_1_weights,
   AI_SHAPE_INIT(1, 1, 3, 1152),
-  AI_STRIDE_INIT(3456, 3456, 1152, 1),
+  AI_STRIDE_INIT(13824, 13824, 4608, 4),
   &dense_1_weights_array,
   AI_STATIC)
 
@@ -352,7 +352,7 @@ AI_LAYER_OBJ_DECLARE(
 AI_NETWORK_OBJ_DECLARE(
   AI_NET_OBJ_INSTANCE,
   AI_BUFFER_OBJ_INIT(AI_BUFFER_FORMAT_U8,
-                     1, 1, 23692, 1,
+                     1, 1, 33036, 1,
                      NULL),
   AI_BUFFER_OBJ_INIT(AI_BUFFER_FORMAT_U8,
                      1, 1, 23684, 1,
@@ -415,10 +415,10 @@ ai_bool network_configure_weights(
   conv2d_2_bias_array.data_start = weights + 19072;
   dense_1_weights_array.format |= AI_FMT_FLAG_CONST;
   dense_1_weights_array.data = weights + 19200;
-  dense_1_weights_array.data_start = weights + 22656;
+  dense_1_weights_array.data_start = weights + 19200;
   dense_1_bias_array.format |= AI_FMT_FLAG_CONST;
-  dense_1_bias_array.data = weights + 23680;
-  dense_1_bias_array.data_start = weights + 23680;
+  dense_1_bias_array.data = weights + 33024;
+  dense_1_bias_array.data_start = weights + 33024;
   
   }
 
