@@ -104,3 +104,7 @@ So I left the option to default, and I managed to build the code with extra step
 [Step 2] Add the lib name
 
 ![](./truestudio_lib_name.jpg)
+
+[Step 3] Add include paths (for Application Template only)
+
+![](./truestudio_include_path.jpg)
