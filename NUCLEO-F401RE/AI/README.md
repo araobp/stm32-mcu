@@ -75,6 +75,56 @@ Validation: OK
 Python validation ended
 ```
 
+## Performance test result
+
+```
+#
+# AI system performance measurement 2.1
+#
+Compiled with GCC 6.3.1
+STM32 Runtime configuration...
+ Device       : DevID:0x00000433 (UNKNOWN) RevID:0x00001001
+ Core Arch.   : M4 - FPU PRESENT and used
+ HAL version  : 0x01070400
+ system clock : 84 MHz
+ FLASH conf.  : ACR=0x00000702 - Prefetch=True $I/$D=(True,True) latency=2
+
+AI Network (AI platform API 1.0.0)...
+
+Found network "network"
+Creating the network "network"..
+Network configuration...
+ Model name         : network
+ Model signature    : 21c022f2cfdcffb0abb14b381ae52db9
+ Model datetime     : Wed Jan  2 03:59:12 2019
+ Compile datetime   : Jan  2 2019 04:27:27
+ Runtime revision   :  (3.3.0)
+ Tool revision      : (rev-) (3.3.0)
+Network info...
+  signature         : 0x0
+  nodes             : 4
+  complexity        : 950717 MACC
+  activation        : 23684 bytes
+  weights           : 33036 bytes
+  inputs/outputs    : 1/1
+  IN tensor format  : HWC layout:32,32,1 (s:1024 f:AI_BUFFER_FORMAT_FLOAT)
+  OUT tensor format : HWC layout:1,1,3 (s:3 f:AI_BUFFER_FORMAT_FLOAT)
+Initializing the network
+
+Running PerfTest on "network" with random inputs (16 iterations)...
+................
+
+Results for "network", 16 inferences @84MHz/84MHz (complexity: 950717 MACC)
+ duration     : 99.383 ms (average)
+ CPU cycles   : 8348200 -156/+273 (average,-/+)
+ CPU Workload : 9%
+ cycles/MACC  : 8 (average for all layers)
+ used stack   : 352 bytes
+ used heap    : 0:0 0:0 (req:allocated,req:released) cfg=0
+
+Press any key to continue..
+```
+
 ## How to run the network
 
 => **[CODE_READING](CODE_READING.md)**
