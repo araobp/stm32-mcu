@@ -100,8 +100,6 @@ typedef struct ai_buffer_ {
 } ai_buffer;
 ```
 
-I used ["sklearn.preprocessing.scale"](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.scale.html) to normalize the dataset for training CNN on Keras. Do I need to scale the data on STM32 as well?
-
 ```
 /*!
  * @enum buffer formats enum list
@@ -180,3 +178,5 @@ batch = ai_mnetwork_run(ctx->network, &ai_input[0], &ai_output[0]);
             in_data[i] = 2.0f * (ai_float) rand() / (ai_float) RAND_MAX - 1.0f;
         }
 ```
+
+Note: I did the same scaling (-1.0 to 1.0) on dataset for training CNN on Keras.
