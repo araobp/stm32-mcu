@@ -127,7 +127,9 @@ Press any key to continue..
 
 ## Inference test on my original Keras model "rock-paper-scissors
 
-Input data for testing the neural network is [in this folder](../Thermography/thermography/data).
+Input data (heatmap as 32x32 2D image) for testing the neural network is [in this folder](../Thermography/thermography/data).
+
+The data range is from 0.0 to 80.0 degrees Celsius.
 
 I picked up one input data "rock":
 ```
