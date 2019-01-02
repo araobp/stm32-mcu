@@ -127,7 +127,7 @@ Press any key to continue..
 
 ## Inference test on my original Keras model "rock-paper-scissors
 
-Input data for testing the neural network is in this folder: http://localhost:8888/tree/Documents/GitHub/stm32-mcu/NUCLEO-F401RE/Thermography/thermography/data
+Input data for testing the neural network is [in this folder](../Thermography/thermography/data).
 
 I picked up one input data "rock":
 ```
