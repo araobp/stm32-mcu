@@ -271,7 +271,14 @@ It is working perfect!
 
 This time I trained the CNN model with 8x8 2D images (un-interpolated). I also connected the real sensor "AMG8833" to the inference engine via I2C bus.
 
-The result below seems satisfying!
+I have not been able to manage "Application Template" to work (linker errors to network_runtime.a), so I use "Performance" as an application template of my AI application development with some modifications below:
+- remove "Application" folder under "Middleware"
+- comment out "aiSystemPerformanceInit()" and "aiSystemPerformanceProcess()" from "app_x-cube-ai.c"
+- add headers and code for my application in "app_x-cube-ai.c".
+
+The code is [this](https://github.com/araobp/stm32-mcu/tree/master/NUCLEO-F401RE/AI/AI_THERMOGRAPHY).
+
+The test result below seems very satisfying!
 
 ```
 Found network: "network"
