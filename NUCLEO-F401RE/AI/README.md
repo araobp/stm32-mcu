@@ -127,6 +127,8 @@ Press any key to continue..
 
 ## Inference test on my original Keras model "rock-paper-scissors
 
+### Test 1
+
 Input data (heatmap as 32x32 2D image) for testing the neural network is [in this folder](../Thermography/thermography/data).
 
 The data range is from 0.0 to 80.0 degrees Celsius.
@@ -251,19 +253,24 @@ I ran inference on STM32, and the result (x 100) seemed OK:
 Inference:[19, 80, 0]
 ```
 
+### Test 2
+
+I tested the above with 32x32 images of rock, paper and scissors.
+
+The result is as follows:
+```
+Found network: "network"
+[Inference] input: "paper(idx:0)",  result: [91%, 5%, 2%]
+[Inference] input: "rock(idx:1)",  result: [19%, 80%, 0%]
+[Inference] input: "scissors(idx:2)",  result: [0%, 11%, 88%]
+```
+
+It is working perfect!
+
 ## How to run the network
 
 => **[CODE_READING](CODE_READING.md)**
 
-## Experiment next
-
-I will try the following setup:
-
-```
-
-[PC]---32x32 image--->[STM32]---inference result--->[PC]
-
-```
 
 ## Tips for TrueSTUDIO
 
