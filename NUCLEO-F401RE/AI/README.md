@@ -156,7 +156,7 @@ Press any key to continue..
 
 #### Test 1
 
-Input data (heatmap as interpolated 32x32 2D image) for testing the neural network is [in this folder](../Thermography/thermography/data).
+Input data (heatmap as interpolated 32x32 2D image) for testing the neural network is [in this folder](../Thermography/thermography/data_interpolated).
 
 The data range is from 0.0 to 80.0 degrees Celsius.
 
@@ -217,7 +217,7 @@ It is working perfect!
 
 #### Test 3
 
-This time I trained the CNN model with 8x8 2D images (un-interpolated). I also connected the real sensor "AMG8833" to the inference engine via I2C bus.
+This time I trained the CNN model with [8x8 2D images (un-interpolated)](../Thermography/thermography/data). I also connected the real sensor "AMG8833" to the inference engine via I2C bus.
 
 I have not been able to manage "Application Template" to work (linker errors to network_runtime.a), so I use "Performance" as an application template of my AI application development with some modifications below:
 - remove "Application" folder under "Middleware"
