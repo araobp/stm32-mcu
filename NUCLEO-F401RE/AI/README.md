@@ -267,6 +267,33 @@ Found network: "network"
 
 It is working perfect!
 
+### Test 3
+
+This time I trained the CNN model with 8x8 2D images (un-interpolated). I also connected the real sensor "AMG8833" to the inference engine via I2C bus.
+
+The result below seems satisfying!
+
+```
+Found network: "network"
+
+--- Inference ---
+ rock:         66%
+ paper:        33%
+ scissors:      0%
+
+--- Inference ---
+ rock:         32%
+ paper:        62%
+ scissors:      4%
+ 
+--- Inference ---
+ rock:          2%
+ paper:         3%
+ scissors:     93%
+          :
+
+```
+
 ## How to run the network
 
 => **[CODE_READING](CODE_READING.md)**
