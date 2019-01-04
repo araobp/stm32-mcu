@@ -47,11 +47,13 @@ Class labels:
 - paper
 - scissors
 
-Training data: 2D array of 32 x 32 pixels (8 x 8 images interpolated)
+Training data: 2D array of 8 x 8 pixels or 32 x 32 pixels (8 x 8 images interpolated)
 
 Data set: [csv files](./thermography/data)
 
-Training result: [Jupyter Notebook](./tensorflow/CNN_for_rock_paper_scissors.ipynb)
+Training result:
+- [8 x 8 2D images](./tensorflow/CNN_for_rock_paper_scissors.ipynb)
+- [32 x 32 2D images](./tensorflow/CNN_for_rock_paper_scissors_interpolated.ipynb)
 
 ### Using the trained CNN model
 
