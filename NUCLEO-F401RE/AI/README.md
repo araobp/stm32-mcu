@@ -129,7 +129,7 @@ Press any key to continue..
 
 ### Test 1
 
-Input data (heatmap as 32x32 2D image) for testing the neural network is [in this folder](../Thermography/thermography/data).
+Input data (heatmap as interpolated 32x32 2D image) for testing the neural network is [in this folder](../Thermography/thermography/data).
 
 The data range is from 0.0 to 80.0 degrees Celsius.
 
