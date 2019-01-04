@@ -27,6 +27,10 @@ The picture above is me on thermography GUI that I have developed based on matpl
 - [Infrared array sensor (Panasonic AMG88XX)](https://industrial.panasonic.com/cdbs/www-data/pdf/ADI8000/ADI8000C53.pdf)
 - [Data sheet](https://cdn-learn.adafruit.com/assets/assets/000/043/261/original/Grid-EYE_SPECIFICATIONS%28Reference%29.pdf?1498680225)
 
+### Note on AMG88XX
+
+The output data format of AMG88XX is not like a standard image format. On GUI, I made flip twice (verticaly and horizontaly) on the data to convert it into an image format (it is a finder view image, not a mirror image).
+
 ## Schematic of my original Arduino shield
 
 ![](./device.jpg)
