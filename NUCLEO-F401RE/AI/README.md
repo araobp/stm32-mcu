@@ -13,7 +13,8 @@ I just followed the instructions on [this video (YoueTube)](https://www.youtube.
 
 ```
                                 My appl. "ai.h/ai.c"
-                                   X-CUBE-MX
+                          auto-generated code by X-CUBE-AI
+				       :
 Hand gesture ))) [AMG8833] --I2C--> [STM32] --UART--> [Console(PC)]
                                        ^
 				       |
