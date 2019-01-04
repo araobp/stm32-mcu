@@ -68,7 +68,7 @@ int ai_init(void)
     return 0;
 }
 
-int ai_infer(ai_float *input_data)
+int ai_infer(ai_float *input_data, const char *label)
 {
 
     ai_buffer ai_input[1];
@@ -91,8 +91,11 @@ int ai_infer(ai_float *input_data)
 	ai_mnetwork_run(handle, &ai_input[0], &ai_output[0]);
 
 	output_ = (ai_float *) (ai_output[0].data);
-	printf("Inference:[%d, %d, %d]\n", (int) (output_[0] * 100),
-			(int) (output_[1] * 100), (int) (output_[2] * 100));
+	printf("[Inference] input: \"%s\",  result: [%d%%, %d%%, %d%%]\n",
+			label,
+			(int) (output_[0] * 100),
+			(int) (output_[1] * 100),
+			(int) (output_[2] * 100));
 
     return 0;
 }

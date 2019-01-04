@@ -9,7 +9,7 @@ extern "C" {
 #endif
 
 int ai_init(void);
-int ai_infer(ai_float *raw_data);
+int ai_infer(ai_float *raw_data, const char *label);
 
 #ifdef __cplusplus
 }
