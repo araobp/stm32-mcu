@@ -1,8 +1,6 @@
 # STMicroelectronics STM32 MCU evaluation
 
-![](./NUCLEO-F401RE/Thermography/thermography/screenshots/this_is_me.png)
-
-This is me.
+![](./NUCLEO-F401RE/Thermography/thermography/screenshots/ml_scissors.jpg)
 
 ## IDE
 
