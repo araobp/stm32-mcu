@@ -152,7 +152,7 @@ Results for "network", 16 inferences @84MHz/84MHz (complexity: 950717 MACC)
 Press any key to continue..
 ```
 
-### Inference test on my original Keras model "rock-paper-scissors
+### Inference test on my original Keras model "rock-paper-scissors"
 
 #### Test 1
 
