@@ -58,6 +58,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "amg8833.h"
 
 /* USER CODE END Includes */
 
@@ -125,7 +126,8 @@ int main(void)
   MX_I2C1_Init();
   MX_X_CUBE_AI_Init();
   /* USER CODE BEGIN 2 */
-
+  adaptor_init(&hi2c1);
+  set_moving_average(true);
   /* USER CODE END 2 */
 
   /* Infinite loop */
