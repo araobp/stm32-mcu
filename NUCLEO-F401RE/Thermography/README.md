@@ -65,6 +65,6 @@ Training result:
 
 ## DCT
 
-Descrete Cosine Transform of 2D image shows some features:
+Descrete Cosine Transform of 2D image shows some features. I am going to use DCT output as an additional feature for training a neural network.
 
 ![](./thermography/screenshots/dct.jpg)
