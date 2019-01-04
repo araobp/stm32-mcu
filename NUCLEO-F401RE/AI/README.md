@@ -13,7 +13,13 @@ I just followed the instructions on [this video (YoueTube)](https://www.youtube.
 
 I loaded a Keras model in [this folder](../Thermography/tensorflow) into CubeMX. The model "rock-paper-scissors" was trained with normalized dataset of float type with its range -1.0 ~ +1.0.
 
-## Validation result on CubeMX
+## How to run the network
+
+=> **[CODE_READING](CODE_READING.md)**
+
+## Evaluations so far
+
+### Validation result on CubeMX
 
 It takes around 10msec to infer rock-paper-scissors on 32x32 image from the infrared array sensor.
 
@@ -75,7 +81,7 @@ Validation: OK
 Python validation ended
 ```
 
-## Performance test result
+### Performance test result
 
 ```
 #
@@ -125,9 +131,9 @@ Results for "network", 16 inferences @84MHz/84MHz (complexity: 950717 MACC)
 Press any key to continue..
 ```
 
-## Inference test on my original Keras model "rock-paper-scissors
+### Inference test on my original Keras model "rock-paper-scissors
 
-### Test 1
+#### Test 1
 
 Input data (heatmap as interpolated 32x32 2D image) for testing the neural network is [in this folder](../Thermography/thermography/data).
 
@@ -174,7 +180,7 @@ I ran inference on STM32, and the result (x 100) seemed OK:
 Inference:[19, 80, 0]
 ```
 
-### Test 2
+#### Test 2
 
 I tested the above with 32x32 images of rock, paper and scissors.
 
@@ -188,7 +194,7 @@ Found network: "network"
 
 It is working perfect!
 
-### Test 3
+#### Test 3
 
 This time I trained the CNN model with 8x8 2D images (un-interpolated). I also connected the real sensor "AMG8833" to the inference engine via I2C bus.
 
@@ -221,11 +227,6 @@ Found network: "network"
           :
 
 ```
-
-## How to run the network
-
-=> **[CODE_READING](CODE_READING.md)**
-
 
 ## Tips for TrueSTUDIO
 
