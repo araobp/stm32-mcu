@@ -43,17 +43,19 @@ class GUI:
             data = data * 0.25  # Resolution: 0.25 per degress Celsius
             if self.grid_data:
                 data = griddata(POINTS, data, (GRID_X, GRID_Y), method='cubic')
-                data = np.flip(np.flip(data.reshape(32,32), axis=0), axis=1)
+                # image format
+                data_flip = np.flip(np.flip(data.reshape(32,32), axis=0), axis=1)
             else:
-                data = np.flip(np.flip(data.reshape(8,8), axis=0), axis=1)
+                # image format
+                data_flip = np.flip(np.flip(data.reshape(8,8), axis=0), axis=1)
                 
             axes[0].set_title('Heat map')
             if self.grid_data:
-                sns.heatmap(data, cmap=cmap, ax=axes[0], annot=False, cbar_ax=axes[1])
+                sns.heatmap(data_flip, cmap=cmap, ax=axes[0], annot=False, cbar_ax=axes[1])
             else:
-                sns.heatmap(data, cmap=cmap, ax=axes[0], annot=True, cbar=False)              
+                sns.heatmap(data_flip, cmap=cmap, ax=axes[0], annot=True, cbar=False)              
                 axes[1].set_title('DCT')
-            coef = dct_2d(data)
+            coef = dct_2d(data_flip)
             coef[0,0] = 0  # Remove DC
             max = np.abs(coef).max()
             if not self.grid_data:

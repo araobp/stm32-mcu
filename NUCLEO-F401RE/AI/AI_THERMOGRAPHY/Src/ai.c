@@ -12,7 +12,6 @@ static ai_u8 activations[AI_MNETWORK_DATA_ACTIVATIONS_SIZE];
 ai_handle handle;
 ai_network_report report;
 
-// TOTO: mean value calculation
 void normalize(ai_float *in_data, ai_float *normalized_data) {
 
 	float sum_ = 0.0f;
@@ -28,7 +27,7 @@ void normalize(ai_float *in_data, ai_float *normalized_data) {
 		if (in_data[i] < min_)
 			min_ = in_data[i];
 	}
-	mean_ = (max_ + min_) / 2.0;
+	mean_ = sum_ / 64.0;
 	range_ = (max_ - min_) / 2.0;
 	for (int i = 0; i < AI_MNETWORK_IN_1_SIZE; i++) {
 		normalized_data[i] = (in_data[i] - mean_) / range_;
