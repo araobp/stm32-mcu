@@ -30,7 +30,7 @@ Hand gesture ))) [AMG8833] --I2C--> [STM32] --UART--> [Console(PC)]
 
 ## Loading Keras model into CubeMX
 
-I loaded a Keras model in [this folder](../Thermography/tensorflow) into CubeMX. The model "rock-paper-scissors" was trained with normalized dataset of float type with its range -1 ~ +1.
+I loaded a Keras model in [this folder](../Thermography/tensorflow) into CubeMX. The model "rock-paper-scissors" was trained with normalized dataset of float type.
 
 ## How to run the network
 
@@ -173,25 +173,32 @@ static ai_float out_data[AI_MNETWORK_OUT_1_SIZE];
 
 ```
 
-Then I made some scaling on the input data to fit it into -1.0 to 1.0 range:
+Then I made some scaling on the input data:
 ```
-	float sum = 0.0f;
-	float mean = 0.0f;
-	float max_ = 0.0f;
-	float min_ = 80.0f;
-	float range_;
+// Standard normalization
+void normalize(ai_float *in_data, ai_float *normalized_data) {
+
+	float mean = 0.0;
+	float std = 0.0;
+
+	// Sum and mean
 	for (int i = 0; i < AI_MNETWORK_IN_1_SIZE; i++) {
-		sum += in_data[i];
-		if (in_data[i] > max_)
-			max_ = in_data[i];
-		if (in_data[i] < min_)
-			min_ = in_data[i];
+		mean += in_data[i];
 	}
-	mean = (max_ + min_) / 2.0;
-	range_ = (max_ - min_) / 2.0;
+	mean = mean / AI_MNETWORK_IN_1_SIZE;
+
+	// Standard deviation
 	for (int i = 0; i < AI_MNETWORK_IN_1_SIZE; i++) {
-		in_data[i] = (in_data[i] - mean) / range_;
+		std += pow(in_data[i] - mean, 2);
 	}
+	std = sqrt(std / AI_MNETWORK_IN_1_SIZE);
+
+	// Normalization
+	for (int i = 0; i < AI_MNETWORK_IN_1_SIZE; i++) {
+		normalized_data[i] = (in_data[i] - mean) / std;
+	}
+
+}
 ```
 
 The order of classes is [paper, rock, scissors].
