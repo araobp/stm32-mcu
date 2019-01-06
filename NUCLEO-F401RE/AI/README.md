@@ -46,58 +46,61 @@ There is no API documentation on X-CUBE-AI on the web, so I read the code genera
 
 ### Validation result on CubeMX
 
-It takes around 7msec to infer rock-paper-scissors on 8x8 image from the infrared array sensor.
+It takes around 12msec to infer rock-paper-scissors on 8x8 image from the infrared array sensor.
 
 ```
 Matching results...
 
 ON-DEVICE STM32 execution ("network", auto-detect, 115200)..
 
-<Stm32com id=0x20cffeb05c0 - CONNECTED(COM6/115200) devid=0x433/STM32F401xD/E msg=1.0>
+<Stm32com id=0x1db86d42f98 - CONNECTED(COM6/115200) devid=0x433/STM32F401xD/E msg=1.0>
  0x433/STM32F401xD/E @84MHz/84MHz (FPU is present) lat=2 ART: PRFTen ICen DCen
  found network(s): ['network']
- description    : 'network' (8, 8, 1)-[4]->(1, 1, 3) macc=86493 rom=20.26KiB ram=2.07KiB
- tools versions : rt=(3, 3, 0) tool=(3, 3, 0)/(1, 1, 0) api=(1, 0, 0) "Sun Jan  6 13:50:20 2019"
+ description    : 'network' (8, 8, 1)-[6]->(1, 1, 3) macc=119901 rom=55.76KiB ram=2.07KiB
+ tools versions : rt=(3, 3, 0) tool=(3, 3, 0)/(1, 1, 0) api=(1, 0, 0) "Sun Jan  6 22:37:23 2019"
 
 Running with inputs=(10, 8, 8, 1)..
-.... 1/10
-.... 2/10
-.... 3/10
-.... 4/10
-.... 5/10
-.... 6/10
-.... 7/10
-.... 8/10
-.... 9/10
-.... 10/10
- RUN Stats    : batches=10 dur=1.266s tfx=0.828s 3.161KiB/s (wb=2.500KiB,rb=120B)
+...... 1/10
+...... 2/10
+...... 3/10
+...... 4/10
+...... 5/10
+...... 6/10
+...... 7/10
+...... 8/10
+...... 9/10
+...... 10/10
+ RUN Stats    : batches=10 dur=1.406s tfx=0.952s 2.749KiB/s (wb=2.500KiB,rb=120B)
 
-Results for 10 inference(s) @84/84MHz (macc:86493)
- duration    : 7.426 ms (average)
- CPU cycles  : 623746 (average)
- cycles/MACC : 7.21 (average for all layers)
+Results for 10 inference(s) @84/84MHz (macc:119901)
+ duration    : 11.772 ms (average)
+ CPU cycles  : 988834 (average)
+ cycles/MACC : 8.25 (average for all layers)
 
 Inspector report (layer by layer)
- signature      : 66309095
- n_nodes        : 4
+ signature      : 3BF017EB
+ n_nodes        : 6
  num_inferences : 10
 
 Clayer  id  desc                          oshape            ms        
 --------------------------------------------------------------------------------
-0       0   10011/(Merged Conv2d / Pool)  (10, 4, 4, 16)    2.009     
-1       2   10011/(Merged Conv2d / Pool)  (10, 2, 2, 32)    5.361     
-2       6   10005/(Dense)                 (10, 1, 1, 3)     0.046     
-3       6   10014/(Softmax)               (10, 1, 1, 3)     0.010     
-                                                            7.426 (total)
+0       0   10011/(Merged Conv2d / Pool)  (10, 4, 4, 16)    2.010     
+1       2   10011/(Merged Conv2d / Pool)  (10, 2, 2, 32)    5.379     
+2       6   10005/(Dense)                 (10, 1, 1, 256)   4.244     
+3       6   10009/(Nonlinearity)          (10, 1, 1, 256)   0.042     
+4       8   10005/(Dense)                 (10, 1, 1, 3)     0.086     
+5       8   10014/(Softmax)               (10, 1, 1, 3)     0.010     
+                                                            11.772 (total)
 
-  MACC / frame: 86493
-  ROM size:     20.26 KBytes
+  MACC / frame: 119901
+  ROM size:     55.76 KBytes
   RAM size:     2.07 KBytes (Minimum: 2.07 KBytes)
+  Comp. factor: 2.704
 
 
 Matching criteria: L2 error < 0.01 on the output tensor
 
-  Ref layer 6 matched with C layer 3, error: 1.8168235e-07
+  Ref layer 8 matched with C layer 5, error: 0.00033916105
 
 Validation: OK
  Validation OK
