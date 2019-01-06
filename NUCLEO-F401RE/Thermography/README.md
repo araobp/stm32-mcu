@@ -55,9 +55,7 @@ Training data: 2D array of 8 x 8 pixels or 32 x 32 pixels (8 x 8 images interpol
 
 Data set: [csv files](./thermography/data)
 
-Training result:
-- [8 x 8 2D images](./tensorflow/CNN_for_rock_paper_scissors.ipynb)
-- [32 x 32 2D images](./tensorflow/CNN_for_rock_paper_scissors_interpolated.ipynb)
+Training result: [8 x 8 2D images](./tensorflow/CNN_for_rock_paper_scissors.ipynb)
 
 ### Using the trained CNN model
 
