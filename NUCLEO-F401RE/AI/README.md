@@ -127,17 +127,17 @@ Found network "network"
 Creating the network "network"..
 Network configuration...
  Model name         : network
- Model signature    : dcb268eb2b3cdc77047062b7db4a02c7
- Model datetime     : Sun Jan  6 13:31:42 2019
- Compile datetime   : Jan  6 2019 13:36:25
+ Model signature    : d0d0cfcc2688de1e32cb7fe2e61179db
+ Model datetime     : Sun Jan  6 22:41:29 2019
+ Compile datetime   : Jan  6 2019 22:41:53
  Runtime revision   :  (3.3.0)
  Tool revision      : (rev-) (3.3.0)
 Network info...
   signature         : 0x0
-  nodes             : 4
-  complexity        : 86493 MACC
+  nodes             : 6
+  complexity        : 119901 MACC
   activation        : 2116 bytes
-  weights           : 20748 bytes
+  weights           : 57100 bytes
   inputs/outputs    : 1/1
   IN tensor format  : HWC layout:8,8,1 (s:64 f:AI_BUFFER_FORMAT_FLOAT)
   OUT tensor format : HWC layout:1,1,3 (s:3 f:AI_BUFFER_FORMAT_FLOAT)
@@ -146,14 +146,26 @@ Initializing the network
 Running PerfTest on "network" with random inputs (16 iterations)...
 ................
 
-Results for "network", 16 inferences @84MHz/84MHz (complexity: 86493 MACC)
- duration     : 7.430 ms (average)
- CPU cycles   : 624131 -86/+46 (average,-/+)
- CPU Workload : 0%
- cycles/MACC  : 7 (average for all layers)
+Results for "network", 16 inferences @84MHz/84MHz (complexity: 119901 MACC)
+ duration     : 11.775 ms (average)
+ CPU cycles   : 989124 -66/+50 (average,-/+)
+ CPU Workload : 1%
+ cycles/MACC  : 8 (average for all layers)
  used stack   : 352 bytes
  used heap    : 0:0 0:0 (req:allocated,req:released) cfg=0
 
+Running PerfTest on "network" with random inputs (16 iterations)...
+................
+
+Results for "network", 16 inferences @84MHz/84MHz (complexity: 119901 MACC)
+ duration     : 11.775 ms (average)
+ CPU cycles   : 989132 -47/+27 (average,-/+)
+ CPU Workload : 1%
+ cycles/MACC  : 8 (average for all layers)
+ used stack   : 352 bytes
+ used heap    : 0:0 0:0 (req:allocated,req:released) cfg=0
+ 
+                            :
 ```
 
 ### Inference test on my original Keras model "rock-paper-scissors"
