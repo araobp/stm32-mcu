@@ -5,7 +5,7 @@ import threading
 
 ### Constants #####
 
-BAUD_RATE = 460800          # UART baud rate
+BAUD_RATE = 115200          # UART baud rate
 
 PIXELS = b'p'
 THERMISTOR = b't'
@@ -41,25 +41,13 @@ class Interface:
             n = 0
             try:
                 self.ser.write(cmd)
-                if cmd == PIXELS or cmd == THERMISTOR:  # 16bit quantization
-                    rx = self.ser.read(NUM_SAMPLES[cmd]*2)
-                    rx = zip(rx[0::2], rx[1::2])
-                    for lsb, msb in rx:
-                        n += 1
-                        d =  int.from_bytes([msb, lsb], byteorder='big', signed=False)
-                        data.append(d)
-                    data = np.array(data, dtype=np.int16)
-                else:  # 8bit quantization
-                    rx = self.ser.PIXELS(NUM_SAMPLES[cmd])
-                    for d in rx:
-                        n += 1
-                        d =  int.from_bytes([d], byteorder='big', signed=True)
-                        if ssub and (ssub > 0):
-                            d = d - ssub
-                            if d < 0:
-                                d = 0.0
-                        data.append(d)
-                    data = np.array(data, dtype=np.int8)
+                rx = self.ser.read(NUM_SAMPLES[cmd]*2)
+                rx = zip(rx[0::2], rx[1::2])
+                for lsb, msb in rx:
+                    n += 1
+                    d =  int.from_bytes([msb, lsb], byteorder='big', signed=False)
+                    data.append(d)
+                data = np.array(data, dtype=np.int16)
             except:
                 print('*** serial timeout!')
                 traceback.print_exc()

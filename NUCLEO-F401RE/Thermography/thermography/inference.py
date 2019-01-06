@@ -1,16 +1,7 @@
 import numpy as np
 from keras import models
 import yaml
-#import sklearn.preprocessing as pp
-
-# Normalization
-def scale(data):
-    min_ = np.min(data)
-    max_ = np.max(data)
-    mean = (max_ + min_) / 2.0
-    range_ = (max_ - min_) / 2.0
-    data = (data - mean)/range_
-    return data
+import sklearn.preprocessing as pp
 
 # Trained CNN model
 class Model:
@@ -30,7 +21,7 @@ class Model:
     
     def infer(self, data):
         if self.activation_model:
-            activations = self.activation_model.predict([scale(data).reshape(1,self.shape[0],self.shape[1],1)])
+            activations = self.activation_model.predict([pp.scale(data).reshape(1,self.shape[0],self.shape[1],1)])
             result = (activations[-1]*100)  # The last layer
             p = result[0]
             max_idx = np.argmax(p*100)

@@ -44,6 +44,7 @@ NVIC.PendSV_IRQn=true\:0\:0\:false\:false\:true\:false
 NVIC.PriorityGroup=NVIC_PRIORITYGROUP_0
 NVIC.SVCall_IRQn=true\:0\:0\:false\:false\:true\:false
 NVIC.SysTick_IRQn=true\:0\:0\:true\:false\:true\:true
+NVIC.USART2_IRQn=true\:0\:0\:false\:false\:true\:true
 NVIC.UsageFault_IRQn=true\:0\:0\:false\:false\:true\:true
 PA13.GPIOParameters=GPIO_Label
 PA13.GPIO_Label=TMS
@@ -231,7 +232,7 @@ STMicroelectronics.X-CUBE-AI.3.3.0.ModelRamOccupation-5ccf7a61284496c58fbffa8f0d
 STMicroelectronics.X-CUBE-AI.3.3.0.ModelRamOccupation-83b429b4c90400afb8b98d24d8a848e4d0da1763c85b40df6438c76bb11edbea=2069
 STMicroelectronics.X-CUBE-AI.3.3.0.ModelStructureFile-41473d0be1d23d4f636b372b0e6a80680d70e1363947e1025ce02b962ad481ea=/C\:/Users/shiny/Documents/GitHub/stm32-mcu/NUCLEO-F401RE/Thermography/tensorflow/cnn_for_rock_paper_scissors_20181231083804.h5
 STMicroelectronics.X-CUBE-AI.3.3.0.ModelStructureFile-5ccf7a61284496c58fbffa8f0d8b4cb640aaac57e14790b4780d58a0981c5203=C\:\\Users\\shiny\\Documents\\GitHub\\stm32-mcu\\NUCLEO-F401RE\\Thermography\\cnn_for_rock_paper_scissors20190104212235.h5
-STMicroelectronics.X-CUBE-AI.3.3.0.ModelStructureFile-83b429b4c90400afb8b98d24d8a848e4d0da1763c85b40df6438c76bb11edbea=C\:\\Users\\shiny\\Documents\\GitHub\\stm32-mcu\\NUCLEO-F401RE\\Thermography\\tensorflow\\cnn_for_rock_paper_scissors20190104212235.h5
+STMicroelectronics.X-CUBE-AI.3.3.0.ModelStructureFile-83b429b4c90400afb8b98d24d8a848e4d0da1763c85b40df6438c76bb11edbea=C\:\\Users\\shiny\\Documents\\GitHub\\stm32-mcu\\NUCLEO-F401RE\\Thermography\\tensorflow\\cnn_for_rock_paper_scissors20190106130913.h5
 STMicroelectronics.X-CUBE-AI.3.3.0.ModelType-41473d0be1d23d4f636b372b0e6a80680d70e1363947e1025ce02b962ad481ea=Model and Topology
 STMicroelectronics.X-CUBE-AI.3.3.0.ModelType-5ccf7a61284496c58fbffa8f0d8b4cb640aaac57e14790b4780d58a0981c5203=Saved model
 STMicroelectronics.X-CUBE-AI.3.3.0.ModelType-83b429b4c90400afb8b98d24d8a848e4d0da1763c85b40df6438c76bb11edbea=Saved model

@@ -14,11 +14,11 @@ The picture above is me on thermography GUI that I have developed based on matpl
                  |      |                |  |
                  |      |                |  |
                 SCL    SDA               3.3V
-           [Infrared sensor]---I2C--->[NUCLEO F401RE]--+--UART-+--->[heatmap.py/viewer.py/PC]
-                GND   3.3V             3.3 GND         |       |
-                 |      |                |  |          +--CAN--+
-                 +      +----------------+  |          |       |
-                 +--------------------------+          +--BLE--+
+           [Infrared sensor]---I2C--->[NUCLEO F401RE]--UART-->[thermography.py/PC]
+                GND   3.3V             3.3 GND         
+                 |      |                |  |          
+                 +      +----------------+  |         
+                 +--------------------------+
 
 ```
 
@@ -39,7 +39,7 @@ The output data format of AMG88XX is not like a standard image format. On GUI, I
 
 ## Implementation
 
-- [I2C adaptor on NUCLEO F401RE](./stm32)
+- [I2C adaptor on NUCLEO F401RE with X-CUBE-AI](../AI)
 - [Thermography GUI](./thermography)
 
 ## Deep learning on rock-paper-scissors with Keras/TensorFlow
