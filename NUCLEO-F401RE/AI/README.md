@@ -30,7 +30,9 @@ Hand gesture ))) [AMG8833] --I2C--> [STM32] --UART--> [Console(PC)]
 
 ## Loading Keras model into CubeMX
 
-I loaded a Keras model in [this folder](../Thermography/tensorflow) into CubeMX. The model "rock-paper-scissors" was trained with normalized dataset of float type.
+I have made a very small-size pre-trained Keras model on my own for this evaluation. The model is [this folder](../Thermography/tensorflow). The model "rock-paper-scissors" was trained with normalized dataset of float type.
+
+I loaded the model in into CubeMX. 
 
 ## How to run the network
 
