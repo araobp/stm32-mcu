@@ -32,7 +32,9 @@ Hand gesture ))) [AMG8833] --I2C--> [STM32] --UART--> [Console(PC)]
 
 I have made a very small-size pre-trained Keras model on my own for this evaluation. The model is in [this folder](../Thermography/tensorflow). The model "rock-paper-scissors" was trained with normalized dataset of float type.
 
-I loaded the model into CubeMX. 
+=> **[The training steps](https://github.com/araobp/stm32-mcu/tree/master/NUCLEO-F401RE/Thermography)**
+
+I loaded the pre-trained model into CubeMX for this evaluation.
 
 ## How to run the network
 
