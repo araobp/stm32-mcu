@@ -1,4 +1,4 @@
-# X-CUBE-AI ver 3.3.0 evaluation
+# X-CUBE-AI 3.3.0 / CubeMX 5.0.1 evaluation
 
 ## X-CUBE-AI
 
