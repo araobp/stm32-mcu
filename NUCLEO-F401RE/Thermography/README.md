@@ -47,9 +47,9 @@ The output data format of AMG88XX is not like a standard image format. On GUI, I
 ### Training CNN model
 
 Class labels:
-- rock
-- paper
-- scissors
+- rock (1)
+- paper (0)
+- scissors (2)
 
 ![](./hand_gesture/rock.jpg)
 
