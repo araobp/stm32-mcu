@@ -53,7 +53,6 @@
 #include <string.h>
 #include "app_x-cube-ai.h"
 #include "bsp_ai.h"
-//#include "aiSystemPerformance.h"
 #include "ai_datatypes_defines.h"
 
 #include "ai.h"
@@ -64,7 +63,6 @@
 void MX_X_CUBE_AI_Init(void)
 {
     MX_UARTx_Init();
-    //aiSystemPerformanceInit();
     /* USER CODE BEGIN 0 */
 	ai_init();
     /* USER CODE END 0 */
@@ -72,8 +70,6 @@ void MX_X_CUBE_AI_Init(void)
 
 void MX_X_CUBE_AI_Process(void)
 {
-    //aiSystemPerformanceProcess();
-    //HAL_Delay(1000); /* delay 1s */
     /* USER CODE BEGIN 1 */
 
 	ai_float in_data[AI_MNETWORK_IN_1_SIZE] = { 0.0f };
