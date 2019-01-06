@@ -70,3 +70,9 @@ Training result: [8 x 8 2D images](./tensorflow/CNN_for_rock_paper_scissors.ipyn
 Descrete Cosine Transform of 2D image shows some features. I am going to use DCT output as an additional feature for training a neural network.
 
 ![](./thermography/screenshots/dct.jpg)
+
+## Interpolation
+
+It is interesting to apply linear interpolation to 8x8 2D images to obtain 32x32 2D image. The image becomes like this:
+
+![](./thermography/screenshots/interpolated.jpg)
