@@ -42,21 +42,20 @@ There is no API documentation on X-CUBE-AI on the web, so I read the code genera
 
 ### Validation result on CubeMX
 
-It takes around 10msec to infer rock-paper-scissors on 32x32 image from the infrared array sensor.
+It takes around 7msec to infer rock-paper-scissors on 8x8 image from the infrared array sensor.
 
 ```
 Matching results...
-Unable to compress to target: 4.000000 wanted, 3.080142 reached
 
 ON-DEVICE STM32 execution ("network", auto-detect, 115200)..
 
-<Stm32com id=0x279c8127080 - CONNECTED(COM6/115200) devid=0x433/STM32F401xD/E msg=1.0>
+<Stm32com id=0x20cffeb05c0 - CONNECTED(COM6/115200) devid=0x433/STM32F401xD/E msg=1.0>
  0x433/STM32F401xD/E @84MHz/84MHz (FPU is present) lat=2 ART: PRFTen ICen DCen
  found network(s): ['network']
- description    : 'network' (32, 32, 1)-[4]->(1, 1, 3) macc=950717 rom=23.14KiB ram=23.13KiB
- tools versions : rt=(3, 3, 0) tool=(3, 3, 0)/(1, 1, 0) api=(1, 0, 0) "Mon Dec 31 08:42:10 2018"
+ description    : 'network' (8, 8, 1)-[4]->(1, 1, 3) macc=86493 rom=20.26KiB ram=2.07KiB
+ tools versions : rt=(3, 3, 0) tool=(3, 3, 0)/(1, 1, 0) api=(1, 0, 0) "Sun Jan  6 13:50:20 2019"
 
-Running with inputs=(10, 32, 32, 1)..
+Running with inputs=(10, 8, 8, 1)..
 .... 1/10
 .... 2/10
 .... 3/10
@@ -67,35 +66,34 @@ Running with inputs=(10, 32, 32, 1)..
 .... 8/10
 .... 9/10
 .... 10/10
- RUN Stats    : batches=10 dur=7.062s tfx=6.575s 6.101KiB/s (wb=40.000KiB,rb=120B)
+ RUN Stats    : batches=10 dur=1.266s tfx=0.828s 3.161KiB/s (wb=2.500KiB,rb=120B)
 
-Results for 10 inference(s) @84/84MHz (macc:950717)
- duration    : 99.405 ms (average)
- CPU cycles  : 8350026 (average)
- cycles/MACC : 8.78 (average for all layers)
+Results for 10 inference(s) @84/84MHz (macc:86493)
+ duration    : 7.426 ms (average)
+ CPU cycles  : 623746 (average)
+ cycles/MACC : 7.21 (average for all layers)
 
 Inspector report (layer by layer)
- signature      : 761E9573
+ signature      : 66309095
  n_nodes        : 4
  num_inferences : 10
 
 Clayer  id  desc                          oshape            ms        
 --------------------------------------------------------------------------------
-0       0   10011/(Merged Conv2d / Pool)  (10, 15, 15, 16)  31.126    
-1       2   10011/(Merged Conv2d / Pool)  (10, 6, 6, 32)    67.844    
-2       6   10005/(Dense)                 (10, 1, 1, 3)     0.425     
+0       0   10011/(Merged Conv2d / Pool)  (10, 4, 4, 16)    2.009     
+1       2   10011/(Merged Conv2d / Pool)  (10, 2, 2, 32)    5.361     
+2       6   10005/(Dense)                 (10, 1, 1, 3)     0.046     
 3       6   10014/(Softmax)               (10, 1, 1, 3)     0.010     
-                                                            99.405 (total)
+                                                            7.426 (total)
 
-  MACC / frame: 950717
-  ROM size:     23.14 KBytes
-  RAM size:     23.13 KBytes (Minimum: 23.13 KBytes)
-  Comp. factor: 1.394
+  MACC / frame: 86493
+  ROM size:     20.26 KBytes
+  RAM size:     2.07 KBytes (Minimum: 2.07 KBytes)
 
 
 Matching criteria: L2 error < 0.01 on the output tensor
 
-  Ref layer 6 matched with C layer 3, error: 0.0038189557
+  Ref layer 6 matched with C layer 3, error: 1.8168235e-07
 
 Validation: OK
  Validation OK
@@ -122,34 +120,33 @@ Found network "network"
 Creating the network "network"..
 Network configuration...
  Model name         : network
- Model signature    : 21c022f2cfdcffb0abb14b381ae52db9
- Model datetime     : Wed Jan  2 03:59:12 2019
- Compile datetime   : Jan  2 2019 04:27:27
+ Model signature    : dcb268eb2b3cdc77047062b7db4a02c7
+ Model datetime     : Sun Jan  6 13:31:42 2019
+ Compile datetime   : Jan  6 2019 13:36:25
  Runtime revision   :  (3.3.0)
  Tool revision      : (rev-) (3.3.0)
 Network info...
   signature         : 0x0
   nodes             : 4
-  complexity        : 950717 MACC
-  activation        : 23684 bytes
-  weights           : 33036 bytes
+  complexity        : 86493 MACC
+  activation        : 2116 bytes
+  weights           : 20748 bytes
   inputs/outputs    : 1/1
-  IN tensor format  : HWC layout:32,32,1 (s:1024 f:AI_BUFFER_FORMAT_FLOAT)
+  IN tensor format  : HWC layout:8,8,1 (s:64 f:AI_BUFFER_FORMAT_FLOAT)
   OUT tensor format : HWC layout:1,1,3 (s:3 f:AI_BUFFER_FORMAT_FLOAT)
 Initializing the network
 
 Running PerfTest on "network" with random inputs (16 iterations)...
 ................
 
-Results for "network", 16 inferences @84MHz/84MHz (complexity: 950717 MACC)
- duration     : 99.383 ms (average)
- CPU cycles   : 8348200 -156/+273 (average,-/+)
- CPU Workload : 9%
- cycles/MACC  : 8 (average for all layers)
+Results for "network", 16 inferences @84MHz/84MHz (complexity: 86493 MACC)
+ duration     : 7.430 ms (average)
+ CPU cycles   : 624131 -86/+46 (average,-/+)
+ CPU Workload : 0%
+ cycles/MACC  : 7 (average for all layers)
  used stack   : 352 bytes
  used heap    : 0:0 0:0 (req:allocated,req:released) cfg=0
 
-Press any key to continue..
 ```
 
 ### Inference test on my original Keras model "rock-paper-scissors"
