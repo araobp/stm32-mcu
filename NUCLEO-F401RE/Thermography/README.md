@@ -51,11 +51,11 @@ Class labels:
 - paper
 - scissors
 
-![./hand_gesture](rock.jpg)
+![](./hand_gesture/rock.jpg)
 
-![./hand_gesture](paper.jpg)
+![](./hand_gesture/paper.jpg)
 
-![./hand_gesture](scissors.jpg)
+![](./hand_gesture/scissors.jpg)
 
 Training data: 2D array of 8 x 8 pixels or 32 x 32 pixels (8 x 8 images interpolated)
 
