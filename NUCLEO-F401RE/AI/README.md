@@ -185,3 +185,22 @@ Found network: "network"
           :
 
 ```
+
+## Enhancement plan
+
+I am going to make a rock-paper-scissors machine:
+
+```
+[Character LCD]
+
+3 2 1 
+
+ oooo         !!!!            ii
+ \__O ROCK    \  // PAPER    oo<  SCISSORS
+
+YOU WIN!
+ME:PAPER, YOU:SCISSORS
+
+I WIN!
+ME:PAPER, YOU:ROCK
+```
