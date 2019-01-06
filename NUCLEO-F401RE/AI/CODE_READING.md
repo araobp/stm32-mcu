@@ -126,6 +126,7 @@ Maybe it is a good idea to use the code as a basis for developing an application
 #include <ai.h>
 #include <bsp_ai.h>
 #include "ai_platform.h"
+#include "math.h"
 
 #define AI_BUFFER_NULL(ptr_)  \
   AI_BUFFER_OBJ_INIT( \
@@ -137,26 +138,29 @@ static ai_u8 activations[AI_MNETWORK_DATA_ACTIVATIONS_SIZE];
 ai_handle handle;
 ai_network_report report;
 
+// Standard normalization
 void normalize(ai_float *in_data, ai_float *normalized_data) {
 
-	float sum_ = 0.0f;
-	float mean_ = 0.0f;
-	float max_ = 0.0f;
-	float min_ = 80.0f;
-	float range_;
+	float mean = 0.0;
+	float std = 0.0;
 
+	// Sum and mean
 	for (int i = 0; i < AI_MNETWORK_IN_1_SIZE; i++) {
-		sum_ += in_data[i];
-		if (in_data[i] > max_)
-			max_ = in_data[i];
-		if (in_data[i] < min_)
-			min_ = in_data[i];
+		mean += in_data[i];
 	}
-	mean_ = sum_ / 64.0;
-	range_ = (max_ - min_) / 2.0;
+	mean = mean / AI_MNETWORK_IN_1_SIZE;
+
+	// Standard deviation
 	for (int i = 0; i < AI_MNETWORK_IN_1_SIZE; i++) {
-		normalized_data[i] = (in_data[i] - mean_) / range_;
+		std += pow(in_data[i] - mean, 2);
 	}
+	std = sqrt(std / AI_MNETWORK_IN_1_SIZE);
+
+	// Normalization
+	for (int i = 0; i < AI_MNETWORK_IN_1_SIZE; i++) {
+		normalized_data[i] = (in_data[i] - mean) / std;
+	}
+
 }
 
 int ai_init(void) {
@@ -188,6 +192,7 @@ int ai_init(void) {
 		printf("E: ai_mnetwork_init\n");
 		return -1;
 	}
+
 	return 0;
 }
 
