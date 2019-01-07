@@ -201,7 +201,7 @@ Found network: "network"
 
 ```
 
-## Enhancement
+## Application example: AI-enabled rock-paper-scissors machine
 
 I have made a AI-enabled rock-paper-scissors machine.
 
