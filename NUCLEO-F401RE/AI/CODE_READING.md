@@ -218,16 +218,10 @@ int ai_infer(ai_float *input_data, const char *label) {
 	ai_mnetwork_run(handle, &ai_input[0], &ai_output[0]);
 
 	output_ = (ai_float *) (ai_output[0].data);
-	if (label) {
-		printf("[Inference] input: \"%s\",  result: [%d%%, %d%%, %d%%]\n",
-				label, (int) (output_[0] * 100), (int) (output_[1] * 100),
-				(int) (output_[2] * 100));
-	} else {
-		printf(
-				"\n--- Inference ---\n rock:        %3d%%\n paper:       %3d%%\n scissors:    %3d%%\n",
-				(int) (output_[1] * 100), (int) (output_[0] * 100),
-				(int) (output_[2] * 100));
-	}
+	printf(
+		"\n--- Inference ---\n rock:        %3d%%\n paper:       %3d%%\n scissors:    %3d%%\n",
+		(int) (output_[1] * 100), (int) (output_[0] * 100),
+		(int) (output_[2] * 100));
 	return 0;
 }
 ```
