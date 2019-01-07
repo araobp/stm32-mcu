@@ -204,3 +204,6 @@ Found network: "network"
 ## Enhancement
 
 I have made a AI-enabled rock-paper-scissors machine.
+
+=> [Video of the demo on YouTube](https://youtu.be/d6OYSllaVEs)
+https://youtu.be/d6OYSllaVEs
