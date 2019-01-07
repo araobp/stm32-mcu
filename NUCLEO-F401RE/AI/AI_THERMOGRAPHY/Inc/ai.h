@@ -8,8 +8,10 @@
 extern "C" {
 #endif
 
+#define NUM_CLASS_LABELS 3U
+
 int ai_init(void);
-int ai_infer(ai_float *raw_data, const char *label);
+void ai_infer(ai_float *input_data, ai_float* output_data);
 
 #ifdef __cplusplus
 }

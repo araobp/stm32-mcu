@@ -89,7 +89,9 @@ uint8_t cmd;
 
 volatile bool output_pixels = false;
 volatile bool output_thermistor = false;
+#ifndef GAME_MODE
 volatile bool run_inference = false;
+#endif
 
 /* USER CODE END PV */
 
@@ -105,11 +107,10 @@ void SystemClock_Config(void);
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
-int main(void)
-{
+ * @brief  The application entry point.
+ * @retval int
+ */
+int main(void) {
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -136,57 +137,62 @@ int main(void)
   MX_I2C1_Init();
   MX_X_CUBE_AI_Init();
   /* USER CODE BEGIN 2 */
-	adaptor_init(&hi2c1);
-	set_moving_average(true);
+  adaptor_init(&hi2c1);
+  set_moving_average(true);
 
-	HAL_UART_Receive_IT(&huart2, (uint8_t *) &cmd, 1);
+  HAL_UART_Receive_IT(&huart2, (uint8_t *) &cmd, 1);
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-	while (1) {
+  while (1) {
 
-		if (output_pixels) {
-			read_registors(AMG8833_T01L_ADDR, buffer,
-					AMG8833_PIXEL_DATA_LENGTH);
-			HAL_UART_Transmit(&huart2, buffer, AMG8833_PIXEL_DATA_LENGTH, 3000);
-			output_pixels = false;
-		}
+    // For data acquisition
+    if (output_pixels) {
+      read_registors(AMG8833_T01L_ADDR, buffer,
+      AMG8833_PIXEL_DATA_LENGTH);
+      HAL_UART_Transmit(&huart2, buffer, AMG8833_PIXEL_DATA_LENGTH, 3000);
+      output_pixels = false;
+    }
+    if (output_thermistor) {
+      read_registors(AMG8833_TTHL_ADDR, buffer, 2);
+      HAL_UART_Transmit(&huart2, buffer, 2, 3000);
+      output_thermistor = false;
+    }
 
-		if (output_thermistor) {
-			read_registors(AMG8833_TTHL_ADDR, buffer, 2);
-			HAL_UART_Transmit(&huart2, buffer, 2, 3000);
-			output_thermistor = false;
-		}
+    // For running inference
+#ifndef GAME_MODE
+    if (run_inference) {
+#endif
 
-		if (run_inference) {
+      /* USER CODE END WHILE */
 
-    /* USER CODE END WHILE */
-
-  MX_X_CUBE_AI_Process();
-    /* USER CODE BEGIN 3 */
-  	  	  	run_inference = false;
-		}
-	}
+      MX_X_CUBE_AI_Process();
+      /* USER CODE BEGIN 3 */
+#ifndef GAME_MODE
+      run_inference = false;
+    }
+#endif
+  }
   /* USER CODE END 3 */
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
-void SystemClock_Config(void)
-{
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ * @brief System Clock Configuration
+ * @retval None
+ */
+void SystemClock_Config(void) {
+  RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
 
   /**Configure the main internal regulator output voltage 
-  */
-  __HAL_RCC_PWR_CLK_ENABLE();
+   */
+  __HAL_RCC_PWR_CLK_ENABLE()
+  ;
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
   /**Initializes the CPU, AHB and APB busses clocks 
-  */
+   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
@@ -196,21 +202,19 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
   RCC_OscInitStruct.PLL.PLLQ = 7;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
     Error_Handler();
   }
   /**Initializes the CPU, AHB and APB busses clocks 
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+   */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
+      | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
-  {
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK) {
     Error_Handler();
   }
 }
@@ -218,61 +222,61 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 
 int _write(int file, char *ptr, int len) {
-	HAL_UART_Transmit(&huart2, (uint8_t *) ptr, (uint16_t) len, 0xFFFFFFFF);
-	return len;
+  HAL_UART_Transmit(&huart2, (uint8_t *) ptr, (uint16_t) len, 0xFFFFFFFF);
+  return len;
 }
 
-
 /*
- * One-byte command reception from an application processor
+ * One-byte command reception from console or Thermography GUI
  */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
-	switch (cmd) {
+  switch (cmd) {
 
-	case 'p':
-		output_pixels = true;
-		break;
-	case 't':
-		output_thermistor = true;
-		break;
-	case 'i':
-		run_inference = true;
-		break;
-	default:
-		break;
-	}
+  case 'p':  // pixels
+    output_pixels = true;
+    break;
+  case 't':  // thermistor
+    output_thermistor = true;
+    break;
+#ifndef GAME_MODE
+  case 'i':  // run inference
+    run_inference = true;
+    break;
+#endif
+  default:
+    break;
+  }
 
-	HAL_UART_Receive_IT(&huart2, (uint8_t *) &cmd, 1);
+  HAL_UART_Receive_IT(&huart2, (uint8_t *) &cmd, 1);
 }
 
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
-void Error_Handler(void)
-{
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
+void Error_Handler(void) {
   /* USER CODE BEGIN Error_Handler_Debug */
-	/* User can add his own implementation to report the HAL error return state */
+  /* User can add his own implementation to report the HAL error return state */
 
   /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
-	/* User can add his own implementation to report the file name and line number,
-	 tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  /* User can add his own implementation to report the file name and line number,
+   tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

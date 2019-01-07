@@ -20,6 +20,7 @@
 #define AMG8833_TTHL_ADDR 0x0E
 #define AMG8833_1F_ADDR 0x1F
 #define AMG8833_AVE_ADDR 0x07
+#define AMG8833_RESOLUTION 0.25
 
 void adaptor_init(I2C_HandleTypeDef *phi2c);
 void read_registors(uint8_t reg_addr, uint8_t *buffer, uint8_t length);

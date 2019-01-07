@@ -106,6 +106,8 @@ void Error_Handler(void);
 void   MX_USART2_UART_Init(void);
 /* USER CODE BEGIN Private defines */
 
+#define GAME_MODE
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
