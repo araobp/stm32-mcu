@@ -7,3 +7,4 @@ Note: this implementation supports **norm="ortho"** only. Refer to [scipy.fftpac
 ## References
 
 - [よくわかる信号処理](https://www.kinokuniya.co.jp/f/dsg-08-EK-0410603)
+- [CMSIS-DSP](http://www.keil.com/pack/doc/CMSIS/DSP/html/index.html)
