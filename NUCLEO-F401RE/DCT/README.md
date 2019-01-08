@@ -4,6 +4,8 @@ DCT Type-II is used for calculating MFCCs and image compression in my other proj
 
 Since CMSIS-DSP does not support DCT Type-II, I have developed it on my own.
 
+I have also developed 2D-version of DCT Type-II for 2D image pre-processing.
+
 Note: this implementation supports **norm="ortho"** only. Refer to [scipy.fftpack.dct](https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.fftpack.dct.html).
 
 ## References
