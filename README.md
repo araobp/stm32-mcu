@@ -4,7 +4,7 @@
 
 STMicro has given me NUCLEO-L476RG and NUCLEO-F401RE with expansion boards for free at trade shows in year 2018. Thanks a lot to STMicro!
 
-## Toolchain
+Toolchain:
 
 - [TrueSTUDIO](https://atollic.com/truestudio/)
 - [STM32 CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html)
