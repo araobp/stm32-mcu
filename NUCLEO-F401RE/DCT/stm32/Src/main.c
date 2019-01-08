@@ -90,11 +90,26 @@ int main(void)
 
   dct2_instance_f32 S;
 
+  dct2_instance_f32 S_2d;
+
   float32_t in_data[8] = {
       1.0, 0.0, 1.0, 2.0, 3.0, 4.0, 3.0, 2.0
   };
 
   float32_t out_data[8] = { 0.0 };
+
+  float32_t in_data_2d[8*8] = {
+      1.0, 0.0, 1.0, 2.0, 3.0, 4.0, 3.0, 2.0,
+            2.0, 0.0, 0.0, 2.0, 3.0, 4.0, 4.0, 2.0,
+            3.0, 0.0, -1.0, 2.0, 3.0, 4.0, 3.0, 2.0,
+            4.0, 0.0, -2.0, 2.0, 3.0, 4.0, 2.0, 2.0,
+            5.0, 4.0, 3.0, 2.0, 1.0, 0.0, -1.0, -2.0,
+            6.0, 0.0, -4.0, 2.0, 3.0, 4.0, 0.0, 2.0,
+            7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0, 0.0,
+            8.0, 0.0, -6.0, 2.0, 3.0, 4.0, -2.0, 2.0
+  };
+
+  float32_t out_data_2d[8*8] = { 0.0 };
 
   /* USER CODE END 1 */
 
@@ -120,18 +135,30 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   dct2_init_f32(&S, 8);
+  dct2_2d_init_f32(&S_2d, 8, 8);
 
   printf ("**** START *********\n");
 
   printf(">> DCT\n");
   dct2_f32(&S, in_data, out_data, 0);
   for (int i=0; i<8; i++) {
-    printf("[%d] %f\n", i, out_data[i]);
+    printf("[%d] %.1f\n", i, out_data[i]);
   }
   printf(">> inverse DCT\n");
-  dct2_f32(&S, out_data, out_data, 1);
+  dct2_f32(&S, out_data, in_data, 1);
   for (int i=0; i<8; i++) {
-    printf("[%d] %f\n", i, out_data[i]);
+    printf("[%d] %.1f\n", i, in_data[i]);
+  }
+
+  printf(">> DCT 2D\n");
+  dct2_2d_f32(&S_2d, in_data_2d, out_data_2d, 0);
+  for (int i=0; i<8*8; i++) {
+    printf("[%d] %.1f\n", i, out_data_2d[i]);
+  }
+  printf(">> inverse DCT 2D\n");
+  dct2_2d_f32(&S_2d, out_data_2d, in_data_2d, 1);
+  for (int i=0; i<8*8; i++) {
+    printf("[%d] %.1f\n", i, in_data_2d[i]);
   }
 
   /* USER CODE END 2 */
