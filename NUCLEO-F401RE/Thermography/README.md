@@ -60,29 +60,16 @@ Class labels:
 - paper (0)
 - scissors (2)
 
-![](./hand_gesture/rock.jpg)
-
-![](./hand_gesture/paper.jpg)
-
-![](./hand_gesture/scissors.jpg)
-
 Training data: 2D array of 8 x 8 pixels
 
 Data set: [csv files](./thermography/data)
 
 Training result:
-- [CNN on raw 8x8-pixel images](./tensorflow/CNN_for_rock_paper_scissors.ipynb)
-- [DNN on DCT Type-II feature extracted from 8x8-pixel images](./tensorflow/CNN_for_rock_paper_scissors-DCT.ipynb)
+- [Raw 8x8-pixel images](./tensorflow/rock_paper_scissors_raw_data.ipynb)
+- [CNN on raw 8x8-pixel images](./tensorflow/rock_paper_scissors_cnn.ipynb)
+- [DNN on DCT Type-II feature extracted from 8x8-pixel images](./tensorflow/rock_paper_scissors_dct.ipynb)
 
 I use the DNN model for this project.
-
-### Using the trained DNN model
-
-![](./thermography/screenshots/ml_rock.jpg)
-
-![](./thermography/screenshots/ml_paper.jpg)
-
-![](./thermography/screenshots/ml_scissors.jpg)
 
 ## Interpolation
 
