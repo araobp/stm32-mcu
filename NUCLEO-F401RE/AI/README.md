@@ -203,9 +203,7 @@ Found network: "network"
 
 ### Model 2: DNN on DCT Type-II feature extracted from 8x8-pixel images
 
-Note:
-- The current implementation uses this DNN model, since **the size of this model is much smaller than that of the CNN model.**
-- The time for pre-processing (DCT Type-II) is not included in the performance measurement results below.
+Note: the time for pre-processing (DCT Type-II) is not included in the performance measurement results below.
 
 #### Validation result on CubeMX
 
