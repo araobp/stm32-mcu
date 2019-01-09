@@ -65,11 +65,11 @@ Training data: 2D array of 8 x 8 pixels
 Data set: [csv files](./thermography/data)
 
 Training result:
-- [Model 1: DNN on raw 8x8-pixel images](./tensorflow/rock_paper_scissors_raw_data.ipynb)
-- [Model 2: CNN on raw 8x8-pixel images](./tensorflow/rock_paper_scissors_cnn.ipynb)
-- [Model 3: DNN on DCT Type-II feature extracted from 8x8-pixel images](./tensorflow/rock_paper_scissors_dct.ipynb)
+- [Model 1: CNN on raw 8x8-pixel images](./tensorflow/rock_paper_scissors_cnn.ipynb)
+- [Model 2: DNN on DCT Type-II feature extracted from 8x8-pixel images](./tensorflow/rock_paper_scissors_dct.ipynb)
+- [Model 3: DNN on raw 8x8-pixel images](./tensorflow/rock_paper_scissors_raw_data.ipynb)
 
-I adopt "model 3" in [the other project](https://github.com/araobp/stm32-mcu/tree/master/NUCLEO-F401RE/AI), since the training result is the best and the neural network is the smallest.
+I adopt "model 2" in [my X-CUBE-AI project](https://github.com/araobp/stm32-mcu/tree/master/NUCLEO-F401RE/AI), since the training result is the best and the neural network is the smallest.
 
 ## Interpolation
 
