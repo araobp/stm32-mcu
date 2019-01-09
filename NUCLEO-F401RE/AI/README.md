@@ -44,10 +44,9 @@ There is no API documentation on X-CUBE-AI on the web, so I read the code genera
 
 ## Evaluations so far
 
-I have tested two kinds of models:
-- Model 1: [CNN on raw 8x8-pixel images](../Thermography/tensorflow/CNN_for_rock_paper_scissors.ipynb)
-- Model 2: [DNN on DCT Type-II feature extracted from 8x8-pixel images](../Thermography/tensorflow/CNN_for_rock_paper_scissors-DCT.ipynb)
-
+I have tested the following of models:
+- Model 1: [CNN on raw 8x8-pixel images](../Thermography/tensorflow/rock_paper_scissors_cnn.ipynb)
+- Model 2: [DNN on DCT Type-II feature extracted from 8x8-pixel images](../Thermography/tensorflow/CNN_for_rock_paper_scissors_dct.ipynb)
 
 ### Model 1: CNN on raw 8x8-pixel images
 
