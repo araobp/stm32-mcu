@@ -65,7 +65,7 @@ Training data: 2D array of 8 x 8 pixels
 Data set: [csv files](./thermography/data)
 
 Training result:
-- [Raw 8x8-pixel images](./tensorflow/rock_paper_scissors_raw_data.ipynb)
+- [DNN on raw 8x8-pixel images](./tensorflow/rock_paper_scissors_raw_data.ipynb)
 - [CNN on raw 8x8-pixel images](./tensorflow/rock_paper_scissors_cnn.ipynb)
 - [DNN on DCT Type-II feature extracted from 8x8-pixel images](./tensorflow/rock_paper_scissors_dct.ipynb)
 
