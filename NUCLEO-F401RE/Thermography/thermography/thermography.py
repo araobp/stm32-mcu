@@ -22,8 +22,6 @@ import heatmap
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("port", help="serial port identifier")
-parser.add_argument("-m", "--model_file", help="Trained CNN model in hdf5 (.h5) format")
-parser.add_argument("-c", "--class_file", help="Class labels of the trained CNN model in YAML format")
 parser.add_argument("-g", "--grid_data", help="Apply griddata filter", action='store_true')
 args = parser.parse_args()
 
@@ -56,16 +54,10 @@ if __name__ == '__main__':
     class_label_ = ''
     filename = None
     data = None
-    cnn_model = None
     if args.grid_data:
         shape = (32, 32)
     else:
         shape = (8, 8)
-
-    cnn_model = None
-    if args.model_file and args.class_file:
-        import inference
-        cnn_model = inference.Model(shape=shape, class_file=args.class_file, model_file=args.model_file)
 
     canvas = FigureCanvasTkAgg(fig, master=frame_row0)
     canvas.draw()
@@ -78,9 +70,6 @@ if __name__ == '__main__':
         fig.tight_layout()
         canvas.draw()
         thermistor()
-        if cnn_model:
-            class_label, probability = cnn_model.infer(data)
-            label_inference.configure(text='ML inference: this is {} ({} %)'.format(class_label, int(probability)))
 
     def pixels_continuous():
         global data, axes
@@ -90,9 +79,6 @@ if __name__ == '__main__':
         fig.tight_layout()
         canvas.draw()
         thermistor()
-        if cnn_model:
-            class_label, probability = cnn_model.infer(data)
-            label_inference.configure(text='ML inference: this is {} ({} %)'.format(class_label, int(probability)))
         repeat(pixels_continuous)
 
     def thermistor():
@@ -178,11 +164,6 @@ if __name__ == '__main__':
 
     label_thermistor.grid(row=0, column=0, padx=PADX_GRID)
     frame_row1.pack(pady=PADY_GRID)
-
-    ### Row 2: inference
-    if cnn_model:
-        label_inference.grid(row=0, column=0, padx=PADX_GRID)
-        frame_row2.pack(pady=PADY_GRID)
 
     ### Row 3: operation ####
 
