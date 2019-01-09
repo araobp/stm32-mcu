@@ -44,7 +44,14 @@ There is no API documentation on X-CUBE-AI on the web, so I read the code genera
 
 ## Evaluations so far
 
-### Validation result on CubeMX
+I have tested two kinds of models:
+- Model 1: [CNN on raw 8x8-pixel images](../Thermography/tensorflow/CNN_for_rock_paper_scissors.ipynb)
+- Model 2: [DNN on DCT Type-II feature extracted from 8x8-pixel images](../Thermography/tensorflow/CNN_for_rock_paper_scissors-DCT.ipynb)
+
+
+### Model 1: CNN on raw 8x8-pixel images
+
+#### Validation result on CubeMX
 
 It takes around 12msec to infer rock-paper-scissors on 8x8 image from the infrared array sensor.
 
@@ -107,7 +114,7 @@ Validation: OK
 Python validation ended
 ```
 
-### System performance test result
+#### System performance test result
 
 ```
 #
@@ -168,7 +175,7 @@ Results for "network", 16 inferences @84MHz/84MHz (complexity: 119901 MACC)
                             :
 ```
 
-### Inference test on my original Keras model "rock-paper-scissors"
+#### Inference test on my original Keras model "rock-paper-scissors"
 
 This time I trained the CNN model with [8x8 2D images](../Thermography/thermography/data). I also connected the real sensor "AMG8833" to the inference engine via I2C bus.
 
@@ -199,6 +206,119 @@ Found network: "network"
  scissors:     93%
           :
 
+```
+
+### Model 2: DNN on DCT Type-II feature extracted from 8x8-pixel images
+
+Note:
+- The current implementation uses this DNN model, since **the size of this model is much smaller than that of the CNN model.**
+- The time for pre-processing (DCT Type-II) is not included in the performance measurement results below.
+
+#### Validation result on CubeMX
+
+```
+Matching results...
+
+ON-DEVICE STM32 execution ("network", auto-detect, 115200)..
+
+<Stm32com id=0x18c8bb36c50 - CONNECTED(COM6/115200) devid=0x433/STM32F401xD/E msg=1.0>
+ 0x433/STM32F401xD/E @84MHz/84MHz (FPU is present) lat=2 ART: PRFTen ICen DCen
+ found network(s): ['network']
+ description    : 'network' (1, 1, 36)-[6]->(1, 1, 3) macc=5175 rom=20.05KiB ram=0.43KiB
+ tools versions : rt=(3, 3, 0) tool=(3, 3, 0)/(1, 1, 0) api=(1, 0, 0) "Wed Jan  9 10:22:24 2019"
+
+Running with inputs=(10, 1, 1, 36)..
+...... 1/10
+...... 2/10
+...... 3/10
+...... 4/10
+...... 5/10
+...... 6/10
+...... 7/10
+...... 8/10
+...... 9/10
+...... 10/10
+ RUN Stats    : batches=10 dur=1.125s tfx=0.534s 2.853KiB/s (wb=1.406KiB,rb=120B)
+
+Results for 10 inference(s) @84/84MHz (macc:5175)
+ duration    : 0.678 ms (average)
+ CPU cycles  : 56982 (average)
+ cycles/MACC : 11.01 (average for all layers)
+
+Inspector report (layer by layer)
+ signature      : 6AFE0A71
+ n_nodes        : 6
+ num_inferences : 10
+
+Clayer  id  desc                          oshape            ms        
+--------------------------------------------------------------------------------
+0       0   10005/(Dense)                 (10, 1, 1, 54)    0.261     
+1       0   10009/(Nonlinearity)          (10, 1, 1, 54)    0.010     
+2       2   10005/(Dense)                 (10, 1, 1, 54)    0.365     
+3       2   10009/(Nonlinearity)          (10, 1, 1, 54)    0.010     
+4       4   10005/(Dense)                 (10, 1, 1, 3)     0.023     
+5       4   10014/(Softmax)               (10, 1, 1, 3)     0.010     
+                                                            0.678 (total)
+
+  MACC / frame: 5175
+  ROM size:     20.05 KBytes
+  RAM size:     436 Bytes (Minimum: 436 Bytes)
+
+
+Matching criteria: L2 error < 0.01 on the output tensor
+
+  Ref layer 4 matched with C layer 5, error: 1.6048034e-07
+
+Validation: OK
+ Validation OK
+Python validation ended
+````
+#### System performance test result
+
+```
+#
+# AI system performance measurement 2.1
+#
+Compiled with GCC 6.3.1
+STM32 Runtime configuration...
+ Device       : DevID:0x00000433 (UNKNOWN) RevID:0x00001001
+ Core Arch.   : M4 - FPU PRESENT and used
+ HAL version  : 0x01070400
+ system clock : 84 MHz
+ FLASH conf.  : ACR=0x00000702 - Prefetch=True $I/$D=(True,True) latency=2
+
+AI Network (AI platform API 1.0.0)...
+
+Found network "network"
+Creating the network "network"..
+Network configuration...
+ Model name         : network
+ Model signature    : 6458c0b18813d980a474b0270588669e
+ Model datetime     : Wed Jan  9 10:17:53 2019
+ Compile datetime   : Jan  9 2019 10:19:00
+ Runtime revision   :  (3.3.0)
+ Tool revision      : (rev-) (3.3.0)
+Network info...
+  signature         : 0x0
+  nodes             : 6
+  complexity        : 5175 MACC
+  activation        : 436 bytes
+  weights           : 20532 bytes
+  inputs/outputs    : 1/1
+  IN tensor format  : HWC layout:1,1,36 (s:36 f:AI_BUFFER_FORMAT_FLOAT)
+  OUT tensor format : HWC layout:1,1,3 (s:3 f:AI_BUFFER_FORMAT_FLOAT)
+Initializing the network
+
+Running PerfTest on "network" with random inputs (16 iterations)...
+................
+
+Results for "network", 16 inferences @84MHz/84MHz (complexity: 5175 MACC)
+ duration     : 0.679 ms (average)
+ CPU cycles   : 57070 -37/+18 (average,-/+)
+ CPU Workload : 0%
+ cycles/MACC  : 11 (average for all layers)
+ used stack   : 172 bytes
+ used heap    : 0:0 0:0 (req:allocated,req:released) cfg=0
 ```
 
 ## Application example: AI-enabled rock-paper-scissors machine

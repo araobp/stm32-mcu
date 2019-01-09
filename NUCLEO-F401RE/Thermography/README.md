@@ -42,9 +42,18 @@ The output data format of AMG88XX is not like a standard image format. On GUI, I
 - [I2C adaptor on NUCLEO F401RE with X-CUBE-AI](../AI)
 - [Thermography GUI](./thermography)
 
-## Deep learning on rock-paper-scissors with Keras/TensorFlow
 
-### Training CNN model
+## Hand gesture recognition: "rock-paper-scissors" with Keras/TensorFlow
+
+
+### DCT as a feature of hand gesture
+
+Descrete Cosine Transform of 2D image shows some features. I use DCT output as feature for training a neural network.
+
+![](./thermography/screenshots/dct.jpg)
+
+
+### Training a neural network
 
 Class labels:
 - rock (1)
@@ -57,25 +66,23 @@ Class labels:
 
 ![](./hand_gesture/scissors.jpg)
 
-Training data: 2D array of 8 x 8 pixels or 32 x 32 pixels (8 x 8 images interpolated)
+Training data: 2D array of 8 x 8 pixels
 
 Data set: [csv files](./thermography/data)
 
-Training result: [8 x 8 2D images](./tensorflow/CNN_for_rock_paper_scissors.ipynb)
+Training result:
+- [CNN on raw 8x8-pixel images](./tensorflow/CNN_for_rock_paper_scissors.ipynb)
+- [DNN on DCT Type-II feature extracted from 8x8-pixel images](./tensorflow/CNN_for_rock_paper_scissors-DCT.ipynb)
 
-### Using the trained CNN model
+I use the DNN model for this project.
+
+### Using the trained DNN model
 
 ![](./thermography/screenshots/ml_rock.jpg)
 
 ![](./thermography/screenshots/ml_paper.jpg)
 
 ![](./thermography/screenshots/ml_scissors.jpg)
-
-## DCT
-
-Descrete Cosine Transform of 2D image shows some features. I am going to use DCT output as an additional feature for training a neural network.
-
-![](./thermography/screenshots/dct.jpg)
 
 ## Interpolation
 
