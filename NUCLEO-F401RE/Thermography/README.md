@@ -52,6 +52,7 @@ Descrete Cosine Transform of 2D image shows some features. I use DCT output as f
 
 ![](./thermography/screenshots/dct.jpg)
 
+Note: pixels[0,0] is DC and pixels[6:8, 6:8] are conisdered as noises, so I set zero to pixels[0, 0] and remove pixels[6:8, 6:8] for training a neural network.
 
 ### Training a neural network
 
