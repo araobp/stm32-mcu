@@ -92,6 +92,10 @@ int main(void)
 
   dct2_instance_f32 S_2d;
 
+  dct2_instance_f32 S_zigzag_even;
+
+  dct2_instance_f32 S_zigzag_odd;
+
   float32_t in_data[8] = {
       1.0, 0.0, 1.0, 2.0, 3.0, 4.0, 3.0, 2.0
   };
@@ -110,6 +114,31 @@ int main(void)
   };
 
   float32_t out_data_2d[8*8] = { 0.0 };
+
+  float32_t in_data_zigzag_even[8*8] = {
+       1.0,  2.0,  6.0,  7.0, 15.0, 16.0, 28.0, 29.0,
+       3.0,  5.0,  8.0, 14.0, 17.0, 27.0, 30.0, 43.0,
+       4.0,  9.0, 13.0, 18.0, 26.0, 31.0, 42.0, 44.0,
+      10.0, 12.0, 19.0, 25.0, 32.0, 41.0, 45.0, 54.0,
+      11.0, 20.0, 24.0, 33.0, 40.0, 46.0, 53.0, 55.0,
+      21.0, 23.0, 34.0, 39.0, 47.0, 52.0, 56.0, 61.0,
+      22.0, 35.0, 38.0, 48.0, 51.0, 57.0, 60.0, 62.0,
+      36.0, 37.0, 49.0, 50.0, 58.0, 59.0, 63.0, 64.0
+  };
+
+  float32_t out_data_zigzag_even[8*8] = { 0.0 };
+
+  float32_t in_data_zigzag_odd[7*7] = {
+       1.0,  2.0,  6.0,  7.0, 15.0, 16.0, 28.0,
+       3.0,  5.0,  8.0, 14.0, 17.0, 27.0, 29.0,
+       4.0,  9.0, 13.0, 18.0, 26.0, 30.0, 39.0,
+      10.0, 12.0, 19.0, 25.0, 31.0, 38.0, 40.0,
+      11.0, 20.0, 24.0, 32.0, 37.0, 41.0, 46.0,
+      21.0, 23.0, 33.0, 36.0, 42.0, 45.0, 47.0,
+      22.0, 34.0, 35.0, 43.0, 44.0, 48.0, 49.0
+  };
+
+  float32_t out_data_zigzag_odd[7*7] = { 0.0 };
 
   /* USER CODE END 1 */
 
@@ -136,6 +165,8 @@ int main(void)
 
   dct2_init_f32(&S, 8);
   dct2_2d_init_f32(&S_2d, 8, 8);
+  dct2_2d_init_f32(&S_zigzag_even, 8, 8);
+  dct2_2d_init_f32(&S_zigzag_odd, 7, 7);
 
   printf ("**** START *********\n");
 
@@ -159,6 +190,18 @@ int main(void)
   dct2_2d_f32(&S_2d, out_data_2d, in_data_2d, 1);
   for (int i=0; i<8*8; i++) {
     printf("[%d] %.1f\n", i, in_data_2d[i]);
+  }
+
+  printf(">> Zigzag scan even\n");
+  zigzag_scan_f32(&S_zigzag_even, in_data_zigzag_even, out_data_zigzag_even);
+  for (int i=0; i<8*8; i++) {
+    printf("[%d] %.1f\n", i, out_data_zigzag_even[i]);
+  }
+
+  printf(">> Zigzag scan odd\n");
+  zigzag_scan_f32(&S_zigzag_odd, in_data_zigzag_odd, out_data_zigzag_odd);
+  for (int i=0; i<7*7; i++) {
+    printf("[%d] %.1f\n", i, out_data_zigzag_odd[i]);
   }
 
   /* USER CODE END 2 */
