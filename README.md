@@ -13,7 +13,7 @@ Toolchain:
 
 ### [NUCLEO-F401RE](http://www.st.com/en/evaluation-tools/nucleo-f401re.html) board
 
-- [DCT Type-II implementation on CMSIS-DSP (also works on L4)](./NUCLEO-F401RE/DCT)
+- [DCT Type-II implementation on CMSIS-DSP (also works on L4)](./NUCLEO-F401RE/DCT) including a zigzag scan utility function.
 
 ## Application components
 
