@@ -52,7 +52,7 @@ Descrete Cosine Transform of 2D image shows some features. I use DCT output as f
 
 ![](./thermography/screenshots/dct.jpg)
 
-Note: pixels[0,0] is DC and pixels[6:8, 6:8] are conisdered as noises, so I set zero to pixels[0, 0] and remove pixels[6:8, 6:8] (28 pixels) for training a neural network. I will test the JPEG's zigzag pattern as well: the last 28 pixels on the zigzap pattern are removed.
+Note: pixels[0,0] is DC and pixels of higher frequenceis are conisdered as noises, so I apply zigzag scan to the data to extract pixels of lower frequencies (low-pass filtering). Refer to [this page](https://github.com/araobp/stm32-mcu/tree/master/NUCLEO-F401RE/DCT).
 
 ### Training a neural network
 
