@@ -23,7 +23,7 @@
 #define AMG8833_RESOLUTION 0.25
 
 void adaptor_init(I2C_HandleTypeDef *phi2c);
-void read_registors(uint8_t reg_addr, uint8_t *buffer, uint8_t length);
 void set_moving_average(bool enable);
+void read_registors(uint8_t reg_addr, uint8_t *buffer, uint8_t length);
 
 #endif /* AMG8833_H_ */

@@ -102,16 +102,11 @@ void ai_infer(ai_float *input_data, ai_float *output_data) {
   // DCT Type-II 2D for extracting feature
   dct2_2d_f32(&S, (float32_t *)input_data, (float32_t *)feature, 0);
 
-  // Remove DC and higher frequency coefficients
-  feature[0] = 0.0;  // remove DC
-  for (int j=0; j<height_cutoff; j++) {
-    for (int i=0; i<width_cutoff; i++) {
-      feature[j*height_cutoff+i] = feature[j*HEIGHT+i];
-    }
-  }
+  // Zigzag scan
+  zigzag_scan_f32(&S, (float32_t *)feature, (float32_t *)input_data);
 
-  // Normalize the feature data
-  normalize(feature, normalized_data, AI_MNETWORK_IN_1_SIZE);
+  // Normalize the feature data (DC is discarded)
+  normalize(input_data+1, normalized_data, AI_MNETWORK_IN_1_SIZE);
 
   // Input parameters for running inference
   ai_input[0] = report.inputs;

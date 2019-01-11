@@ -24,6 +24,10 @@ typedef struct {
   arm_matrix_instance_f32 X;
 } dct2_instance_f32;
 
+typedef enum {
+  ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT
+} zigzag_path;
+
 void dct2_init_f32(dct2_instance_f32 *S, uint16_t width);
 
 void dct2_f32(dct2_instance_f32 *S, float32_t *pSrc, float32_t *pDst, uint8_t idctFlag);
@@ -32,5 +36,7 @@ void dct2_2d_init_f32(dct2_instance_f32 *S, uint16_t height, uint16_t width);
 
 void dct2_2d_f32(dct2_instance_f32 *S, float32_t *pSrc, float32_t *pDst,
     uint8_t idctFlag);
+
+void zigzag_scan_f32(dct2_instance_f32 *S, float32_t *pSrc, float32_t *pDst);
 
 #endif /* DCT_H_ */

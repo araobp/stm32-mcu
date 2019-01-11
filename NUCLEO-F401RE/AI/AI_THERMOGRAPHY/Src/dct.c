@@ -117,5 +117,97 @@ void dct2_2d_f32(dct2_instance_f32 *S, float32_t *pSrc, float32_t *pDst,
   arm_mat_init_f32(&X, S->width, S->height, pDst);
   arm_mat_init_f32(&Y, S->height, S->width, pSrc);
   arm_mat_trans_f32(&X, &Y);
-  arm_copy_f32(pSrc, pDst, S->height*S->width);
+  arm_copy_f32(pSrc, pDst, S->height * S->width);
+}
+
+/*
+ * @brief zigzag scan (for a square matrix only)
+ * @param[in]     *S         points to an instance of floating-point DCT2 structure.
+ * @param[in]     *pSrc      points to the input buffer.
+ * @param[out]    *pDst      points to the output buffer.
+ * @return        none.
+ */
+void zigzag_scan_f32(dct2_instance_f32 *S, float32_t *pSrc, float32_t *pDst) {
+  int i, j, n;
+  i = 0;
+  j = 0;
+  n = 0;
+  zigzag_path path = ONE;
+
+  do {
+
+    pDst[n++] = pSrc[j * S->width + i];
+
+    switch (path) {
+    case ONE:
+      if (i == S->width - 1) {
+        j++;
+        path = EIGHT;
+      } else {
+        i++;
+        path = TWO;
+      }
+      break;
+
+    case TWO:
+      i--;
+      j++;
+      if (i == 0) {
+        if (j == S-> height - 1) {
+          path = SEVEN;
+        } else {
+          path = THREE;
+        }
+      }
+      break;
+
+    case THREE:
+      if (j == S->height - 1) {
+        i++;
+        path = EIGHT;
+      } else {
+        j++;
+        path = FOUR;
+      }
+      break;
+
+    case FOUR:
+      i++;
+      j--;
+      if (j == 0) {
+        if (i == S->width - 1) {
+          path = FIVE;
+        } else {
+          path = ONE;
+        }
+      }
+      break;
+
+    case FIVE:
+      j++;
+      path = SIX;
+      break;
+
+    case SIX:
+      i--;
+      j++;
+      if (j == S->height - 1) {
+        path = SEVEN;
+      }
+      break;
+
+    case SEVEN:
+      i++;
+      path = EIGHT;
+      break;
+
+    case EIGHT:
+      i++;
+      j--;
+      if (i == S->width - 1) {
+        path = FIVE;
+      }
+      break;
+    }
+  } while (n < S->width * S->height);
 }

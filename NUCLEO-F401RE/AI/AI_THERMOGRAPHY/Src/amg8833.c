@@ -21,26 +21,6 @@ void i2c_write(uint8_t i2c_addr, uint8_t reg_addr, uint8_t data) {
   HAL_Delay(1);
 }
 
-void i2c_buf_write(uint8_t i2c_addr, uint8_t *pbuf, uint8_t len) {
-  HAL_I2C_Master_Transmit(phi2c_, i2c_addr, pbuf, len, 100);
-  HAL_Delay(1);
-}
-
-uint8_t i2c_read(uint8_t i2c_addr, uint8_t reg_addr) {
-  uint8_t buf[1];
-  buf[0] = reg_addr;
-  HAL_I2C_Master_Transmit(phi2c_, i2c_addr, buf, 1, 100);
-  HAL_I2C_Master_Receive(phi2c_, i2c_addr, buf, 1, 100);
-  HAL_Delay(1);
-  return buf[0];
-}
-
-void read_registors(uint8_t reg_addr, uint8_t *buffer, uint8_t length) {
-  for (uint8_t i = 0; i < length; i++) {
-    buffer[i] = i2c_read(AMG8833_DEV_ADDR, reg_addr++);
-  }
-}
-
 void set_moving_average(bool enable) {
   uint8_t reg_addr_sequence[5] = {AMG8833_1F_ADDR, AMG8833_1F_ADDR, AMG8833_1F_ADDR,
       AMG8833_AVE_ADDR, AMG8833_1F_ADDR};
@@ -59,3 +39,9 @@ void set_moving_average(bool enable) {
   }
 }
 
+void read_registors(uint8_t reg_addr, uint8_t *buffer, uint8_t length) {
+  uint8_t buf[1];
+  buf[0] = reg_addr;
+  HAL_I2C_Master_Transmit(phi2c_, AMG8833_DEV_ADDR, buf, 1, 100);
+  HAL_I2C_Master_Receive(phi2c_, AMG8833_DEV_ADDR, buffer, length, 100);
+}
