@@ -70,7 +70,7 @@ Training result:
 - [Model 2: DNN on DCT Type-II feature extracted from 8x8-pixel images](./tensorflow/rock_paper_scissors_dct.ipynb)
 - [Model 3: DNN on raw 8x8-pixel images](./tensorflow/rock_paper_scissors_raw_data.ipynb)
 
-CNN achived the best score with penality of longer processing time and larger memory consumption. I adopt "model 2" in [my X-CUBE-AI project](https://github.com/araobp/stm32-mcu/tree/master/NUCLEO-F401RE/AI), since the training result is better than "model 3" and the size of neural network (under 1000 parameters) is very small (i.e., very fast).
+CNN achived the best score with penality of longer processing time and larger memory consumption. I adopt "model 2" in [my X-CUBE-AI project](https://github.com/araobp/stm32-mcu/tree/master/NUCLEO-F401RE/AI), since the training result is better than "model 3" and the size of neural network is very small (i.e., very fast).
 
 ## Interpolation
 
