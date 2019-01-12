@@ -1,23 +1,31 @@
 # DCT Type-II Implementation on CMSIS-DSP
 
+## DCT Type-II as feature for machine learning
+
 DCT Type-II is used for calculating MFCCs and image compression in my other projects.
 
 Since CMSIS-DSP does not support DCT Type-II, I have developed it on my own.
 
-I have also developed 2D-version of DCT Type-II for 2D image pre-processing.
+I have also developed 2D-version of DCT Type-II for 2D image pre-processing. I use the 2D version for extracting feature from a heatmap of 8x8 pixel image.
+
+## Code
 
 - [header file](./stm32/Inc/dct.h)
 - [source file](./stm32/Src/dct.c)
+
+### Zigzag scan utility
 
 This implementation includes a zigzag scan utility function (=> [reference on Wikipedia](https://en.wikipedia.org/wiki/JPEG)).
 
 Python version of the implementation is in [this folder](./ipynb).
 
-Note:
+### Note
+
 - This implementation is based on CMSIS-DSP.
 - This implementation supports **norm="ortho"** only. Refer to [scipy.fftpack.dct](https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.fftpack.dct.html).
 
-Test result:
+## Test result
+
 ```
 **** START *********
 >> DCT
