@@ -9,7 +9,7 @@ I have also developed 2D-version of DCT Type-II for 2D image pre-processing.
 - [header file](./stm32/Inc/dct.h)
 - [source file](./stm32/Src/dct.c)
 
-This implementation includes a zigzag scan utility function.
+This implementation includes a zigzag scan utility function (=> [reference on Wikipedia](https://en.wikipedia.org/wiki/JPEG)).
 
 Python version of the implementation is in [this folder](./ipynb).
 
