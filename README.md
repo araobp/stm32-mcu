@@ -1,4 +1,4 @@
-# Application components for STMicroelectronics STM32 MCU 
+# Application components for STMicroelectronics STM32 MCUs
 
 <img src="./NUCLEO-F401RE/Thermography/thermography/screenshots/interpolated.jpg" width="400">
 
