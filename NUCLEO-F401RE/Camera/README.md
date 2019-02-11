@@ -7,5 +7,8 @@
 ## References
 
 - [IT Text 画像工学](https://www.ohmsha.co.jp/book/9784274220074/)
+- [Serial Camera Control Bus
+Functional Specification ](http://www4.cs.umanitoba.ca/~jacky/Teaching/Courses/74.795-LocalVision/ReadingList/ov-sccb.pdf)
+- [OV7670 datasheet](https://www.voti.nl/docs/OV7670.pdf)
 - [STM32マイコンによるデジタルカメラの作成](https://qiita.com/take-iwiw/items/212ddb6faa05412c83b7)
 - [STM32マイコンでOV7670などとSCCB通信する際の注意点](https://qiita.com/take-iwiw/items/cf10034890d2784676d0)
