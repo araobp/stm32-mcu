@@ -6,5 +6,6 @@
 
 ## References
 
+- [IT Text 画像工学](https://www.ohmsha.co.jp/book/9784274220074/)
 - [STM32マイコンによるデジタルカメラの作成](https://qiita.com/take-iwiw/items/212ddb6faa05412c83b7)
 - [STM32マイコンでOV7670などとSCCB通信する際の注意点](https://qiita.com/take-iwiw/items/cf10034890d2784676d0)
