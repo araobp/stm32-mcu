@@ -34,6 +34,12 @@ My HiLetgo OV7670 module returned the following ID over SCCB:
 - Product ID: 0x76
 - Version: 0x73
 
+## TODO
+
+- Make an OV7670 expansion board
+- OV7670 config
+- Test OV7670 parallel ports (DCMI) with DMA
+
 ## References
 
 - [IT Text 画像工学](https://www.ohmsha.co.jp/book/9784274220074/)
