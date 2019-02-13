@@ -1,9 +1,34 @@
 # Camera
 
+(Work in progress)
+
 ## Goal
 
 - Capture QCIF images (176 x 144 pixels).
 - Cut out 128 x 128 pixel or 64 x 64 pixel images from QCIF.
+
+## Test circuit
+
+### Wirling among pins
+
+|STM32F407VGTx|OV7670 module|Pull-up|
+|-------------|-------------|-------|
+|GND          | GND |    |
+|3V           | 3V3 |    |
+|GPIO PE1     |RESET|STM32-internal pull-up  |
+|MCO PA8      |XCLK |    |
+|SCL PB8      |SIOC(SCCB)|External 10k ohm pull-up|
+|SDA PB9      |SIOO(SCCB)|External 10k ohm pull-up|
+
+### Initialization test
+
+As per the OV7670 datasheet, SCCB slave addresses are:
+- 0x42 for write
+- 0x43 for read
+
+My HiLetgo OV7670 module returned the following ID over SCCB:
+- Product ID: 0x76
+- Version: 0x73
 
 ## Parts
 
