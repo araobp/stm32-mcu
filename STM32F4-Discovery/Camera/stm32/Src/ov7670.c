@@ -6,24 +6,6 @@
 
 #include "ov7670.h"
 
-/*--- SCCB addresses-------------------------*/
-#define SCCB_WRITE_SLAVE_ADDR 0x42
-#define SCCB_READ_SLAVE_ADDR 0x43
-
-/*--- Registers -----------------------------*/
-#define COM3_ADDR 0x0c
-#define DCW_ENABLE 0x40
-
-#define COM7_ADDR 0x12
-#define RESET_TO_DEFAULT 0x80
-#define QCIF 0x08
-
-#define PID_ADDR 0x0a
-#define VER_ADDR 0x0b
-
-/*-------------------------------------------*/
-
-
 I2C_HandleTypeDef *phi2c;
 DCMI_HandleTypeDef *phdcmi;
 
