@@ -93,6 +93,8 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
+  uint32_t framebuf[QCIF_WIDTH * QCIF_HEIGHT * 2] = { 0 };
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -118,7 +120,7 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   ov7670_init(&hi2c1, &hdcmi);
-
+  ov7670_config();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -126,6 +128,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+    ov7670_take(framebuf, QCIF_WIDTH * QCIF_HEIGHT * 2);
 
     /* USER CODE BEGIN 3 */
   }
@@ -317,6 +320,9 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_DCMI_FrameEventCallback(DCMI_HandleTypeDef *hdcmi) {
+  ;;
+}
 
 /* USER CODE END 4 */
 

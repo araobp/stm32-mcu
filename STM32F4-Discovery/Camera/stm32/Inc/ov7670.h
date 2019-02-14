@@ -14,37 +14,65 @@
 #define SCCB_READ_SLAVE_ADDR 0x43
 
 /*--- Registers -----------------------------*/
+//----- Common control 3 -----
 #define COM3_ADDR 0x0c
-#define DCW_ENABLE 0x40
-
-#define COM7_ADDR 0x12
-#define RESET_TO_DEFAULT 0x80
-#define QCIF 0b00001000
-#define RGB  0b00000100
-
-#define COM3_ADDR 0x0c
+// Bit[2]
 #define DCW_ENABLE 0b00000100
 
+//----- Common control 7 -----
+#define COM7_ADDR 0x12
+// Bit[7]
+#define RESET_TO_DEFAULT 0b10000000
+// Bit[4]
+#define QVGA 0b00010000
+// Bit[3]
+#define QCIF 0b00001000
+// Bit[2] and Bit[0]
+#define RGB  0b00000100
+
+//----- Common control 14 -----
 #define COM14_ADDR 0x3e
+// Bit[4]
 #define DCW_AND_SCALING_PCLK 0b00010000
+// Bit[3]
 #define ADJUST_MANUALY 0b00001000
+// Bit[2:0]
 #define DIVIDED_BY_2 0b00000001
 
+//------ Common Control 15 -----
 #define COM15_ADDR 0x40
+// Bit[7:6]
 #define ZZ_TO_FF 0b11000000
+// Bit[5:4]
+#define NORMAL   0b00000000
 #define RGB565   0b00010000
+#define RGB555   0b00110000
 
+//----- Product ID number MSB -----
 #define PID_ADDR 0x0a
+//----- Product ID number LSB -----
 #define VER_ADDR 0x0b
-/*-------------------------------------------*/
 
+/*----- Picture width and height ------------*/
+#define QCIF_WIDTH  176
+#define QCIF_HEIGHT 144
+
+#define QVGA_WIDTH 320
+#define QVGA_HEIGHT 240
+
+// OV7670 config data
 const uint8_t OV7670_CONFIG[][2] = {
   {COM7_ADDR, QCIF | RGB},
-  {COM15_ADDR, ZZ_TO_FF | RGB565},
+  {COM15_ADDR, ZZ_TO_FF | RGB555},
   {COM3_ADDR, DCW_ENABLE},
-  {COM14_ADDR, DCW_AND_SCALING_PCLK | ADJUST_MANUALY | DIVIDED_BY_2 }
+  {COM14_ADDR, DCW_AND_SCALING_PCLK | ADJUST_MANUALY | DIVIDED_BY_2 },
+  {0xFF,0xFF}
 };
 
 void ov7670_init(I2C_HandleTypeDef *p_hi2c, DCMI_HandleTypeDef *p_hdcmi);
+
+void ov7670_config(void);
+
+void ov7670_take(void *pbuf, int len);
 
 #endif /* OV7670_H_ */

@@ -44,11 +44,22 @@ static int sccb_read(uint8_t reg_addr, uint8_t *pdata) {
   }
 }
 
+void stop_capturing(void) {
+  HAL_DCMI_Stop(phdcmi);
+  HAL_Delay(30);
+}
+
+/**
+ * Take a snapshot
+ */
+void ov7670_take(void *pbuf, int len) {
+  HAL_DCMI_Start_DMA(phdcmi, DCMI_MODE_SNAPSHOT, (uint32_t)pbuf, len);
+}
+
 /**
  * OV7670 initialization
  */
 void ov7670_init(I2C_HandleTypeDef *p_hi2c, DCMI_HandleTypeDef *p_hdcmi) {
-  int return_code;
   phi2c = p_hi2c;
   phdcmi = p_hdcmi;
 
@@ -63,10 +74,24 @@ void ov7670_init(I2C_HandleTypeDef *p_hi2c, DCMI_HandleTypeDef *p_hdcmi) {
   HAL_Delay(30);
 
   // Read product ID and version
-  return_code = sccb_read(PID_ADDR, &pid);  // pid is 0x76
-  return_code = sccb_read(VER_ADDR, &ver);  // ver is 0x73
+  sccb_read(PID_ADDR, &pid);  // pid is 0x76
+  sccb_read(VER_ADDR, &ver);  // ver is 0x73
 
-  // Stop capturing
-  HAL_DCMI_Stop(phdcmi);
+  stop_capturing();
+}
+
+/**
+ * OV7670 configuration
+ */
+void ov7670_config(void) {
+  int i = 0;
+  uint8_t reg_addr, data;
+  while (1) {
+    reg_addr = OV7670_CONFIG[i][0];
+    data = OV7670_CONFIG[i][1];
+    if (reg_addr == 0xff) break;
+    sccb_write(reg_addr, data);
+    HAL_Delay(1);
+  }
 }
 
