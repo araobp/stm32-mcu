@@ -16,16 +16,9 @@
 
 ## Test circuit
 
-### Wirling among pins
+### Schematic
 
-|STM32F407VGTx|OV7670 module|Pull-up|
-|-------------|-------------|-------|
-|GND          | GND |    |
-|3V           | 3V3 |    |
-|GPIO PE1     |RESET|STM32-internal pull-up  |
-|MCO PA8      |XCLK |    |
-|SCL PB8      |SIOC(SCCB)|External 10k ohm pull-up|
-|SDA PB9      |SIOO(SCCB)|External 10k ohm pull-up|
+- [OV7670 expansion board for STM32F4 Discovery](./kicad/ov7670_expansion_board.pdf)
 
 ### Initialization test
 
@@ -52,3 +45,5 @@ Functional Specification ](http://www4.cs.umanitoba.ca/~jacky/Teaching/Courses/7
 - [Digital camera interface (DCMI) for STM32 MCUs](https://www.st.com/content/ccc/resource/technical/document/application_note/group0/c0/ef/15/38/d1/d6/49/88/DM00373474/files/DM00373474.pdf/jcr:content/translations/en.DM00373474.pdf)
 - [STM32マイコンによるデジタルカメラの作成](https://qiita.com/take-iwiw/items/212ddb6faa05412c83b7)
 - [STM32マイコンでOV7670などとSCCB通信する際の注意点](https://qiita.com/take-iwiw/items/cf10034890d2784676d0)
+- https://github.com/maslovk/STM32_OV7670/blob/master/Src/OV7670.c
+
