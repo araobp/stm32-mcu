@@ -64,6 +64,6 @@ void ov7670_init(I2C_HandleTypeDef *p_hi2c, DCMI_HandleTypeDef *p_hdcmi);
 
 void ov7670_conf(void);
 
-void ov7670_take(void *pbuf, int len);
+void ov7670_take(uint32_t buf_addr, int len);
 
 #endif /* OV7670_H_ */

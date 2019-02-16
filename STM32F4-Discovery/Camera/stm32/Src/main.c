@@ -98,7 +98,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-  uint32_t framebuf[QCIF_WIDTH * QCIF_HEIGHT / 2] = { 0 };
+  uint8_t framebuf[QCIF_WIDTH * QCIF_HEIGHT * 2] = { 0 };
 
   /* USER CODE END 1 */
 
@@ -133,15 +133,18 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
-
-    ov7670_take(framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
-    while(!pic_taken) {}
-    pic_taken = false;
-    for (int i=0; i<QCIF_WIDTH/2; i++) {
-      printf("%lx ", framebuf[i]);
+    ov7670_take((uint32_t)framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
+    HAL_Delay(1000);
+    for (int i=0; i<QCIF_WIDTH; i++) {
+      printf("%02x ", framebuf[i]);
     }
     printf("\n");
+    printf("pic_taken: %u\n", pic_taken);
+    printf("addr: %lu\n", (uint32_t)framebuf);
+    printf("addr: %lu\n", (uint32_t)&framebuf);
+    pic_taken = false;
+
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
@@ -368,6 +371,12 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_DCMI_FrameEventCallback(DCMI_HandleTypeDef *hdcmi) {
   pic_taken = true;
+  printf("DCMI FrameEventCallback\n");
+}
+
+void HAL_DCMI_LineEventCallback(DCMI_HandleTypeDef *hdcmi) {
+  //pic_taken = true;
+  //printf("DCMI LineEventCallback\n");
 }
 
 int _write(int file, char *pbuf, int len)
