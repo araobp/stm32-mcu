@@ -1,6 +1,9 @@
 # Camera
 
+<img src="./camera_board.jpg" width=400>
+
 (Work in progress)
+
 
 ## Goal
 
