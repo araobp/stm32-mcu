@@ -16,16 +16,9 @@
 
 ## Test circuit
 
-### Wirling among pins
+### Schematic
 
-|STM32F407VGTx|OV7670 module|Pull-up|
-|-------------|-------------|-------|
-|GND          | GND |    |
-|3V           | 3V3 |    |
-|GPIO PE1     |RESET|STM32-internal pull-up  |
-|MCO PA8      |XCLK |    |
-|SCL PB8      |SIOC(SCCB)|External 10k ohm pull-up|
-|SDA PB9      |SIOO(SCCB)|External 10k ohm pull-up|
+- [OV7670 expansion board for STM32F4 Discovery](./kicad/ov7670_expansion_board.pdf)
 
 ### Initialization test
 
