@@ -72,7 +72,7 @@ I2C_HandleTypeDef hi2c1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-volatile bool pic_taken;
+volatile bool pic_taken = false;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -134,6 +134,14 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+
+    ov7670_take(framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
+    while(!pic_taken) {}
+    pic_taken = false;
+    for (int i=0; i<QCIF_WIDTH/2; i++) {
+      printf("%lx ", framebuf[i]);
+    }
+    printf("\n");
 
     /* USER CODE BEGIN 3 */
   }
