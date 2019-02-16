@@ -60,18 +60,9 @@
 #define QVGA_WIDTH 320
 #define QVGA_HEIGHT 240
 
-// OV7670 config data
-const uint8_t OV7670_CONFIG[][2] = {
-  {COM7_ADDR, QCIF | RGB},
-  {COM15_ADDR, ZZ_TO_FF | RGB555},
-  {COM3_ADDR, DCW_ENABLE},
-  {COM14_ADDR, DCW_AND_SCALING_PCLK | ADJUST_MANUALY | DIVIDED_BY_2 },
-  {0xFF,0xFF}
-};
-
 void ov7670_init(I2C_HandleTypeDef *p_hi2c, DCMI_HandleTypeDef *p_hdcmi);
 
-void ov7670_config(void);
+void ov7670_conf(void);
 
 void ov7670_take(void *pbuf, int len);
 

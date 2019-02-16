@@ -12,6 +12,15 @@ DCMI_HandleTypeDef *phdcmi;
 uint8_t pid;
 uint8_t ver;
 
+// OV7670 config data
+const uint8_t OV7670_CONFIG[][2] = {
+  {COM7_ADDR, QCIF | RGB},
+  {COM15_ADDR, ZZ_TO_FF | RGB555},
+  {COM3_ADDR, DCW_ENABLE},
+  {COM14_ADDR, DCW_AND_SCALING_PCLK | ADJUST_MANUALY | DIVIDED_BY_2 },
+  {0xFF, 0xFF}
+};
+
 static int sccb_write(uint8_t reg_addr, uint8_t data) {
   uint8_t buf[2] = { 0 };
   HAL_StatusTypeDef status;
@@ -76,14 +85,16 @@ void ov7670_init(I2C_HandleTypeDef *p_hi2c, DCMI_HandleTypeDef *p_hdcmi) {
   // Read product ID and version
   sccb_read(PID_ADDR, &pid);  // pid is 0x76
   sccb_read(VER_ADDR, &ver);  // ver is 0x73
+  printf("PID: %x, VER: %x\n", pid, ver);
 
+  // Stop capturing
   stop_capturing();
 }
 
 /**
  * OV7670 configuration
  */
-void ov7670_config(void) {
+void ov7670_conf(void) {
   int i = 0;
   uint8_t reg_addr, data;
   while (1) {

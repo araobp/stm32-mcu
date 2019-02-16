@@ -106,11 +106,7 @@ F 3 "" H 5750 3050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5450 1600 5750 1600
-Wire Wire Line
-	5750 1600 5950 1600
-Wire Wire Line
-	5950 1600 6850 1600
+	5450 1600 6850 1600
 Wire Wire Line
 	5450 1600 5450 4950
 Wire Wire Line
@@ -134,15 +130,11 @@ Wire Wire Line
 Wire Wire Line
 	5350 2300 6850 2300
 Wire Wire Line
-	5350 2300 5350 3400
-Wire Wire Line
-	5350 3400 5350 4950
+	5350 2300 5350 4950
 Wire Wire Line
 	5350 5450 5350 5800
 Wire Wire Line
-	5350 5800 5950 5800
-Wire Wire Line
-	5950 5800 9000 5800
+	5350 5800 9000 5800
 Wire Wire Line
 	5950 5800 5950 3200
 Connection ~ 5350 3400
@@ -276,7 +268,6 @@ NoConn ~ 2400 1600
 NoConn ~ 2400 1700
 NoConn ~ 2400 1800
 NoConn ~ 2400 1900
-NoConn ~ 2400 2000
 NoConn ~ 2400 2100
 NoConn ~ 2400 2200
 NoConn ~ 2400 2300
@@ -311,7 +302,6 @@ NoConn ~ 2900 2600
 NoConn ~ 2900 2500
 NoConn ~ 2900 2400
 NoConn ~ 2900 2300
-NoConn ~ 2900 2000
 NoConn ~ 2900 1900
 NoConn ~ 2900 1800
 NoConn ~ 2900 1700
@@ -411,4 +401,55 @@ Text Label 4750 5600 1    60   ~ 0
 D0
 Text Label 4650 4900 1    60   ~ 0
 RESET
+$Comp
+L Conn_01x04 J4
+U 1 1 5C65E357
+P 2700 5200
+F 0 "J4" H 2700 5400 50  0000 C CNN
+F 1 "Conn_01x04" H 2700 4900 50  0000 C CNN
+F 2 "" H 2700 5200 50  0001 C CNN
+F 3 "" H 2700 5200 50  0001 C CNN
+	1    2700 5200
+	0    1    1    0   
+$EndComp
+NoConn ~ 2800 5000
+NoConn ~ 2700 5000
+Wire Wire Line
+	2400 2000 1550 2000
+Wire Wire Line
+	1550 2000 1550 4200
+Wire Wire Line
+	1550 4200 2600 4200
+Wire Wire Line
+	2600 4200 2600 5000
+Wire Wire Line
+	2900 2000 3700 2000
+Wire Wire Line
+	3700 2000 3700 4300
+Wire Wire Line
+	3700 4300 2500 4300
+Wire Wire Line
+	2500 4300 2500 5000
+Text Label 1600 2000 0    60   ~ 0
+USART2_RX(PA3)
+Text Label 2950 2000 0    60   ~ 0
+USART2_TX(PA2)
+Text Label 2600 4900 1    60   ~ 0
+TX
+Text Label 2500 4900 1    60   ~ 0
+RX
+Wire Notes Line
+	2250 4950 2250 5600
+Wire Notes Line
+	2250 5600 3000 5600
+Wire Notes Line
+	3000 5600 3000 4950
+Wire Notes Line
+	3000 4950 2250 4950
+Text Notes 2000 5700 0    60   ~ 0
+USB-Serial converter module
+Text Notes 2750 1300 0    60   ~ 0
+P1
+Text Notes 7250 1300 0    60   ~ 0
+P2
 $EndSCHEMATC
