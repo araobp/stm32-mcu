@@ -105,4 +105,3 @@ void ov7670_conf(void) {
     HAL_Delay(1);
   }
 }
-
