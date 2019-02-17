@@ -32,7 +32,7 @@ My HiLetgo OV7670 module returned the following ID over SCCB:
 
 ### QCIF capture test
 
-I faced a problem that **void HAL_DCMI_FrameEventCallback(DCMI_HandleTypeDef *hdcmi)** is called every two **HAL_StatusTypeDef HAL_DCMI_Start_DMA(DCMI_HandleTypeDef* hdcmi, uint32_t DCMI_Mode, uint32_t pData, uint32_t Length)** calls.
+I faced a problem that **void HAL_DCMI_FrameEventCallback(DCMI_HandleTypeDef \*hdcmi)** is called every two **HAL_StatusTypeDef HAL_DCMI_Start_DMA(DCMI_HandleTypeDef\* hdcmi, uint32_t DCMI_Mode, uint32_t pData, uint32_t Length)** calls.
 
 It took a whole day to determine the cause of the problem. OV7670 seems like outputing 172x144 pixels rather than 176x144.
 
