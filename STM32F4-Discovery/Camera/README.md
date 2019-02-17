@@ -55,4 +55,6 @@ Functional Specification ](http://www4.cs.umanitoba.ca/~jacky/Teaching/Courses/7
 - [STM32マイコンによるデジタルカメラの作成](https://qiita.com/take-iwiw/items/212ddb6faa05412c83b7)
 - [STM32マイコンでOV7670などとSCCB通信する際の注意点](https://qiita.com/take-iwiw/items/cf10034890d2784676d0)
 - https://github.com/maslovk/STM32_OV7670/blob/master/Src/OV7670.c
+- https://os.mbed.com/users/diasea/notebook/ov7670_FIFO_AL422B/
+
 
