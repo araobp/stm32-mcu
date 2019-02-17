@@ -38,9 +38,7 @@ It took a whole day to determine the cause of the problem. OV7670 seems like out
 
 ## TODO
 
-- Make an OV7670 expansion board
-- OV7670 config
-- Test OV7670 parallel ports (DCMI) with DMA
+- Develop a QCIF viewer on matplotlib/Tkinter.
 
 ## References
 
