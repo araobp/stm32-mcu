@@ -1,6 +1,6 @@
 # Application components for STMicro STM32 MCUs
 
-<img src="./NUCLEO-F401RE/Thermography/thermography/screenshots/interpolated.jpg" width="400">
+<img src="./STM32F4-Discovery/Camera/camera_board.jpg width="400">
 
 STMicro has given me NUCLEO-L476RG and NUCLEO-F401RE with expansion boards for free at trade shows in year 2018. Thanks a lot to STMicro!
 
