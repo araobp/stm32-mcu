@@ -7,8 +7,8 @@
 
 ## Goal
 
-- Capture QCIF images (176 x 144 pixels).
-- Cut out 128 x 128 pixel or 64 x 64 pixel images from QCIF.
+- Capture QCIF images.
+- Cut out 128 x 128 pixel or 64 x 64 pixel images from QCIF for deep learning
 
 ## Parts
 
