@@ -6,6 +6,8 @@
 
 #include "ov7670.h"
 
+//#define DEBUG
+
 I2C_HandleTypeDef *phi2c;
 DCMI_HandleTypeDef *phdcmi;
 
@@ -93,7 +95,9 @@ void ov7670_init(I2C_HandleTypeDef *p_hi2c, DCMI_HandleTypeDef *p_hdcmi) {
   phi2c = p_hi2c;
   phdcmi = p_hdcmi;
 
+#ifdef DEBUG
   printf("OV7670 init\n");
+#endif
 
   // Hardware reset
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_1, GPIO_PIN_RESET);  // GPIO PE1: LOW
@@ -108,7 +112,9 @@ void ov7670_init(I2C_HandleTypeDef *p_hi2c, DCMI_HandleTypeDef *p_hdcmi) {
   // Read product ID and version
   sccb_read(PID_ADDR, &pid);  // pid is 0x76
   sccb_read(VER_ADDR, &ver);  // ver is 0x73
+#ifdef DEBUG
   printf("PID: 0x%x, VER: 0x%x\n", pid, ver);
+#endif
 
 }
 
@@ -124,14 +130,17 @@ void ov7670_conf(void) {
     if (reg_addr == 0xff) break;
 
     sccb_read(reg_addr, &data_read);
-    HAL_Delay(10);
     sccb_write(reg_addr, data);
+#ifdef DEBUG
     printf("sccb write: 0x%x 0x%x=>0x%x\n", reg_addr, data_read, data);
-    HAL_Delay(10);
+#endif
+    HAL_Delay(30);
     sccb_read(reg_addr, &data_read);
+#ifdef DEBUG
     if (data != data_read) {
       printf("sccb write failure: 0x%x 0x%x\n", reg_addr, data_read);
     }
+#endif
     i++;
   }
 }

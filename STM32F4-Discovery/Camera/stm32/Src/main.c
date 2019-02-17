@@ -70,9 +70,12 @@ DMA_HandleTypeDef hdma_dcmi;
 I2C_HandleTypeDef hi2c1;
 
 UART_HandleTypeDef huart2;
+DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
 volatile bool pic_taken = false;
+volatile char cmd;
+volatile bool output_pixels = false;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -88,6 +91,9 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void uart_tx(uint8_t *pbuf, int len) {
+  HAL_UART_Transmit(&huart2, pbuf, len, 3000);
+}
 /* USER CODE END 0 */
 
 /**
@@ -126,9 +132,11 @@ int main(void)
   MX_I2C1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  HAL_UART_Receive_IT(&huart2, (uint8_t *) &cmd, 1);
+
   ov7670_init(&hi2c1, &hdcmi);
   ov7670_conf();
-  HAL_Delay(1000);
+//  HAL_Delay(1000);
   //ov7670_take_continuous((uint32_t)framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
   /* USER CODE END 2 */
 
@@ -136,22 +144,28 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    ov7670_take_snapshot((uint32_t)framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
-    //ov7670_take_snapshot((uint32_t)framebuf, QVGA_WIDTH * QVGA_HEIGHT / 2);
-    //HAL_Delay(1000);
-    while (!pic_taken);
-    for (int i=0; i<16; i++) {
-      printf("%02x ", framebuf[i]);
-    }
-    printf("\n");
-    for (int i= QCIF_WIDTH * QCIF_HEIGHT*2-1; i>=0; i--) {
-      if (framebuf[i] != 0) {
-        printf("tail index: %u\n", i);
-        break;
+    if (output_pixels) {
+      ov7670_take_snapshot((uint32_t)framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
+      //ov7670_take_snapshot((uint32_t)framebuf, QVGA_WIDTH * QVGA_HEIGHT / 2);
+      //HAL_Delay(1000);
+      while (!pic_taken);
+#ifdef DEBUG
+      for (int i=0; i<16; i++) {
+        printf("%02x ", framebuf[i]);
       }
+      printf("\n");
+      for (int i= QCIF_WIDTH * QCIF_HEIGHT*2-1; i>=0; i--) {
+        if (framebuf[i] != 0) {
+          printf("tail index: %u\n", i);
+          break;
+        }
+      }
+      printf("pic_taken: %u\n", pic_taken);
+#endif
+      uart_tx(framebuf, QCIF_WIDTH * QCIF_HEIGHT * 2);
+      pic_taken = false;
+      output_pixels = false;
     }
-    printf("pic_taken: %u\n", pic_taken);
-    pic_taken = false;
 
     /* USER CODE END WHILE */
 
@@ -310,8 +324,12 @@ static void MX_DMA_Init(void)
 {
   /* DMA controller clock enable */
   __HAL_RCC_DMA2_CLK_ENABLE();
+  __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
+  /* DMA1_Stream5_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
   /* DMA2_Stream1_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
@@ -380,12 +398,31 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_DCMI_FrameEventCallback(DCMI_HandleTypeDef *hdcmi) {
   pic_taken = true;
+#ifdef DEBUG
   printf("DCMI FrameEventCallback\n");
+#endif
 }
 
 void HAL_DCMI_LineEventCallback(DCMI_HandleTypeDef *hdcmi) {
   //pic_taken = true;
   //printf("DCMI LineEventCallback\n");
+}
+
+/*
+ * One-byte command reception from console or Thermography GUI
+ */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+
+  switch (cmd) {
+
+  case 'p':  // pixels
+    output_pixels = true;
+    break;
+  default:
+    break;
+  }
+
+  HAL_UART_Receive_IT(&huart2, (uint8_t *) &cmd, 1);
 }
 
 int _write(int file, char *pbuf, int len)
