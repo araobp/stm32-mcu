@@ -36,9 +36,13 @@ I faced a problem that **void HAL_DCMI_FrameEventCallback(DCMI_HandleTypeDef \*h
 
 It took a whole day to determine the cause of the problem. OV7670 seems like outputing 172x144 pixels rather than 176x144.
 
-## TODO
+### Showing an image on PC
 
-- Develop a QCIF viewer on matplotlib/Tkinter.
+I started developing an utilty program in Python to capture an image with the device and to show it on my PC.
+
+I took a picture of myself. It seems like requiring calibraion on its color map.
+
+<img src="./python/me.png" width=250>
 
 ## References
 
