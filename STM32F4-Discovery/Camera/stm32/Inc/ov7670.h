@@ -54,7 +54,7 @@
 #define VER_ADDR 0x0b
 
 /*----- Picture width and height ------------*/
-#define QCIF_WIDTH_PAL  172
+#define QCIF_WIDTH 172
 #define QCIF_HEIGHT 144
 
 #define QVGA_WIDTH 320

@@ -78,7 +78,6 @@ void stop_capturing(void) {
 void ov7670_take_snapshot(uint32_t buf_addr, int len) {
   //HAL_StatusTypeDef status;
   //status = HAL_DCMI_Start_DMA(phdcmi, DCMI_MODE_SNAPSHOT, buf_addr, len);
-  stop_capturing();
   HAL_DCMI_Start_DMA(phdcmi, DCMI_MODE_SNAPSHOT, buf_addr, len);
   //printf("%lu\n", (uint32_t)status);
 }

@@ -98,7 +98,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-  uint8_t framebuf[QCIF_WIDTH_PAL * QCIF_HEIGHT * 2] = { 0 };
+  uint8_t framebuf[QCIF_WIDTH * QCIF_HEIGHT * 2] = { 0 };
   //uint8_t framebuf[QVGA_WIDTH * QVGA_HEIGHT * 2] = { 0 };
 
   /* USER CODE END 1 */
@@ -136,14 +136,15 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    ov7670_take_snapshot((uint32_t)framebuf, QCIF_WIDTH_PAL * QCIF_HEIGHT / 2);
+    ov7670_take_snapshot((uint32_t)framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
     //ov7670_take_snapshot((uint32_t)framebuf, QVGA_WIDTH * QVGA_HEIGHT / 2);
-    HAL_Delay(1000);
+    //HAL_Delay(1000);
+    while (!pic_taken);
     for (int i=0; i<16; i++) {
       printf("%02x ", framebuf[i]);
     }
     printf("\n");
-    for (int i= QCIF_WIDTH_PAL * QCIF_HEIGHT*2-1; i>=0; i--) {
+    for (int i= QCIF_WIDTH * QCIF_HEIGHT*2-1; i>=0; i--) {
       if (framebuf[i] != 0) {
         printf("tail index: %u\n", i);
         break;
