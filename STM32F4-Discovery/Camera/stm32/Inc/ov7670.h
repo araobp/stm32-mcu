@@ -54,7 +54,7 @@
 #define VER_ADDR 0x0b
 
 /*----- Picture width and height ------------*/
-#define QCIF_WIDTH  176
+#define QCIF_WIDTH_PAL  172
 #define QCIF_HEIGHT 144
 
 #define QVGA_WIDTH 320
@@ -64,6 +64,8 @@ void ov7670_init(I2C_HandleTypeDef *p_hi2c, DCMI_HandleTypeDef *p_hdcmi);
 
 void ov7670_conf(void);
 
-void ov7670_take(uint32_t buf_addr, int len);
+void ov7670_take_snapshot(uint32_t buf_addr, int len);
+
+void ov7670_take_continuous(uint32_t buf_addr, int len);
 
 #endif /* OV7670_H_ */

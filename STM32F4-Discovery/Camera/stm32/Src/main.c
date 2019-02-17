@@ -98,7 +98,8 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-  uint8_t framebuf[QCIF_WIDTH * QCIF_HEIGHT * 2] = { 0 };
+  uint8_t framebuf[QCIF_WIDTH_PAL * QCIF_HEIGHT * 2] = { 0 };
+  //uint8_t framebuf[QVGA_WIDTH * QVGA_HEIGHT * 2] = { 0 };
 
   /* USER CODE END 1 */
 
@@ -127,21 +128,28 @@ int main(void)
   /* USER CODE BEGIN 2 */
   ov7670_init(&hi2c1, &hdcmi);
   ov7670_conf();
+  HAL_Delay(1000);
+  //ov7670_take_continuous((uint32_t)framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    ov7670_take((uint32_t)framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
+    ov7670_take_snapshot((uint32_t)framebuf, QCIF_WIDTH_PAL * QCIF_HEIGHT / 2);
+    //ov7670_take_snapshot((uint32_t)framebuf, QVGA_WIDTH * QVGA_HEIGHT / 2);
     HAL_Delay(1000);
-    for (int i=0; i<QCIF_WIDTH; i++) {
+    for (int i=0; i<16; i++) {
       printf("%02x ", framebuf[i]);
     }
     printf("\n");
+    for (int i= QCIF_WIDTH_PAL * QCIF_HEIGHT*2-1; i>=0; i--) {
+      if (framebuf[i] != 0) {
+        printf("tail index: %u\n", i);
+        break;
+      }
+    }
     printf("pic_taken: %u\n", pic_taken);
-    printf("addr: %lu\n", (uint32_t)framebuf);
-    printf("addr: %lu\n", (uint32_t)&framebuf);
     pic_taken = false;
 
     /* USER CODE END WHILE */
@@ -191,7 +199,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_PLLCLK, RCC_MCODIV_4);
+  HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_PLLCLK, RCC_MCODIV_5);
 }
 
 /**

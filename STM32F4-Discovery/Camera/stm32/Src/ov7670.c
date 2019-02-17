@@ -14,13 +14,14 @@ uint8_t ver;
 
 // OV7670 config data
 const uint8_t OV7670_CONFIG[][2] = {
-  {COM7_ADDR, QCIF | RGB},
-  {COM15_ADDR, ZZ_TO_FF | RGB555},
   //{COM3_ADDR, DCW_ENABLE},
+  //{COM14_ADDR, DCW_AND_SCALING_PCLK | ADJUST_MANUALY},
+  {COM7_ADDR, QCIF | RGB},
+  //{COM7_ADDR, QVGA | RGB},
+  {COM15_ADDR, ZZ_TO_FF | RGB555},
   //{COM14_ADDR, DCW_AND_SCALING_PCLK | ADJUST_MANUALY | DIVIDED_BY_2 },
   {0xFF, 0xFF}
 };
-
 
 /*
 const uint8_t OV7670_CONFIG[][2] = {
@@ -74,11 +75,16 @@ void stop_capturing(void) {
 /**
  * Take a snapshot
  */
-void ov7670_take(uint32_t buf_addr, int len) {
+void ov7670_take_snapshot(uint32_t buf_addr, int len) {
   //HAL_StatusTypeDef status;
   //status = HAL_DCMI_Start_DMA(phdcmi, DCMI_MODE_SNAPSHOT, buf_addr, len);
+  stop_capturing();
   HAL_DCMI_Start_DMA(phdcmi, DCMI_MODE_SNAPSHOT, buf_addr, len);
   //printf("%lu\n", (uint32_t)status);
+}
+
+void ov7670_take_continuous(uint32_t buf_addr, int len) {
+  HAL_DCMI_Start_DMA(phdcmi, DCMI_MODE_CONTINUOUS, buf_addr, len);
 }
 
 /**
@@ -105,8 +111,6 @@ void ov7670_init(I2C_HandleTypeDef *p_hi2c, DCMI_HandleTypeDef *p_hdcmi) {
   sccb_read(VER_ADDR, &ver);  // ver is 0x73
   printf("PID: 0x%x, VER: 0x%x\n", pid, ver);
 
-  // Stop capturing
-  stop_capturing();
 }
 
 /**
@@ -119,8 +123,11 @@ void ov7670_conf(void) {
     reg_addr = OV7670_CONFIG[i][0];
     data = OV7670_CONFIG[i][1];
     if (reg_addr == 0xff) break;
+
+    sccb_read(reg_addr, &data_read);
+    HAL_Delay(10);
     sccb_write(reg_addr, data);
-    printf("sccb write: 0x%x 0x%x\n", reg_addr, data);
+    printf("sccb write: 0x%x 0x%x=>0x%x\n", reg_addr, data_read, data);
     HAL_Delay(10);
     sccb_read(reg_addr, &data_read);
     if (data != data_read) {
