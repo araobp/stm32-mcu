@@ -40,6 +40,15 @@ It took a whole day to determine the cause of the problem. OV7670 seems like out
 
 I started developing an utilty program in Python to capture an image with the device and to show it on my PC.
 
+```
+                 STM32L4 Discovery
+                ...................
+                :                 :
+ [OV7670]----->[DCMI]        [UASRT]------>[Python program on my PC]
+                :                 :
+                ...................
+```
+                
 I took a picture of myself. It seems like requiring calibraion on its color map.
 
 <img src="./python/me.png" width=250>
