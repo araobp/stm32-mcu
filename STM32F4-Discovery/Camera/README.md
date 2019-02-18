@@ -44,6 +44,10 @@ I took a picture of myself. It seems like requiring calibraion on its color map.
 
 <img src="./python/me.png" width=250>
 
+I figured out the OV7670 register settings to aquire RGB565 color images, and I took a picture of tobacco pipe doll in QCIF format.
+
+<img src="./python/doll.png" width=250>
+
 ## References
 
 - [IT Text 画像工学](https://www.ohmsha.co.jp/book/9784274220074/)
