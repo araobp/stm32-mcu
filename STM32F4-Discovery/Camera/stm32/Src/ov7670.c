@@ -16,27 +16,13 @@ uint8_t ver;
 
 // OV7670 config data
 const uint8_t OV7670_CONFIG[][2] = {
-  //{COM3_ADDR, DCW_ENABLE},
-  //{COM14_ADDR, DCW_AND_SCALING_PCLK | ADJUST_MANUALY},
   {COM7_ADDR, QCIF | RGB},
-  //{COM7_ADDR, QVGA | RGB},
-  {COM15_ADDR, ZZ_TO_FF | RGB555},
-  //{COM14_ADDR, DCW_AND_SCALING_PCLK | ADJUST_MANUALY | DIVIDED_BY_2 },
+  {COM15_ADDR, ZZ_TO_FF | RGB565},
+  {0xB0, 0x84}, // Not in the datasheet, but it is necessary.
+  {MVFP, MIRROR_IMAGE | VERTICALLY_FLIP_IMAGE},
   {0xFF, 0xFF}
 };
 
-/*
-const uint8_t OV7670_CONFIG[][2] = {
-    {0x3A,0x04},
-    {0x12,0x0C},
-    {0x8C,0x00},
-    {0x04,0x00},
-    {0x40,0xD0},
-    {0x72,0x11},
-    {0x73,0xF1},
-    {0xff,0xff}
-};
-*/
 static int sccb_write(uint8_t reg_addr, uint8_t data) {
   uint8_t buf[2] = { 0 };
   HAL_StatusTypeDef status;

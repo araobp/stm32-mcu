@@ -48,12 +48,12 @@ class Interface:
                 for lsb, msb in rx:
                     n += 1
                     d =  int.from_bytes([msb, lsb], byteorder='big', signed=False)
-                    red =   (d & 0b0111110000000000) >> 10
-                    green = (d & 0b0000001111100000) >> 5
+                    red =   (d & 0b1111100000000000) >> 11
+                    green = (d & 0b0000011111100000) >> 5
                     blue =   d & 0b0000000000011111
-                    data.append((red << 3, green << 3, blue << 3))
+                    data.append((red << 3, green << 2, blue << 3))
                     #print("{:02x} {:02x} {:02x}".format(red, green, blue))
-                data = np.array(data).reshape(QCIF_HEIGHT, QCIF_WIDTH, 3)
+                data = np.array(data, dtype=np.uint8).reshape(QCIF_HEIGHT, QCIF_WIDTH, 3)
                 print(data.shape)
             except:
                 print('*** serial timeout!')

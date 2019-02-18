@@ -17,6 +17,6 @@ class GUI:
         
         if cmd == interface.PIXELS:
             ax.set_title('Image')
-            ax.imshow(data, aspect='auto')              
+            ax.imshow(data)              
     
         return data

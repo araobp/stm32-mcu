@@ -36,7 +36,7 @@ if __name__ == '__main__':
     root = Tk.Tk()
     root.wm_title("Camera for ML with Keras/TensorFlow")
 
-    fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+    fig, ax = plt.subplots(1, 1, figsize=(4, 4))
     
     fig.subplots_adjust(bottom=0.15)
 

@@ -14,6 +14,10 @@
 #define SCCB_READ_SLAVE_ADDR 0x43
 
 /*--- Registers -----------------------------*/
+
+//----- Common control 1 -----
+#define COM1_ADDR 0x04
+
 //----- Common control 3 -----
 #define COM3_ADDR 0x0c
 // Bit[2]
@@ -29,6 +33,15 @@
 #define QCIF 0b00001000
 // Bit[2] and Bit[0]
 #define RGB  0b00000100
+#define PROCESSED_BAYER_RAW  0b00000101
+
+//----- Common control 9
+#define COM9_ADDR 0x14
+
+//----- Common control 13
+#define COM13_ADDR 0x3d
+#define GAMMA_ENABLED 0b10000000
+#define UYVY 0b00000100
 
 //----- Common control 14 -----
 #define COM14_ADDR 0x3e
@@ -47,6 +60,23 @@
 #define NORMAL   0b00000000
 #define RGB565   0b00010000
 #define RGB555   0b00110000
+
+//----- TSLB -----
+#define TSLB_ADDR 0x0c
+
+//---- MTX1 ~ MTX6 -----
+#define MTX1_ADDR 0x4f
+#define MTX2_ADDR 0x50
+#define MTX3_ADDR 0x51
+#define MTX4_ADDR 0x52
+#define MTX5_ADDR 0x53
+#define MTX6_ADDR 0x54
+#define MTXS_ADDR 0x58
+
+//----- Mirror/Vflip -----
+#define MVFP 0x1e
+#define MIRROR_IMAGE 0b00100000
+#define VERTICALLY_FLIP_IMAGE 0b00010000
 
 //----- Product ID number MSB -----
 #define PID_ADDR 0x0a
