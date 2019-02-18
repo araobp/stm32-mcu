@@ -7,8 +7,8 @@
 
 ## Goal
 
-- Capture QCIF images (176 x 144 pixels).
-- Cut out 128 x 128 pixel or 64 x 64 pixel images from QCIF.
+- Capture QCIF images.
+- Cut out 128 x 128 pixel or 64 x 64 pixel images from QCIF for deep learning
 
 ## Parts
 
@@ -36,9 +36,13 @@ I faced a problem that **void HAL_DCMI_FrameEventCallback(DCMI_HandleTypeDef \*h
 
 It took a whole day to determine the cause of the problem. OV7670 seems like outputing 172x144 pixels rather than 176x144.
 
-## TODO
+### Showing an image on PC
 
-- Develop a QCIF viewer on matplotlib/Tkinter.
+I started developing an utilty program in Python to capture an image with the device and to show it on my PC.
+
+I took a picture of myself. It seems like requiring calibraion on its color map.
+
+<img src="./python/me.png" width=250>
 
 ## References
 
@@ -46,8 +50,13 @@ It took a whole day to determine the cause of the problem. OV7670 seems like out
 - [Serial Camera Control Bus
 Functional Specification ](http://www4.cs.umanitoba.ca/~jacky/Teaching/Courses/74.795-LocalVision/ReadingList/ov-sccb.pdf)
 - [OV7670 datasheet](https://www.voti.nl/docs/OV7670.pdf)
+- [OV7670 implementation guide](http://www.haoyuelectronics.com/Attachment/OV7670%20+%20AL422B%28FIFO%29%20Camera%20Module%28V2.0%29/OV7670%20Implementation%20Guide%20%28V1.0%29.pdf)
 - [Digital camera interface (DCMI) for STM32 MCUs](https://www.st.com/content/ccc/resource/technical/document/application_note/group0/c0/ef/15/38/d1/d6/49/88/DM00373474/files/DM00373474.pdf/jcr:content/translations/en.DM00373474.pdf)
 - [STM32マイコンによるデジタルカメラの作成](https://qiita.com/take-iwiw/items/212ddb6faa05412c83b7)
 - [STM32マイコンでOV7670などとSCCB通信する際の注意点](https://qiita.com/take-iwiw/items/cf10034890d2784676d0)
 - https://github.com/maslovk/STM32_OV7670/blob/master/Src/OV7670.c
+- https://os.mbed.com/users/diasea/notebook/ov7670_FIFO_AL422B/
+- https://thinksmallthings.wordpress.com/2012/11/03/ov7670-yuv-demystified/comment-page-1/
+- https://ja.scribd.com/document/356160003/Beginning-Arduino-Ov7670-Camera-Development
+
 
