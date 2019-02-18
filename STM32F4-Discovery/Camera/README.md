@@ -57,6 +57,21 @@ I figured out the OV7670 register settings to aquire RGB565 color images, and I 
 
 <img src="./python/doll.png" width=300>
 
+## Deep learning plan
+
+### CIFAR-10
+
+I will use [CIFAR-10 database](https://www.cs.toronto.edu/~kriz/cifar.html) to train CNN.
+
+### Windowing and resizing
+
+- I will use the OV7670-built-in windowing capability to extract 128 x 128 square images from QCIF images.
+- Then down-convert them into 32 x 32 images on STM32.
+
+### Inference
+
+I use X-CUBE-AI on STM32F4 Discovery.
+
 ## References
 
 - [IT Text 画像工学](https://www.ohmsha.co.jp/book/9784274220074/)
