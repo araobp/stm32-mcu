@@ -57,5 +57,6 @@ Functional Specification ](http://www4.cs.umanitoba.ca/~jacky/Teaching/Courses/7
 - https://github.com/maslovk/STM32_OV7670/blob/master/Src/OV7670.c
 - https://os.mbed.com/users/diasea/notebook/ov7670_FIFO_AL422B/
 - https://thinksmallthings.wordpress.com/2012/11/03/ov7670-yuv-demystified/comment-page-1/
+- https://ja.scribd.com/document/356160003/Beginning-Arduino-Ov7670-Camera-Development
 
 
