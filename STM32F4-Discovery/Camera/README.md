@@ -65,8 +65,8 @@ I will use [CIFAR-10 database](https://www.cs.toronto.edu/~kriz/cifar.html) to t
 
 ### Windowing and resizing
 
-- I will use the OV7670-built-in windowing capability to extract 128 x 128 square images from QCIF images.
-- Then down-convert them into 32 x 32 images on STM32.
+- I will not use the OV7670-built-in windowing capability.
+- I will implement a windowing capability on STM32 to extract 128 x 128, 64 x 64 and 32 x 32 pixels from an original image.
 
 ### Inference
 
