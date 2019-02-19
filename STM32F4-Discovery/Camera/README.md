@@ -40,9 +40,37 @@ It took a whole day to determine the cause of the problem. OV7670 seems like out
 
 I started developing an utilty program in Python to capture an image with the device and to show it on my PC.
 
+```
+                 STM32L4 Discovery
+                ...................
+                :                 :
+ [OV7670]----->[DCMI]        [UASRT]------>[Python program on my PC]
+                :                 :
+                ...................
+```
+                
 I took a picture of myself. It seems like requiring calibraion on its color map.
 
 <img src="./python/me.png" width=250>
+
+I figured out the OV7670 register settings to aquire RGB565 color images, and I took a picture of tobacco pipe doll in QCIF format.
+
+<img src="./python/doll.png" width=300>
+
+## Deep learning plan
+
+### CIFAR-10
+
+I will use [CIFAR-10 database](https://www.cs.toronto.edu/~kriz/cifar.html) to train CNN.
+
+### Windowing and resizing
+
+- I will not use the OV7670-built-in windowing capability.
+- I will implement a windowing capability on STM32 to extract 128 x 128, 64 x 64 and 32 x 32 pixels from an original image.
+
+### Inference
+
+I use X-CUBE-AI on STM32F4 Discovery.
 
 ## References
 
