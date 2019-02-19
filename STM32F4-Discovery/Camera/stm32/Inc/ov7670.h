@@ -22,6 +22,7 @@
 #define COM3_ADDR 0x0c
 // Bit[2]
 #define DCW_ENABLE 0b00000100
+#define ENABLE_SCALING 0b00001000
 
 //----- Common control 7 -----
 #define COM7_ADDR 0x12
@@ -74,9 +75,13 @@
 #define MTXS_ADDR 0x58
 
 //----- Mirror/Vflip -----
-#define MVFP 0x1e
+#define MVFP_ADDR 0x1e
 #define MIRROR_IMAGE 0b00100000
 #define VERTICALLY_FLIP_IMAGE 0b00010000
+
+//----- Contrast/brightness -----
+#define BRIGHT_ADDR 0x55
+#define CONTRAS_ADDR 0x56
 
 //----- Product ID number MSB -----
 #define PID_ADDR 0x0a
@@ -89,6 +94,12 @@
 
 #define QVGA_WIDTH 320
 #define QVGA_HEIGHT 240
+
+
+
+int sccb_read(uint8_t reg_addr, uint8_t *pdata);
+
+int sccb_write(uint8_t reg_addr, uint8_t data);
 
 void ov7670_init(I2C_HandleTypeDef *p_hi2c, DCMI_HandleTypeDef *p_hdcmi);
 

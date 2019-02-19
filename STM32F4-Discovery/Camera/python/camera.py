@@ -1,7 +1,3 @@
-#
-# Thermography GUI
-#
-
 import matplotlib
 matplotlib.use('TkAgg')
 
@@ -19,10 +15,22 @@ import matplotlib.pyplot as plt
 import interface
 import image
 
+import h5py
+
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("port", help="serial port identifier")
 args = parser.parse_args()
+
+def int2regvalue(value):
+    if value >= 127:
+        value = 127
+    elif value <= -127:
+        value = -127
+    if value >= 0:
+        return value
+    else:
+        return 0b10000000 + value
 
 if __name__ == '__main__':
 
@@ -44,13 +52,14 @@ if __name__ == '__main__':
     frame_row0 = Tk.Frame(master=frame)
     frame_row1 = Tk.Frame(master=frame)
     frame_row2 = Tk.Frame(master=frame)
-    frame_row3 = Tk.Frame(master=frame)
 
     cnt = 0
     class_label_ = ''
     filename = None
     data = None
     shape = (8, 8)
+
+    repeat_action = False
 
     canvas = FigureCanvasTkAgg(fig, master=frame_row0)
     canvas.draw()
@@ -70,7 +79,15 @@ if __name__ == '__main__':
         canvas.draw()
         repeat(pixels_continuous)
 
-    repeat_action = False
+    def brightness():
+        value = int(entry_brightness.get())
+        value = int2regvalue(value)
+        itfc.write(interface.BRIGHTNESS, value)
+    
+    def contrast():
+        value = int(entry_contrast.get())
+        value = int2regvalue(value)
+        itfc.write(interface.CONTRAST, value)
 
     # Repeat an operation
     def repeat(func):
@@ -99,6 +116,8 @@ if __name__ == '__main__':
 
     # Save training data for deep learning
     def save_training_data():
+        ## TODO: use h5py instead.
+        '''
         global class_label_, cnt, filename, data
         class_label = entry.get()
         dt = datetime.today().strftime('%Y%m%d%H%M%S')
@@ -114,29 +133,30 @@ if __name__ == '__main__':
                 cnt = 0
             cnt += 1
             counter.configure(text='({})'.format(str(cnt)))
+        '''
 
     def _quit():
         itfc.close()
         root.quit()
         root.destroy() 
 
+   
+    label_class = Tk.Label(master=frame_row1, text='Class label:')
+    entry = Tk.Entry(master=frame_row1, width=14)
+    counter = Tk.Label(master=frame_row1)
 
-    label_thermistor = Tk.Label(master=frame_row1, padx=PADX)
-    
-    label_inference = Tk.Label(master=frame_row2, padx=PADX)
-    label_inference.config(font=("Arial", 20))
-    
-    label_class = Tk.Label(master=frame_row3, text='Class label:')
-    entry = Tk.Entry(master=frame_row3, width=14)
-    counter = Tk.Label(master=frame_row3)
+    button_shutter = Tk.Button(master=frame_row1, text='Shutter', command=pixels, bg='lightblue', activebackground='grey', padx=PADX)
+    button_continuous = Tk.Button(master=frame_row1, text='Continous', command=repeat_toggle, bg='lightblue', activebackground='grey', padx=PADX)
+    button_screenshot = Tk.Button(master=frame_row1, text='Screenshot', command=screenshot, bg='lightblue', activebackground='grey', padx=PADX)
+    button_save = Tk.Button(master=frame_row1, text='Save', command=save_training_data, bg='lightblue', activebackground='grey', padx=PADX)
+    button_remove = Tk.Button(master=frame_row1, text='Remove', command=remove, bg='lightblue', activebackground='grey', padx=PADX)
+    button_quit = Tk.Button(master=frame_row1, text='Quit', command=_quit, bg='yellow', activebackground='grey', padx=PADX)
 
-    button_shutter = Tk.Button(master=frame_row3, text='Shutter', command=pixels, bg='lightblue', activebackground='grey', padx=PADX)
-    button_continuous = Tk.Button(master=frame_row3, text='Continous', command=repeat_toggle, bg='lightblue', activebackground='grey', padx=PADX)
-    button_screenshot = Tk.Button(master=frame_row3, text='Screenshot', command=screenshot, bg='lightblue', activebackground='grey', padx=PADX)
-    button_save = Tk.Button(master=frame_row3, text='Save', command=save_training_data, bg='lightblue', activebackground='grey', padx=PADX)
-    button_remove = Tk.Button(master=frame_row3, text='Remove', command=remove, bg='lightblue', activebackground='grey', padx=PADX)
-    button_quit = Tk.Button(master=frame_row3, text='Quit', command=_quit, bg='yellow', activebackground='grey', padx=PADX)
-    
+    entry_brightness = Tk.Entry(master=frame_row2, width=5)
+    button_brightness = Tk.Button(master=frame_row2, text='Brightness', command=brightness, bg='lightblue', activebackground='grey', padx=PADX)
+    entry_contrast = Tk.Entry(master=frame_row2, width=5)
+    button_contrast = Tk.Button(master=frame_row2, text='Contrast', command=contrast, bg='lightblue', activebackground='grey', padx=PADX)
+
     ##### Place the parts on Tk #####
 
     frame.pack(expand=True, fill=Tk.BOTH)
@@ -145,24 +165,25 @@ if __name__ == '__main__':
     canvas._tkcanvas.pack(expand=True, fill=Tk.BOTH)
     frame_row0.pack(expand=True, fill=Tk.BOTH)
 
-    ### Row 1: information ####
-
-    frame_row1.pack(pady=PADY_GRID)
-
-    ### Row 3: operation ####
-
+    ### Row 1: operation ####
     label_class.grid(row=0, column=0, padx=PADX_GRID)
     entry.grid(row=0, column=1, padx=PADX_GRID)
     counter.grid(row=0, column=2, padx=PADX_GRID)
     counter.configure(text='({})'.format(str(cnt)))
-    button_save.grid(row=0, column=5, padx=PADX_GRID)
-    button_remove.grid(row=0, column=6, padx=PADX_GRID)
-    
     button_shutter.grid(row=0, column=3, padx=PADX_GRID)
     button_continuous.grid(row=0, column=4, padx=PADX_GRID)
+    button_save.grid(row=0, column=5, padx=PADX_GRID)
+    button_remove.grid(row=0, column=6, padx=PADX_GRID)   
     button_screenshot.grid(row=0, column=7, padx=PADX_GRID)
     button_quit.grid(row=0, column=8, padx=PADX_GRID)
-    frame_row3.pack(pady=PADY_GRID)
-    
+    frame_row1.pack(pady=PADY_GRID)
+
+    ### Row 2: calibration ####
+    entry_brightness.grid(row=0, column=0, padx=PADX_GRID)
+    button_brightness.grid(row=0, column=1, padx=PADX_GRID)
+    entry_contrast.grid(row=0, column=2, padx=PADX_GRID)
+    button_contrast.grid(row=0, column=3, padx=PADX_GRID)
+    frame_row2.pack(pady=PADY_GRID)
+
     ##### loop forever #####
     Tk.mainloop()

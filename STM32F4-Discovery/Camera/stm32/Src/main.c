@@ -44,6 +44,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "ov7670.h"
+#include "image.h"
+#include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 /* USER CODE END Includes */
@@ -94,6 +96,9 @@ static void MX_USART2_UART_Init(void);
 void uart_tx(uint8_t *pbuf, int len) {
   HAL_UART_Transmit(&huart2, pbuf, len, 3000);
 }
+
+
+
 /* USER CODE END 0 */
 
 /**
@@ -104,8 +109,13 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-  uint8_t framebuf[QCIF_WIDTH * QCIF_HEIGHT * 2] = { 0 };
-  //uint8_t framebuf[QVGA_WIDTH * QVGA_HEIGHT * 2] = { 0 };
+#ifdef OUTPUT_128
+  uint16_t image128[128][128];
+#elif defined OUTPUT_32
+  uint16_t image32[32][32];
+#endif
+
+  uint16_t framebuf[QCIF_HEIGHT][QCIF_WIDTH] = { 0 };
 
   /* USER CODE END 1 */
 
@@ -162,7 +172,16 @@ int main(void)
       }
       printf("pic_taken: %u\n", pic_taken);
 #endif
+
+#ifdef OUTPUT_128
+      qcif_to_128x128(framebuf, image128);
+      uart_tx((uint8_t *)image128, 128*128*2);
+#elif defined OUTPUT_32
+      qcif_to_32x32(framebuf, image32);
+      uart_tx((uint8_t *)image32, 32*32*2);
+#else
       uart_tx(framebuf, QCIF_WIDTH * QCIF_HEIGHT * 2);
+#endif
       pic_taken = false;
       output_pixels = false;
     }
@@ -413,13 +432,32 @@ void HAL_DCMI_LineEventCallback(DCMI_HandleTypeDef *hdcmi) {
  */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
-  switch (cmd) {
+  static char cmd_line[8] = { '\0' };
+  static int cnt = 0;
+  uint8_t value;
 
-  case 'p':  // pixels
-    output_pixels = true;
-    break;
-  default:
-    break;
+  cmd_line[cnt] = cmd;
+
+  if (cmd_line[cnt] == '\n') {
+    cmd_line[cnt] = '\0';
+    cnt = 0;
+    switch (cmd_line[0]) {
+    case 'p':  // pixels
+      output_pixels = true;
+      break;
+    case 'b':  // Brightness
+      value = atoi(&cmd_line[1]);
+      sccb_write(BRIGHT_ADDR, value);
+      break;
+    case 'c':  // Contrast
+      value = atoi(&cmd_line[1]);
+      sccb_write(CONTRAS_ADDR, value);
+      break;
+    default:
+      break;
+    }
+  } else if (++cnt > 7) {
+    cnt = 0;
   }
 
   HAL_UART_Receive_IT(&huart2, (uint8_t *) &cmd, 1);

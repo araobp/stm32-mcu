@@ -8,12 +8,17 @@ import threading
 BAUD_RATE = 460800          # UART baud rate
 
 PIXELS = b'p'
+BRIGHTNESS = b'b'
+CONTRAST = b'c'
+
 QCIF_WIDTH = 172
 QCIF_HEIGHT = 144
 
 # main.c
 NUM_SAMPLES = {}            # The number of samples to receive from the device
-NUM_SAMPLES[PIXELS] = QCIF_WIDTH * QCIF_HEIGHT * 2
+#NUM_SAMPLES[PIXELS] = QCIF_WIDTH * QCIF_HEIGHT * 2
+#NUM_SAMPLES[PIXELS] = 128 * 128 * 2
+NUM_SAMPLES[PIXELS] = 32 * 32 * 2
 
 class Interface:
     
@@ -40,7 +45,7 @@ class Interface:
         with self.lock:
             n = 0
             try:
-                self.ser.write(cmd)
+                self.ser.write(cmd+b'\n')
                 print(cmd)
                 rx = self.ser.read(NUM_SAMPLES[cmd])
                 #print(rx)
@@ -53,7 +58,9 @@ class Interface:
                     blue =   d & 0b0000000000011111
                     data.append((red << 3, green << 2, blue << 3))
                     #print("{:02x} {:02x} {:02x}".format(red, green, blue))
-                data = np.array(data, dtype=np.uint8).reshape(QCIF_HEIGHT, QCIF_WIDTH, 3)
+                #data = np.array(data, dtype=np.uint8).reshape(QCIF_HEIGHT, QCIF_WIDTH, 3)
+                #data = np.array(data, dtype=np.uint8).reshape(128, 128, 3)
+                data = np.array(data, dtype=np.uint8).reshape(32, 32, 3)
                 print(data.shape)
             except:
                 print('*** serial timeout!')
@@ -61,3 +68,12 @@ class Interface:
 
         return data
     
+
+    def write(self, cmd, value):
+            try:
+                cmd_line = cmd + bytes(str(value), encoding='ascii') + b'\n'
+                self.ser.write(cmd_line)
+                print(cmd_line)
+            except:
+                traceback.print_exc()
+
