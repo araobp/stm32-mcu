@@ -54,9 +54,11 @@ I figured out the OV7670 register settings to aquire RGB565 color images, and I 
 
 <img src="./python/doll.png" width=300>
 
-## Deep learning plan
+## Plan next
 
-I am going to use this code in another project for object recognition with Keras/TensorFlow and X-CUBE-AI.
+I have tested CNN with cifar-10 dataset on Google's colab. I think image classification based on deep learning (CNN) seems heavy for STM32F4. It may works as a demo, but it will no be practical.
+
+OV7670 is great in terms of its reasonable price and its flexibility. I can even exchange the M12 lens with another one depending on the use case. I will delve into classical use cases based on classical image processing methodlogy: motion detection, telescope etc.
 
 ## References
 
