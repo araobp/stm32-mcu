@@ -35,7 +35,7 @@ It took a whole day to determine the cause of the problem. OV7670 seems like out
 
 ### Showing an image on PC
 
-I started developing an utilty program in Python to capture an image with the device and to show it on my PC.
+I have developed an image viewer program in Python to capture an image with the device and to show it on my PC.
 
 ```
                  STM32L4 Discovery
