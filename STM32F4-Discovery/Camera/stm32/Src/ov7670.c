@@ -21,9 +21,11 @@ uint8_t ver;
  * I could get color images (w/o the setting, I got gray scale images).
  * - White balance: Advanced AWB mode is better than Normal AWB mode.
  * - Automatic gain ceiling: 0x4a is default, but 0x6a outputs brighter image.
+ * - The following color matrix setting seemed to increase contrast.
  */
 const uint8_t OV7670_CONFIG[][2] = {
   // Color matrix setting
+#ifdef HIGH_CONTRAST
   {MTX1_ADDR,0x80},
   {MTX2_ADDR,0x80},
   {MTX3_ADDR,0x00},
@@ -31,6 +33,7 @@ const uint8_t OV7670_CONFIG[][2] = {
   {MTX5_ADDR,0x5e},
   {MTX6_ADDR,0x80},
   {MTXS_ADDR, 0x9e},
+#endif
   // Image size etc
   {COM7_ADDR, QCIF | RGB},
   {COM15_ADDR, ZZ_TO_FF | RGB565},

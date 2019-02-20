@@ -1,1 +1,1 @@
-python camera.py -s m COM13
+python viewer.py -s m COM13

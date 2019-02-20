@@ -43,7 +43,7 @@ if __name__ == '__main__':
     PADY_GRID = 2
 
     root = Tk.Tk()
-    root.wm_title("Camera for ML with Keras/TensorFlow")
+    root.wm_title("Image viewer")
 
     fig, ax = plt.subplots(1, 1, figsize=(4, 4))
     
@@ -108,34 +108,6 @@ if __name__ == '__main__':
     def screenshot():
         fig.savefig('screen_shot.png')
 
-    def remove():
-        global filename, cnt
-        if filename:
-            os.remove(filename+'.csv')
-            cnt -= 1
-            counter.configure(text='({})'.format(str(cnt)))
-
-    # Save training data for deep learning
-    def save_training_data():
-        ## TODO: use h5py instead.
-        '''
-        global class_label_, cnt, filename, data
-        class_label = entry.get()
-        dt = datetime.today().strftime('%Y%m%d%H%M%S')
-        if class_label == '':
-            filename = './data/{}'.format(dt)
-        else:
-            filename = './data/{}-{}'.format(entry.get(), dt)
-            with open(filename+'.csv', "w") as f:
-                flattend_data = np.round(data.flatten(), 1)
-                f.write(','.join(flattend_data.astype(str)))
-            if class_label_ != class_label:
-                class_label_ = class_label
-                cnt = 0
-            cnt += 1
-            counter.configure(text='({})'.format(str(cnt)))
-        '''
-
     def _quit():
         itfc.close()
         root.quit()
@@ -149,8 +121,6 @@ if __name__ == '__main__':
     button_shutter = Tk.Button(master=frame_row1, text='Shutter', command=pixels, bg='lightblue', activebackground='grey', padx=PADX)
     button_continuous = Tk.Button(master=frame_row1, text='Continous', command=repeat_toggle, bg='lightblue', activebackground='grey', padx=PADX)
     button_screenshot = Tk.Button(master=frame_row1, text='Screenshot', command=screenshot, bg='lightblue', activebackground='grey', padx=PADX)
-    button_save = Tk.Button(master=frame_row1, text='Save', command=save_training_data, bg='lightblue', activebackground='grey', padx=PADX)
-    button_remove = Tk.Button(master=frame_row1, text='Remove', command=remove, bg='lightblue', activebackground='grey', padx=PADX)
     button_quit = Tk.Button(master=frame_row1, text='Quit', command=_quit, bg='yellow', activebackground='grey', padx=PADX)
 
     entry_brightness = Tk.Entry(master=frame_row2, width=5)
@@ -173,8 +143,6 @@ if __name__ == '__main__':
     counter.configure(text='({})'.format(str(cnt)))
     button_shutter.grid(row=0, column=3, padx=PADX_GRID)
     button_continuous.grid(row=0, column=4, padx=PADX_GRID)
-    button_save.grid(row=0, column=5, padx=PADX_GRID)
-    button_remove.grid(row=0, column=6, padx=PADX_GRID)   
     button_screenshot.grid(row=0, column=7, padx=PADX_GRID)
     button_quit.grid(row=0, column=8, padx=PADX_GRID)
     frame_row1.pack(pady=PADY_GRID)
