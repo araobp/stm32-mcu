@@ -56,9 +56,11 @@ I figured out the OV7670 register settings to aquire RGB565 color images, and I 
 
 ## Plan next
 
-I have tested CNN with cifar-10 dataset on Google's colab. I think image classification based on deep learning (CNN) seems heavy for STM32F4. It may works as a demo, but it will no be practical.
+I tested CNN with cifar-10 dataset on Google's colab, then I thought image classification based on deep learning (CNN) seems very heavy for STM32F4. It may works as a demo, but it will no be practical. Or it will require **FPGA** or **AI accelerator** add-on for inference.
 
-OV7670 is great in terms of its reasonable price and its flexibility. I can even exchange the M12 lens with another one depending on the use case. I will delve into classical use cases based on classical image processing methodlogy: motion detection, telescope etc.
+OV7670 is great in terms of its reasonable price and its flexibility. I can even exchange the M12 lens with another one depending on the use case.
+
+Conclusion: I will delve into classical use cases (not ML) based on classical image processing methodlogy: motion detection, telescope etc.
 
 ## References
 
