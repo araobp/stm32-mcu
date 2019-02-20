@@ -1,9 +1,6 @@
-# Camera
+# Camera (OV7670 CMOS image sensor)
 
 <img src="./camera_board.jpg" width=400>
-
-(Work in progress)
-
 
 ## Goal
 
