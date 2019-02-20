@@ -14,12 +14,32 @@ DCMI_HandleTypeDef *phdcmi;
 uint8_t pid;
 uint8_t ver;
 
-// OV7670 config data
+/* OV7670 config data
+ *
+ * Note for my device:
+ * - Register at 0xB0 is not in the datasheet. By setting this register,
+ * I could get color images (w/o the setting, I got gray scale images).
+ * - White balance: Advanced AWB mode is better than Normal AWB mode.
+ * - Automatic gain ceiling: 0x4a is default, but 0x6a outputs brighter image.
+ */
 const uint8_t OV7670_CONFIG[][2] = {
+  // Color matrix setting
+  {MTX1_ADDR,0x80},
+  {MTX2_ADDR,0x80},
+  {MTX3_ADDR,0x00},
+  {MTX4_ADDR,0x22},
+  {MTX5_ADDR,0x5e},
+  {MTX6_ADDR,0x80},
+  {MTXS_ADDR, 0x9e},
+  // Image size etc
   {COM7_ADDR, QCIF | RGB},
   {COM15_ADDR, ZZ_TO_FF | RGB565},
+  // Control features
   {0xB0, 0x84}, // Not in the datasheet, but it is necessary.
+  {AWBCTR0_ADDR, 0x93},  // Enable advanced AWB mode
+  {COM9_ADDR, 0x4a},  // Automatic Gain ceiling
   {MVFP_ADDR, MIRROR_IMAGE | VERTICALLY_FLIP_IMAGE},
+  {COM13_ADDR, GAMMA_ENABLED},
   {0xFF, 0xFF}
 };
 

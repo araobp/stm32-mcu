@@ -20,21 +20,22 @@ import h5py
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("port", help="serial port identifier")
+parser.add_argument("-s", "--size", help="image sizes", default="m")
 args = parser.parse_args()
 
 def int2regvalue(value):
-    if value >= 127:
-        value = 127
-    elif value <= -127:
-        value = -127
     if value >= 0:
-        return value
+        sign = 0b00000000
     else:
-        return 0b10000000 + value
+        sign = 0b10000000
+    value = abs(value)
+    if value > 127:
+        value = 127
+    return sign + value
 
 if __name__ == '__main__':
 
-    itfc = interface.Interface(port = args.port)
+    itfc = interface.Interface(port = args.port, size=args.size)
     gui = image.GUI(interface=itfc)
 
     PADX = 6
@@ -86,7 +87,7 @@ if __name__ == '__main__':
     
     def contrast():
         value = int(entry_contrast.get())
-        value = int2regvalue(value)
+        value += 0x40
         itfc.write(interface.CONTRAST, value)
 
     # Repeat an operation

@@ -19,6 +19,7 @@ void qcif_to_128x128(uint16_t src[QCIF_HEIGHT][QCIF_WIDTH], uint16_t dst[128][12
   }
 }
 
+#define AVERAGE_32x32
 /**
  * QCIF to 32x32
  *
@@ -26,9 +27,12 @@ void qcif_to_128x128(uint16_t src[QCIF_HEIGHT][QCIF_WIDTH], uint16_t dst[128][12
  * then takes averages of each 4x4 pixels for RGB.
  */
 void qcif_to_32x32(uint16_t src[QCIF_HEIGHT][QCIF_WIDTH], uint16_t dst[32][32]) {
+#ifdef AVERAGE_32x32
   uint16_t red, green, blue, pixel;
+#endif
   for (int j=0; j<32; j++) {
     for (int i=0; i<32; i++) {
+#ifdef AVERAGE_32x32
       red = 0;
       green = 0;
       blue = 0;
@@ -38,11 +42,14 @@ void qcif_to_32x32(uint16_t src[QCIF_HEIGHT][QCIF_WIDTH], uint16_t dst[32][32]) 
           pixel = src[j*4+l+8][i*4+k+22];
           red += (pixel & 0b1111100000000000) >> 11;
           green += (pixel & 0b0000011111100000) >> 5;
-          blue += blue & 0b0000000000011111;
+          blue += pixel & 0b0000000000011111;
         }
       }
       // Average of 16 pixels
       dst[j][i] = ((red/16) << 11) + ((green/16) << 5) + blue/16;
+#else
+    dst[j][i] = src[j*4+8][i*4+22];
+#endif
     }
   }
 }

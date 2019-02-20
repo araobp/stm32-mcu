@@ -62,6 +62,12 @@
 #define RGB565   0b00010000
 #define RGB555   0b00110000
 
+//----- CLKRC -----
+#define CLKRC_ADDR 0x80
+
+//----- White balance -----
+#define AWBCTR0_ADDR 0x6f
+
 //----- TSLB -----
 #define TSLB_ADDR 0x0c
 
