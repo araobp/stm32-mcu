@@ -56,18 +56,7 @@ I figured out the OV7670 register settings to aquire RGB565 color images, and I 
 
 ## Deep learning plan
 
-### CIFAR-10
-
-I will use [CIFAR-10 database](https://www.cs.toronto.edu/~kriz/cifar.html) to train CNN.
-
-### Windowing and resizing
-
-- I will not use the OV7670-built-in windowing capability.
-- I will implement a windowing capability on STM32 to extract 128 x 128, 64 x 64 and 32 x 32 pixels from an original image.
-
-### Inference
-
-I use X-CUBE-AI on STM32F4 Discovery.
+I am going to use this code in another project for object recognition with Keras/TensorFlow and X-CUBE-AI.
 
 ## References
 
