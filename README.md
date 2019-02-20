@@ -39,7 +39,7 @@ Toolchain:
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html) board
 
-- [Camera (work in progress)](./STM32F4-Discovery/Camera)
+- [Camera (CMOS image sensor OV7670)](./STM32F4-Discovery/Camera)
 - [BlueSwitch](./STM32F4-Discovery/BlueSwitch)
 - [HelloWorld](./STM32F4-Discovery/HelloWorld)
 - [LED_blinking](./STM32F4-Discovery/LED_blinking)
