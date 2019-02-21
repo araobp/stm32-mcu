@@ -1,9 +1,6 @@
-# Camera
+# Camera (OV7670 CMOS image sensor)
 
 <img src="./camera_board.jpg" width=400>
-
-(Work in progress)
-
 
 ## Goal
 
@@ -38,7 +35,7 @@ It took a whole day to determine the cause of the problem. OV7670 seems like out
 
 ### Showing an image on PC
 
-I started developing an utilty program in Python to capture an image with the device and to show it on my PC.
+I have developed an image viewer program in Python to capture an image with the device and to show it on my PC.
 
 ```
                  STM32L4 Discovery
@@ -57,28 +54,20 @@ I figured out the OV7670 register settings to aquire RGB565 color images, and I 
 
 <img src="./python/doll.png" width=300>
 
-## Deep learning plan
+## Plan next
 
-### CIFAR-10
+I tested CNN with cifar-10 dataset on Google's colab, then I thought image classification based on deep learning (CNN) seems very heavy for STM32F4. It may works as a demo, but it will no be practical. Or it will require **FPGA** or **AI accelerator** add-on for inference.
 
-I will use [CIFAR-10 database](https://www.cs.toronto.edu/~kriz/cifar.html) to train CNN.
+OV7670 is great in terms of its reasonable price and its flexibility. I can even exchange the M12 lens with another one depending on the use case.
 
-### Windowing and resizing
-
-- I will not use the OV7670-built-in windowing capability.
-- I will implement a windowing capability on STM32 to extract 128 x 128, 64 x 64 and 32 x 32 pixels from an original image.
-
-### Inference
-
-I use X-CUBE-AI on STM32F4 Discovery.
+Conclusion: I will delve into classical use cases (not ML) based on classical image processing methodlogy: motion detection, telescope etc.
 
 ## References
 
-- [IT Text 画像工学](https://www.ohmsha.co.jp/book/9784274220074/)
-- [Serial Camera Control Bus
-Functional Specification ](http://www4.cs.umanitoba.ca/~jacky/Teaching/Courses/74.795-LocalVision/ReadingList/ov-sccb.pdf)
 - [OV7670 datasheet](https://www.voti.nl/docs/OV7670.pdf)
 - [OV7670 implementation guide](http://www.haoyuelectronics.com/Attachment/OV7670%20+%20AL422B%28FIFO%29%20Camera%20Module%28V2.0%29/OV7670%20Implementation%20Guide%20%28V1.0%29.pdf)
+- [Serial Camera Control Bus
+Functional Specification ](http://www4.cs.umanitoba.ca/~jacky/Teaching/Courses/74.795-LocalVision/ReadingList/ov-sccb.pdf)
 - [Digital camera interface (DCMI) for STM32 MCUs](https://www.st.com/content/ccc/resource/technical/document/application_note/group0/c0/ef/15/38/d1/d6/49/88/DM00373474/files/DM00373474.pdf/jcr:content/translations/en.DM00373474.pdf)
 - [STM32マイコンによるデジタルカメラの作成](https://qiita.com/take-iwiw/items/212ddb6faa05412c83b7)
 - [STM32マイコンでOV7670などとSCCB通信する際の注意点](https://qiita.com/take-iwiw/items/cf10034890d2784676d0)
