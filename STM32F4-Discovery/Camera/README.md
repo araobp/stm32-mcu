@@ -58,9 +58,11 @@ I figured out the OV7670 register settings to aquire RGB565 color images, and I 
 
 ### Deep learning?
 
-I tested CNN with cifar-10 dataset on Google's colab, then I thought image classification based on deep learning (CNN) seems very heavy for STM32F4. It may works as a demo, but it will no be practical. Or it will require **FPGA** or **AI accelerator** add-on for inference.
+I tested CNN with CIFAR-10 dataset on Google's colab, then I thought image classification based on deep learning (CNN) seems very heavy for STM32F4. It may works as a demo, but it will no be practical. Or it will require **FPGA** or **AI accelerator** add-on for inference.
 
 I loaded a CNN model, that can acheive ACC over 80%, into X-CUBE-AI to generate AI inference code. The RAM consumption was around 100KBytes, so it would not run on STM32F4-Discovery.
+
+So, for a demo, I will try "rock-scissors-paper" instead of CIFAR-10, as I did in another project with AMG8833 infrared array sensor.
 
 ### Classical image processing methods
 
