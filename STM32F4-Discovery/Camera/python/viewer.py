@@ -21,6 +21,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("port", help="serial port identifier")
 parser.add_argument("-s", "--size", help="image sizes", default="m")
+parser.add_argument("-e", "--effect", help="effect", default=None)
 args = parser.parse_args()
 
 def int2regvalue(value):
@@ -68,14 +69,20 @@ if __name__ == '__main__':
     def pixels():
         global data, ax
         ax.clear()
-        data = gui.plot(ax, interface.PIXELS, cmap='rainbow')
+        if args.effect is None:
+            data = gui.plot(ax, interface.PIXELS)
+        elif args.effect == 'd':
+            data = gui.plot(ax, interface.DIFF)
         fig.tight_layout()
         canvas.draw()
 
     def pixels_continuous():
         global data, ax
         ax.clear()
-        data = gui.plot(ax, interface.PIXELS, cmap='rainbow')
+        if args.effect is None:
+            data = gui.plot(ax, interface.PIXELS)
+        elif args.effect == 'd':
+            data = gui.plot(ax, interface.DIFF)
         fig.tight_layout()
         canvas.draw()
         repeat(pixels_continuous)

@@ -1,12 +1,14 @@
 import serial
 import numpy as np
 import traceback
+import cv2
 
 ### Constants #####
 
 BAUD_RATE = 460800          # UART baud rate
 
 PIXELS = b'p'
+DIFF = b'd'
 BRIGHTNESS = b'b'
 CONTRAST = b'c'
 
@@ -28,6 +30,7 @@ class Interface:
         self.port = port
         self.size = size
         self.ser = None
+        self.data_prev = np.zeros(SHAPE[self.size], dtype=np.int)
         try:
             self.ser = serial.Serial(self.port, BAUD_RATE, timeout=3)
         except:
@@ -58,8 +61,21 @@ class Interface:
                 blue =   d & 0b0000000000011111
                 data.append((red << 3, green << 2, blue << 3))
                 #print("{:02x} {:02x} {:02x}".format(red, green, blue))
-            data = np.array(data, dtype=np.uint8).reshape(*SHAPE[self.size])
+            data = np.array(data, dtype=np.int).reshape(*SHAPE[self.size])
             print(data.shape)
+            '''
+            if self.effect == "d":
+                diff = data - self.data_prev
+                diff[diff < 0] = 0
+                diff[diff > 255] = 255
+                self.data_prev = data
+                data = diff
+            elif self.effect == "e":
+                '''
+            '''
+            if self.effect == b"e":
+                data = cv2.Canny(data.astype(np.uint8), 64, 64) 
+            '''
         except:
             print('*** serial timeout!')
             traceback.print_exc()

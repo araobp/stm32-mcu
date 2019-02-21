@@ -15,7 +15,7 @@ class GUI:
 
         data = self.interface.read(cmd)
         
-        if cmd == interface.PIXELS:
+        if cmd == interface.PIXELS or cmd == interface.DIFF:
             ax.set_title('Image')
             ax.imshow(data)              
     

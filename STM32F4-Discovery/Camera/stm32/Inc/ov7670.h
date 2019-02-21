@@ -10,8 +10,9 @@
 #include "stm32f4xx_hal.h"
 
 
+//#define OUTPUT_32
 #define OUTPUT_128
-//#define HIGH_CONTRAST
+#define HIGH_CONTRAST
 
 /*--- SCCB addresses-------------------------*/
 #define SCCB_WRITE_SLAVE_ADDR 0x42

@@ -52,6 +52,9 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+typedef enum {
+  NOP, PIXELS, DIFF
+} mode;
 
 /* USER CODE END PTD */
 
@@ -77,7 +80,7 @@ DMA_HandleTypeDef hdma_usart2_rx;
 /* USER CODE BEGIN PV */
 volatile bool pic_taken = false;
 volatile char cmd;
-volatile bool output_pixels = false;
+volatile mode output_mode = NOP;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -111,8 +114,10 @@ int main(void)
 
 #ifdef OUTPUT_128
   uint16_t image128[128][128];
+  uint16_t prev_image128[128][128];
 #elif defined OUTPUT_32
   uint16_t image32[32][32];
+  uint16_t prev_image32[32][32];
 #endif
 
   uint16_t framebuf[QCIF_HEIGHT][QCIF_WIDTH] = { 0 };
@@ -154,11 +159,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if (output_pixels) {
+    if (output_mode == PIXELS || output_mode == DIFF) {
       ov7670_take_snapshot((uint32_t)framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
-      //ov7670_take_snapshot((uint32_t)framebuf, QVGA_WIDTH * QVGA_HEIGHT / 2);
-      //HAL_Delay(1000);
       while (!pic_taken);
+
 #ifdef DEBUG
       for (int i=0; i<16; i++) {
         printf("%02x ", framebuf[i]);
@@ -175,15 +179,21 @@ int main(void)
 
 #ifdef OUTPUT_128
       qcif_to_128x128(framebuf, image128);
+      if (output_mode == DIFF) {
+        diff(prev_image128, image128);
+      }
       uart_tx((uint8_t *)image128, 128*128*2);
 #elif defined OUTPUT_32
       qcif_to_32x32(framebuf, image32);
+      if (output_mode == DIFF) {
+        diff(prev_image32, image32);
+      }
       uart_tx((uint8_t *)image32, 32*32*2);
 #else
       uart_tx(framebuf, QCIF_WIDTH * QCIF_HEIGHT * 2);
 #endif
       pic_taken = false;
-      output_pixels = false;
+      output_mode = NOP;
     }
 
     /* USER CODE END WHILE */
@@ -443,7 +453,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     cnt = 0;
     switch (cmd_line[0]) {
     case 'p':  // pixels
-      output_pixels = true;
+      output_mode = PIXELS;
+      break;
+    case 'd':  // diff
+      output_mode = DIFF;
       break;
     case 'b':  // Brightness
       value = atoi(&cmd_line[1]);
