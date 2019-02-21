@@ -62,13 +62,18 @@ I tested CNN with CIFAR-10 dataset on Google's colab, then I thought image class
 
 I loaded a CNN model, that can acheive ACC over 80%, into X-CUBE-AI to generate AI inference code. The RAM consumption was around 100KBytes, so it would not run on STM32F4-Discovery.
 
-So, for a demo, I will try "rock-scissors-paper" instead of CIFAR-10, as I did in another project with AMG8833 infrared array sensor.
+So, for a demo, I will try "rock-scissors-paper" instead of CIFAR-10, as I did in another project with AMG8833 infrared array sensor:
+- DCT as pre-processing
+- DNN to infer rock-scissors-paper
 
 ### Classical image processing methods
 
 OV7670 is great in terms of its reasonable price and its flexibility. I can even exchange the M12 lens with another one depending on the use case.
 
-I will delve into classical use cases (not ML) based on classical image processing methodlogy: motion detection, telescope etc.
+I will delve into classical use cases (not ML) based on classical image processing methodlogy:
+- motion detection (diff)
+- edge extraction (DCT etc)
+- telescope (attache the CMOS image sensor to a telescope)
 
 ## References
 
