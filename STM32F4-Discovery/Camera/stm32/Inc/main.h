@@ -108,7 +108,7 @@ void Error_Handler(void);
 #define OV7670_RESET_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
 
-#define HPF_THRESHOLD 8
+#define COEF_CUTOFF 6
 
 /* USER CODE END Private defines */
 

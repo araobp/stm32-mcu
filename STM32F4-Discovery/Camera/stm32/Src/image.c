@@ -30,7 +30,6 @@ void qcif_to_128x128(uint16_t src_image[QCIF_HEIGHT][QCIF_WIDTH], uint16_t dst_i
   }
 }
 
-#define AVERAGE_32x32
 /**
  * QCIF to 32x32
  *
@@ -38,12 +37,12 @@ void qcif_to_128x128(uint16_t src_image[QCIF_HEIGHT][QCIF_WIDTH], uint16_t dst_i
  * then takes averages of each 4x4 pixels for RGB.
  */
 void qcif_to_32x32(uint16_t src_image[QCIF_HEIGHT][QCIF_WIDTH], uint16_t dst_image[32][32]) {
-#ifdef AVERAGE_32x32
+#ifdef AVERAGE_4x4
   uint16_t red, green, blue, pixel;
 #endif
   for (int j=0; j<32; j++) {
     for (int i=0; i<32; i++) {
-#ifdef AVERAGE_32x32
+#ifdef AVERAGE_4x4
       red = 0;
       green = 0;
       blue = 0;
@@ -62,12 +61,16 @@ void qcif_to_32x32(uint16_t src_image[QCIF_HEIGHT][QCIF_WIDTH], uint16_t dst_ima
       blue = blue/16;
       dst_image[j][i] = TO_RGB565(red, green, blue);
 #else
+    // Significant noises w/o averaging
     dst_image[j][i] = src_image[j*4+8][i*4+22];
 #endif
     }
   }
 }
 
+/**
+ * Diff between frames.
+ */
 #ifdef OUTPUT_128
 void diff(uint16_t prev_image[128][128], uint16_t image[128][128]) {
 #elif defined OUTPUT_32
@@ -101,7 +104,11 @@ void diff(uint16_t prev_image[32][32], uint16_t image[32][32]) {
 }
 #endif
 
-void grayscale(uint16_t image[32][32], uint8_t gray[32][32]) {
+/**
+ * Convert RGB to gray scale.
+ * Note: taking Y component of YUV format might be better.
+ */
+void to_grayscale(uint16_t image[32][32], uint8_t gray[32][32]) {
   uint16_t pixel;
   for (int j=0; j<32; j++) {
     for (int i=0; i<32; i++) {

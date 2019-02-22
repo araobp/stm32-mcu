@@ -91,8 +91,8 @@ volatile mode output_mode = NOP;
   uint16_t image32[32][32];
   uint16_t prev_image32[32][32];
   uint8_t gray_u8_32[32][32];
-  float32_t buf1_32[32*32];
-  float32_t buf2_32[32*32];
+  float32_t buf1_32[32][32];
+  float32_t buf2_32[32][32];
   dct2_instance_f32 S;
 #endif
 
@@ -117,7 +117,30 @@ void uart_tx(uint8_t *pbuf, int len) {
   HAL_UART_Transmit(&huart2, pbuf, len, 3000);
 }
 
+void f32_to_u8(float32_t src[32][32], uint8_t dst[32][32]) {
+for (int j=0; j<32;j++) {
+  for (int i=0; i<32; i++) {
+    dst[j][i] = (float32_t)src[j][i];
+  }
+}
+}
 
+void u8_to_f32(uint8_t src[32][32], float32_t dst[32][32]) {
+for (int j=0; j<32;j++) {
+  for (int i=0; i<32; i++) {
+    dst[j][i] = (uint8_t)src[j][i];
+  }
+}
+}
+
+// Coefficients cutoff (high-pass filter)
+void hpf(float32_t buf[32][32], int cutoff) {
+  for (int j=0; j<cutoff; j++) {
+    for (int i=0; i<cutoff; i++) {
+      buf[j][i] = 0;
+    }
+  }
+}
 
 /* USER CODE END 0 */
 
@@ -204,29 +227,16 @@ int main(void)
         uart_tx((uint8_t *)image32, 32*32*2);
         break;
       case GRAY:
-        grayscale(image32, gray_u8_32);
+        to_grayscale(image32, gray_u8_32);
         uart_tx((uint8_t *)gray_u8_32, 32*32);
         break;
-      case EDGE:
-        grayscale(image32, gray_u8_32);
-        for (int j=0; j<32;j++) {
-          for (int i=0; i<32; i++) {
-            buf1_32[j*32+i] = (float32_t)gray_u8_32[j][i];
-          }
-        }
-        dct2_2d_f32(&S, buf1_32, buf2_32, 0);
-        for (int j=0; j<HPF_THRESHOLD; j++) {
-          for (int i=0; i<HPF_THRESHOLD; i++) {
-            buf2_32[j*32+i] = 0;
-          }
-        }
-
-        dct2_2d_f32(&S, buf2_32, buf1_32, 1);
-        for (int j=0; j<32;j++) {
-          for (int i=0; i<32; i++) {
-            gray_u8_32[j][i] = (uint8_t)buf1_32[j*32+i];
-          }
-        }
+      case EDGE:  // Extract edge via DCT/IDCT.
+        to_grayscale(image32, gray_u8_32);
+        u8_to_f32(gray_u8_32, buf1_32);
+        dct2_2d_f32(&S, (float32_t *)buf1_32, (float32_t *)buf2_32, 0);
+        hpf(buf2_32, COEF_CUTOFF);
+        dct2_2d_f32(&S, (float32_t *)buf2_32, (float32_t *)buf1_32, 1);
+        f32_to_u8(buf1_32, gray_u8_32);
         uart_tx((uint8_t *)gray_u8_32, 32*32);
         break;
       default:
@@ -469,6 +479,10 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+/**
+ * Called when all lines in one frame has just been received.
+ */
 void HAL_DCMI_FrameEventCallback(DCMI_HandleTypeDef *hdcmi) {
   pic_taken = true;
 #ifdef DEBUG
@@ -476,13 +490,8 @@ void HAL_DCMI_FrameEventCallback(DCMI_HandleTypeDef *hdcmi) {
 #endif
 }
 
-void HAL_DCMI_LineEventCallback(DCMI_HandleTypeDef *hdcmi) {
-  //pic_taken = true;
-  //printf("DCMI LineEventCallback\n");
-}
-
-/*
- * One-byte command reception from console or Thermography GUI
+/**
+ * Command reception from viewer GUI
  */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
@@ -505,14 +514,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     case 'e':  // Edge
       output_mode = EDGE;
       break;
-    case 'g':  // Grayscale
+    case 'g':  // gray scale
       output_mode = GRAY;
       break;
-    case 'b':  // Brightness
+    case 'b':  // brightness
       value = atoi(&cmd_line[1]);
       sccb_write(BRIGHT_ADDR, value);
       break;
-    case 'c':  // Contrast
+    case 'c':  // contrast
       value = atoi(&cmd_line[1]);
       sccb_write(CONTRAS_ADDR, value);
       break;

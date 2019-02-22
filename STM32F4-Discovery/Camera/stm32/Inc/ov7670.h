@@ -9,10 +9,18 @@
 
 #include "stm32f4xx_hal.h"
 
-
+/**
+ * Image size setting
+ * Comment out: QCIF
+ * OUTPUT_128: 128x128
+ * OUTPUT_32: 32x32
+ */
 #define OUTPUT_32
 //#define OUTPUT_128
 
+/**
+ * High-contrast color matrix setting
+ */
 #define HIGH_CONTRAST
 
 /*--- SCCB addresses-------------------------*/
@@ -106,7 +114,6 @@
 
 #define QVGA_WIDTH 320
 #define QVGA_HEIGHT 240
-
 
 
 int sccb_read(uint8_t reg_addr, uint8_t *pdata);
