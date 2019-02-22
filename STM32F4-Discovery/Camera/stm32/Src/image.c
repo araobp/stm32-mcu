@@ -82,6 +82,7 @@ void diff(uint16_t prev_image[32][32], uint16_t image[32][32]) {
   for (int j=0; j<32; j++) {
     for (int i=0; i<32; i++) {
 #endif
+#if defined OUTPUT_128 || defined OUTPUT_32
       prev_pixel = prev_image[j][i];
       pixel = image[j][i];
       red = TO_RED(prev_pixel) - TO_RED(pixel);
@@ -95,6 +96,17 @@ void diff(uint16_t prev_image[32][32], uint16_t image[32][32]) {
       if (blue > 255) blue = 255;
       prev_image[j][i] = image[j][i];
       image[j][i] = TO_RGB565(red, green, blue);
+    }
+  }
+}
+#endif
+
+void grayscale(uint16_t image[32][32], uint8_t gray[32][32]) {
+  uint16_t pixel;
+  for (int j=0; j<32; j++) {
+    for (int i=0; i<32; i++) {
+      pixel = image[j][i];
+      gray[j][i] = ((TO_RED(pixel) << 1) + TO_GREEN(pixel) + (TO_BLUE(pixel) <<1)) / 3;
     }
   }
 }

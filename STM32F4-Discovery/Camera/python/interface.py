@@ -1,7 +1,6 @@
 import serial
 import numpy as np
 import traceback
-import cv2
 
 ### Constants #####
 
@@ -9,6 +8,11 @@ BAUD_RATE = 460800          # UART baud rate
 
 PIXELS = b'p'
 DIFF = b'd'
+GRAY = b'g'
+EDGE = b'e'
+COMMANDS = (PIXELS, DIFF, GRAY, EDGE)
+COMMANDS_GRAY = (GRAY, EDGE)
+
 BRIGHTNESS = b'b'
 CONTRAST = b'c'
 
@@ -43,39 +47,32 @@ class Interface:
                 
     # As an application processor, send a command
     # then receive and process the output.
-    def read(self, cmd, ssub=None):
+    def read(self, cmd):
 
         data = []
-        n = 0
         try:
             self.ser.write(cmd+b'\n')
             print(cmd)
-            rx = self.ser.read(NUM_SAMPLES[self.size])
-            #print(rx)
-            rx = zip(rx[0::2], rx[1::2])
-            for lsb, msb in rx:
-                n += 1
-                d =  int.from_bytes([msb, lsb], byteorder='big', signed=False)
-                red =   (d & 0b1111100000000000) >> 11
-                green = (d & 0b0000011111100000) >> 5
-                blue =   d & 0b0000000000011111
-                data.append((red << 3, green << 2, blue << 3))
-                #print("{:02x} {:02x} {:02x}".format(red, green, blue))
-            data = np.array(data, dtype=np.int).reshape(*SHAPE[self.size])
+            if cmd in COMMANDS_GRAY:
+                rx = self.ser.read(int(NUM_SAMPLES[self.size]/2))
+                print(int(NUM_SAMPLES[self.size]/2))
+                for lsb in rx:
+                    d =  int.from_bytes([lsb], byteorder='big', signed=False)
+                    data.append(d << 2)
+                data = np.array(data, dtype=np.int).reshape(SHAPE[self.size][0], SHAPE[self.size][1])
+            else:
+                rx = self.ser.read(NUM_SAMPLES[self.size])
+                #print(rx)
+                rx = zip(rx[0::2], rx[1::2])
+                for lsb, msb in rx:
+                    d =  int.from_bytes([msb, lsb], byteorder='big', signed=False)
+                    red =   (d & 0b1111100000000000) >> 11
+                    green = (d & 0b0000011111100000) >> 5
+                    blue =   d & 0b0000000000011111
+                    data.append((red << 3, green << 2, blue << 3))
+                    #print("{:02x} {:02x} {:02x}".format(red, green, blue))
+                data = np.array(data, dtype=np.int).reshape(*SHAPE[self.size])
             print(data.shape)
-            '''
-            if self.effect == "d":
-                diff = data - self.data_prev
-                diff[diff < 0] = 0
-                diff[diff > 255] = 255
-                self.data_prev = data
-                data = diff
-            elif self.effect == "e":
-                '''
-            '''
-            if self.effect == b"e":
-                data = cv2.Canny(data.astype(np.uint8), 64, 64) 
-            '''
         except:
             print('*** serial timeout!')
             traceback.print_exc()

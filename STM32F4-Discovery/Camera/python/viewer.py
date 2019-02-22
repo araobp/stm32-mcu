@@ -73,18 +73,15 @@ if __name__ == '__main__':
             data = gui.plot(ax, interface.PIXELS)
         elif args.effect == 'd':
             data = gui.plot(ax, interface.DIFF)
+        elif args.effect == 'g':
+            data = gui.plot(ax, interface.GRAY, cmap='gray')
+        elif args.effect == 'e':
+            data = gui.plot(ax, interface.EDGE, cmap='gray')
         fig.tight_layout()
         canvas.draw()
 
     def pixels_continuous():
-        global data, ax
-        ax.clear()
-        if args.effect is None:
-            data = gui.plot(ax, interface.PIXELS)
-        elif args.effect == 'd':
-            data = gui.plot(ax, interface.DIFF)
-        fig.tight_layout()
-        canvas.draw()
+        pixels()
         repeat(pixels_continuous)
 
     def brightness():

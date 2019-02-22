@@ -48,12 +48,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "arm_math.h"
+#include "dct.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 typedef enum {
-  NOP, PIXELS, DIFF
+  NOP, PIXELS, DIFF, GRAY, EDGE
 } mode;
 
 /* USER CODE END PTD */
@@ -81,6 +83,21 @@ DMA_HandleTypeDef hdma_usart2_rx;
 volatile bool pic_taken = false;
 volatile char cmd;
 volatile mode output_mode = NOP;
+
+#ifdef OUTPUT_128
+  uint16_t image128[128][128];
+  uint16_t prev_image128[128][128];
+#elif defined OUTPUT_32
+  uint16_t image32[32][32];
+  uint16_t prev_image32[32][32];
+  uint8_t gray_u8_32[32][32];
+  float32_t buf1_32[32*32];
+  float32_t buf2_32[32*32];
+  dct2_instance_f32 S;
+#endif
+
+  uint16_t framebuf[QCIF_HEIGHT][QCIF_WIDTH] = { 0 };
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -112,16 +129,6 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-#ifdef OUTPUT_128
-  uint16_t image128[128][128];
-  uint16_t prev_image128[128][128];
-#elif defined OUTPUT_32
-  uint16_t image32[32][32];
-  uint16_t prev_image32[32][32];
-#endif
-
-  uint16_t framebuf[QCIF_HEIGHT][QCIF_WIDTH] = { 0 };
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -151,15 +158,16 @@ int main(void)
 
   ov7670_init(&hi2c1, &hdcmi);
   ov7670_conf();
-//  HAL_Delay(1000);
-  //ov7670_take_continuous((uint32_t)framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
+#ifdef OUTPUT_32
+  dct2_2d_init_f32(&S, 32, 32);
+#endif
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if (output_mode == PIXELS || output_mode == DIFF) {
+    if (output_mode > NOP) {
       ov7670_take_snapshot((uint32_t)framebuf, QCIF_WIDTH * QCIF_HEIGHT / 2);
       while (!pic_taken);
 
@@ -179,18 +187,54 @@ int main(void)
 
 #ifdef OUTPUT_128
       qcif_to_128x128(framebuf, image128);
-      if (output_mode == DIFF) {
+      switch(output_mode) {
+      case DIFF:
         diff(prev_image128, image128);
+        uart_tx((uint8_t *)image128, 128*128*2);
+        break;
+      default:
+        uart_tx((uint8_t *)image128, 128*128*2);
+        break;
       }
-      uart_tx((uint8_t *)image128, 128*128*2);
 #elif defined OUTPUT_32
       qcif_to_32x32(framebuf, image32);
-      if (output_mode == DIFF) {
+      switch(output_mode) {
+      case DIFF:
         diff(prev_image32, image32);
+        uart_tx((uint8_t *)image32, 32*32*2);
+        break;
+      case GRAY:
+        grayscale(image32, gray_u8_32);
+        uart_tx((uint8_t *)gray_u8_32, 32*32);
+        break;
+      case EDGE:
+        grayscale(image32, gray_u8_32);
+        for (int j=0; j<32;j++) {
+          for (int i=0; i<32; i++) {
+            buf1_32[j*32+i] = (float32_t)gray_u8_32[j][i];
+          }
+        }
+        dct2_2d_f32(&S, buf1_32, buf2_32, 0);
+        for (int j=0; j<HPF_THRESHOLD; j++) {
+          for (int i=0; i<HPF_THRESHOLD; i++) {
+            buf2_32[j*32+i] = 0;
+          }
+        }
+
+        dct2_2d_f32(&S, buf2_32, buf1_32, 1);
+        for (int j=0; j<32;j++) {
+          for (int i=0; i<32; i++) {
+            gray_u8_32[j][i] = (uint8_t)buf1_32[j*32+i];
+          }
+        }
+        uart_tx((uint8_t *)gray_u8_32, 32*32);
+        break;
+      default:
+        uart_tx((uint8_t *)image32, 32*32*2);
+        break;
       }
-      uart_tx((uint8_t *)image32, 32*32*2);
 #else
-      uart_tx(framebuf, QCIF_WIDTH * QCIF_HEIGHT * 2);
+      uart_tx((uint8_t *)framebuf, QCIF_WIDTH * QCIF_HEIGHT * 2);
 #endif
       pic_taken = false;
       output_mode = NOP;
@@ -457,6 +501,12 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
       break;
     case 'd':  // diff
       output_mode = DIFF;
+      break;
+    case 'e':  // Edge
+      output_mode = EDGE;
+      break;
+    case 'g':  // Grayscale
+      output_mode = GRAY;
       break;
     case 'b':  // Brightness
       value = atoi(&cmd_line[1]);
