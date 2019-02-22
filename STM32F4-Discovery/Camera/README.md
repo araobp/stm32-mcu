@@ -54,6 +54,12 @@ I figured out the OV7670 register settings to aquire RGB565 color images, and I 
 
 <img src="./python/doll.png" width=300>
 
+## Image processing
+
+<img src="./python/doll_128x128.png" width=300>
+
+<img src="./python/doll_128x128_diff.png" width=300>
+
 ## Plan next
 
 ### Deep learning?
