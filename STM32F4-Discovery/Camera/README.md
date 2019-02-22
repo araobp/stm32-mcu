@@ -62,7 +62,7 @@ I figured out the OV7670 register settings to aquire RGB565 color images, and I 
 
 <img src="./python/doll_32x32_gray.png" width=300>
 
-<img src="./python/doll_32x32_edge.png" width=300>
+<img src="./python/hand_32x32_edge.png" width=300>
 
 ## Plan next
 
