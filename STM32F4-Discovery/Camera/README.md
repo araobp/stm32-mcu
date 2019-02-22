@@ -56,6 +56,8 @@ I figured out the OV7670 register settings to aquire RGB565 color images, and I 
 
 ## Image processing on the device (STM32)
 
+I bought a text book of image processing for college students, and implemented part of the algorithms in the book on STM32.
+
 ### Converting QCIF into 128x128
 
 <img src="./python/doll_128x128.png" width=300>
