@@ -2,6 +2,8 @@
 
 <img src="./camera_board.jpg" width=400>
 
+(This project is taken over by [another project](https://github.com/araobp/image-features)).
+
 ## Goal
 
 - Capture QCIF images.
