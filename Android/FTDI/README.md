@@ -23,6 +23,10 @@ Arduino shield    UART-USB converter
 --------+
 ```
 
+## UART-USB converter
+
+I always use [this tiny converter](http://akizukidenshi.com/catalog/g/gM-08461/) from Akizuki Denshi in Akihabara, Tokyo.
+
 ## FTDI driver for Android
 
 I already developed such a driver for Android with this library: [D2XX driver](https://www.ftdichip.com/Android.htm)
