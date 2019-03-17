@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import jp.araobp.serial.Message
 import jp.araobp.serial.jp.araobp.serial.service.FtdiDriver
+import jp.araobp.serial.jp.araobp.serial.service.FtdiSimulator
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -24,7 +25,8 @@ class MainActivity : AppCompatActivity() {
         EventBus.getDefault().register(this)
 
         // Start SerialService
-        val intent = Intent(application, FtdiDriver::class.java)
+        //val intent = Intent(application, FtdiDriver::class.java)
+        val intent = Intent(application, FtdiSimulator::class.java)
         startService(intent)
     }
 
