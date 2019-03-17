@@ -2,6 +2,12 @@
 
 (Work in progress)
 
+## Goal
+
+I develop an oscilloscope GUI on Android for this project: https://github.com/araobp/acoustic-features
+
+In this project, I will just confirm if Android can communicate with a NUCLEO board over UART/USB.
+
 ## Set up
 
 I dare not use ST-Link USB port on NUCLEO board in this project, because the debugger part should be removed to make the board more portable.
