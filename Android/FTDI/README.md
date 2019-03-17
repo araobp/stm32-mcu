@@ -16,7 +16,7 @@ NUCLEO board
 Arduino shield    UART-USB converter
 ------+            +------+                +------
       |E5V <--- 5V |      |                | Terminal application
-      |GND <--- GND| FTDI |----- USB ------| on Android
+      |GND <--- GND| FTDI |----- USB OTG --| on Android
       |RX  <--- TX |      |                |
       |TX  <--- RX |      |                |
 ------+ |          +------+                +------
