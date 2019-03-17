@@ -29,7 +29,7 @@ I always use [this tiny converter](http://akizukidenshi.com/catalog/g/gM-08461/)
 
 ## FTDI driver for Android
 
-I already developed such a driver for Android based on [FTDI's D2XX driver](https://www.ftdichip.com/Android.htm), and used the driver for the projects below:
+I already developed such a driver for Android based on [FTDI's D2XX driver](https://www.ftdichip.com/Android.htm), and used the driver in the projects below:
 - https://github.com/araobp/sensor-network-android
 - https://github.com/araobp/gps_android
 
