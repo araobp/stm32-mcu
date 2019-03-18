@@ -1,11 +1,8 @@
-package jp.araobp.serial.jp.araobp.serial.service
+package jp.araobp.serial.service
 
 import android.util.Log
 
-import com.ftdi.j2xx.D2xxManager
-import com.ftdi.j2xx.FT_Device
 import jp.araobp.serial.SerialService
-import kotlin.experimental.or
 
 /**
  * FTDI device driver

@@ -29,8 +29,8 @@
                     android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
                     android:resource="@xml/device_filter" />
         </activity>
-        <!--- <service android:name="jp.araobp.iot.serial.service.FtdiDriver"/> -->
-        <service android:name="jp.araobp.serial.jp.araobp.serial.service.FtdiSimulator"/>
+        <service android:name="jp.araobp.serial.service.FtdiDriver"/>
+        <!-- <service android:name="jp.araobp.serial.service.FtdiSimulator"/> -->
     </application>
 
 </manifest>

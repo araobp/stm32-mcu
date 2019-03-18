@@ -1,4 +1,4 @@
-package jp.araobp.serial.jp.araobp.serial.service
+package jp.araobp.serial.service
 
 import android.util.Log
 

@@ -12,7 +12,7 @@ abstract class SerialService : Service() {
     private val mEventBus = EventBus.getDefault()
 
     companion object {
-        const val BAUDRATE = 115200
+        const val BAUDRATE = 460800
         const val SLEEP_TIMER = 1000L
     }
 
