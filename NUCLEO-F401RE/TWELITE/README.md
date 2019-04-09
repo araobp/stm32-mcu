@@ -33,3 +33,10 @@ TWELITE-DIP is powered by 3V3 pin on the NUCLEO board:
 <img src="./doc/jumper_cables.jpg" width=400>
 
 **=> [TWELITE DIP pin assignment](https://mono-wireless.com/jp/products/TWE-APPS/App_Twelite/asset/twe_app_pins.png)**
+
+## Code
+
+I use TWELITE's Binary Transfer Mode to transfer data in a bulk to an edge AI application.
+
+- [Slave node: TWELITE driver and test program for STM32](./stm32)
+- [Master node: TWELITE driver and test program for Python](./python)
