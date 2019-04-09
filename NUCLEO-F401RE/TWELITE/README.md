@@ -4,11 +4,14 @@
 
 TWELITE is a IEEE802.15.4-based sensor networking technology by a Japanese company [MONO WIRELESS](https://mono-wireless.com/en/).
 
-I used TWELITE with PIC16F1 MCU in a very important IoT projects in Feb 2019. It was very successful, so I will use TWELITE rather than other low-power wireless technologies such as BLE, in my upcoming projects for the time being.
+I used TWELITE with PIC16F1 MCU in a very important IoT projects in Feb 2019. It was very successful, so I will use TWELITE rather than other low-power wireless technologies for the time being.
 
 ## Goal
 
-Port this code to STM32: https://github.com/araobp/pic16f1-mcu/blob/master/src/pic16f18326/amg8833.X/twelite.c
+- port this code to STM32: https://github.com/araobp/pic16f1-mcu/blob/master/src/pic16f18326/amg8833.X/twelite.c
+- develop drivers and utilities.
+- confirm that those programs work.
+- use the driver in my edge AI projects.
 
 ## Set up
 
