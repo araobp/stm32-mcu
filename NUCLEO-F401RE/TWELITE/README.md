@@ -20,4 +20,16 @@ SB62 and SB63 need to be shorted to transmit data to D1 or receive data from D0.
 
 ### Circuit
 
+TWELITE-DIP is powered by 3V3 pin on the NUCLEO board:
+```
+ NUCLEO      TWELITE
+  3V3 ------- VCC
+  GND ------- GND
+  TX/D1 ----- RX
+  RX/D0 ----- TX
+
+```
+
 <img src="./doc/jumper_cables.jpg" width=400>
+
+**=> [TWELITE DIP pin assignment](https://mono-wireless.com/jp/products/TWE-APPS/App_Twelite/asset/twe_app_pins.png)**
