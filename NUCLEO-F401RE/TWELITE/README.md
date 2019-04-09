@@ -2,9 +2,9 @@
 
 (Work in progress)
 
-TWELITE is a IEEE802.15.4-based sensor networking technology by [MONO WIRELESS](https://mono-wireless.com/en/).
+TWELITE is a IEEE802.15.4-based sensor networking technology by a Japanese company [MONO WIRELESS](https://mono-wireless.com/en/).
 
-I have used TWELITE in some IoT projects with PIC16F1 MCU.
+I used TWELITE with PIC16F1 MCU in a very important IoT projects in Feb 2019. It was very successful, so I will use TWELITE rather than other low-power wireless technologies such as BLE, in my upcoming projects for the time being.
 
 ## Goal
 
