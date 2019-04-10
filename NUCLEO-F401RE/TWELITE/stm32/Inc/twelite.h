@@ -32,6 +32,6 @@
 #define RESET_DELAY 50U  // 50msec
 
 void twelite_uart_tx(uint8_t *pbuf, uint8_t seq, uint8_t len);
-bool twelite_uart_rx(uint8_t c, uint8_t *cmd, uint8_t *seq);
+void twelite_uart_rx(uint8_t *pbuf, uint8_t *cmd, uint8_t *seq);
 
 #endif /* TWELITE_H_ */

@@ -9,13 +9,14 @@
 #include <stdio.h>
 
 void send_one(uint8_t data) {
-  HAL_UART_Transmit(&huart2, &data, 1, 0xFFFFFFFF);
+  HAL_UART_Transmit(&huart1, &data, 1, 0xFFFFFFFF);
 }
 
 void twelite_uart_tx(uint8_t *pbuf, uint8_t seq, uint8_t len) {
     static uint8_t cs;
 
     //--- Binary transfer mode header
+    //printf("start\n");
     send_one(0xA5); // Binary transfer mode header
     send_one(0x5A); // Binary transfer mode header
     send_one(0x80); // Data length MSB
@@ -40,45 +41,19 @@ void twelite_uart_tx(uint8_t *pbuf, uint8_t seq, uint8_t len) {
     }
     //--- Checksum
     send_one(cs); // Checksum
+    //printf("cs: %x\n", cs);
 }
 
 /**
  * Note: this API is just for receiving an one-byte payload.
- * @param c
- * @return true if the input character is payload.
  */
-bool twelite_uart_rx(uint8_t c, uint8_t *cmd, uint8_t *seq) {
-    static uint8_t pos = 0;
-    static uint8_t seq_ = 0;
-    static uint8_t cmd_ = 0;
-    bool eot_reached;
-
-    eot_reached = false;
-    switch (pos++) {
-        case SEQ_NUMBER_POS:
-            seq_ = c;
-            break;
-        case PAYLOAD_POS:
-            cmd_ = c;
-            break;
-        case EOT_POS:
-            if (c == EOT) {
-                pos = 0;
-                eot_reached = true;
-            } else { // Out-of-sync
-                // Software reset
-                HAL_Delay(RESET_DELAY);
-                NVIC_SystemReset();
-            }
-            break;
-        default:
-            break;
-    }
-    if (eot_reached) {
-        *seq = seq_;
-        *cmd = cmd_;
-        return true;
+void twelite_uart_rx(uint8_t* buf, uint8_t *cmd, uint8_t *seq) {
+    if (buf[EOT_POS] != EOT) {
+      HAL_Delay(RESET_DELAY);
+      NVIC_SystemReset();
+      //return false;
     } else {
-        return false;
+      *seq = buf[SEQ_NUMBER_POS];
+      *cmd = buf[PAYLOAD_POS];
     }
 }

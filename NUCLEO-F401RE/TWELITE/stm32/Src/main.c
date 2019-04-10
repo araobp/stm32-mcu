@@ -1,31 +1,33 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <stdbool.h>
 #include "twelite.h"
 /* USER CODE END Includes */
 
@@ -47,6 +49,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+volatile bool request_received = false;
 
 /* USER CODE END PV */
 
@@ -68,9 +71,14 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  int seq = 0;
-  uint8_t data1[] = { 0, 1, 2, 3, 4 };
-  char data2[] = "ASCII";
+
+  uint8_t buf[EOT_POS + 1];
+
+  int8_t data_int8_t[] = { -128, -2, -1, 0, 1, 2, 127 };
+  int16_t data_int16_t[] = { -32768, -256, -255, -254, 0, 254, 255, 256, 32767 };
+  char data_ascii[] = "ASCII";
+  uint8_t cmd;
+  uint8_t seq;
 
   /* USER CODE END 1 */
 
@@ -92,19 +100,46 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USART2_UART_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+
+  HAL_UART_Receive_DMA(&huart1, buf, EOT_POS + 1);
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+  while (1) {
+
+    HAL_Delay(1);
+
+    if (request_received) {
+
+      twelite_uart_rx(buf, &cmd, &seq);
+      //printf("cmd: %c\n", cmd);
+
+      switch (cmd) {
+      case 'i':
+        //printf("INT8_T\n");
+        twelite_uart_tx((uint8_t *) data_int8_t, seq++, sizeof(data_int8_t));
+        break;
+      case 'l':
+        //printf("INT16_T\n");
+        twelite_uart_tx((uint8_t *) data_int16_t, seq++, sizeof(data_int16_t));
+        break;
+      case 'a':
+        //printf("ASCII\n");
+        twelite_uart_tx((uint8_t *) data_ascii, seq++, sizeof(data_ascii));
+        break;
+      default:
+        break;
+      }
+      request_received = false;
+      HAL_UART_Receive_DMA(&huart1, buf, EOT_POS + 1);
+    }
     /* USER CODE END WHILE */
-    twelite_uart_tx(data1, seq++, 5);
- //   twelite_uart_tx((uint8_t *)data2, seq++, 5);
-    HAL_Delay(1000);
 
     /* USER CODE BEGIN 3 */
   }
@@ -156,6 +191,13 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+/*
+ * One-byte command reception from PC
+ */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+  request_received = true;
+}
+
 int _write(int file, char *ptr, int len) {
   HAL_UART_Transmit(&huart2, (uint8_t *) ptr, (uint16_t) len, 0xFFFFFFFF);
   return len;
@@ -187,7 +229,7 @@ void assert_failed(uint8_t *file, uint32_t line)
 { 
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
-     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+   tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
