@@ -32,9 +32,10 @@ TWELITE-DIP is powered by 3V3 pin on the NUCLEO board:
 ```
 
 NUCLEO board:
+
 <img src="./doc/Wirling.jpg" width=500>
 
-[TWELITE-DIP](https://mono-wireless.com/jp/products/TWE-APPS/App_Twelite/asset/twe_app_pins.png)
+**==> [TWELITE-DIP](https://mono-wireless.com/jp/products/TWE-APPS/App_Twelite/asset/twe_app_pins.png)**
 
 ## Code
 
