@@ -30,7 +30,7 @@ TWELITE-DIP is powered by 3V3 pin on the NUCLEO board:
   RX/D0 ----- TX
 
 ```
-<img src="./doc/Wirling.jpg" width=300>
+<img src="./doc/Wirling.jpg" width=450>
 
 ## Code
 
