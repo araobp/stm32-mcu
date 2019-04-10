@@ -43,3 +43,5 @@ I use TWELITE's Binary Transfer Mode to transfer data in a bulk to an edge AI ap
 
 - [Slave node: TWELITE driver and test program for STM32](./stm32)
 - [Master node: TWELITE driver and test program for Python](./python)
+- [(Work in progress) Master node: TWELITE driver and test program for Web USB with Vue.js](./vue.js)
+
