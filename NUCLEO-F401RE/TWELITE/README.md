@@ -17,9 +17,7 @@ I used TWELITE with PIC16F1 MCU in a very important IoT projects in Feb 2019. It
 
 ### NUCLEO board
 
-SB62 and SB63 need to be shorted to transmit data to D1 or receive data from D0.
-
-<img src="./doc/soldering_bridges.jpg" width=250>
+I use USART1 as an UART peripheral for TWELITE.
 
 ### Circuit
 
@@ -32,10 +30,7 @@ TWELITE-DIP is powered by 3V3 pin on the NUCLEO board:
   RX/D0 ----- TX
 
 ```
-
-<img src="./doc/jumper_cables.jpg" width=400>
-
-**=> [TWELITE DIP pin assignment](https://mono-wireless.com/jp/products/TWE-APPS/App_Twelite/asset/twe_app_pins.png)**
+<img src="./doc/Wirling.jpg" width=300>
 
 ## Code
 
