@@ -1,9 +1,5 @@
 '''
  "twelite" module test utility.
-
- Example usage:
- $ python main.py COM9 2 1 -q
-
 '''
 import argparse
 import sys
