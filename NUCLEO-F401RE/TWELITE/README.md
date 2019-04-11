@@ -52,3 +52,8 @@ I use TWELITE's Binary Transfer Mode to transfer data in a bulk to an edge AI ap
                                                            +------------TWELITE---[TWELITE slave node]
    
 ```
+
+## References
+
+- [Device simulator](https://github.com/araobp/device-simulator)
+- [Using The JavaScript MQTT Client With Websockets](http://www.steves-internet-guide.com/using-javascript-mqtt-client-websockets/)
