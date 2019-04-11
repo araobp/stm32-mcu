@@ -45,3 +45,10 @@ I use TWELITE's Binary Transfer Mode to transfer data in a bulk to an edge AI ap
 - [Master node: TWELITE driver and test program for Python](./python)
 - [(Work in progress) Master node: TWELITE driver and test program for Web USB with Vue.js](./vue.js)
 
+```
+    Smart phone                          RasPi 3 as IoT Gateway                          STM32
+   [HTML5/Vue.js]---MQTT/WebSocket---[mosquitto][TWELITE master node]---TWELITE---[TWELITE slave node]
+                                                           |
+                                                           +------------TWELITE---[TWELITE slave node]
+   
+```
