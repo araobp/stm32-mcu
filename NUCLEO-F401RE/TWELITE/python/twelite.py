@@ -86,7 +86,7 @@ class MasterNode:
     # Receive data
     def _rx(self):
         d = self.ser.read(5)  # 0xA5 0x5A 0x80 <len> <src>
-        print(d)
+        #print(d)
         if len(d) == 0:
             data, seq, lqi = d, 0, 0  # d is b'' in this case
             raise TweliteException('read timeout: {:.1f} sec passed'.format(self.timeout))
