@@ -74,9 +74,11 @@ int main(void)
 
   uint8_t buf[EOT_POS + 1];
 
+  // Test data
   int8_t data_int8_t[] = { -128, -2, -1, 0, 1, 2, 127 };
   int16_t data_int16_t[] = { -32768, -256, -255, -254, 0, 254, 255, 256, 32767 };
   char data_ascii[] = "ASCII";
+
   uint8_t cmd;
   uint8_t seq;
 
@@ -117,26 +119,26 @@ int main(void)
 
     if (request_received) {
 
+      // Receive a request (command) from a master node.
       twelite_uart_rx(buf, &cmd, &seq);
-      //printf("cmd: %c\n", cmd);
 
+      // Return a response to the master node.
       switch (cmd) {
       case 'i':
-        //printf("INT8_T\n");
         twelite_uart_tx((uint8_t *) data_int8_t, seq++, sizeof(data_int8_t));
         break;
       case 'l':
-        //printf("INT16_T\n");
         twelite_uart_tx((uint8_t *) data_int16_t, seq++, sizeof(data_int16_t));
         break;
       case 'a':
-        //printf("ASCII\n");
         twelite_uart_tx((uint8_t *) data_ascii, seq++, sizeof(data_ascii));
         break;
       default:
         break;
       }
+
       request_received = false;
+
       HAL_UART_Receive_DMA(&huart1, buf, EOT_POS + 1);
     }
     /* USER CODE END WHILE */
@@ -198,6 +200,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
   request_received = true;
 }
 
+/*
+ * Override _write function.
+ *
+ * Note: usart2 is used for outputting debug info.
+ */
 int _write(int file, char *ptr, int len) {
   HAL_UART_Transmit(&huart2, (uint8_t *) ptr, (uint16_t) len, 0xFFFFFFFF);
   return len;

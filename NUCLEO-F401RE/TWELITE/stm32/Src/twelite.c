@@ -21,7 +21,6 @@ void twelite_uart_tx(uint8_t *pbuf, uint8_t seq, uint8_t len) {
     send_one(0x5A); // Binary transfer mode header
     send_one(0x80); // Data length MSB
     send_one(len + 8); // Data length LSB
-    //putchar(len+5);  // Data length LSB
     //--- Packet header
     send_one(DST_NODE); // Destination is "parent node"
     send_one(BYTE); // Byte (fixed)
