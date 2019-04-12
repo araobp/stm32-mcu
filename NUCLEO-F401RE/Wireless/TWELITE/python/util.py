@@ -25,4 +25,3 @@ def to_int8_array(data):
         tmp.append(d)
     tmp = np.array(tmp, dtype=np.int8)
     return tmp
-
