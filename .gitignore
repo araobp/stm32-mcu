@@ -194,3 +194,5 @@ lint/tmp/
 # lint/reports/
 
 .vscode
+node_modules/
+package-lock.json
