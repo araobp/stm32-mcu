@@ -1,4 +1,4 @@
 # Wireless transport for IoT and edge AI
 
 - [TWELITE](./TWELITE)
-- [BLE](./BLE)
+- [BLE](./RN4020)
