@@ -71,7 +71,7 @@ Characteristic UUID: 01020304-0506-0708-0900-0a0b0c0d0e0f
 
 I think Web Bluetooth is good for quick prototyping or making MVP.
 
-A simpler version of "Web Bluetooth / Notification" sample is [here](./html5/notifications.html).
+A simpler version of "Web Bluetooth / Notification" sample is [here](./html5/notifications.html). Thanks to Vue.js, the html5 code is very simple.
 
 ### On Raspberry Pi 3
 
