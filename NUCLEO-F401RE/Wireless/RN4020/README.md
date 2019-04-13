@@ -1,18 +1,12 @@
 # Microchip RN4020
 
-(Work in progress)
-
 ## Background
 
-I have developed several edge AI applications on STM32. They require wireless transport to transfer inference results to a host machine such as a smart phone.
+I have got the Bluetooth expansion board for NUCLEO boards, but I have not been able to find good technical documentation on the board on the net.
 
-I have been avoiding using Bluetooth/BLE as wireless transport for IoT, since I have faced a lot of problems on BLE so far:
-- the BLE lib on Linux has a lot of issues.
-- the BLE lib on Android seems to have a lot of issues.
+I only need a very compact BLE board. I discovered that Microchip [RN4020](https://www.microchip.com/wwwproducts/en/RN4020) module is very easy-to-use. Microchip is a good company.
 
-Why is that? I have been using LoRa or TWELITE instead of BLE so far.
-
-However, I discovered that Microchip [RN4020](https://www.microchip.com/wwwproducts/en/RN4020) module is very easy-to-use. Microchip is a good company.
+I use [this board](http://akizukidenshi.com/catalog/g/gK-11102/) with NUCLEO-F401RE in this project.
 
 ## Project goal
 
@@ -73,9 +67,29 @@ I think Web Bluetooth is good for quick prototyping or making MVP.
 
 A simpler version of "Web Bluetooth / Notification" sample is [here](./html5/notifications.html). Thanks to Vue.js, the html5 code is very simple.
 
-### On Raspberry Pi 3
+### Raspberry Pi 3 as BLE-WiFi router
 
-I run [the edge AI simulator script](./python/edge_ai_simulator.py) on my PC, and I also run [this script on RasPi](./python/get_notified.py). It works!
+They say Bluetooth 5 seems to be the way to go for edge AI.
+
+I saw several BLE-WiFi router products at a trade show held in Tokyo in April 2019. I am quite interested in them, so I develop a prototype of such a router.
+
+I use Microchip RN4020 that supports Bluetooth 4.x.  
+
+I run [the edge AI simulator script](./python/edge_ai_simulator.py) on my PC, and I also run [this script on RasPi](./python/agent.py). It works!
+
+#### Set up: edge AI simulator
+
+```
+[main.html]<-- mqtt/WebSocket --[mosquitto]<-- mqtt --[agent.py]<--[BLE module]<-- notify --[RN4020]<--[edge_ai simulator.py]
+Chrome browser                     RasPi                RasPi         RasPi                                     RasPi
+```
+
+#### Set up: RN4020 sheild on NUCLEO-F401RE
+
+```
+[main.html]<-- mqtt/WebSocket --[mosquitto]<-- mqtt --[agent.py]<--[BLE module]<-- notify --[RN4020]<--[edge AI simulator]
+Chrome browser                     RasPi                RasPi         RasPi                  Shield      NUCLEO-F401RE    
+```
 
 ## References
 
