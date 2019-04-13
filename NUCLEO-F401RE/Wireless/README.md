@@ -16,12 +16,18 @@ I use Microchip RN4020 that supports Bluetooth 4.x.  They say Bluetooth 5 seems 
 
 **==> [BLE(Microchip RN4020)](./RN4020)**
 
-#### Set up
+#### Set up: edge AI simulator
 
 ```
-[main.html]<-- mqtt over WebSocket --[mosquitto]<-- mqtt --[agent.py]<--[BLE module]<-- notify --[RN4020]<-- [edge_ai simulator.py]
-Chrome browser                          RasPi                RasPi         RasPi                                     RasPi
+[main.html]<-- mqtt/WebSocket --[mosquitto]<-- mqtt --[agent.py]<--[BLE module]<-- notify --[RN4020]<--[edge_ai simulator.py]
+Chrome browser                     RasPi                RasPi         RasPi                                     RasPi
+```
 
+#### Set up: RN4020 sheild on NUCLEO-F401RE
+
+```
+[main.html]<-- mqtt/WebSocket --[mosquitto]<-- mqtt --[agent.py]<--[BLE module]<-- notify --[RN4020]<--[edge AI simulator]
+Chrome browser                     RasPi                RasPi         RasPi                  Shield      NUCLEO-F401RE    
 ```
 
 ## EnOcean
