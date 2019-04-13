@@ -71,6 +71,10 @@ Characteristic UUID: 01020304-0506-0708-0900-0a0b0c0d0e0f
 
 I think Web Bluetooth is good for quick prototyping or making MVP.
 
+### On Raspberry Pi 3
+
+I run the python script on my PC, and I also run [this script on RasPi](./python/get_notified.py). It works!
+
 ## References
 
 - [RN4020 user's guide](http://ww1.microchip.com/downloads/en/devicedoc/70005191b.pdf)
