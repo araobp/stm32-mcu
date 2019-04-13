@@ -93,6 +93,10 @@ I run [another edge AI simulator](./stm32) on NUCLEO-F401RE, and I also run [thi
 Chrome browser                     RasPi                RasPi         RasPi                  Shield      NUCLEO-F401RE    
 ```
 
+I made [RN4020 Arduino shield schematic](./kicad/rn4020_shield.pdf) for this setup.
+
+<img src="./doc/rn4020_shield.jpg" width=300>
+
 ## References
 
 - [RN4020 user's guide](http://ww1.microchip.com/downloads/en/devicedoc/70005191b.pdf)
