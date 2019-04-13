@@ -75,9 +75,9 @@ I saw several BLE-WiFi router products at a trade show held in Tokyo in April 20
 
 I use Microchip RN4020 that supports Bluetooth 4.x.  
 
-I run [the edge AI simulator script](./python/edge_ai_simulator.py) on my PC, and I also run [this script on RasPi](./python/agent.py). It works!
-
 #### Set up: edge AI simulator
+
+I run [the edge AI simulator script](./python/edge_ai_simulator.py) on my PC, and I also run [this script on RasPi](./python/agent.py). It works!
 
 ```
 [main.html]<-- mqtt/WebSocket --[mosquitto]<-- mqtt --[agent.py]<--[BLE module]<-- notify --[RN4020]<--[edge_ai simulator.py]
@@ -85,6 +85,8 @@ Chrome browser                     RasPi                RasPi         RasPi     
 ```
 
 #### Set up: RN4020 sheild on NUCLEO-F401RE
+
+I run [another edge AI simulator](./stm32) on NUCLEO-F401RE, and I also run [this script on RasPi](./python/agent.py). It works!
 
 ```
 [main.html]<-- mqtt/WebSocket --[mosquitto]<-- mqtt --[agent.py]<--[BLE module]<-- notify --[RN4020]<--[edge AI simulator]
