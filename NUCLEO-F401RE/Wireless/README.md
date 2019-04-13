@@ -1,5 +1,7 @@
 # Wireless transport for IoT and edge AI
 
+<img src="./RN4020/doc/rn4020_shield.jpg" width=400>
+
 I use wireless communication modules supporting operations on UART for prototyping IoT and edge AI.
 
 In this project, [a single page application (SPA)](./spa) is used for showing an inference result from an edge AI simulator.
