@@ -2,11 +2,11 @@
 
 ## Background
 
-I have got the Bluetooth expansion board for NUCLEO boards, but I have not been able to find a good documentation on the board.
+I have got the Bluetooth expansion board for NUCLEO boards, but I have not been able to find good technical documentation on the board on the net.
 
 I only need a very compact BLE board. I discovered that Microchip [RN4020](https://www.microchip.com/wwwproducts/en/RN4020) module is very easy-to-use. Microchip is a good company.
 
-I use [this board](http://akizukidenshi.com/catalog/g/gK-11102/) in this project.
+I use [this board](http://akizukidenshi.com/catalog/g/gK-11102/) with NUCLEO-F401RE in this project.
 
 ## Project goal
 
