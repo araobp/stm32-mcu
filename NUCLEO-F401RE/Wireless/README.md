@@ -6,15 +6,15 @@ I use wireless communication modules supporting operations on UART for prototypi
 
 In this project, [a single page application (SPA)](./spa) is used for showing an inference result from an edge AI simulator.
 
+## Bluetooth Low Energy
+
+**==> [BLE(Microchip RN4020)](./RN4020)**
+
 ## TWELITE
 
 Although TWELITE is not so reliable, it is very cheap.
 
 **==> [TWELITE](./TWELITE)**
-
-## Bluetooth Low Energy
-
-**==> [BLE(Microchip RN4020)](./RN4020)**
 
 ## EnOcean
 
