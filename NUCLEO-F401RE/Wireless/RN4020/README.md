@@ -2,15 +2,7 @@
 
 ## Background
 
-I have developed several edge AI applications on STM32. They require wireless transport to transfer inference results to a host machine such as a smart phone.
-
-I have been avoiding using Bluetooth/BLE as wireless transport for IoT, since I have faced a lot of problems on BLE so far:
-- the BLE lib on Linux has a lot of issues.
-- the BLE lib on Android seems to have a lot of issues.
-
-Why is that? I have been using LoRa or TWELITE instead of BLE so far.
-
-However, I discovered that Microchip [RN4020](https://www.microchip.com/wwwproducts/en/RN4020) module is very easy-to-use. Microchip is a good company.
+I discovered that Microchip [RN4020](https://www.microchip.com/wwwproducts/en/RN4020) module is very easy-to-use. Microchip is a good company.
 
 ## Project goal
 
