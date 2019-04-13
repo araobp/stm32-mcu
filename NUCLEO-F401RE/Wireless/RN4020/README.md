@@ -63,7 +63,7 @@ I think Web Bluetooth is good for quick prototyping or making MVP.
 
 A simpler version of "Web Bluetooth / Notification" sample is [here](./html5/notifications.html). Thanks to Vue.js, the html5 code is very simple.
 
-### On Raspberry Pi 3
+### Raspberry Pi 3 as BLE-WiFi router
 
 They say Bluetooth 5 seems to be the way to go for edge AI.
 
