@@ -75,7 +75,27 @@ A simpler version of "Web Bluetooth / Notification" sample is [here](./html5/not
 
 ### On Raspberry Pi 3
 
-I run [the edge AI simulator script](./python/edge_ai_simulator.py) on my PC, and I also run [this script on RasPi](./python/get_notified.py). It works!
+They say Bluetooth 5 seems to be the way to go for edge AI.
+
+I saw several BLE-WiFi router products at a trade show held in Tokyo in April 2019. I am quite interested in them, so I develop a prototype of such a router.
+
+I use Microchip RN4020 that supports Bluetooth 4.x.  
+
+I run [the edge AI simulator script](./python/edge_ai_simulator.py) on my PC, and I also run [this script on RasPi](./python/agent.py). It works!
+
+#### Set up: edge AI simulator
+
+```
+[main.html]<-- mqtt/WebSocket --[mosquitto]<-- mqtt --[agent.py]<--[BLE module]<-- notify --[RN4020]<--[edge_ai simulator.py]
+Chrome browser                     RasPi                RasPi         RasPi                                     RasPi
+```
+
+#### Set up: RN4020 sheild on NUCLEO-F401RE
+
+```
+[main.html]<-- mqtt/WebSocket --[mosquitto]<-- mqtt --[agent.py]<--[BLE module]<-- notify --[RN4020]<--[edge AI simulator]
+Chrome browser                     RasPi                RasPi         RasPi                  Shield      NUCLEO-F401RE    
+```
 
 ## References
 
