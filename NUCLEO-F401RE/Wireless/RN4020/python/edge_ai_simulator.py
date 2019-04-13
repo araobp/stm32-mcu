@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
+
 import serial
 import time
 
-PORT = 'COM13'
+#PORT = 'COM13'
+PORT = '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_DJ00LSV6-if00-port0'
 BAUDRATE = 115200
 
 CHARACTERISTIC_UUID = "010203040506070809000A0B0C0D0E0F"
