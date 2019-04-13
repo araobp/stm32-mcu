@@ -73,7 +73,7 @@ I think Web Bluetooth is good for quick prototyping or making MVP.
 
 ### On Raspberry Pi 3
 
-I run the python script on my PC, and I also run [this script on RasPi](./python/get_notified.py). It works!
+I run [the edge AI simulator script](./python/edge_ai_simulator.py) on my PC, and I also run [this script on RasPi](./python/get_notified.py). It works!
 
 ## References
 
