@@ -31,6 +31,7 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
+LIBS:rn4020_shield-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -124,14 +125,6 @@ Wire Wire Line
 	3750 3500 5000 3500
 Wire Wire Line
 	5000 3500 5000 4900
-Wire Wire Line
-	4700 4900 4700 4300
-Wire Wire Line
-	4700 4300 5850 4300
-Wire Wire Line
-	5850 3350 4600 3350
-Wire Wire Line
-	4600 3350 4600 4900
 NoConn ~ 3750 3000
 NoConn ~ 3750 3100
 NoConn ~ 3750 3200
@@ -161,4 +154,12 @@ NoConn ~ 5850 4400
 NoConn ~ 5850 4500
 NoConn ~ 4500 4900
 NoConn ~ 4900 4900
+Wire Wire Line
+	5850 3350 4700 3350
+Wire Wire Line
+	4700 3350 4700 4900
+Wire Wire Line
+	5850 4300 4600 4300
+Wire Wire Line
+	4600 4300 4600 4900
 $EndSCHEMATC
