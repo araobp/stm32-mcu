@@ -12,7 +12,13 @@ Although TWELITE is not so reliable, it is very cheap.
 
 ## Bluetooth Low Energy
 
-I use Microchip RN4020 that supports Bluetooth 4.x.  They say Bluetooth 5 seems to be the way to go for edge AI. 
+They say Bluetooth 5 seems to be the way to go for edge AI.
+
+I saw several BLE-WiFi router products at a trade show held in Tokyo in April 2019. I am quite interested in them, so I develop a prototype of such a router.
+
+I use Microchip RN4020 that supports Bluetooth 4.x.  
+
+agent.py works as BLE-mqtt/WiFi router.
 
 **==> [BLE(Microchip RN4020)](./RN4020)**
 
