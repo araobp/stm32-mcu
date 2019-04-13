@@ -1,7 +1,5 @@
 # Microchip RN4020
 
-(Work in progress)
-
 ## Background
 
 I have developed several edge AI applications on STM32. They require wireless transport to transfer inference results to a host machine such as a smart phone.
