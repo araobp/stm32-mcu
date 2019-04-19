@@ -1,5 +1,7 @@
 # NFC
 
+(Work in progress)
+
 ## Background
 
 STMicro gave me a NFC expansion board for free at a trade show held in Japan. I evaluate the boad in this project with a NFC-capable smart phone.
