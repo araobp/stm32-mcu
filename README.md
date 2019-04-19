@@ -21,6 +21,7 @@ Toolchain:
 
 - [Thermography (infrared array sensor) and rock-paper-scissors recogniton with Keras/TensorFlow](./NUCLEO-F401RE/Thermography)
 - [X-CUBE-AI (ML inference on MCU with 2D images from an infrared array sensor)](./NUCLEO-F401RE/AI)
+- [NFC](./NUCLEO-F401RE/NFC)
 
 ### [NUCLEO-L476RG](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board
 
