@@ -11,7 +11,7 @@ STMicro gave me a NFC expansion board for free at a trade show held in Japan. I 
 ## Setup
 
 ```
-   [Android smart phone]<--NFC---[X-NUCLEO-NFC04A1 NFC/RFID][NUCLEO-F401RE]<--UART---[PC]
+   [Android smart phone]<--NFC---[X-NUCLEO-NFC04A1 NFC/RFID][NUCLEO-F401RE]
    
 ```
 
