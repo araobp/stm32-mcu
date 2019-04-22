@@ -16,3 +16,22 @@ STMicro gave me a NFC expansion board for free at a trade show held in Japan. I 
    [Android smart phone]<--NFC---[X-NUCLEO-NFC04A1 NFC/RFID][NUCLEO-F401RE]<--UART---[PC]
    
 ```
+
+## Changing the advertized URI
+
+Modify the following part in app_x-cube-nfc4.c:
+
+```
+void MX_NFC4_NDEF_URI_Init(void) {
+
+             :
+             
+  /* Prepare URI NDEF message content */
+  //strcpy( URI.protocol,URI_ID_0x01_STRING );
+  //strcpy( URI.URI_Message,"st.com/st25-demo" );
+  strcpy( URI.protocol,URI_ID_0x04_STRING );
+  strcpy( URI.URI_Message,"en.wikipedia.org/wiki/Nexus_5X" );
+  strcpy( URI.Information,"\0" );
+             :
+  }
+  ```
