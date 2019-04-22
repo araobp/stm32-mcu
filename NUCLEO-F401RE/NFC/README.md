@@ -1,7 +1,5 @@
 # NFC
 
-(Work in progress)
-
 ## Background
 
 STMicro gave me a NFC expansion board for free at a trade show held in Japan. I evaluate the boad in this project with a NFC-capable smart phone.
@@ -35,3 +33,7 @@ void MX_NFC4_NDEF_URI_Init(void) {
              :
   }
   ```
+  
+## Confirmation
+
+Use [NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc) to read the URI or write an URL to the NFC tag.
