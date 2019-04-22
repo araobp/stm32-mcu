@@ -83,8 +83,9 @@ PWM output (100Hz, 50% duty) to PA8:
 ## Tips
 
 - [CMSIS DSP RFFT pitfalls](./tips/CMSIS_DSP_RFFT.md)
-- [Enabling DSP on STM32](./tips/ENABLE_DSP_AND_PRINTF.md)
+- [Enabling DSP on STM32](./tips/ENABLE_DSP.md)
 - [PCM data resolution on STM32L4 DFSDM](./tips/RESOLUTION.md)
+- [Enabling printf on STM32](./tips/ENABLE_PRINTF.md)
 
 ## References
 
