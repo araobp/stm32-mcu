@@ -74,6 +74,11 @@ void print_csv_time(void){
 void MX_BlueNRG_MS_Init(void)
 {
   /* USER CODE BEGIN SV */
+
+  /* USER CODE END SV */
+
+  /* USER CODE BEGIN BlueNRG_MS_Init_PreTreatment */
+
   /* Initialize the peripherals and the BLE Stack */
   uint8_t SERVER_BDADDR[] = { 0xaa, 0x00, 0x00, 0xE1, 0x80, 0x02 };
   uint8_t bdaddr[BDADDR_SIZE];
@@ -140,11 +145,6 @@ void MX_BlueNRG_MS_Init(void)
   /* Set output power level */
   ret = aci_hal_set_tx_power_level(1, 4);
 
-
-  /* USER CODE END SV */
-  
-  /* USER CODE BEGIN BlueNRG_MS_Init_PreTreatment */
-  
   /* USER CODE END BlueNRG_MS_Init_PreTreatment */
 
   /* USER CODE BEGIN BlueNRG_MS_Init_PostTreatment */
