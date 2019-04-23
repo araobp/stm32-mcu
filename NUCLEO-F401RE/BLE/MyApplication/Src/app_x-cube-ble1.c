@@ -2,7 +2,6 @@
 #include "app_x-cube-ble1.h"
 
 #include "hci_tl.h"
-#include "role_type.h"
 #include "bluenrg_utils.h"
 #include "bluenrg_gatt_server.h"
 #include "bluenrg_gap_aci.h"
@@ -27,7 +26,6 @@ extern volatile uint8_t end_read_rx_char_handle;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-static void User_Process(void);
 
 /* USER CODE BEGIN PFP */
 
@@ -129,25 +127,3 @@ void MX_BlueNRG_MS_Process(void) {
   /* USER CODE END BlueNRG_MS_Process_PostTreatment */
 }
 
-static void User_Process(void) {
-  uint8_t data[] = { 0 };
-  static uint8_t inference_result = 0;
-  static uint32_t prev_time = 0;
-  uint32_t current_time;
-  if (set_connectable) {
-    /* Establish connection with remote device */
-    Make_Connection();
-    set_connectable = FALSE;
-  }
-
-  if (connected && notification_enabled) {
-    current_time = HAL_GetTick();
-    if ( (current_time - prev_time) >= 1000) {  // every 1 sec
-      data[0] = inference_result++;
-      printf("%d\n", data[0]);
-      sendData(data, sizeof(data));
-      prev_time = current_time;
-    }
-  }
-
-}

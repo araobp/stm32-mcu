@@ -1,14 +1,12 @@
 /**
   ******************************************************************************
-  * @file    role_type.h 
-  * @author  CL
-  * @version V1.0.0
-  * @date    04-July-2014
-  * @brief   
+  * @file    
+  * @author  MCD Application Team
+  * @version V2.0.0
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * COPYRIGHT(c) 2019 STMicroelectronics
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -32,61 +30,13 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
   */
-  
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef _ROLE_TYPE_H_
-#define _ROLE_TYPE_H_
+  /* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef  __RTE_COMPONENTS_H__
+#define  __RTE_COMPONENTS_H__ 
 
-#ifdef __cplusplus
- extern "C" {
-#endif
-
-/** @addtogroup Applications
- *  @{
- */
-
-/** @addtogroup SampleAppThT
- *  @{
- */
+/* Defines ------------------------------------------------------------------*/
+#define HCI_TL
+#define HCI_TL_INTERFACE 
  
-/** @defgroup ROLE_TYPE 
- * @{
- */
-
-/** @defgroup ROLE_TYPE_Exported_Types
- *  @{
- */
-/* Exported types ------------------------------------------------------------*/
-/** 
-* @brief BlueNRG Role.
-*/
-typedef enum {
-  CLIENT = 0, /**< CLIENT is for Central role. */
-  SERVER = 1  /**< SERVER is for Peripheral role. */
-} BLE_RoleTypeDef;
-/**
- * @}
- */
-
-/**
- * @}
- */
-
-/**
- * @}
- */
- 
-/**
- * @}
- */
- 
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* _ROLE_TYPE_H_ */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-
+#endif /* __RTE_COMPONENTS_H__ */
