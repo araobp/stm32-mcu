@@ -34,9 +34,11 @@ tBleStatus Add_Service(void) {
   tBleStatus ret;
 
   /*
-   * Service: 11223344-5566-7788-9900-aabbccddeeff
-   * Char TX: 01020304-0506-0708-0900-0a0b0c0d0e0f
-   * Char Rx: 01020304-0506-0708-0900-aabbccddeeff
+   * Declare a private service and characteristics
+   *
+   * Service: ffeeddcc-bbaa-0099-8877-665544332211
+   * Char TX: 0f0e0d0c-0b0a-0009-0807-060504030201
+   * Char Rx: ffeeddcc-bbaa-0009-0807-060504030201
    */
   const uint8_t service_uuid[16] = { 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77,
       0x88, 0x99, 0x00, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff };
@@ -46,7 +48,7 @@ tBleStatus Add_Service(void) {
       0x08, 0x09, 0x00, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff };
 
   ret = aci_gatt_add_serv(UUID_TYPE_128, service_uuid, PRIMARY_SERVICE, 7,
-      &servHandle); /* original is 9?? */
+      &servHandle);
   if (ret != BLE_STATUS_SUCCESS)
     goto fail;
 
@@ -77,6 +79,7 @@ void Make_Connection(void) {
 
   tBleStatus ret;
 
+  // Local name "ASC" that stands for Acoustic Scene Classification
   const char local_name[] = { AD_TYPE_COMPLETE_LOCAL_NAME, 'A', 'S', 'C' };
 
   /* disable scan response */
@@ -129,9 +132,11 @@ void startReadRXCharHandle(void) {
 }
 
 void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes) {
+  printf("r: ");
   for (int i = 0; i < Nb_bytes; i++) {
-    printf("%c", data_buffer[i]);
+    printf("%02x ", data_buffer[i]);
   }
+  printf("\n");
   fflush(stdout);
 }
 
@@ -263,7 +268,7 @@ void User_Process(void) {
     current_time = HAL_GetTick();
     if ( (current_time - prev_time) >= 1000) {  // every 1 sec
       data[0] = inference_result++;
-      printf("%d\n", data[0]);
+      printf("s: %02x\n", data[0]);
       sendData(data, sizeof(data));
       prev_time = current_time;
     }
