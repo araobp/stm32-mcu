@@ -20,6 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "usart.h"
 #include "gpio.h"
 #include "app_x-cube-nfc4.h"
@@ -89,8 +90,9 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USART2_UART_Init();
-  MX_lib_nfc_Init();
+  MX_NFC_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -101,7 +103,6 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-  MX_lib_nfc_Process();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

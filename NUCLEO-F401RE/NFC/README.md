@@ -12,7 +12,7 @@ STMicro gave me a NFC expansion board for free at a trade show held in Japan. I 
 
 ```
    [Android smart phone]<--NFC---[X-NUCLEO-NFC04A1 NFC/RFID][NUCLEO-F401RE]
-   
+
 ```
 
 ## NFC04A1_NDEF_URI
@@ -29,7 +29,7 @@ Modify the following part in app_x-cube-nfc4.c:
 void MX_NFC4_NDEF_URI_Init(void) {
 
              :
-             
+
   /* Prepare URI NDEF message content */
   //strcpy( URI.protocol,URI_ID_0x01_STRING );
   //strcpy( URI.URI_Message,"st.com/st25-demo" );
@@ -39,7 +39,11 @@ void MX_NFC4_NDEF_URI_Init(void) {
              :
   }
   ```
-  
+
 ### Confirmation
 
 Use [NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc) to read the URI or write an URL to the NFC tag.
+
+### Issue
+
+CubeMX remove "".\NFC04A1_NDEF_URI\Drivers\BSP" folder, when the generate button is pressed after the initial generation. Keep the BSP folder somewhere, and copy the folder into the newly generated project.
