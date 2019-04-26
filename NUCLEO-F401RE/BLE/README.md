@@ -8,7 +8,7 @@
 ## Setup
 
 ```
-   [Android smart phone]<--EddyStone---[X-NUCLEO-IDB05A1][NUCLEO-F401RE]
+   [Android smart phone]<--BLE-->[X-NUCLEO-IDB05A1][NUCLEO-F401RE]
 ```
 
 ## Beacon (EddyStone)
