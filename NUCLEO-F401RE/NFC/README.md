@@ -33,6 +33,6 @@ Modify URI.protocol and URI.URI_Message in app_x-cube-nfc4.c:
 
 Use [NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc) to read the URI or write an URL to the NFC tag.
 
-### Issue
+### Bug? in CubeMX(v 5.1.0)/X-CUBE-NFC4
 
 CubeMX remove "".\NFC04A1_NDEF_URI\Drivers\BSP" folder, when the generate button is pressed after the initial generation. Keep the BSP folder somewhere, and copy the folder into the newly generated project.
