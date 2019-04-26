@@ -1,9 +1,6 @@
-# BLE
-
-## X-NUCLEO-IDB05A1 Bluetooth Low Energy expansion board
+# X-NUCLEO-IDB05A1 Bluetooth Low Energy expansion board
 
 ==> **[STMicro's web site](https://www.st.com/en/ecosystems/x-nucleo-idb05a1.html)**
-
 
 ## Setup
 
