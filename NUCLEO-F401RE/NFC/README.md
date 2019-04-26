@@ -16,22 +16,18 @@
 
 ### Changing the advertized URI
 
-Modify the following part in app_x-cube-nfc4.c:
+Modify URI.protocol and URI.URI_Message in app_x-cube-nfc4.c:
 
 ```
-void MX_NFC4_NDEF_URI_Init(void) {
-
-             :
-
   /* Prepare URI NDEF message content */
-  //strcpy( URI.protocol,URI_ID_0x01_STRING );
-  //strcpy( URI.URI_Message,"st.com/st25-demo" );
-  strcpy( URI.protocol,URI_ID_0x04_STRING );
-  strcpy( URI.URI_Message,"en.wikipedia.org/wiki/Nexus_5X" );
+  strcpy( URI.protocol,URI_ID_0x01_STRING );
+  strcpy( URI.URI_Message,"st.com/st25-demo" );
   strcpy( URI.Information,"\0" );
-             :
-  }
-  ```
+  
+  /* Write NDEF to EEPROM */
+  HAL_Delay(5);
+  while( NDEF_WriteURI( &URI ) != NDEF_OK );
+```
 
 ### Confirmation
 
