@@ -1,7 +1,4 @@
-
-## Background
-
-STMicro gave me a NFC expansion board for free at a trade show held in Japan.
+# BLE
 
 ## X-NUCLEO-IDB05A1 Bluetooth Low Energy expansion board
 
