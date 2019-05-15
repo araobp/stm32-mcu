@@ -27,7 +27,7 @@ Toolchain:
 ### [NUCLEO-L476RG](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board
 
 - [HelloWorld](./NUCLEO-L476RG/HelloWorld)
-- [GPIO_Interrupt](.//GPIO_Interrupt)
+- [GPIO_Interrupt](./GPIO_Interrupt)
 - [Clock](./NUCLEO-L476RG/Clock/README.md)
 - [CAN](./NUCLEO-L476RG/CAN/README.md)
 - [MEMSMIC(MEMS mic expansion board)](./NUCLEO-L476RG/MEMSMIC/README.md)
