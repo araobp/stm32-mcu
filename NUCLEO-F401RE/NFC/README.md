@@ -53,11 +53,13 @@ Service preparation
 - Android
 - iPhone "Core NFC": https://www.idownloadblog.com/2018/09/14/apple-core-nfc-background-tag-reading/
 
-### Dynamic NFC tag
+### Dynamic NFC tag device
 
-Current implementation:
-- [NUCLEO F401RE](https://www.st.com/en/evaluation-tools/nucleo-f401re.html)
-- [X-NUCLEO-NFC04A1(ST25DV04K)](https://www.st.com/en/ecosystems/x-nucleo-nfc04a1.html)
+- [Host MCU: NUCLEO F401RE](https://www.st.com/en/evaluation-tools/nucleo-f401re.html)
+- [NFC tag: X-NUCLEO-NFC04A1(ST25DV04K)](https://www.st.com/en/ecosystems/x-nucleo-nfc04a1.html)
+
+I am also purchasing the following tag that is much smaller than X-NUCLEO-NFC04A1:
+- [NFC tag: ANT7-T-ST25DV04K](https://www.st.com/en/evaluation-tools/ant7-t-st25dv04k.html)
 
 ### Web application server
 
@@ -92,12 +94,6 @@ This is just a skeltpne of web application server.
 ### Android-native app for more advanced services
 
 TODO: p2p data transfer scenarios using ST25 mailbox, other than NDEF messages.
-
-### Web NFC for dynamic tag NFC management
-
-It is pure experimental -- although Web NFC is interesting, iPhone does not support it, and Chrome users need to access "chrome://flags" to enable Web NFC.
-
-TODO
 
 ## A bug in X-CUBE-NFC4/CubeMX
 
