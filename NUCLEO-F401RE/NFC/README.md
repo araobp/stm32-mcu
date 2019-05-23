@@ -1,5 +1,7 @@
 # Dynamic NFC tag (STMicro's ST25DV04K)
 
+<img src="./doc/ST25DV04K.jpg" width=200>
+
 ## Dynamic NFC tag "ST25"
 
 ST25 supports bi-directional communication in a passive way, so it can be thought of as a reader/writer powerd by a smartphone via RF.
