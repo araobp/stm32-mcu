@@ -12,7 +12,7 @@ INTERVAL = 10  # in seconds
 TAG_DATA = {'1': ['seoul_22', 'korea_highway_route50_rest_stop'],
         '2': ['seoul_22', 'gangneung_noodles']}
 
-LOCAL_IP_ADDR = subprocess.check_output(['hostname', '-I']).decode('utf-8').rstrip(' \n')
+LOCAL_IP_ADDR = subprocess.check_output(['hostname', '-I']).decode('utf-8').split(' ')[0]
 
 URL_FORMAT = LOCAL_IP_ADDR + "/some_service?loc={}&ref={}\n"
 
@@ -34,5 +34,4 @@ with serial.Serial(PORT, 115200, timeout=3) as ser:
         ser.write(url.encode('utf-8'))
         client.publish('display', '2')
         time.sleep(INTERVAL)
-
 
