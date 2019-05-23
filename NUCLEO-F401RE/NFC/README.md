@@ -57,6 +57,8 @@ Service preparation
 
 ### Dynamic NFC tag device
 
+<img src="./doc/expansion_board1.jpg" width=200>
+
 - [Host MCU: NUCLEO F401RE](https://www.st.com/en/evaluation-tools/nucleo-f401re.html)
 - [NFC tag: X-NUCLEO-NFC04A1(ST25DV04K)](https://www.st.com/en/ecosystems/x-nucleo-nfc04a1.html)
 
