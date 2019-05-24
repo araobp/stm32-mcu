@@ -2,6 +2,8 @@
 
 <img src="./doc/ST25DV04K.jpg" width=200>
 
+ST25DV04K (4K = 512bytes EEPROM)
+
 ## Dynamic NFC tag "ST25"
 
 ST25 supports bi-directional communication in a passive way, so it can be thought of as a reader/writer powerd by a smartphone via RF.
@@ -9,6 +11,8 @@ ST25 supports bi-directional communication in a passive way, so it can be though
 ## My interests
 
 Think different -- IoT in a different way.
+
+**Actually, dynamic NFC tag is exactly what I have been looking for since three years ago, to make things talk with smart phones.**
 
 ## Service enabled by ST25
 
@@ -94,10 +98,6 @@ main.c
 This is just a skeltpne of web application server.
 
 ==> **[code](./node)**
-
-### Android-native app for more advanced services
-
-TODO: p2p data transfer scenarios using ST25 mailbox, other than NDEF messages.
 
 ## A bug in X-CUBE-NFC4/CubeMX
 
