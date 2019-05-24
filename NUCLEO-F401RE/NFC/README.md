@@ -30,9 +30,9 @@ Think different -- IoT in a different way.
 [2] The system wakes up and prepares a service for the user in a very short time.
 
 ```
-[Local service function]
+[Local service function (incl. edge AI enabled by X-CUBE-AI)]
        |
-       +-------------[Sensor] ((( shape, color, temperature ...
+       +-------------[Sensor] ((( gesture, shape, color ...
        |
        v
     [STM32]          [ST25]<---RF----[Smart phone] User
