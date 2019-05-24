@@ -12,7 +12,7 @@ ST25 supports bi-directional communication in a passive way, so it can be though
 
 Think different -- IoT in a different way.
 
-**Actually, dynamic NFC tag is exactly what I have been looking for since three years ago, to make things talk with smart phones.**
+**Actually, dynamic NFC tag is exactly what I have been looking for since three years ago, to make things talk to smart phones.**
 
 ## Service enabled by ST25
 
