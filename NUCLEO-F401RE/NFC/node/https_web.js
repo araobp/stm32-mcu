@@ -81,7 +81,7 @@ app.get('/some_service', (req, res) => {
 
     switch(SERVICES[loc]) {
       case 'restaurants':
-        console.log(RESTAURANTS[ref]);
+        console.log('Redirect: ' + RESTAURANTS[ref]);
         res.redirect(RESTAURANTS[ref]);
         break;
       defafult:

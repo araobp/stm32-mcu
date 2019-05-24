@@ -19,7 +19,10 @@ URL_FORMAT = LOCAL_IP_ADDR + "/some_service?loc={}&ref={}\n"
 client = mqtt.Client('display_controller')
 client.connect('localhost')
 
-with serial.Serial(PORT, 115200, timeout=3) as ser:
+ser = None
+
+try:
+    ser = serial.Serial(PORT, 115200, timeout=3)
 
     while True:
 
@@ -32,6 +35,18 @@ with serial.Serial(PORT, 115200, timeout=3) as ser:
         url = URL_FORMAT.format(*TAG_DATA['2']) 
         print(url, end='')
         ser.write(url.encode('utf-8'))
+        client.publish('display', '2')
+        time.sleep(INTERVAL)
+except:
+    while True:
+
+        url = URL_FORMAT.format(*TAG_DATA['1']) 
+        print(url, end='')
+        client.publish('display', '1')
+        time.sleep(INTERVAL)
+
+        url = URL_FORMAT.format(*TAG_DATA['2']) 
+        print(url, end='')
         client.publish('display', '2')
         time.sleep(INTERVAL)
 
