@@ -69,14 +69,10 @@ Service preparation
 I am also purchasing the following tag that is much smaller than X-NUCLEO-NFC04A1:
 - [NFC tag: ANT7-T-ST25DV04K](https://www.st.com/en/evaluation-tools/ant7-t-st25dv04k.html)
 
-### Web application server
+### Web applications
 
-- Node.js with express.js
-- SQLite
-
-## Software toolchain
-
-- TrueSTUDIO
+- Server: Node.js with express.js and EJS template engine
+- Client: Vue.js as SPA framework
 
 ## Code
 
