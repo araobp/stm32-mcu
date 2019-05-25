@@ -98,7 +98,7 @@ Note: The current implementation of local service function just copies the base 
 
 ### HTTPS web application server
 
-This is just a skeltpne of web application server.
+This is just a skelton of web application server.
 
 ==> **[code](./node)**
 
