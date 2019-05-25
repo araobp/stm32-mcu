@@ -8,11 +8,9 @@ ST25DV04K (4K = 512bytes EEPROM)
 
 ST25 supports bi-directional communication in a passive way, so it can be thought of as a reader/writer powerd by a smartphone via RF.
 
-## My interests
+## Why I am so interested in dynaminc NFC tag
 
-Think different -- IoT in a different way.
-
-**Actually, dynamic NFC tag is exactly what I have been looking for since three years ago, to make things talk to smart phones.**
+Dynamic NFC tag is exactly what I have been looking for since three years ago, to make things talk to smart phones. Think different -- IoT in a different way.
 
 ## Service enabled by ST25
 
