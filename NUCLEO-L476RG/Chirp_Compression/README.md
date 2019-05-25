@@ -2,6 +2,10 @@
 
 ![](./oscilloscope/screenshots/chirp_compression.jpg)
 
+## Motivation, goal and review
+
+I studied Signal Processing very hard in 2018, and I was especially interested in Chirp Compression technique used by radars. I thought it could have been used for transmitting some emergency event over ultrasonic. But it turned out that STM32L476RG and the MEMS mic used in this project cannot achive the goal because of their physical limitations.
+
 ## Chirp compression technique
 
 It is very simple:
