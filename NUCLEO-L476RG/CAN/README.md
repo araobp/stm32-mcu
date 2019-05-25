@@ -2,6 +2,8 @@
 
 This project does not use CAN tranceivers (such as Microchip MCP2561). The program runs in Loopback/Silent mode instead.
 
+Note: My [can-bus](https://github.com/araobp/can-bus) project on github.com uses both CAN controllers and CAN tranceivers from Microchip. I even developed CAN controller driver by myself.
+
 Connect Teraterm to the board at baudrate 9600bps to show output messages.
 
 ```
