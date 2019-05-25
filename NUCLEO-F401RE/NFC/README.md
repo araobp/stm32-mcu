@@ -30,9 +30,8 @@ Think different -- IoT in a different way.
 [2] The system wakes up and prepares a service for the user in a very short time.
 
 ```
-[Local service function (incl. edge AI enabled by X-CUBE-AI)]
-       |
-       +-------------[Sensor] ((( gesture, shape, color ...
+[(optional)X-CUBE-AI   ]
+[Local service function]<---[Sensor] ((( gesture, shape, color ...
        |
        v
     [STM32]          [ST25]<---RF----[Smart phone] User
@@ -68,6 +67,16 @@ Service preparation
 
 I am also purchasing the following tag that is much smaller than X-NUCLEO-NFC04A1:
 - [NFC tag: ANT7-T-ST25DV04K](https://www.st.com/en/evaluation-tools/ant7-t-st25dv04k.html)
+
+**UART commands**
+
+|Command     |Description                        |
+|------------|-----------------------------------|
+|.l          |Lock RF write (default)            |
+|.u          |Unlock RF write                    |
+|<any string>|Write base URL to Area 2 on EEPROM |
+
+Note: The current implementation of local service function just copies the base URL with a serial number appended to Area 1 on EEPROM.
 
 ### Web applications
 
