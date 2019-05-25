@@ -2,6 +2,8 @@
 
 ==> **[STMicro's web site](https://www.st.com/en/ecosystems/x-nucleo-idb05a1.html)**
 
+Note: I have not been using this BLE expansion board, since its pin assignment does not allow me to add another wireless module such as X-NUCLEO-NFC04A1(ST25DV04K). I have been using Microchip's RN4020 instead.
+
 ## Setup
 
 ```
@@ -9,6 +11,8 @@
 ```
 
 ## Template project for simple TX and RX
+
+The aim of this template project is to add BLE to edge AI developed with X-CUBE-AI.
 
 ### Config on CubeMX
 
