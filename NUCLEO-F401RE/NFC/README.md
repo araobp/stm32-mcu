@@ -66,16 +66,6 @@ Service preparation
 I am also purchasing the following tag that is much smaller than X-NUCLEO-NFC04A1:
 - [NFC tag: ANT7-T-ST25DV04K](https://www.st.com/en/evaluation-tools/ant7-t-st25dv04k.html)
 
-**UART commands**
-
-|Command     |Description                        |
-|------------|-----------------------------------|
-|.l          |Lock RF write (default)            |
-|.u          |Unlock RF write                    |
-|<any string>|Write base URL to Area 2 on EEPROM |
-
-Note: The current implementation of local service function just copies the base URL with a serial number appended to Area 1 on EEPROM.
-
 ### Web applications
 
 - Server: Node.js with express.js and EJS template engine
@@ -95,6 +85,16 @@ main.c
 ```
 #define SLEEP_ENABLED
 ```
+
+**UART commands**
+
+|Command     |Description                        |
+|------------|-----------------------------------|
+|.l          |Lock RF write (default)            |
+|.u          |Unlock RF write                    |
+|<any string>|Write base URL to Area 2 on EEPROM |
+
+Note: The current implementation of local service function just copies the base URL with a serial number appended to Area 1 on EEPROM.
 
 ### HTTPS web application server
 
