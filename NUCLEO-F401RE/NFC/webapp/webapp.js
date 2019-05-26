@@ -32,11 +32,11 @@ function expires(time) {
 
 // Create HTTPS server
 https.createServer({
-  key: fs.readFileSync('./server.key'),
-  cert: fs.readFileSync('./server.cert')
+  key: fs.readFileSync(path.join(__dirname + '/server.key')),
+  cert: fs.readFileSync(path.join(__dirname + '/server.cert'))
 }, app)
 .listen(PORT, () => {
-  console.log('HTTPS web server started');
+  console.log('HTTPS web server started for web app with dynamic NFC tag');
 });
 
 app.get('/some_service', (req, res) => {

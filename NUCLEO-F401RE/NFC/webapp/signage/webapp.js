@@ -9,11 +9,11 @@ app.use(bodyParser.urlencoded({extended: true, limit: '200mb'}));
 app.use(bodyParser.json({limit: '200mb'}));
 
 // Directory of static HTML files
-app.use(express.static('./www'));
+app.use(express.static(__dirname));
 
 // EJS template engine setup
 app.set('view engine', 'ejs');
 
 app.listen(80, () => {
-  console.log('HTTP web server started');
+  console.log('HTTP web server started for digital signage web app');
 });
