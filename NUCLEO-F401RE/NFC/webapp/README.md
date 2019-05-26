@@ -1,4 +1,4 @@
-# Web application servers
+# Web application server
 
 ## Architecture
 
