@@ -100,7 +100,7 @@ Note: The current implementation of local service function just copies the base 
 
 This is just a skelton of web application server.
 
-==> **[code](./node)**
+==> **[code](./webapp)**
 
 ## A bug in X-CUBE-NFC4/CubeMX
 
