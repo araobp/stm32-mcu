@@ -9,9 +9,9 @@
    [STM32F401RE]
         | I2C
         v
-      [ST25](())[Chrome/Android] ----- HTTPS over WiFi ----- [webapp.js]
-                                                             + server.key
-                                                             + sever.cert
+      [ST25](())[Chrome/Android] ----- HTTPS ----- [webapp.js]
+                                                   + server.key
+                                                   + sever.cert
 ```
 
 ### express.js over HTTPS
