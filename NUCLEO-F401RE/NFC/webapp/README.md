@@ -5,9 +5,13 @@
 ### Architecture
 
 ```
-  [ST25](())[Chrome/Android] ----- HTTPS over WiFi ----- [webapp.js]
-                                                         + server.key
-                                                         + sever.cert
+[Local service function] generates URL
+   [STM32F401RE]
+        | I2C
+        v
+      [ST25](())[Chrome/Android] ----- HTTPS over WiFi ----- [webapp.js]
+                                                             + server.key
+                                                             + sever.cert
 ```
 
 ### express.js over HTTPS
@@ -30,6 +34,6 @@ The controller send MQTT messages to repeatedly show muliple images at some inte
        [STM32F401RE]
              | I2C
              v
-        [ST25DV04K]
+           [ST25](())[Chrome/Android] ----- HTTP or HTTPS ----- [WWW or YouTube]
 
 ```
