@@ -5,6 +5,8 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 abstract class SerialService : Service() {
 
@@ -13,6 +15,10 @@ abstract class SerialService : Service() {
     companion object {
         const val BAUDRATE = 9600
         const val SLEEP_TIMER = 1000L
+    }
+
+    init {
+        EventBus.getDefault().register(this)
     }
 
     override fun onCreate() {
@@ -45,4 +51,8 @@ abstract class SerialService : Service() {
         mEventBus.post(MessageFromDevice(message))
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessage(message: MessageToDevice) {
+        tx(message.toString())
+    }
 }

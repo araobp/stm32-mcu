@@ -7,6 +7,7 @@ import android.text.method.ScrollingMovementMethod
 import android.widget.TextView
 import jp.araobp.serial.MessageFromDevice
 import jp.araobp.serial.MessageToDevice
+import jp.araobp.serial.service.FtdiDriver
 import jp.araobp.serial.service.FtdiSimulator
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe

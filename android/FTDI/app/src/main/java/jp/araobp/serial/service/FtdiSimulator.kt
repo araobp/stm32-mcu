@@ -19,10 +19,6 @@ class FtdiSimulator : SerialService() {
         const val SLEEP = 1000L  // 1sec interval
     }
 
-    init {
-        EventBus.getDefault().register(this)
-    }
-
     /**
      * Sets FTDI device config
      */
@@ -66,10 +62,5 @@ class FtdiSimulator : SerialService() {
      * Stops reader thread and closes FTDI device
      */
     override fun close() {
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessage(message: MessageToDevice) {
-        tx(message.toString())
     }
 }
