@@ -132,8 +132,8 @@ void MX_NFC4_NDEF_URI_Init(void)
   HAL_Delay( 300 );
   
   /* Prepare URI NDEF message content */
-  strcpy( URI.protocol,URI_ID_0x04_STRING );
-  strcpy( URI.URI_Message,"github.com/araobp" );
+  strcpy( URI.protocol,URI_ID_0x01_STRING );
+  strcpy( URI.URI_Message,"st.com/st25-demo" );
   strcpy( URI.Information,"\0" );
   
   /* Write NDEF to EEPROM */

@@ -31,6 +31,7 @@
 #include "nfc04a1.h"
 #include "nfc04a1_nfctag.h"
 #include "app_nfc_uri.h"
+#include "rn4020.h"
 
 /* USER CODE END Includes */
 
@@ -74,7 +75,7 @@ typedef enum {
 volatile bool field_changed = false;
 
 // Command reception from uart2
-volatile bool command_received = false;
+volatile bool command_received2 = false;
 uint8_t uart_rx_buf[BUFSIZE];
 uint8_t uart_rx_data;
 
@@ -130,6 +131,9 @@ int main(void)
 
   char base_url[BUFSIZE];
 
+  // Notify BLE central of RF field change
+  uint8_t RF_FIELD_CHANGED[] = "RF_FIELD_CHANGED";
+
   /* USER CODE END 1 */
   
 
@@ -152,6 +156,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  MX_USART6_UART_Init();
   MX_NFC_Init();
   /* USER CODE BEGIN 2 */
   NFC04A1_LED_Off( YELLOW_LED );
@@ -187,6 +192,7 @@ int main(void)
       if (phase == STANDBY) {
         NFC04A1_LED_On( GREEN_LED );
         printf("PHASE 1: RF field change detected\n");
+        notify(RF_FIELD_CHANGED, sizeof(RF_FIELD_CHANGED));  // Notify the event to BLE entral
         pData = extraProcess();
         generate_URI_with_serial_number('4', (char *)base_url, (char *)pData, increment);
         tick_prev = HAL_GetTick();
@@ -235,7 +241,7 @@ int main(void)
 #endif
 
     // Command parser
-    if (command_received) {
+    if (command_received2) {
       if (strcmp((char *)uart_rx_buf, ".r") == 0) {  // Reset NFC tag
         printf("RESET...\n\n");
         init_NFC_tag(true);
@@ -254,7 +260,7 @@ int main(void)
         write_data_area2(uart_rx_buf, strlen((char *)uart_rx_buf)+1);
         strcpy(base_url, (char *)uart_rx_buf);
       }
-      command_received = false;
+      command_received2 = false;
     }
     /* USER CODE END WHILE */
 
@@ -322,11 +328,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle) {
 
   static int idx = 0;
 
-  if (!command_received) {
+  if (!command_received2) {
     if (uart_rx_data == '\n') {
       uart_rx_buf[idx] = '\0';
       idx = 0;
-      command_received = true;
+      command_received2 = true;
     } else {
       uart_rx_buf[idx++] = uart_rx_data;
     }
