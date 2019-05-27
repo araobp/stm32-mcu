@@ -43,10 +43,6 @@ Toolchain: [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.h
 - [PWM-output](./STM32F4-Discovery/PWM-output)
 - [AudioWeaver](./STM32F4-Discovery/AudioWeaver)
 
-### Android with NUCLEO board
-
-- [Android app skelton to communicate with NUCLEO board via FTDI chip](./android/FTDI)
-
 #### printf issue
 
 I managed to support printf on USART2.
