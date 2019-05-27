@@ -152,7 +152,7 @@ uint32_t read_data_area3(void) {
 /**
  * Write URL with a serial number to NFC tag
  */
-void generate_URI_with_serial_number(char identifier, char *pUri, char *pData) {
+void generate_URI_with_serial_number(char identifier, char *pUri, char *pData, bool increment) {
 
   char buf[256] = { 0 };
   int len;
@@ -184,7 +184,9 @@ void generate_URI_with_serial_number(char identifier, char *pUri, char *pData) {
   printf("sno: %ld\n", sno);
   printf("uri w/ sno: %s\n", buf);
 
-  write_data_area3(++sno);
+  if (increment) {
+	  write_data_area3(++sno);
+  }
   URI_write(identifier, buf);
 }
 

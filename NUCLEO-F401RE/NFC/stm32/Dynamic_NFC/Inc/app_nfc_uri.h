@@ -19,7 +19,7 @@ void URI_read(sURI_Info *pUri);
 
 void write_data_area2(uint8_t *pData, uint8_t len);
 uint8_t read_data_area2(uint8_t *pData);
-void generate_URI_with_serial_number(char identifier, char *pUri, char *pData);
+void generate_URI_with_serial_number(char identifier, char *pUri, char *pData, bool increment);
 
 void lock_nfc(void);
 void unlock_nfc(void);

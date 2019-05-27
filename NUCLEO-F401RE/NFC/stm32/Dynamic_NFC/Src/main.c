@@ -54,6 +54,9 @@ typedef enum {
 
 #define BUFSIZE 256
 
+
+#define CMD(cmd) (strcmp((char *)uart_rx_buf, cmd) == 0)
+
 //#define SLEEP_ENABLED
 
 /* USER CODE END PD */
@@ -77,6 +80,9 @@ uint8_t uart_rx_data;
 
 // Characteristics data simulation
 char characteristics[] = "woman,tall,young,white_blouse,blue_skirt,black_shoes";  // Some characteristics of the user
+
+// Enable/disable serial number increment
+volatile bool increment = true;
 
 /* USER CODE END PV */
 
@@ -182,7 +188,7 @@ int main(void)
         NFC04A1_LED_On( GREEN_LED );
         printf("PHASE 1: RF field change detected\n");
         pData = extraProcess();
-        generate_URI_with_serial_number('4', (char *)base_url, (char *)pData);
+        generate_URI_with_serial_number('4', (char *)base_url, (char *)pData, increment);
         tick_prev = HAL_GetTick();
         phase = PHASE1;
       }
@@ -239,8 +245,11 @@ int main(void)
       } else if (strcmp((char *)uart_rx_buf, ".u") == 0) {
         printf("UNLOCK NFC...\n\n");
         unlock_nfc();
-      }
-      else {
+      } else if (CMD(".d")) {
+    	increment = false;
+      } else if (CMD(".e")) {
+    	increment = true;
+      } else {
         // Write URL
         write_data_area2(uart_rx_buf, strlen((char *)uart_rx_buf)+1);
         strcpy(base_url, (char *)uart_rx_buf);
