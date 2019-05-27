@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script>
+      let cookies = Cookies.get();
+      console.log(cookies);
+      let new_url;
+      if (cookies.tok) {
+        new_url = window.location.href + '&tok=' + cookies.tok;
+      } else {
+        new_url = window.location.href + '&tok=0';
+      }
+      console.log(new_url);
+      window.open(new_url, '_self');
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

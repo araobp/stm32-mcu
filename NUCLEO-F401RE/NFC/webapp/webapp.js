@@ -5,12 +5,14 @@ const https = require('https');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
+const uuidv4 = require('uuid/v4');
 
 // HTTPS default port number
 const PORT = 443 
 
 // Services
-const SERVICES = {seoul_22: 'restaurants'};
+const SERVICES = {seoul_22: 'restaurants',
+                  'yokohama,osanbashi': 'debug'};
 const RESTAURANTS = {korea_highway_route50_rest_stop: 'https://www.youtube.com/watch?v=eU-tS92t2vU',
   gangneung_noodles: 'https://www.tripadvisor.jp/Restaurant_Review-g317126-d8882864-Reviews-Brothers_Buckwheat_Noodles-Gangneung_Gangwon_do.html'};
 
@@ -41,6 +43,7 @@ https.createServer({
 
 app.get('/some_service', (req, res) => {
   
+  // Query strings
   let loc = req.query.loc;
   let dat = req.query.dat;
   let sno = req.query.sno;
@@ -67,28 +70,44 @@ app.get('/some_service', (req, res) => {
     });
   }
 
-  params = {
-    message: 'Welcome!',
+  let params = {
+    message: 'Welcome to the dynamic NFC tag world!',
     loc: loc,
     dat: dat,
     sno: sno,
     ref: ref,
-    expires: expires(3600 * 24)  // expires after one day
-  }
+    tok: tok,
+    assign_token: null,
+    //expires: expires(3600 * 24)  // expires after one day
+    expires: expires(5)  // expires after 5 sec (for debugging) 
+  };
 
 
-  if (loc in SERVICES) {
+  //----- Service delivery -----
 
     switch(SERVICES[loc]) {
       case 'restaurants':
         console.log('Redirect: ' + RESTAURANTS[ref]);
         res.redirect(RESTAURANTS[ref]);
         break;
-      defafult:
+      case 'debug':
+        console.log('Access to debug page');
+        res.render('debug', params); 
+        break;
+      default:
+        if (tok) {
+          console.log(tok);
+          if (tok == '0') {
+            console.log('Access to menu page without token');
+            params.assign_token = uuidv4();
+          } else {
+            console.log('Access to menu page with token');
+          }
+          res.render('menu', params); 
+        } else {
+          console.log('Access to bootstrap page');
+          res.render('bootstrap', params); 
+        }
         break;
     }
-
-  } else {
-    res.render('index', params); 
-  }
 });

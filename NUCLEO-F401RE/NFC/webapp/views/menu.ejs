@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <script src="https://jp.vuejs.org/js/vue.min.js"></script>
+    <title>Menu</title>
+  </head>
+
+  <body>
+    <H1>Menu</h1>
+
+    <p><%= message %></p>
+
+    <h2>URL query strings (current)</h2>
+    <ul>
+      <li>loc=<%= loc %>
+      <li>dat=<%= dat %>
+      <li>sno=<%= sno %>
+      <li>tok=<%= tok %>
+    </ul>
+
+    <h2>Cookies (previous)</h2>
+    <div id="app">
+      <p>{{ cookies }}</p>
+    </div>
+
+    <script>
+      let app = new Vue({
+        el: '#app',
+        data: {
+          cookies: ''
+        }
+      });
+
+      // Show previous query params
+      let cookies = document.cookie;
+      console.log(cookies);
+      app.cookies = cookies;
+
+      // Save current query params
+      document.cookie = 'loc=<%= loc %>; expires=<%= expires %>';
+      document.cookie = 'sno=<%= sno %>; expires=<%= expires %>';
+      let assign_token = "<%- assign_token%>";
+      if (assign_token) {
+        console.log('New token assigned: ' + assign_token);
+        document.cookie = 'tok=' + assign_token +'; expires=<%= expires %>';
+      }
+    </script>
+    
+  </body>
+</html>

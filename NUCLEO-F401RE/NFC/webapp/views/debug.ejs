@@ -4,22 +4,23 @@
   <head>
     <meta charset='utf-8'>
     <script src="https://jp.vuejs.org/js/vue.min.js"></script>
-    <title>Web applications enabled by dynamic NFC tag</title>
+    <title>Debug tool</title>
   </head>
 
   <body>
-    <H1>Web applications enabled by dynamic NFC tag</h1>
+    <H1>Debug tool</h1>
 
     <p><%= message %></p>
 
-    <h2>URL query strings</h2>
+    <h2>URL query strings (current)</h2>
     <ul>
       <li>loc=<%= loc %>
       <li>dat=<%= dat %>
       <li>sno=<%= sno %>
+      <li>tok=<%= tok %>
     </ul>
 
-    <h2>Cookies</h2>
+    <h2>Cookies (previous)</h2>
     <div id="app">
       <p>{{ cookies }}</p>
     </div>
@@ -32,12 +33,15 @@
         }
       });
 
+      // Show previous query params
       let cookies = document.cookie;
       console.log(cookies);
       app.cookies = cookies;
 
+      // Save current query params
       document.cookie = 'loc=<%= loc %>; expires=<%= expires %>';
       document.cookie = 'sno=<%= sno %>; expires=<%= expires %>';
+      document.cookie = 'tok=<%= assign_token %>; expires=<%= expires %>';
     </script>
     
   </body>
