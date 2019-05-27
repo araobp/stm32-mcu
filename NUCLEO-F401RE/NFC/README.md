@@ -25,7 +25,16 @@ Dynamic NFC tag is exactly what I have been looking for since three years ago, t
            Interrupt
 ```
 
-[2] The system wakes up and prepares a service for the user in a very short time.
+[1b(optional)] The device notifies a BLE central of the RF field change event 
+
+```
+       +--------NOTIFY---------------------------->[BLE central]
+       |
+   [RN4020]                                         
+    [STM32]          [ST25]<---RF----[Smart phone] User
+```
+
+[2] The device wakes up and prepares a service for the user in a very short time.
 
 ```
 [(optional)X-CUBE-AI   ]
@@ -36,7 +45,7 @@ Dynamic NFC tag is exactly what I have been looking for since three years ago, t
 Service preparation  
 ```
 
-[3] The system provides a service URL to the smartphone.
+[3] The device provides a service URL to the smartphone.
 
 ```
     [STM32]---I2C--->[ST25]----RF--->[Smart phone]----GET---->[Web application server]
