@@ -90,7 +90,9 @@
 
   function handleNotifications(event) {
     let value = event.target.value;
-    let datastr = value.getInt8(0).toString();
+    let buf = value.buffer
+    let datastr = String.fromCharCode.apply(null, new Uint8Array(buf));
+    datastr = datastr.substr(0, datastr.length - 1);
     console.log(datastr);
     app.message = datastr;
     cnt = cnt + 1;
