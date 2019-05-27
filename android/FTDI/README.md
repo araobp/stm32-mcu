@@ -1,16 +1,10 @@
 # Testing Android FTDI driver
 
-(Work in progress)
-
 ## Goal
 
-I develop an oscilloscope GUI on Android for this project: https://github.com/araobp/acoustic-features
-
-In this project, I will just confirm if Android can communicate with a NUCLEO board over UART/USB.
+In this project, I will just confirm if Android can communicate with a NUCLEO board via USB-UART converter chip from FTDI.
 
 ## Set up
-
-I dare not use ST-Link USB port on NUCLEO board in this project, because the debugger part should be removed to make the board more portable.
 
 I will make an Arduino shield with the following pins:
 
@@ -41,4 +35,4 @@ I already developed such a driver for Android based on [FTDI's D2XX driver](http
 
 I used to be a Java programmer, but I prefer Kotlin these days.
 
-In this project, I will just develop a simple terminal application with the driver.
+In this project, I will just develop a simple skelton with the driver.
