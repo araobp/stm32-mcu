@@ -192,7 +192,7 @@ int main(void)
       if (phase == STANDBY) {
         NFC04A1_LED_On( GREEN_LED );
         printf("PHASE 1: RF field change detected\n");
-        notify(RF_FIELD_CHANGED, sizeof(RF_FIELD_CHANGED));  // Notify the event to BLE entral
+        notify(RF_FIELD_CHANGED, sizeof(RF_FIELD_CHANGED)-1);  // Notify the event to BLE entral
         pData = extraProcess();
         generate_URI_with_serial_number('4', (char *)base_url, (char *)pData, increment);
         tick_prev = HAL_GetTick();

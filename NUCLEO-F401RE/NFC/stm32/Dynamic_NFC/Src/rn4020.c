@@ -49,16 +49,7 @@ void notify(uint8_t *data, int len) {
     send_buf[37+i*2+1] = ascii_hex_buf[1];
     i++;
     idx++;
-    if (i == 20) {  // The length of 20 bytes
-      send_buf[37 + i*2] = '\n';
-      HAL_UART_Transmit(&huart6, (uint8_t *)send_buf, 37+i*2+1, 0xffff);
-      // For debug
-      send_buf[37 + i*2] = '\0';
-      printf("sendData(@20): %s\n", send_buf);
-      // NOTIFY interval
-      HAL_Delay(500);
-      i = 0;
-    } else if (idx >= len) {  // The length of data
+    if (idx >= len) {  // The length of data
       send_buf[37 + i*2] = '\n';
       HAL_UART_Transmit(&huart6, (uint8_t *)send_buf, 37+i*2+1, 0xffff);
       // For debug
