@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="css/video.css" rel="stylesheet" type="text/css">
+    <title>Video player</title>    
+    <meta name="mobile-web-app-capable" content="yes">
+  </head>
+
+<body>
+
+  <div id="app" v-bind:style="{ display: display, visibility: visibility }">
+  <form>
+  <button id="startNotifications">Start BLE</button>
+  <button id="stopNotifications">Stop BLE</button>
+  <button id="startVideo">Start Video</button>
+  <button id="hideButtons">Hide buttons</button>
+  </form>
+  Event: [#{{cnt}}] {{message}}
+  </div>
+
+  <br>
+
+  <video id="video" src="./video/yokohama_osanbashi.mp4"></video>
+  <script>
+  let v = document.getElementById("video");
+  v.addEventListener("ended", () => {
+    v.currentTime = 0;
+    v.play();
+  }, false);
+  </script>
+
+  <script src="https://jp.vuejs.org/js/vue.js"></script>
+
+  <script>
+  let SERVICE_UUID = "11223344-5566-7788-9900-aabbccddeeff";
+  let CHARACTERISTIC_UUID = "01020304-0506-0708-0900-0a0b0c0d0e0f";
+  let DEVICE_NAME = "BLE2";
+  </script>
+
+  <script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: '...',
+            cnt: 0,
+            display: 'block',
+            visibility: 'visible'
+        }
+    });
+  </script> 
+
+  <script>
+
+  var myCharacteristic;
+  var cnt = 0;
+
+  function onStartButtonClick() {
+
+    console.log('Requesting Bluetooth Device...');
+    navigator.bluetooth.requestDevice({
+      filters: [{name: DEVICE_NAME,
+                services: [SERVICE_UUID]}],
+      })
+    .then(device => {
+      console.log('Connecting to GATT Server...');
+      return device.gatt.connect();
+    })
+    .then(server => {
+      console.log('Getting Service...');
+      return server.getPrimaryService(SERVICE_UUID);
+    })
+    .then(service => {
+      console.log('Getting Characteristic...');
+      return service.getCharacteristic(CHARACTERISTIC_UUID);
+    })
+    .then(characteristic => {
+      myCharacteristic = characteristic;
+      return myCharacteristic.startNotifications().then(_ => {
+        console.log('> Notifications started');
+        myCharacteristic.addEventListener('characteristicvaluechanged',
+            handleNotifications);
+      });
+    })
+    .catch(error => {
+      console.log('Argh! ' + error);
+    });
+  }
+
+  function onStopButtonClick() {
+    if (myCharacteristic) {
+      myCharacteristic.stopNotifications()
+      .then(_ => {
+        console.log('> Notifications stopped');
+        myCharacteristic.removeEventListener('characteristicvaluechanged',
+            handleNotifications);
+      })
+      .catch(error => {
+        console.log('Argh! ' + error);
+      });
+    }
+  }
+
+  function handleNotifications(event) {
+    let value = event.target.value;
+    let buf = value.buffer
+    let datastr = String.fromCharCode.apply(null, new Uint8Array(buf));
+
+    datastr = datastr.substr(0, datastr.length);
+    console.log(datastr);
+    app.message = datastr;
+    cnt = cnt + 1;
+    app.cnt = cnt;
+
+    if (datastr == "RF_FIELD_CHANGED") {
+      v.currentTime = 0;  // Rewind
+    }
+  }
+
+  document.querySelector('#startNotifications').addEventListener('click', event => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (isWebBluetoothEnabled()) {
+      onStartButtonClick();
+    }
+  });
+
+  document.querySelector('#stopNotifications').addEventListener('click', event => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (isWebBluetoothEnabled()) {
+      onStopButtonClick();
+    }
+  });
+
+  document.querySelector('#startVideo').addEventListener('click', event => {
+    event.stopPropagation();
+    event.preventDefault();
+    v.play();
+  });
+
+  document.querySelector('#hideButtons').addEventListener('click', event => {
+    event.stopPropagation();
+    event.preventDefault();
+    app.display = 'none';
+    app.visibility = 'hidden';
+  });
+
+  function isWebBluetoothEnabled() {
+    if (navigator.bluetooth) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  </script>
+
+</body>
+</html>

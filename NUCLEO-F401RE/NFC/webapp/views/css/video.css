@@ -1,0 +1,14 @@
+html {
+    margin: 0;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+#video {
+    border: none;
+    width: 100%;
+}
