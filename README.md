@@ -1,9 +1,5 @@
 # Application components for STMicro STM32 MCUs
 
-<img src="./STM32F4-Discovery/Camera/camera_board.jpg" width=400>
-
-STMicro has given me NUCLEO-L476RG and NUCLEO-F401RE with expansion boards for free at trade shows in year 2018. Thanks a lot to STMicro!
-
 Toolchain: [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html)
 
 ## Common libraries
