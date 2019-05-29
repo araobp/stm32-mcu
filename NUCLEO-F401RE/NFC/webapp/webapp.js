@@ -10,11 +10,14 @@ const uuidv4 = require('uuid/v4');
 // HTTPS default port number
 const PORT = 443 
 
-// Services
-const SERVICES = {seoul_22: 'restaurants',
-                  'yokohama,osanbashi': 'debug'};
-const RESTAURANTS = {korea_highway_route50_rest_stop: 'https://www.youtube.com/watch?v=eU-tS92t2vU',
-  gangneung_noodles: 'https://www.tripadvisor.jp/Restaurant_Review-g317126-d8882864-Reviews-Brothers_Buckwheat_Noodles-Gangneung_Gangwon_do.html'};
+// Services at the location
+const SERVICES = {seoul_22: 'external_links',
+                  'yokohama_osanbashi': 'external_links'};
+
+const EXTERNAL_LINKS = {korea_highway_route50_rest_stop: 'https://www.youtube.com/watch?v=eU-tS92t2vU',
+  gangneung_noodles: 'https://www.tripadvisor.jp/Restaurant_Review-g317126-d8882864-Reviews-Brothers_Buckwheat_Noodles-Gangneung_Gangwon_do.html',
+  yokohama_osanbashi: 'https://osanbashi.jp/english/'
+};
 
 app.use(bodyParser.urlencoded({extended: true, limit: '200mb'}));
 app.use(bodyParser.json({limit: '200mb'}));
@@ -48,26 +51,7 @@ app.get('/some_service', (req, res) => {
   let sno = req.query.sno;
   let ref = req.query.ref;
   let tok = req.query.tok;
-
-  console.log('---');
-  if (sno) {
-    console.log('sno: ' + sno);
-  }
-  if (loc) {
-    console.log('loc: ' + loc);
-  }
-  if (ref) {
-    console.log('ref: ' + ref);
-  }
-  if (tok) {
-    console.log('tok: ' + tok);
-  }
-  if (dat) {
-    console.log('dat: ');
-    dat.split(',').forEach(it => {
-      console.log('- ' + it);
-    });
-  }
+  let sts = req.query.sts;
 
   let params = {
     message: 'Welcome to the dynamic NFC tag world!',
@@ -76,39 +60,63 @@ app.get('/some_service', (req, res) => {
     sno: sno,
     ref: ref,
     tok: tok,
+    sts: sts,
     assign_token: null,
-    //expires: expires(3600 * 24)  // expires after one day
-    expires: expires(5)  // expires after 5 sec (for debugging) 
+    expires: null
   };
 
+  // Location as reference 
+  if (!ref) {
+    ref = loc
+  }
 
-  //----- Service delivery -----
+  console.log('----------')
 
+  if (loc=='debug') {
+    
+    //----- Debug 
+    console.log('>>> Access to debug page');
+    res.render('debug', params); 
+
+  } else if (!tok) {
+
+    //----- Access initiated by the tag indirectly
+    console.log('>>> Access initiated by dynamic NFC tag');
+    // params.expires = expires(3600 * 24)  // expires after one day
+    params.expires = expires(5)  // expires after 5 sec (for debugging) 
+    params.assign_token = uuidv4();
+    res.render('bootstrap', params); 
+
+  } else {
+
+    //----- Service delivery to the browser -----
+    console.log('>>> Access initiated by bootstrap html');
     switch(SERVICES[loc]) {
-      case 'restaurants':
-        console.log('Redirect: ' + RESTAURANTS[ref]);
-        res.redirect(RESTAURANTS[ref]);
+
+      case 'external_links':
+        console.log('Redirect: ' + EXTERNAL_LINKS[ref]);
+        res.redirect(EXTERNAL_LINKS[ref]);
         break;
-      case 'debug':
-        console.log('Access to debug page');
-        res.render('debug', params); 
-        break;
+
       default:
-        if (tok) {
-          console.log(tok);
-          if (tok == '0') {
-            console.log('Access to menu page without token');
-            params.assign_token = uuidv4();
-          } else {
-            console.log('Access to menu page with token');
-          }
-          res.render('menu', params); 
-        } else {
-          console.log('Access to bootstrap page');
-          res.render('bootstrap', params); 
+        switch(sts) {
+          case 'new':
+            console.log('Access from a new user');
+            break;
+          case 'entry':
+            console.log('Access from a entering user');
+            break;
+          case 'tracking':
+            console.log('Access from a user being tracked');
+            break;
         }
+        res.render('menu', params); 
         break;
-    }
+      }
+  }
+  console.log('--- params ---')
+  console.log(params)
+  console.log('')
 });
 
 // Directory of static HTML files

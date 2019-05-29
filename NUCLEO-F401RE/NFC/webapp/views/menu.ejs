@@ -18,6 +18,7 @@
       <li>dat=<%= dat %>
       <li>sno=<%= sno %>
       <li>tok=<%= tok %>
+      <li>status=<%= status %>
     </ul>
 
     <h2>Cookies (previous)</h2>
@@ -33,19 +34,11 @@
         }
       });
 
-      // Show previous query params
+      // Show cookie
       let cookies = document.cookie;
       console.log(cookies);
       app.cookies = cookies;
 
-      // Save current query params
-      document.cookie = 'loc=<%= loc %>; expires=<%= expires %>';
-      document.cookie = 'sno=<%= sno %>; expires=<%= expires %>';
-      let assign_token = "<%- assign_token%>";
-      if (assign_token) {
-        console.log('New token assigned: ' + assign_token);
-        document.cookie = 'tok=' + assign_token +'; expires=<%= expires %>';
-      }
     </script>
     
   </body>
