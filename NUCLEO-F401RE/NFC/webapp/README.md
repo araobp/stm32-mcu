@@ -28,12 +28,38 @@ This is to make RasPi as a digital signage controller with dynamic NFC tag.
 The controller send MQTT messages to repeatedly show muliple images at some interval on the display (display.html), and the contents on the display are synchronized with URLs on ST25DV04K.
 
 ```
-  [signage_controller.py] -- MQTT --> [mosquitto] -- MQTT/WebSocket --> [index.html]
+  [signage_controller.py] -- MQTT --> [mosquitto] -- MQTT/WebSocket --> [display.html]
              | UART
              v
        [STM32F401RE]
              | I2C
              v
-           [ST25](())[Chrome/Android] ----- HTTP or HTTPS ----- [WWW or YouTube]
+           [ST25](())[Chrome/Android] ----- HTTP or HTTPS ----> [webapp.js, WWW and YouTube]
 
 ```
+
+## Video player with dynamic NFC tag
+
+This is to make a table or a PC as a video player with dynamic NFC tag.
+
+```
+         [gateway.py] -- MQTT --> [mosquitto] -- MQTT/WebSocket --> [yokohama_osanbashi.html]
+     [RasPi's onboard BLE]                                               [WebBluetooth]
+             ^                                                                   ^
+             |                                                                   |
+         (case 2)                                                            (case 1)
+             | BLE                                                               | BLE
+         [RN4020]----------------------------------------------------------------+
+             ^
+             | UART
+       [STM32F401RE]
+             | RF field change event
+            GPO
+           [ST25](())[Chrome/Android] ----- HTTP or HTTPS ----- [WWW or YouTube]
+
+Case 1: RF field change event is received by WebBluetooth.
+Case 2: RF field change event is received by gateway.py, and it transfers the event to the html page.
+
+```
+
+
