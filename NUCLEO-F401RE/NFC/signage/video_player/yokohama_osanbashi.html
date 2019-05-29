@@ -2,26 +2,26 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link href="css/video.css" rel="stylesheet" type="text/css">
-    <title>Video player</title>    
     <meta name="mobile-web-app-capable" content="yes">
+    <link href="css/video.css" rel="stylesheet" type="text/css">
+    <script src="https://jp.vuejs.org/js/vue.min.js"></script>
+    <title>Video player</title>    
   </head>
 
 <body>
 
-  <div id="app" v-bind:style="{ display: display, visibility: visibility }">
+  <div id="app" v-bind:class="{shrink: shrink}">
   <form>
-  <button id="startNotifications">Start BLE</button>
-  <button id="stopNotifications">Stop BLE</button>
-  <button id="startVideo">Start Video</button>
-  <button id="hideButtons">Hide buttons</button>
+    <button id="startNotifications">Start BLE</button>
+    <button id="stopNotifications">Stop BLE</button>
+    <button id="startVideo">Start Video</button>
+    <button id="hideButtons">Hide buttons</button>
   </form>
   Event: [#{{cnt}}] {{message}}
   </div>
 
-  <br>
-
   <video id="video" src="./video/yokohama_osanbashi.mp4"></video>
+
   <script>
   let v = document.getElementById("video");
   v.addEventListener("ended", () => {
@@ -29,8 +29,6 @@
     v.play();
   }, false);
   </script>
-
-  <script src="https://jp.vuejs.org/js/vue.js"></script>
 
   <script>
   let SERVICE_UUID = "11223344-5566-7788-9900-aabbccddeeff";
@@ -44,8 +42,7 @@
         data: {
             message: '...',
             cnt: 0,
-            display: 'block',
-            visibility: 'visible'
+            shrink: false 
         }
     });
   </script> 
@@ -144,8 +141,7 @@
   document.querySelector('#hideButtons').addEventListener('click', event => {
     event.stopPropagation();
     event.preventDefault();
-    app.display = 'none';
-    app.visibility = 'hidden';
+    app.shrink = true;
   });
 
   function isWebBluetoothEnabled() {

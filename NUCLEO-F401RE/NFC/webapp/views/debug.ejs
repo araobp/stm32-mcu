@@ -12,15 +12,17 @@
 
     <p><%= message %></p>
 
-    <h2>URL query strings (current)</h2>
+    <h2>URL query strings from the client</h2>
     <ul>
       <li>loc=<%= loc %>
       <li>dat=<%= dat %>
       <li>sno=<%= sno %>
+      <li>ref=<%= ref %>
       <li>tok=<%= tok %>
+      <li>sts=<%= sts %>
     </ul>
 
-    <h2>Cookies (previous)</h2>
+    <h2>Cookies on the client</h2>
     <div id="app">
       <p>{{ cookies }}</p>
     </div>
@@ -37,11 +39,6 @@
       let cookies = document.cookie;
       console.log(cookies);
       app.cookies = cookies;
-
-      // Save current query params
-      document.cookie = 'loc=<%= loc %>; expires=<%= expires %>';
-      document.cookie = 'sno=<%= sno %>; expires=<%= expires %>';
-      document.cookie = 'tok=<%= assign_token %>; expires=<%= expires %>';
     </script>
     
   </body>
