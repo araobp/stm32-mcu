@@ -75,12 +75,12 @@ typedef enum {
 volatile bool field_changed = false;
 
 // Command reception from uart2
-volatile bool command_received2 = false;
+volatile bool command_received = false;
 uint8_t uart_rx_buf[BUFSIZE];
 uint8_t uart_rx_data;
 
 // Characteristics data simulation
-char characteristics[] = "woman,tall,young,white_blouse,blue_skirt,black_shoes";  // Some characteristics of the user
+char characteristics[] = "woman,young";  // Some characteristics of the user
 
 // Enable/disable serial number increment
 volatile bool increment = true;
@@ -241,7 +241,7 @@ int main(void)
 #endif
 
     // Command parser
-    if (command_received2) {
+    if (command_received) {
       if (strcmp((char *)uart_rx_buf, ".r") == 0) {  // Reset NFC tag
         printf("RESET...\n\n");
         init_NFC_tag(true);
@@ -260,7 +260,7 @@ int main(void)
         write_data_area2(uart_rx_buf, strlen((char *)uart_rx_buf)+1);
         strcpy(base_url, (char *)uart_rx_buf);
       }
-      command_received2 = false;
+      command_received = false;
     }
     /* USER CODE END WHILE */
 
@@ -328,11 +328,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle) {
 
   static int idx = 0;
 
-  if (!command_received2) {
+  if (!command_received) {
     if (uart_rx_data == '\n') {
       uart_rx_buf[idx] = '\0';
       idx = 0;
-      command_received2 = true;
+      command_received = true;
     } else {
       uart_rx_buf[idx++] = uart_rx_data;
     }

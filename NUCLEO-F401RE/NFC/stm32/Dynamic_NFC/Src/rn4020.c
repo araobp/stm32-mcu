@@ -16,7 +16,6 @@
 
 uint8_t uart_rx_data;
 uint8_t data_buf[BUFSIZE/2];
-volatile bool command_received = false;
 volatile int data_len;
 uint8_t cnt = 0;
 

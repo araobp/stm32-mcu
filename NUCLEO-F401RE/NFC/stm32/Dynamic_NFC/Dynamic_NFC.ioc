@@ -56,7 +56,6 @@ NVIC.PriorityGroup=NVIC_PRIORITYGROUP_0
 NVIC.SVCall_IRQn=true\:0\:0\:false\:false\:true\:false\:false
 NVIC.SysTick_IRQn=true\:0\:0\:true\:false\:true\:true\:true
 NVIC.USART2_IRQn=true\:0\:0\:false\:false\:true\:true\:true
-NVIC.USART6_IRQn=true\:0\:0\:false\:false\:true\:true\:true
 NVIC.UsageFault_IRQn=true\:0\:0\:false\:false\:true\:true\:false
 PA10.GPIOParameters=GPIO_ModeDefaultOutputPP
 PA10.GPIO_ModeDefaultOutputPP=GPIO_MODE_OUTPUT_PP
