@@ -114,7 +114,6 @@ app.get('/some_service', (req, res) => {
         break;
       }
   }
-  console.log('--- params ---')
   console.log(params)
   console.log('')
 });

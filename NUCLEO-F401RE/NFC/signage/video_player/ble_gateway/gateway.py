@@ -57,6 +57,8 @@ class Interface():
 
 if __name__ == '__main__':
 
+    print("Starting BLE gateway...")
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--interface",
                                 help="BLE interface number (hcix)", type=int, default=0)
