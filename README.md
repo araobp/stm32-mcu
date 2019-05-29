@@ -86,7 +86,6 @@ PWM output (100Hz, 50% duty) to PA8:
 
 - [Schematics](http://www.st.com/resource/en/schematic_pack/nucleo_64pins_sch.zip)
 - [Datasheet](http://www.st.com/resource/en/datasheet/stm32l476je.pdf)
-- [STM32CubeL4](https://my.st.com/content/my_st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32cube-mcu-packages/stm32cubel4.license%3d1524847579867.html)
 
 ### STM32F4 Discovery board
 
