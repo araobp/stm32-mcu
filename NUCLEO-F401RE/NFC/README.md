@@ -1,14 +1,6 @@
 # Dynamic NFC tag (STMicro's ST25DV04K)
 
-<img src="./doc/ST25DV04K.jpg" width=200>
-
-ST25DV04K (4K = 512bytes EEPROM)
-
-## Why I am so interested in dynaminc NFC tag
-
-Dynamic NFC tag is exactly what I have been looking for since three years ago, to make things talk to smart phones. Think different -- IoT in a different way.
-
-## Service enabled by dynamic NFC tag
+## Operations
 
 [1] A smart phone initiates a service.
 
@@ -53,25 +45,13 @@ Service preparation
     [STM32]          [ST25]          [Smart phone]<---200 OK--[Web application server]
 ```
 
-## Platform
-
-### Smart phones
-
-- Android
-- iPhone "Core NFC": https://www.idownloadblog.com/2018/09/14/apple-core-nfc-background-tag-reading/
-
-### Dynamic NFC tag device
+## Dynamic NFC tag device
 
 <img src="./doc/expansion_board1.jpg" width=200>
 
 - [Host MCU: NUCLEO F401RE](https://www.st.com/en/evaluation-tools/nucleo-f401re.html)
 - [NFC tag: X-NUCLEO-NFC04A1(ST25DV04K)](https://www.st.com/en/ecosystems/x-nucleo-nfc04a1.html)
 - [NFC tag: ANT7-T-ST25DV04K](https://www.st.com/en/evaluation-tools/ant7-t-st25dv04k.html)
-
-### Web applications
-
-- Server: Node.js with express.js and EJS template engine
-- Client: Vue.js as SPA framework
 
 ## Code
 
@@ -98,9 +78,7 @@ main.c
 
 Note: The current implementation of local service function just copies the base URL with a serial number appended to Area 1 on EEPROM.
 
-### HTTPS web application server
-
-This is just a skelton of web application server.
+### HTTPS server for testing the device
 
 ==> **[code](./webapp)**
 
