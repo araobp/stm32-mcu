@@ -1,6 +1,8 @@
 # ST25DV04K
 
-## Operations
+This chip (ST25DV04K) can be used for showing an internal status of a home appliance to the user's smart phone.
+
+## Typical operations (my guess)
 
 [1] A smart phone initiates a service.
 
@@ -22,7 +24,7 @@
     [STM32]          [ST25]<---RF----[Smart phone] User
 ```
 
-[2] The device wakes up and prepares a service for the user in a very short time.
+[2] The device prepares a service for the user in a very short time.
 
 ```
 [Local service function]<---[Sensor] ((( gesture, shape, color ...
@@ -45,6 +47,15 @@ Service preparation
     [STM32]          [ST25]          [Smart phone]<---200 OK--[Web application server]
 ```
 
+## Internal status of a home appliance
+
+- Initial setup: URL of its startup manual page
+- Serial number (fixed number): URL of a user registration page
+- Error code: URL of its trouble shooting page
+- etc
+
+In this project, I only support a serial number that is incremented every time the user hold his or her smart phone over the NFC tag.
+
 ## Parts
 
 - [Host MCU: NUCLEO F401RE](https://www.st.com/en/evaluation-tools/nucleo-f401re.html)
@@ -58,7 +69,7 @@ Service preparation
 ==> **[code](./stm32/Dynamic_NFC)**
 
 - The code supports power management for the MCU.
-- The code puts the MCU into sleep after start up, so TrueSTUDIO on my PC cannot communicate with the MCU. In this case, hold a smart phone over the antenna to keep the MCU awaken.
+- The code puts the MCU into sleep after start up, so CubeIDE cannot communicate with the MCU. In this case, hold a smart phone over the antenna to keep the MCU awaken.
 - To disable the power management (to use GPO on PA9 as an interrupt to signal RF change to MCU), just comment out the following line:
 
 main.c
@@ -74,7 +85,7 @@ main.c
 |.u        |Unlock RF write                    |
 |any string|Write base URL to Area 2 on EEPROM |
 
-Note: The current implementation of local service function just copies the base URL with a serial number appended to Area 1 on EEPROM.
+Note: The current implementation of local service function just copies the base URL with a serial number, as an internal status of a home appliance, appended to Area 1 on EEPROM.
 
 ### HTTPS server for testing the device
 
