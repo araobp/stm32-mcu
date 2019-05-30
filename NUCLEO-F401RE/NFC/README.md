@@ -93,7 +93,7 @@ Note: The current implementation of local service function just copies the base 
 
 ### Home appliances
 
-==> **[code](./signage)**
+==> **[code](./home_appliances)**
 
 ## A bug in X-CUBE-NFC4/CubeMX
 
