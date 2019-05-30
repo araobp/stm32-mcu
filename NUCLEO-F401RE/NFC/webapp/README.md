@@ -1,8 +1,6 @@
-# Web application servers
+# HTTPS server for testing the device
 
-## Web app server with dynamic NFC tag
-
-### Architecture
+## Architecture
 
 ```
 [Local service function] generates URL
@@ -14,16 +12,18 @@
                                                    + sever.cert
 ```
 
-### express.js over HTTPS
+## express.js over HTTPS
 
 HTTPS is MUST to prevent fraud attacks.
 
 Refer to the following link to run express.js over HTTPS:
 https://timonweb.com/posts/running-expressjs-server-over-https/
 
-## Digital signage with dynamic NFC tag
+## Home appliances
 
-This is to make RasPi as a digital signage controller with dynamic NFC tag.
+### Home Digital Signage
+
+I use TV in my living room as "Home Digital Signage". I use RasPi as a digital signage controller with ST25DV and SONY TV.
 
 The controller send MQTT messages to repeatedly show muliple images at some interval on the display (display.html), and the contents on the display are synchronized with URLs on ST25DV04K.
 
@@ -38,9 +38,9 @@ The controller send MQTT messages to repeatedly show muliple images at some inte
 
 ```
 
-## Video player with dynamic NFC tag
+## Video player
 
-This is to make a table or a PC as a video player with dynamic NFC tag.
+This is just to rewind video playback to the begining.
 
 ```
          [gateway.py] -- MQTT --> [mosquitto] -- MQTT/WebSocket --> [yokohama_osanbashi.html]
