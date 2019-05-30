@@ -33,7 +33,6 @@ Dynamic NFC tag is exactly what I have been looking for since three years ago, t
 [2] The device wakes up and prepares a service for the user in a very short time.
 
 ```
-[(optional)X-CUBE-AI   ]
 [Local service function]<---[Sensor] ((( gesture, shape, color ...
        |
        v
@@ -67,8 +66,6 @@ Service preparation
 
 - [Host MCU: NUCLEO F401RE](https://www.st.com/en/evaluation-tools/nucleo-f401re.html)
 - [NFC tag: X-NUCLEO-NFC04A1(ST25DV04K)](https://www.st.com/en/ecosystems/x-nucleo-nfc04a1.html)
-
-I am also purchasing the following tag that is much smaller than X-NUCLEO-NFC04A1:
 - [NFC tag: ANT7-T-ST25DV04K](https://www.st.com/en/evaluation-tools/ant7-t-st25dv04k.html)
 
 ### Web applications
