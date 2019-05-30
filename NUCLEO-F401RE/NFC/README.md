@@ -47,7 +47,7 @@ Service preparation
     [STM32]          [ST25]          [Smart phone]<---200 OK--[Web application server]
 ```
 
-## Internal status of a home appliance
+## Internal status of home appliance
 
 - Initial setup: URL of its startup manual page
 - Serial number (fixed number): URL of a user registration page
