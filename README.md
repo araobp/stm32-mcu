@@ -15,7 +15,7 @@ Toolchain: [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.h
 - [Thermography (infrared array sensor) and rock-paper-scissors recogniton with Keras/TensorFlow](./NUCLEO-F401RE/Thermography)
 - [X-CUBE-AI (ML inference on MCU with 2D images from an infrared array sensor)](./NUCLEO-F401RE/AI)
 - [X-CUBE-BLE1 (BLE)](./NUCLEO-F401RE/BLE)
-- [Dynamic NFC tag](./NUCLEO-F401RE/NFC)
+- [ST25DV04K (NFC)](./NUCLEO-F401RE/NFC)
 
 ### [NUCLEO-L476RG](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board
 
