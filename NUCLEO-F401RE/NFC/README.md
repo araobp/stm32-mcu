@@ -1,6 +1,6 @@
 # ST25DV04K
 
-This chip (ST25DV04K) can be used for showing an internal status of a home appliance to the user's smart phone.
+This chip (ST25DV04K) from STMicro can be used for showing an internal status of a home appliance to the user's smart phone.
 
 ## Typical operations (my guess)
 
