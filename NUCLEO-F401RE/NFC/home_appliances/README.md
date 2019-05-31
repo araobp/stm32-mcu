@@ -21,7 +21,10 @@ The controller send MQTT messages to repeatedly show muliple images at some inte
 
 This is just to rewind video playback to the begining.
 
+The player just playbacks a sample video content "Yokohama Osanbashi" on Chrome for Android.
+
 ```
+                                                                       Tablet PC (Android)
          [gateway.py] -- MQTT --> [mosquitto] -- MQTT/WebSocket --> [yokohama_osanbashi.html]
      [RasPi's onboard BLE]                                               [WebBluetooth]
              ^                                                                   ^
