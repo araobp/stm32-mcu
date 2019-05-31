@@ -8,7 +8,7 @@ This chip (ST25DV04K) can be used for showing an internal status of a home appli
 
 ```
    Sleeping                                         
-    [STM32]          [ST25]<---RF----[Smart phone] User
+    [STM32]          [ST25DV]<---RF----[Smart phone] User
       ^               GPO                           
       |                |
       +----------------+
@@ -21,7 +21,7 @@ This chip (ST25DV04K) can be used for showing an internal status of a home appli
        +--------NOTIFY---------------------------->[BLE central]
        |
    [RN4020]                                         
-    [STM32]          [ST25]<---RF----[Smart phone] User
+    [STM32]          [ST25DV]<---RF----[Smart phone] User
 ```
 
 [2] The device prepares a service for the user in a very short time.
@@ -30,7 +30,7 @@ This chip (ST25DV04K) can be used for showing an internal status of a home appli
 [Local service function]<---[Sensor] ((( gesture, shape, color ...
        |
        v
-    [STM32]          [ST25]<---RF----[Smart phone] User
+    [STM32]          [ST25DV]<---RF----[Smart phone] User
 Service preparation  
 ```
 
@@ -64,7 +64,9 @@ In this project, I only support a serial number that is incremented every time t
 
 ## Code
 
-### MCU with ST25
+### MCU with ST25DV
+
+IDE: CubeIDE from STMicro.
 
 ==> **[code](./stm32/Dynamic_NFC)**
 
