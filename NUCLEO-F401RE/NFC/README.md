@@ -99,6 +99,8 @@ Note: The current implementation of local service function just copies the base 
 
 ### Arduino shield of ANT7-T-ST25DV04K
 
+I refered to the schematic of X-NUCLEO-NFC04A1(ST25DV04K) to design Arduino shield for ANT7-T-ST25DV04K. I omitted some small stuff such as bypass capacitors, because the board size is small.
+
 ==> **[Circuit](./kicad/ant7_t_st25dv04k.pdf)**
 
 ## A bug in X-CUBE-NFC4/CubeMX
