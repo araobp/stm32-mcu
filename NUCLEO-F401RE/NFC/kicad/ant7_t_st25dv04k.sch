@@ -1,0 +1,351 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:switches
+LIBS:relays
+LIBS:motors
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:mcu
+LIBS:ant7_t_st25dv04k-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title "Arduino shield of ANT-7-ST25DV04K (dynamic NFC tag)"
+Date "2019-05-31"
+Rev ""
+Comp "https://github.com/araobp"
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Conn_01x08_Male J5
+U 1 1 5BEA0DD0
+P 8250 5450
+F 0 "J5" H 8250 5850 50  0000 C CNN
+F 1 "Conn_01x08_Male" H 8250 4950 50  0000 C CNN
+F 2 "mcu:Pin Header 8P" H 8250 5450 50  0001 C CNN
+F 3 "" H 8250 5450 50  0001 C CNN
+	1    8250 5450
+	-1   0    0    -1  
+$EndComp
+NoConn ~ 8050 5150
+NoConn ~ 8050 5250
+NoConn ~ 8050 5350
+NoConn ~ 8050 5450
+NoConn ~ 8050 5550
+$Comp
+L Conn_01x06_Male J2
+U 1 1 5BEA152F
+P 2400 5550
+F 0 "J2" H 2400 5850 50  0000 C CNN
+F 1 "Conn_01x06_Male" H 2400 5150 50  0000 C CNN
+F 2 "mcu:Pin Header 6P" H 2400 5550 50  0001 C CNN
+F 3 "" H 2400 5550 50  0001 C CNN
+	1    2400 5550
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2600 5350
+NoConn ~ 2600 5450
+NoConn ~ 2600 5550
+NoConn ~ 2600 5650
+NoConn ~ 2600 5750
+NoConn ~ 2600 5850
+Text Notes 2150 2550 0    60   ~ 0
+Vin
+Text Notes 2150 2450 0    60   ~ 0
+GND
+Text Notes 2150 2350 0    60   ~ 0
+GND
+Text Notes 2150 2150 0    60   ~ 0
+3.3V
+Text Notes 2100 2050 0    60   ~ 0
+RESET
+$Comp
+L tactile_sw U1
+U 1 1 5BEA1A70
+P 3650 1050
+F 0 "U1" V 3350 900 60  0000 C CNN
+F 1 "tactile_sw" V 3900 1050 60  0000 C CNN
+F 2 "mcu:tactile_sw_4p" V 3700 1100 60  0001 C CNN
+F 3 "" V 3700 1100 60  0001 C CNN
+	1    3650 1050
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2600 2000 3000 2000
+Wire Wire Line
+	3000 2000 3000 1150
+Wire Wire Line
+	3000 1150 3350 1150
+$Comp
+L GND #PWR01
+U 1 1 5BEA39CA
+P 4300 1700
+F 0 "#PWR01" H 4300 1450 50  0001 C CNN
+F 1 "GND" H 4300 1550 50  0000 C CNN
+F 2 "" H 4300 1700 50  0001 C CNN
+F 3 "" H 4300 1700 50  0001 C CNN
+	1    4300 1700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4050 1150 4300 1150
+Wire Wire Line
+	4300 1150 4300 1700
+Text Notes 2200 2250 0    60   ~ 0
+5V\n
+NoConn ~ 2600 2400
+NoConn ~ 2600 2500
+NoConn ~ -1000 1500
+NoConn ~ -950 1450
+NoConn ~ 8050 5750
+NoConn ~ 8050 5850
+$Comp
+L Conn_01x08_Male J1
+U 1 1 5C5A0EE3
+P 2400 2100
+F 0 "J1" H 2400 2500 50  0000 C CNN
+F 1 "Conn_01x08_Male" H 2400 1600 50  0000 C CNN
+F 2 "mcu:Pin Header 8P" H 2400 2100 50  0001 C CNN
+F 3 "" H 2400 2100 50  0001 C CNN
+	1    2400 2100
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2600 1800
+NoConn ~ 2600 1900
+$Comp
+L Conn_01x10_Male J4
+U 1 1 5C5A0FF3
+P 8250 2200
+F 0 "J4" H 8250 2700 50  0000 C CNN
+F 1 "Conn_01x10_Male" H 8250 1600 50  0000 C CNN
+F 2 "mcu:Pin Header 10P" H 8250 2200 50  0001 C CNN
+F 3 "" H 8250 2200 50  0001 C CNN
+	1    8250 2200
+	-1   0    0    -1  
+$EndComp
+NoConn ~ 3350 950 
+NoConn ~ 4050 950 
+NoConn ~ 8050 2000
+NoConn ~ 8050 2200
+NoConn ~ 8050 2400
+NoConn ~ 8050 2500
+Text Notes 8300 2350 0    60   ~ 0
+PA6 (GPO)
+$Comp
+L Conn_01x05_Male J3
+U 1 1 5CF0BE0A
+P 5050 5800
+F 0 "J3" H 5050 6100 50  0000 C CNN
+F 1 "Conn_01x05_Male" H 5050 5500 50  0000 C CNN
+F 2 "mcu:Pin_Header_5P" H 5050 5800 50  0001 C CNN
+F 3 "" H 5050 5800 50  0001 C CNN
+	1    5050 5800
+	0    1    -1   0   
+$EndComp
+Text Notes 4650 6300 0    60   ~ 0
+ANT7-T-ST24DV04K
+Text Notes 5300 6050 1    60   ~ 0
+GND
+Text Notes 5200 6050 1    60   ~ 0
+VCC
+Text Notes 5100 6050 1    60   ~ 0
+SCL
+Text Notes 5000 6050 1    60   ~ 0
+SDA
+Text Notes 4900 6050 1    60   ~ 0
+GPO
+Text Notes 8300 2150 0    60   ~ 0
+GND
+Wire Wire Line
+	5250 2100 8050 2100
+Wire Wire Line
+	5250 2100 5250 5600
+Wire Wire Line
+	4850 2300 8050 2300
+Wire Wire Line
+	4850 2300 4850 5600
+Text Notes 8300 1850 0    60   ~ 0
+SCL
+Text Notes 8300 1950 0    60   ~ 0
+SDA
+Wire Wire Line
+	5050 1800 8050 1800
+Wire Wire Line
+	5050 1800 5050 5600
+Wire Wire Line
+	4950 1900 8050 1900
+Wire Wire Line
+	4950 1900 4950 5600
+Wire Wire Line
+	2600 2100 5150 2100
+Wire Wire Line
+	5150 2100 5150 5600
+NoConn ~ 2600 2200
+NoConn ~ 2600 2300
+$Comp
+L +3.3V #PWR02
+U 1 1 5CF0C8E1
+P 6250 800
+F 0 "#PWR02" H 6250 650 50  0001 C CNN
+F 1 "+3.3V" H 6250 940 50  0000 C CNN
+F 2 "" H 6250 800 50  0001 C CNN
+F 3 "" H 6250 800 50  0001 C CNN
+	1    6250 800 
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R1
+U 1 1 5CF0C901
+P 6250 1450
+F 0 "R1" V 6330 1450 50  0000 C CNN
+F 1 "10k" V 6250 1450 50  0000 C CNN
+F 2 "mcu:Register" V 6180 1450 50  0001 C CNN
+F 3 "" H 6250 1450 50  0001 C CNN
+	1    6250 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R2
+U 1 1 5CF0C94A
+P 6500 1450
+F 0 "R2" V 6580 1450 50  0000 C CNN
+F 1 "10k" V 6500 1450 50  0000 C CNN
+F 2 "mcu:Register" V 6430 1450 50  0001 C CNN
+F 3 "" H 6500 1450 50  0001 C CNN
+	1    6500 1450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6250 800  6250 1300
+Wire Wire Line
+	6250 1200 6750 1200
+Wire Wire Line
+	6500 1200 6500 1300
+Connection ~ 6250 1200
+Wire Wire Line
+	6250 1600 6250 1900
+Connection ~ 6250 1900
+Wire Wire Line
+	6500 1600 6500 1800
+Connection ~ 6500 1800
+Wire Notes Line
+	4400 5400 4400 6300
+Wire Notes Line
+	4400 6300 5700 6300
+Wire Notes Line
+	5700 6300 5700 5400
+Wire Notes Line
+	5700 5400 4400 5400
+NoConn ~ 8050 2600
+NoConn ~ 8050 2700
+$Comp
+L PWR_FLAG #FLG03
+U 1 1 5CF0D7E3
+P 5850 900
+F 0 "#FLG03" H 5850 975 50  0001 C CNN
+F 1 "PWR_FLAG" H 5850 1050 50  0000 C CNN
+F 2 "" H 5850 900 50  0001 C CNN
+F 3 "" H 5850 900 50  0001 C CNN
+	1    5850 900 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 900  5850 1050
+Wire Wire Line
+	5850 1050 6250 1050
+Connection ~ 6250 1050
+NoConn ~ 8050 5650
+NoConn ~ 13500 4000
+$Comp
+L GND #PWR04
+U 1 1 5CF0D869
+P 6250 3150
+F 0 "#PWR04" H 6250 2900 50  0001 C CNN
+F 1 "GND" H 6250 3000 50  0000 C CNN
+F 2 "" H 6250 3150 50  0001 C CNN
+F 3 "" H 6250 3150 50  0001 C CNN
+	1    6250 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6250 2100 6250 3150
+Connection ~ 6250 2100
+$Comp
+L PWR_FLAG #FLG05
+U 1 1 5CF0DB37
+P 5950 2750
+F 0 "#FLG05" H 5950 2825 50  0001 C CNN
+F 1 "PWR_FLAG" H 5950 2900 50  0000 C CNN
+F 2 "" H 5950 2750 50  0001 C CNN
+F 3 "" H 5950 2750 50  0001 C CNN
+	1    5950 2750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5950 2750 5950 2900
+Wire Wire Line
+	5950 2900 6250 2900
+Connection ~ 6250 2900
+$Comp
+L R R3
+U 1 1 5CF108D0
+P 6750 1450
+F 0 "R3" V 6830 1450 50  0000 C CNN
+F 1 "51k" V 6750 1450 50  0000 C CNN
+F 2 "mcu:Register" V 6680 1450 50  0001 C CNN
+F 3 "" H 6750 1450 50  0001 C CNN
+	1    6750 1450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6750 1600 6750 2300
+Connection ~ 6750 2300
+Wire Wire Line
+	6750 1200 6750 1300
+Connection ~ 6500 1200
+Wire Wire Line
+	3450 1700 3450 2100
+Connection ~ 3450 2100
+$Comp
+L +3.3V #PWR06
+U 1 1 5CF11B86
+P 3450 1700
+F 0 "#PWR06" H 3450 1550 50  0001 C CNN
+F 1 "+3.3V" H 3450 1840 50  0000 C CNN
+F 2 "" H 3450 1700 50  0001 C CNN
+F 3 "" H 3450 1700 50  0001 C CNN
+	1    3450 1700
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
