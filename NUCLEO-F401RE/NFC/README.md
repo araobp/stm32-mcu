@@ -79,11 +79,11 @@ main.c
 
 **UART commands**
 
-|Command   |Description                        |
-|----------|-----------------------------------|
-|.l        |Lock RF write (default)            |
-|.u        |Unlock RF write                    |
-|any string|Write base URL to Area 2 on EEPROM |
+|Command                          |Description                        |
+|---------------------------------|-----------------------------------|
+|.l                               |Lock RF write (default)            |
+|.u                               |Unlock RF write                    |
+|<base url w/o protocol>?loc=<loc>|Write base URL to Area 2 on EEPROM |
 
 Note: The current implementation of local service function just copies the base URL with a serial number, as an internal status of a home appliance, appended to Area 1 on EEPROM.
 
