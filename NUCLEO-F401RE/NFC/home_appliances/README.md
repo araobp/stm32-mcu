@@ -39,7 +39,7 @@ The player just playbacks a sample video content "Yokohama Osanbashi" on Chrome 
             GPO
            [ST25](())[Chrome/Android] ----- HTTP or HTTPS ----- [WWW or YouTube]
 
-Case 1: RF field change event is received by WebBluetooth.
+Case 1: RF field change event is received by Web Bluetooth.
 Case 2: RF field change event is received by gateway.py, and it transfers the event to the html page.
 
 ```
