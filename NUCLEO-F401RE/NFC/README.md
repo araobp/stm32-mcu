@@ -107,6 +107,7 @@ I refered to the schematic of X-NUCLEO-NFC04A1(ST25DV04K) to design Arduino shie
 - I chose a 51k ohm pull-up registor for open-drain GPO.
 
 ==> **[Circuit](./kicad/ant7_t_st25dv04k.pdf)**
+
 ==> **[Universal board](./kicad/arduino_shield_ant7_t_st25dv04k.pdf)**
 
 ## A bug in X-CUBE-NFC4/CubeMX
