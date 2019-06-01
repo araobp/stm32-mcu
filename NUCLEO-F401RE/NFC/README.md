@@ -91,15 +91,18 @@ Note: The current implementation of local service function just copies the base 
 
 ### HTTPS server for testing the device
 
-==> **[code](./webapp)**
+==> **[Code](./webapp)**
 
 ### Home appliances
 
-==> **[code](./home_appliances)**
+==> **[Code](./home_appliances)**
 
 ### Arduino shield of ANT7-T-ST25DV04K
 
-I refered to the schematic of X-NUCLEO-NFC04A1(ST25DV04K) to design Arduino shield for ANT7-T-ST25DV04K. I omitted some small stuff such as bypass capacitors, because the board size is small.
+I refered to the schematic of X-NUCLEO-NFC04A1(ST25DV04K) to design Arduino shield for ANT7-T-ST25DV04K with some modifications as follows:
+- I omitted some small stuff such as bypass capacitors, because the board size is small.
+- I chose 10k ohm pull-up registors for I2C. I think 10k ohm is relatively large, but it should work at 400kHz of SCL clock cycle in my experience.
+- I chose a 51k ohm pull-up registor for open-drain GPO.
 
 ==> **[Circuit](./kicad/ant7_t_st25dv04k.pdf)**
 
