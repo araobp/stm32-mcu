@@ -1,6 +1,6 @@
 # ST25DV04K
 
-This chip (ST25DV04K) from STMicro can be used for showing an internal status of a home appliance to the user's smart phone.
+This chip ["ST25DV04K"](https://github.com/araobp/stm32-mcu/edit/master/NUCLEO-F401RE/NFC/README.md) from STMicro can be used for showing an internal status of a home appliance to the user's smart phone.
 
 ## Typical operations (my guess)
 
