@@ -47,6 +47,8 @@ Service preparation
     [STM32]          [ST25]          [Smart phone]<---200 OK--[Web application server]
 ```
 
+Note: the last data written on the tag (e.g., on EEPROM) will remain even if the battery dies.
+
 ## Internal status of home appliance
 
 - Initial setup: URL of its startup manual page
