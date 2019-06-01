@@ -21,7 +21,10 @@ The controller send MQTT messages to repeatedly show muliple images at some inte
 
 This is just to rewind video playback to the begining.
 
+The player just playbacks a sample video content "Yokohama Osanbashi" on Chrome for Android.
+
 ```
+                                                                       Tablet PC (Android)
          [gateway.py] -- MQTT --> [mosquitto] -- MQTT/WebSocket --> [yokohama_osanbashi.html]
      [RasPi's onboard BLE]                                               [WebBluetooth]
              ^                                                                   ^
@@ -36,7 +39,7 @@ This is just to rewind video playback to the begining.
             GPO
            [ST25](())[Chrome/Android] ----- HTTP or HTTPS ----- [WWW or YouTube]
 
-Case 1: RF field change event is received by WebBluetooth.
+Case 1: RF field change event is received by Web Bluetooth.
 Case 2: RF field change event is received by gateway.py, and it transfers the event to the html page.
 
 ```
