@@ -22,9 +22,10 @@ ST25DV_EN_STATUS GPO_en;
 ST25DV_PASSWD passwd;
 
 // Serial Number
-uint32_t sno = 0;
+uint32_t sno_l = 0;
+uint32_t sno_h = 0;
 
-void write_data_area3(uint32_t sno);
+void write_data_area3(uint32_t sno_h);
 uint32_t read_data_area3(void);
 
 /**
@@ -57,9 +58,9 @@ void init_NFC_tag(bool reset) {
     status = NFC04A1_NFCTAG_CreateUserZone(0, 32*8, 31*8+4, 4, 0);
     printf("Status of CreateUserZone: %ld\n\n", status);
 
-    printf("--- SNO reset ---\n");
+    printf("--- Batteries reset ---\n");
     write_data_area3(0);
-    sno = 0;
+    sno_l = 0;
     printf("Serial number reset to 0\n");
   }
 
@@ -132,10 +133,10 @@ uint8_t read_data_area2(uint8_t *pData) {
 /**
  * Write a serial number to Area 3 (uint32_t: 4bytes length)
  */
-void write_data_area3(uint32_t sno) {
+void write_data_area3(uint32_t sno_h) {
   NFC04A1_NFCTAG_PresentI2CPassword(0, passwd);
   HAL_Delay(50);
-  NFC04A1_NFCTAG_WriteData(0, (uint8_t *)&sno, 508, 4);
+  NFC04A1_NFCTAG_WriteData(0, (uint8_t *)&sno_h, 508, 4);
 }
 
 /**
@@ -157,10 +158,20 @@ void generate_URI_with_serial_number(char identifier, char *pUri, char *pData, b
   char buf[256] = { 0 };
   int len;
 
-  if (sno == 0) {
-    sno = read_data_area3();
+  // Serial number: the_number_of_(re)starts(sno_h) * 1000000 + counter(sno_l)
+  char sno[16] = { 0 };
+
+  // Update the number of (re)starts
+  if (sno_l == 0) {
+    sno_h = read_data_area3();
+    sno_h++;
+    write_data_area3(sno_h);
   }
 
+  // assuming that the max numbers of EEPROM write is 1000000.
+  sprintf(sno, "%lu", sno_h * 10000000 + sno_l);
+
+  //--- URL generation start ---
   strcpy(buf, pUri);
   len = strlen(pUri);
 
@@ -179,15 +190,15 @@ void generate_URI_with_serial_number(char identifier, char *pUri, char *pData, b
   buf[len++] = 'n';
   buf[len++] = 'o';
   buf[len++] = '=';
-  itoa(sno, buf+len, 10);
+  strcpy(buf+len, sno);
+  //--- URL generation finish ---
 
-  printf("sno: %ld\n", sno);
+  printf("sno: %s\n", sno);
   printf("uri w/ sno: %s\n", buf);
 
-  if (increment) {
-	  write_data_area3(++sno);
-  }
   URI_write(identifier, buf);
+
+  if (increment) ++sno_l;
 }
 
 /**
