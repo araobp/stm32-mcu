@@ -5,6 +5,7 @@ This chip ["ST25DV04K"](https://www.st.com/en/nfc/st25dv-i2c-series-dynamic-nfc-
 [Note] I lately migrated from TrueSTUIO+CubeMX to CubeIDE. The quality of CubeIDE 1.0.0 is NOT good. Some precautions I learned by doing for 24 hours wasting a lot of time:
 - Always start a new STM32 project from CubeIDE, do not generate code from CubeMX.
 - Do not regenerate code on CubeIDE -- if you need some config modifications, create a new project on CubeIDE again, although it is a waste of time.
+- Otherwise, you will face a lot of errors at a build time or a debug time, including communication errors with the targe board over ST-Link.
 
 ## Typical operations (my guess)
 
