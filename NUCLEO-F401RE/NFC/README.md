@@ -75,7 +75,7 @@ In this project, I only support a serial number that is incremented every time t
 
 IDE: CubeIDE from STMicro.
 
-==> **[Code](./stm32/Dynamic_NFC)**
+==> **[Code](./stm32)**
 
 - The code supports power management for the MCU.
 - The code puts the MCU into sleep after start up, so CubeIDE cannot communicate with the MCU. In this case, hold a smart phone over the antenna to keep the MCU awaken.
