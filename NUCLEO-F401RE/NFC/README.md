@@ -2,6 +2,10 @@
 
 This chip ["ST25DV04K"](https://www.st.com/en/nfc/st25dv-i2c-series-dynamic-nfc-tags.html) from STMicro can be used for showing an internal status of a home appliance to the user's smart phone.
 
+[Note] I lately migrated from TrueSTUIO+CubeMX to CubeIDE. The quality of CubeIDE 1.0.0 is NOT good. Some precautions I learned by doing for 24 hours wasting a lot of time:
+- Always start a new STM32 project from CubeIDE, do not generate code from CubeMX.
+- Do not regenerate code on CubeIDE -- if you need some config modifications, create a new project on CubeIDE again, although it is a waste of time.
+
 ## Typical operations (my guess)
 
 [1] A smart phone initiates a service.
