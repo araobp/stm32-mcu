@@ -16,12 +16,6 @@ Toolchain: [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.h
 - [X-CUBE-AI (ML inference on MCU with 2D images from an infrared array sensor)](./NUCLEO-F401RE/AI)
 - [X-CUBE-BLE1 (BLE)](./NUCLEO-F401RE/BLE)
 
-### [NUCLEO-F401RE](http://www.st.com/en/evaluation-tools/nucleo-f401re.html) and [NUCLEO-L476RG](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html) boards
-
-#### Dynamic NFC tags
-- [ST25DV04K (NFC) on F401RE](./NUCLEO-F401RE/NFC)
-- [ST25DV04K (NFC) on L476RG](./NUCLEO-L476RG/NFC) 
-
 ### [NUCLEO-L476RG](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board
 
 - [HelloWorld](./NUCLEO-L476RG/HelloWorld)
@@ -34,6 +28,12 @@ Toolchain: [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.h
 - [Mic->ADC->DAC pipeline](./NUCLEO-L476RG/Mic_ADC_DAC/README.md)
 - [Sound Effector](./NUCLEO-L476RG/Sound_Effector)
 - [Chirp compression](./NUCLEO-L476RG/Chirp_Compression)
+
+### [NUCLEO-F401RE](http://www.st.com/en/evaluation-tools/nucleo-f401re.html) and [NUCLEO-L476RG](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html) boards
+
+#### Dynamic NFC tags
+- [ST25DV04K (NFC) on F401RE](./NUCLEO-F401RE/NFC)
+- [ST25DV04K (NFC) on L476RG](./NUCLEO-L476RG/NFC) 
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html) board
 
