@@ -6,15 +6,15 @@ echo "sudo kill -9 $!" > ./stop.sh
 echo "sudo kill -9 $child_pid" >> ./stop.sh
 chmod +x ./stop.sh
 
-# RasPi as a digital signage controller
-sudo node ./signage/webapp.js --mode=https &
+# Home appliances
+sudo node ./home_appliances/webapp.js --mode=https &
 sleep 1
 child_pid=$(ps --ppid $! -o pid=)
 echo "sudo kill -9 $!" >> ./stop.sh
 echo "sudo kill -9 $child_pid" >> ./stop.sh
 
-# RasPi as a digital signage controller
-sudo node ./signage/webapp.js --mode=http &
+# Home appliances
+sudo node ./home_appliances/webapp.js --mode=http &
 sleep 1
 child_pid=$(ps --ppid $! -o pid=)
 echo "sudo kill -9 $!" >> ./stop.sh

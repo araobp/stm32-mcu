@@ -1,24 +1,19 @@
-# Dynamic NFC tag (STMicro's ST25DV04K)
+# ST25DV04K
 
-<img src="./doc/ST25DV04K.jpg" width=200>
+This chip ["ST25DV04K"](https://www.st.com/en/nfc/st25dv-i2c-series-dynamic-nfc-tags.html) from STMicro can be used for showing an internal status of a home appliance to the user's smart phone.
 
-ST25DV04K (4K = 512bytes EEPROM)
+[Note] I lately migrated from TrueSTUIO+CubeMX to CubeIDE. The quality of CubeIDE 1.0.0 is NOT good. Some precautions I learned by doing for 24 hours wasting a lot of time:
+- Always start a new STM32 project from CubeIDE, do not generate code from CubeMX.
+- Do not regenerate code on CubeIDE -- if you need some config modifications, create a new project on CubeIDE again, although it is a waste of time.
+- Otherwise, you will face a lot of errors at a build time or a debug time, including communication errors with the targe board over ST-Link.
 
-## Dynamic NFC tag "ST25"
-
-ST25 supports bi-directional communication in a passive way, so it can be thought of as a reader/writer powerd by a smartphone via RF.
-
-## Why I am so interested in dynaminc NFC tag
-
-Dynamic NFC tag is exactly what I have been looking for since three years ago, to make things talk to smart phones. Think different -- IoT in a different way.
-
-## Service enabled by ST25
+## Typical operations (my guess)
 
 [1] A smart phone initiates a service.
 
 ```
    Sleeping                                         
-    [STM32]          [ST25]<---RF----[Smart phone] User
+    [STM32]          [ST25DV]<---RF----[Smart phone] User
       ^               GPO                           
       |                |
       +----------------+
@@ -31,17 +26,16 @@ Dynamic NFC tag is exactly what I have been looking for since three years ago, t
        +--------NOTIFY---------------------------->[BLE central]
        |
    [RN4020]                                         
-    [STM32]          [ST25]<---RF----[Smart phone] User
+    [STM32]          [ST25DV]<---RF----[Smart phone] User
 ```
 
-[2] The device wakes up and prepares a service for the user in a very short time.
+[2] The device prepares a service for the user in a very short time.
 
 ```
-[(optional)X-CUBE-AI   ]
 [Local service function]<---[Sensor] ((( gesture, shape, color ...
        |
        v
-    [STM32]          [ST25]<---RF----[Smart phone] User
+    [STM32]          [ST25DV]<---RF----[Smart phone] User
 Service preparation  
 ```
 
@@ -58,36 +52,33 @@ Service preparation
     [STM32]          [ST25]          [Smart phone]<---200 OK--[Web application server]
 ```
 
-## Platform
+Note: the last data written on the tag (e.g., on EEPROM) will remain even if the battery dies.
 
-### Smart phones
+## Internal status of home appliance
 
-- Android
-- iPhone "Core NFC": https://www.idownloadblog.com/2018/09/14/apple-core-nfc-background-tag-reading/
+- Initial setup: URL of its startup manual page
+- Serial number (fixed number): URL of a user registration page
+- Error code: URL of its trouble shooting page
+- etc
 
-### Dynamic NFC tag device
+In this project, I only support a serial number that is incremented every time the user hold his or her smart phone over the NFC tag.
 
-<img src="./doc/expansion_board1.jpg" width=200>
+## Parts
 
 - [Host MCU: NUCLEO F401RE](https://www.st.com/en/evaluation-tools/nucleo-f401re.html)
 - [NFC tag: X-NUCLEO-NFC04A1(ST25DV04K)](https://www.st.com/en/ecosystems/x-nucleo-nfc04a1.html)
-
-I am also purchasing the following tag that is much smaller than X-NUCLEO-NFC04A1:
 - [NFC tag: ANT7-T-ST25DV04K](https://www.st.com/en/evaluation-tools/ant7-t-st25dv04k.html)
-
-### Web applications
-
-- Server: Node.js with express.js and EJS template engine
-- Client: Vue.js as SPA framework
 
 ## Code
 
-### MCU with ST25
+### MCU with ST25DV
 
-==> **[code](./stm32/Dynamic_NFC)**
+IDE: CubeIDE from STMicro.
+
+==> **[Code](./stm32)**
 
 - The code supports power management for the MCU.
-- The code puts the MCU into sleep after start up, so TrueSTUDIO on my PC cannot communicate with the MCU. In this case, hold a smart phone over the antenna to keep the MCU awaken.
+- The code puts the MCU into sleep after start up, so CubeIDE cannot communicate with the MCU. In this case, hold a smart phone over the antenna to keep the MCU awaken.
 - To disable the power management (to use GPO on PA9 as an interrupt to signal RF change to MCU), just comment out the following line:
 
 main.c
@@ -97,27 +88,39 @@ main.c
 
 **UART commands**
 
-|Command   |Description                        |
-|----------|-----------------------------------|
-|.l        |Lock RF write (default)            |
-|.u        |Unlock RF write                    |
-|any string|Write base URL to Area 2 on EEPROM |
+|Command                          |Description                        |
+|---------------------------------|-----------------------------------|
+|.l                               |Lock RF write (default)            |
+|.u                               |Unlock RF write                    |
+|<base url w/o protocol>?loc=<loc>|Write base URL to Area 2 on EEPROM |
 
-Note: The current implementation of local service function just copies the base URL with a serial number appended to Area 1 on EEPROM.
+Note: The current implementation of local service function just copies the base URL with a serial number, as an internal status of a home appliance, appended to Area 1 on EEPROM.
 
-### HTTPS web application server
+### HTTPS server for testing the device
 
-This is just a skelton of web application server.
+==> **[Code](./webapp)**
 
-==> **[code](./webapp)**
+### Home appliances
+
+==> **[Code](./home_appliances)**
+
+### Arduino shield of ANT7-T-ST25DV04K
+
+<img src="./kicad/arduino_shield_ant7_t_st25dv04k.jpg" width=200>
+
+I refered to the schematic of X-NUCLEO-NFC04A1(ST25DV04K) to design Arduino shield for ANT7-T-ST25DV04K with some modifications as follows:
+- I omitted some small stuff such as bypass capacitors, because the board size is small.
+- I chose 10k ohm pull-up registors for I2C. I think 10k ohm is relatively large, but it should work at 400kHz of SCL clock cycle in my experience.
+- I chose a 51k ohm pull-up registor for open-drain GPO.
+
+==> **[Circuit](./kicad/ant7_t_st25dv04k.pdf)**
+
+==> **[Universal board](./kicad/arduino_shield_ant7_t_st25dv04k.pdf)**
 
 ## A bug in X-CUBE-NFC4/CubeMX
 
 BSP folder is removed whenever code is generated by CubeMX after the initial generation. Copy BSP into the folder manually to cope with the problem.
 
-## References
+## Future direction
 
-- [ST25DV04K(Dynamic NFC tag)](https://www.st.com/en/nfc/st25dv04k.html)
-- ["NFC Tap" Android app for ST25](https://www.st.com/content/st_com/en/products/embedded-software/st25-nfc-rfid-software/stsw-st25001.html)
-- [ST25 SDK(jar)](https://my.st.com/content/my_st_com/en/products/embedded-software/st25-nfc-rfid-software/stsw-st25sdk001.html)
-- [ST25 Webapp(html5)](https://smarter.st.com/st25-nfc-web-application/?icmp=tt7281_gl_lnkon_may2018)
+["ADUX1020"](https://www.analog.com/en/products/adux1020.html) from Analog Devices is very interesting as a very small contactless gester sensing device in combination with dynamic NFC tag (not limited to STMicro's products but also from other makers such as NXP or SONY).

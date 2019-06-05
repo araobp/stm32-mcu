@@ -1,9 +1,5 @@
 # Application components for STMicro STM32 MCUs
 
-<img src="./STM32F4-Discovery/Camera/camera_board.jpg" width=400>
-
-STMicro has given me NUCLEO-L476RG and NUCLEO-F401RE with expansion boards for free at trade shows in year 2018. Thanks a lot to STMicro!
-
 Toolchain: [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html)
 
 ## Common libraries
@@ -16,7 +12,6 @@ Toolchain: [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.h
 
 ### [NUCLEO-F401RE](http://www.st.com/en/evaluation-tools/nucleo-f401re.html) board
 
-- [Dynamic NFC tag](./NUCLEO-F401RE/NFC)
 - [Thermography (infrared array sensor) and rock-paper-scissors recogniton with Keras/TensorFlow](./NUCLEO-F401RE/Thermography)
 - [X-CUBE-AI (ML inference on MCU with 2D images from an infrared array sensor)](./NUCLEO-F401RE/AI)
 - [X-CUBE-BLE1 (BLE)](./NUCLEO-F401RE/BLE)
@@ -33,6 +28,12 @@ Toolchain: [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.h
 - [Mic->ADC->DAC pipeline](./NUCLEO-L476RG/Mic_ADC_DAC/README.md)
 - [Sound Effector](./NUCLEO-L476RG/Sound_Effector)
 - [Chirp compression](./NUCLEO-L476RG/Chirp_Compression)
+
+### [NUCLEO-F401RE](http://www.st.com/en/evaluation-tools/nucleo-f401re.html) and [NUCLEO-L476RG](http://www.st.com/en/evaluation-tools/nucleo-l476rg.html) boards
+
+#### Dynamic NFC tags
+- [ST25DV04K (NFC) on F401RE](./NUCLEO-F401RE/NFC)
+- [ST25DV04K (NFC) on L476RG](./NUCLEO-L476RG/NFC) 
 
 ### [STM32F4 Discovery](http://www.st.com/en/evaluation-tools/stm32f4discovery.html) board
 
@@ -90,7 +91,6 @@ PWM output (100Hz, 50% duty) to PA8:
 
 - [Schematics](http://www.st.com/resource/en/schematic_pack/nucleo_64pins_sch.zip)
 - [Datasheet](http://www.st.com/resource/en/datasheet/stm32l476je.pdf)
-- [STM32CubeL4](https://my.st.com/content/my_st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32cube-mcu-packages/stm32cubel4.license%3d1524847579867.html)
 
 ### STM32F4 Discovery board
 

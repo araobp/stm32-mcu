@@ -1,34 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset='utf-8'>
     <title><%= title %></title>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script>
-      let cookies = Cookies.get();
-      console.log(cookies);
-
-      let token = cookies.tok;
-      let status;
-
-      if (token) {
-        if (cookies.status) {
-          status = 'tracking'
-          new_url = window.location.href + '&tok=' + cookies.tok;
-        } else {
-          status = 'entry'
+        let cookies = Cookies.get();
+        let token = cookies.tok;
+        if (!token) {
+            token = '<%= assign_token %>';
+            document.cookie = 'tok=<%= assign_token %>; expires=<%= expires %>';
         }
-      } else {
-        token = '<%= assign_token %>';
-        status = 'new'
-        document.cookie = 'tok=<%= assign_token %>; expires=<%= expires %>';
-      }
-
-      let new_url = window.location.href + '&tok=' + token + '&sts=' + status;
-      console.log(new_url);
-      window.open(new_url, '_self');
+        let new_url = window.location.href + '&tok=' + token;
+        window.open(new_url, '_self');
     </script>
-  </head>
-  <body>
-  </body>
+</head>
+
+<body>
+</body>
+
 </html>
