@@ -4,24 +4,23 @@
   <head>
     <meta charset='utf-8'>
     <script src="https://jp.vuejs.org/js/vue.min.js"></script>
-    <title>Menu</title>
+    <title>Debug tool</title>
   </head>
 
   <body>
-    <H1>Menu</h1>
+    <H1>Debug tool</h1>
 
-    <p><%= message %></p>
-
-    <h2>URL query strings (current)</h2>
+    <h2>URL query strings from the client</h2>
     <ul>
       <li>loc=<%= loc %>
       <li>dat=<%= dat %>
       <li>sno=<%= sno %>
+      <li>ref=<%= ref %>
       <li>tok=<%= tok %>
-      <li>status=<%= status %>
+      <li>sts=<%= sts %>
     </ul>
 
-    <h2>Cookies (previous)</h2>
+    <h2>Cookies on the client</h2>
     <div id="app">
       <p>{{ cookies }}</p>
     </div>
@@ -34,11 +33,10 @@
         }
       });
 
-      // Show cookie
+      // Show previous query params
       let cookies = document.cookie;
       console.log(cookies);
       app.cookies = cookies;
-
     </script>
     
   </body>

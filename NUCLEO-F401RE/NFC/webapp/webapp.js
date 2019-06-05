@@ -54,7 +54,7 @@ app.get('/some_service', (req, res) => {
   let sts = req.query.sts;
 
   let params = {
-    message: 'Welcome to the dynamic NFC tag world!',
+    title: loc,
     loc: loc,
     dat: dat,
     sno: sno,
@@ -83,7 +83,7 @@ app.get('/some_service', (req, res) => {
     //----- Access initiated by the tag indirectly
     console.log('>>> Access initiated by dynamic NFC tag');
     // params.expires = expires(3600 * 24)  // expires after one day
-    params.expires = expires(5)  // expires after 5 sec (for debugging) 
+    params.expires = expires(60)  // expires after 60 sec (for debugging) 
     params.assign_token = uuidv4();
     res.render('bootstrap', params); 
 
