@@ -8,7 +8,7 @@ const path = require('path');
 const uuidv4 = require('uuid/v4');
 
 // HTTPS default port number
-const PORT = 443 
+const PORT = 10443 
 
 // Services at the location
 const SERVICES = {seoul_22: 'external_links',

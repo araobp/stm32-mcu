@@ -1,1 +1,1 @@
-./write_base_url.py yokohama_osanbashi
+./base_url.py 10443 yokohama_osanbashi

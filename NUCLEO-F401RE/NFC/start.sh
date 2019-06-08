@@ -1,36 +1,20 @@
 # Web app server
-sudo node ./webapp/webapp.js &
+node ./webapp/webapp.js &
 sleep 1
-child_pid=$(ps --ppid $! -o pid=)
-echo "sudo kill -9 $!" > ./stop.sh
-echo "sudo kill -9 $child_pid" >> ./stop.sh
+echo "kill -9 $!" > ./stop.sh
 chmod +x ./stop.sh
 
 # Home appliances
-sudo node ./home_appliances/webapp.js --mode=https &
+node ./home_appliances/webapp.js &
 sleep 1
-child_pid=$(ps --ppid $! -o pid=)
-echo "sudo kill -9 $!" >> ./stop.sh
-echo "sudo kill -9 $child_pid" >> ./stop.sh
-
-# BLE gateway for http-version of video player
-#sudo python3 ./home_appliances/video_player/ble_gateway/gateway.py -i 0 -d BLE2 -s 11223344-5566-7788-9900-aabbccddeeff -t 01020304-0506-0708-0900-0a0b0c0d0e0f -r 01020304-0506-0708-0900-0a0b0c0deeff &
-#sleep 1
-#child_pid=$(ps --ppid $! -o pid=)
-#echo "sudo kill -9 $!" >> ./stop.sh
-#echo "sudo kill -9 $child_pid" >> ./stop.sh
+echo "kill -9 $!" >> ./stop.sh
 
 localhost=$(hostname -I)
 ip=($localhost)
 echo "---"
-echo "Open https://"$ip":444 with your browser"
-echo "to start the signage web app, and run signage_controller.py to"
-echo "remote-control the signage!"
+echo "Open https://"$ip":10444 with your browser for signage apps."
 echo ""
-echo "Open https://"$ip"/some_service?loc=debug&dat=shiny&sno=24"
+echo "Open https://"$ip":10443/some_service?loc=debug&dat=shiny&sno=24"
 echo "for debugging the web app server"
-echo ""
-echo "Open https://"$ip"/some_service?loc=kawasaki,todoroki&dat=civic&sno=12"
-echo "for testing a menu page"
 echo ""
 

@@ -5,8 +5,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <link href="css/display.css" rel="stylesheet" type="text/css">
   <script src="https://jp.vuejs.org/js/vue.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
-  <script src="./script/uuid.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -26,43 +25,35 @@
   </script>
  
 <script>
-function connect() {
   const host = window.location.hostname;
-  //const port = 11883  // MQTT over WebSocket
-  const port = 18883  // MQTT over WebSocket
-  mqtt = new Paho.MQTT.Client(host, port, uuidv4());
+  const INTERVAL = 10 * 1000;
+  const url_base = 'https://' + host + ':444/signage?trn=';
 
-  let options = {
-    timeout: 3,
-    onSuccess: onConnect,
-    useSSL: true
-  };
-  mqtt.onMessageArrived = onMessageArrived;
-  mqtt.connect(options);
-  console.log('Connecting to MQTT server: ' + host)
-}
+  let turn = 0;
 
-function onConnect() {
-  console.log('Connected to MQTT server');
-	mqtt.subscribe('display');
-}
+  function showImages() {
 
-function onMessageArrived(msg) {
-  let data = msg.payloadString;
-  switch (data) {
-    case '1':
-      app.src = './images/korean_noodles1.jpg';
-      break;
-    case '2':
-      app.src = './images/korean_noodles2.jpg';
-      break;
-    default:
-      break;
+    switch (turn) {
+      case 0:
+        app.src = './images/korean_noodles1.jpg';
+        axios.post(url_base + '0');
+        break;
+      case 1:
+        app.src = './images/korean_noodles2.jpg';
+        axios.post(url_base + '1');
+        break;
+      default:
+        break;
+    }
+    console.log(turn);
+
+    turn++;
+    if (turn > 1) {
+      turn = 0;
+    }
   }
-  console.log(data);
-}
 
-connect();
+  setInterval(showImages, INTERVAL);
 
 </script>
 </body>
