@@ -32,7 +32,7 @@ This chip ["ST25DV04K"](https://www.st.com/en/nfc/st25dv-i2c-series-dynamic-nfc-
 [2] The device prepares a service for the user in a very short time.
 
 ```
-[Local service function]<---[Sensor] ((( gesture, shape, color ...
+[Local service function]
        |
        v
     [STM32]          [ST25DV]<---RF----[Smart phone] User
@@ -58,10 +58,11 @@ Note: the last data written on the tag (e.g., on EEPROM) will remain even if the
 
 - Initial setup: URL of its startup manual page
 - Serial number (fixed number): URL of a user registration page
+- Some additional reference info (content ID) to a base URL: content ID shown on a digital signage currently
 - Error code: URL of its trouble shooting page
 - etc
 
-In this project, I only support a serial number that is incremented every time the user hold his or her smart phone over the NFC tag.
+In this project, I only support a serial number that is incremented every time the user hold his or her smart phone over the NFC tag. In case of the signage use case, content ID is appended to its base URL as "&ref=".
 
 ## Parts
 
