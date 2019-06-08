@@ -4,29 +4,7 @@ const fs = require('fs');
 const https = require('https');
 const bodyParser = require('body-parser');
 const path = require('path');
-const SerialPort = require('serialport');
-const os = require('os');
-
-// Serial port to the dynamic NFC tag
-const TAG_PORT = '/dev/serial/by-id/usb-STMicroelectronics_STM32_STLink_0673FF505250827867103222-if02';
-const TAG_REF = ['korea_highway_route50_rest_stop',
-                 'gangneung_noodles'];
-const tag_port = new SerialPort(TAG_PORT, { baudRate: 115200 });
-
-// RasPi's wlan0 IP address
-const local_ip_addr = os.networkInterfaces().wlan0[0].address;
-//console.log(local_ip_addr);
-const url_base = local_ip_addr + '?loc=seoul_22&ref=';
-
-function writeNextUrl(trn) {
-  let url = url_base + TAG[trn] + '\n';
-  console.log(url);
-  port.write(url, err => {
-    if (err) {
-      console.log(err.message);
-    }
-  });
-}
+const signage = require('./signage.js');
 
 // HTTPS default port number
 const PORT = 10444
@@ -51,7 +29,7 @@ let server = https.createServer({
 app.post('/signage', (req, res) => {
   let trn = req.query.trn;
   console.log(trn);
-  writeNextUrl(trn);
+  signage.writeNextUrl(trn);
   res.send('OK');
 });
 

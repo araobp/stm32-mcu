@@ -1,3 +1,6 @@
+# Stop the daemons initiated by the previous run
+./stop.sh
+
 # Web app server
 node ./webapp/webapp.js &
 sleep 1

@@ -51,7 +51,6 @@ app.get('/some_service', (req, res) => {
   let sno = req.query.sno;
   let ref = req.query.ref;
   let tok = req.query.tok;
-  let sts = req.query.sts;
 
   let params = {
     title: loc,
@@ -60,7 +59,6 @@ app.get('/some_service', (req, res) => {
     sno: sno,
     ref: ref,
     tok: tok,
-    sts: sts,
     assign_token: null,
     expires: null
   };
