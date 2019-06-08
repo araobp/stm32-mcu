@@ -28,12 +28,14 @@
 <script>
 function connect() {
   const host = window.location.hostname;
-  const port = 11883  // MQTT over WebSocket
+  //const port = 11883  // MQTT over WebSocket
+  const port = 18883  // MQTT over WebSocket
   mqtt = new Paho.MQTT.Client(host, port, uuidv4());
 
   let options = {
     timeout: 3,
     onSuccess: onConnect,
+    useSSL: true
   };
   mqtt.onMessageArrived = onMessageArrived;
   mqtt.connect(options);
