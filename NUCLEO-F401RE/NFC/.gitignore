@@ -73,8 +73,6 @@ local.properties
 # End of https://www.gitignore.io/api/eclipse
 
 ########
-server.cert
-server.key
 node_modules
 package-lock.json
 *.sqlite3

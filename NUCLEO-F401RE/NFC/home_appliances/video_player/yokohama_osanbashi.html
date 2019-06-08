@@ -5,10 +5,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <link href="css/video.css" rel="stylesheet" type="text/css">
     <script src="https://jp.vuejs.org/js/vue.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
-
     <script src="./script/uuid.js"></script>
-    <script>const BLE_DEVICE_NAME = 'BLE2';</script>
     <title>Video player</title>    
   </head>
 
@@ -36,7 +33,6 @@
 
   let SERVICE_UUID = "11223344-5566-7788-9900-aabbccddeeff";
   let CHARACTERISTIC_UUID = "01020304-0506-0708-0900-0a0b0c0d0e0f";
-  let DEVICE_NAME = "BLE2";
 
   var app = new Vue({
       el: '#app',
@@ -54,8 +50,7 @@
 
     console.log('Requesting Bluetooth Device...');
     navigator.bluetooth.requestDevice({
-      filters: [{name: DEVICE_NAME,
-                services: [SERVICE_UUID]}],
+      filters: [{services: [SERVICE_UUID]}]
       })
     .then(device => {
       console.log('Connecting to GATT Server...');
@@ -78,7 +73,7 @@
       });
     })
     .catch(error => {
-      console.log('Argh! ' + error);
+      console.log('Error! ' + error);
     });
   }
 
@@ -148,35 +143,6 @@
     } else {
       return false;
     }
-  }
-
-  function onConnect() {
-    console.log('Connected to MQTT server');
-    mqtt.subscribe(BLE_DEVICE_NAME);
-  }
-
-  function onMessageArrived(msg) {
-    let data = msg.payloadString;
-    console.log(data);
-    if (data == "RF_FIELD_CHANGED") {
-      v.currentTime = 0;  // Rewind
-    }
-  }
-
-  if (window.location.protocol == "http:") {
-    console.log('this page is from http server');
-
-    const host = window.location.hostname
-    const port = 11883  // MQTT over WebSocket
-    mqtt = new Paho.MQTT.Client(host, port, uuidv4());
-    
-    options = {
-        timeout: 3,
-        onSuccess: onConnect,
-      };
-    mqtt.onMessageArrived = onMessageArrived;
-    mqtt.connect(options);
-    console.log('Connecting to MQTT server: ' + host);
   }
   </script>
 
