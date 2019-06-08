@@ -7,7 +7,7 @@ I use TV in my living room as "Home Digital Signage". I use RasPi as a digital s
 The controller send MQTT messages to repeatedly show muliple images at some interval on the display (display.html), and the contents on the display are synchronized with URLs on ST25DV04K.
 
 ```
-  [signage_controller.py] -- MQTT --> [mosquitto] -- MQTT/WebSocket --> [display.html]
+  [signage_controller.py] -- MQTT --> [mosquitto] -- MQTT/WebSocket/SSL --> [display.html]
              | UART
              v
        [STM32F401RE]
@@ -43,7 +43,7 @@ Case 2: RF field change event is received by gateway.py, and it transfers the ev
 
 ## MQTTS
 
-Web Bluetooth and some other advanced features are allowd to run in secure contexts only, so mosquitto MQTT broker needs to open MQTT over WebSockets over SSL/TLS as well.
+Web Bluetooth and some other advanced features are allowed to run in secure contexts only, so mosquitto MQTT broker needs to open MQTT over WebSockets over SSL/TLS as well.
 
 ### Set up 
 
