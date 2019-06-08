@@ -1,6 +1,6 @@
 # Application components for STMicro STM32 MCUs
 
-Toolchain: [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html)
+Toolchain: Migrating from TrueSTUDIO+CubeMX to [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html)
 
 ## Common libraries
 

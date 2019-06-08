@@ -27,7 +27,7 @@ The player just playbacks a sample video content "Yokohama Osanbashi" on Chrome 
      Tablet PC (Android)
    [yokohama_osanbashi.html]
              ^
-             | BLE
+             | BLE (RF field change event is received by Web Bluetooth)
          [RN4020]
              ^
              | UART
@@ -35,10 +35,6 @@ The player just playbacks a sample video content "Yokohama Osanbashi" on Chrome 
              | RF field change event
             GPO
            [ST25](())[Chrome/Android] ----- HTTP or HTTPS ----- [WWW or YouTube]
-
-Case 1: RF field change event is received by Web Bluetooth.
-Case 2: RF field change event is received by gateway.py, and it transfers the event to the html page.
-
 ```
 
 ## MQTTS
