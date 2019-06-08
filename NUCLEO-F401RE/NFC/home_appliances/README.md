@@ -55,8 +55,10 @@ Web Bluetooth and some other advanced features are allowd to run in secure conte
 I faced a problem of ERR_CERT_AUTHORITY_INVALID output to the developer's console.
 
 My solution for that is to access the websocket port on mosquitto by typing the following URL in the address bar:
-'''
+
+```
 https://<host address>:<wss port number>/
-'''
+```
+
 Then acknowledge the access on the web page. After that, the mqtt client connects to wss URL with no problems.
 
